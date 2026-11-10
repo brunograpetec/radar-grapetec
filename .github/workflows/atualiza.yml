@@ -1,7 +1,7 @@
 name: Atualiza radar
 on:
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '*/15 * * * *'
   workflow_dispatch:
 permissions:
   contents: write
@@ -11,20 +11,30 @@ concurrency:
 jobs:
   atualiza:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 70
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - name: Lê o canal e recalcula
-        run: bash scripts/atualiza.sh
-      - name: Salva se mudou
+      - name: Atualiza a cada 5 min por ~55 min
         run: |
           git config user.name "radar-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add site_data.json dados/posts/
-          if git diff --cached --quiet; then echo "sem novidade"; exit 0; fi
-          git commit -m "Atualização automática $(TZ=America/Sao_Paulo date '+%d/%m %H:%M')"
-          git pull --rebase -q || true
-          git push
+          fim=$(( $(date +%s) + 55*60 ))
+          while [ $(date +%s) -lt $fim ]; do
+            ini=$(date +%s)
+            git pull --rebase -q || true
+            if bash scripts/atualiza.sh; then
+              git add site_data.json dados/posts/
+              if ! git diff --cached --quiet; then
+                git commit -qm "Atualização automática $(TZ=America/Sao_Paulo date '+%d/%m %H:%M')"
+                git pull --rebase -q -X ours || true
+                git push -q || echo "push falhou"
+              else
+                echo "sem novidade"
+              fi
+            fi
+            dorme=$(( 300 - ($(date +%s) - ini) ))
+            [ $dorme -gt 0 ] && sleep $dorme
+          done

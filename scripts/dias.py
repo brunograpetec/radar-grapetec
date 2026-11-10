@@ -36,11 +36,16 @@ def mobo(t):
     if not s: return None
     extra=' Plus' if s=='TUF Gaming' and re.search(r'\bplus\b',t) else ''
     return f"Placa-mãe {_BR[b.group(1)]} {s} {c}{m}{extra}"
+import sys as _sys;_sys.path.insert(0,_os.path.dirname(_os.path.abspath(__file__)))
+import modelos as _M
 _virt=[]
 for r in allp:
-    if r['produto'].startswith('Placa-mãe') and r['fora_da_curva']!='sim':
+    if r['fora_da_curva']=='sim': continue
+    if r['produto'].startswith('Placa-mãe'):
         mk=mobo(r['titulo'])
-        if mk: _virt.append(dict(r,produto=mk,_mod=1))
+    else:
+        _c=_M.chave(r['produto'],r['titulo']); mk=_c[0] if _c else None
+    if mk: _virt.append(dict(r,produto=mk,_mod=1))
 daily=collections.defaultdict(dict)
 for r in csv.DictReader(open(OUT+'/menor_preco_por_dia.csv',encoding='utf-8-sig'),delimiter=';'):
     daily[r['produto']][r['data']]=float(r['menor_preco'].replace(',','.'))
@@ -86,9 +91,14 @@ def build(day):
     L=list(best.values())
     for k,a in avail.items():
         if best[k].get('esg'): L.append(dict(a,alt=1))
-    # mesmo post no grupo "mais barata" e no modelo: fica o do modelo
-    mp={x['post'] for x in L if x['k'] in _vd}
-    L=[x for x in L if x['k'] in _vd or x['post'] not in mp]
+    # mesmo post em mais de um lugar: fica o mais específico (modelo > produto > grupo "mais barato")
+    def _pri(x): return 0 if x['k'] in _vd else (2 if 'mais bar' in x['k'] else 1)
+    _bp={}
+    for x in L:
+        if x['post'] not in _bp or _pri(x)<_pri(_bp[x['post']]): _bp[x['post']]=x
+    L=[x for x in L if _bp[x['post']] is x]
+    for x in L:
+        if x['k'] in _vd: x['bucket']=True
     L=sorted(L,key=lambda x:(-x['rec'],-x['drop']))
     n=_NOFERTAS.get(day,0)
     return dict(items=L[:90],total=len(best),ofertas=n)

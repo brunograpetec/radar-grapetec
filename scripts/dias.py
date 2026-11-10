@@ -1,5 +1,13 @@
 import os as _os;OUT=_os.environ.get('OUT','/mnt/user-data/outputs/base_precos_grape_tec')
-IMG={};URL={}
+IMG={};URL={};CURL={}
+def _resg(t):
+    tl=t.lower();i=tl.find('resgat')
+    if i<0: i=tl.find('pegue o cupom')
+    if i<0: return ''
+    j=tl.find('link do produto',i)
+    for u in _re.findall(r'https?://[^\s<>"]+',t[i:j if j>i else i+400]):
+        if 't.me' not in u: return u.rstrip('.,);')
+    return ''
 import re as _re
 def _link(t):
     i=t.lower().find('link do produto')
@@ -19,6 +27,8 @@ if _os.environ.get('POSTS'):
             if m.get('photo'): IMG[str(m['id'])]=m['photo']
             u=_link(m.get('text',''))
             if u: URL[str(m['id'])]=u
+            cu=_resg(m.get('text',''))
+            if cu: CURL[str(m['id'])]=cu
 import csv,json,statistics as S,collections,re
 # usa a base limpa (sem fora da curva) + cupons/hora
 allp=list(csv.DictReader(open(OUT+'/todos_os_posts_classificados.csv',encoding='utf-8-sig'),delimiter=';'))
@@ -83,6 +93,7 @@ def build(day):
                 p=price,med=round(med,2),lo=lo,drop=round(drop,1),rec=price<lo,loja=r['loja'],h=c.get('hora',''),cup=c.get('cupom',''),post=int(pid),cat=r['categoria'])
         if pid in IMG: it['img']=IMG[pid]
         if pid in URL: it['url']=URL[pid]
+        if pid in CURL and CURL[pid]!=it.get('url'): it['cupurl']=CURL[pid]
         if it['cup'] and it['cup'] in esg and esg[it['cup']][:10]==day and esg[it['cup']][11:16]>=it['h']: it['esg']=esg[it['cup']][11:16]
         mk=MARCAS.get(str(pid),{})
         if not it.get('esg') and mk.get('esg') and day==mk.get('d',day): it['esg']=mk['esg'];it['esgsrc']=mk['src']

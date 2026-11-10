@@ -218,7 +218,7 @@
 #gt1111 .bfc .acts a,#gt1111 .bfc .acts button{flex:1;text-align:center;font-size:13px;font-weight:600;padding:9px;border-radius:10px;border:1px solid var(--bd);color:var(--ink)}
 #gt1111 .bfc .acts a:hover,#gt1111 .bfc .acts button:hover{border-color:var(--bf1)}
 #gt1111 
-#gt1111 .bfbar{margin:4px 0 18px}
+#gt1111 .bfbar{margin:4px 0 22px}
 #gt1111 .bfbar .search{margin-bottom:12px}
 #gt1111 .bfchips{display:flex;gap:8px;flex-wrap:wrap}
 #gt1111 .bfchip{padding:8px 13px;border-radius:999px;border:1px solid var(--bd);background:var(--s1);font-size:13.5px;color:var(--mut);transition:all .15s}
@@ -229,7 +229,8 @@
 #gt1111 .bfchip.esgt.on{background:var(--s2,var(--s1));color:var(--ink);border-color:var(--badt);box-shadow:none}
 #gt1111 .bfc .ph{position:relative;margin:-16px -16px 4px;height:150px;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;border-bottom:1px solid var(--bd)}
 #gt1111 .bfc .ph img{width:100%;height:100%;object-fit:contain}
-#gt1111 .bfc .ph .noimg{font-size:12px;color:#8a7f95;font-weight:600;letter-spacing:.04em}
+#gt1111 .bfc .ph.no{background:radial-gradient(160px 120px at 30% 20%,rgba(255,45,149,.35),transparent 70%),radial-gradient(200px 140px at 90% 100%,rgba(255,212,0,.25),transparent 70%),#1a1020}
+#gt1111 .bfc .ph .noimg{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:12px;color:#e9dff0;font-weight:700;letter-spacing:.06em;text-transform:uppercase}#gt1111 .bfc .ph.no .noimg{margin-bottom:38px}#gt1111 .bfc .ph .noimg i{font-style:normal;font-size:40px;line-height:1}
 #gt1111 .bfc .ph .off{position:absolute;left:10px;bottom:10px;font-size:22px}
 #gt1111 .bfc .ph .rk{top:10px;right:10px;background:rgba(10,10,12,.75);color:#fff;padding:3px 8px;border-radius:8px}
 #gt1111 .bfc .ph .gonetag{position:absolute;top:10px;left:10px;background:#d63c3c;color:#fff;font-size:11px;font-weight:800;letter-spacing:.06em;padding:4px 8px;border-radius:8px}
@@ -237,7 +238,7 @@
 #gt1111 .bfc.gone .ph img{filter:grayscale(1)}
 #gt1111 .bfmore{display:block;margin:18px auto 0;padding:12px 22px;border-radius:12px;border:1px solid var(--bf2);color:var(--ink);font-weight:700;font-size:14px;background:rgba(255,122,0,.08)}
 #gt1111 .bfmore:hover{background:rgba(255,122,0,.16)}
-@media(max-width:640px){#gt1111 .bfchips{flex-wrap:nowrap;overflow-x:auto;padding-bottom:6px;margin:0 -16px;padding-left:16px;padding-right:16px;scrollbar-width:none}#gt1111 .bfchip{flex:0 0 auto}#gt1111 .bfc .ph{height:170px}}
+@media(max-width:640px){#gt1111 .bfchips{flex-wrap:nowrap;overflow-x:auto;padding-bottom:6px;margin:0 -16px;padding-left:16px;padding-right:16px;scrollbar-width:none}#gt1111 .bfchip{flex:0 0 auto}#gt1111 .bfc .ph{height:160px}#gt1111 .bfstats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}#gt1111 .bfstats span{display:flex;flex-direction:column;font-size:12px;line-height:1.25;background:var(--s1);border:1px solid var(--bd);border-radius:12px;padding:10px}#gt1111 .bfstats b{font-size:22px;margin:0 0 2px}}
 .bfwait{text-align:center;padding:40px 16px;border:1px dashed var(--bd);border-radius:18px}
 #gt1111 .bfwait b{display:block;font-size:22px;margin-bottom:6px}
 #gt1111 .bfwait p{color:var(--mut);margin:0 0 16px}
@@ -475,12 +476,13 @@ document.addEventListener('fullscreenchange',function(){if(!document.fullscreenE
 /* ---------- achados do dia (Black) ---------- */
 (function(){var DD=D.dias||{},tabs=$$('#gtBfTabs button'),grid=$('#gtBfGrid'),stats=$('#gtBfStats'),bar=$('#gtBfBar'),chips=$('#gtBfChips'),q=$('#gtBfQ'),more=$('#gtBfMore');if(!grid)return;
  var CO=['Placas de vídeo','Processadores','Placas-mãe','Memória RAM','SSD','Fontes','Gabinetes','Coolers','Monitores','Mouses','Teclados','Headsets e fones','Controles','Setup e acessórios','Notebooks','Consoles','TVs','Celulares, tablets e relógios'];
+ var IC={'Placas de vídeo':'🎮','Processadores':'🧠','Placas-mãe':'🧩','Memória RAM':'⚡','SSD':'💾','Fontes':'🔌','Gabinetes':'🗄️','Coolers':'❄️','Monitores':'🖥️','Mouses':'🖱️','Teclados':'⌨️','Headsets e fones':'🎧','Controles':'🕹️','Setup e acessórios':'🪑','Notebooks':'💻','Consoles':'🎮','TVs':'📺','Celulares, tablets e relógios':'📱'};
  var st={day:null,cat:'Todas',q:'',esg:false,lim:12};
  tabs.forEach(function(b){var d=DD[b.dataset.d];if(d&&d.items&&d.items.length)st.day=b.dataset.d});if(!st.day)st.day='2026-11-10';
  function wait(day){return '<div class="bfwait" style="grid-column:1/-1"><b>'+(day==='2026-11-11'?'A caçada do 11/11 começa à meia-noite 🔥':'Ainda sem achados nesse dia')+'</b><p>'+(day==='2026-11-11'?'Os cupons caem na virada. Entra no grupo pra pegar na hora — esta lista se atualiza sozinha a cada 10 minutos.':'Volte mais tarde.')+'</p><div class="ctas" style="justify-content:center"><a class="cta wa" href="https://grapetec.com.br/whatsapp" target="_blank" rel="noopener" data-ev="WhatsApp_bf">WhatsApp</a><a class="cta tg" href="https://t.me/grape_tec" target="_blank" rel="noopener" data-ev="Telegram_bf">Telegram</a></div></div>'}
  function base(d){return d.items.filter(function(x){return st.esg?!x.alt:!x.esg})}
  function card(x,i){var c=document.createElement('div');c.className='bfc'+(x.esg?' gone':'');c.style.animationDelay=(i%12)*40+'ms';
-  c.innerHTML='<div class="ph">'+(x.img?'<img loading="lazy" referrerpolicy="no-referrer" src="'+x.img+'" alt="" onerror="this.remove()">':'<span class="noimg">'+x.cat+'</span>')+'<span class="off mono">-'+Math.round(x.drop)+'%<small>vs média</small></span><span class="rk">#'+(i+1)+'</span>'+(x.esg?'<span class="gonetag">ESGOTOU '+x.esg.replace(':','h')+'</span>':'')+'</div>'+
+  c.innerHTML='<div class="ph'+(x.img?'':' no')+'">'+(x.img?'<img loading="lazy" referrerpolicy="no-referrer" src="'+x.img+'" alt="" onerror="this.parentNode.classList.add(\'no\');this.outerHTML=\'<span class=noimg><i>🛒</i>Ver no post</span>\'">':'<span class="noimg"><i>'+(IC[x.cat]||'🛒')+'</i>'+x.cat+'</span>')+'<span class="off mono">-'+Math.round(x.drop)+'%<small>vs média</small></span><span class="rk">#'+(i+1)+'</span>'+(x.esg?'<span class="gonetag">ESGOTOU '+x.esg.replace(':','h')+'</span>':'')+'</div>'+
   (x.rec?'<span class="rec">MENOR PREÇO DO RADAR</span>':'')+'<h4>'+x.n+'</h4><div class="sub">'+(x.bucket?x.t:x.cat)+'</div><div class="pr"><b class="mono">'+brl(x.p)+'</b><s>média '+brl(x.med,0)+'</s></div><div class="meta">'+x.loja+(x.h?' · saiu '+x.h.replace(':','h'):'')+'</div>'+(x.cup?'<div class="cup"><button data-c="'+x.cup+'" title="Copiar cupom">🎟️ '+x.cup+'</button></div>':'')+'<div class="acts"><a href="https://t.me/grape_tec/'+x.post+'" target="_blank" rel="noopener" data-ev="Post_bf">Ver post</a>'+(byId[x.id]?'<button data-p="'+x.id+'">Ver curva</button>':'')+'</div>';return c}
  function draw(){var d=DD[st.day];tabs.forEach(function(b){b.classList.toggle('on',b.dataset.d===st.day)});grid.innerHTML='';more.style.display='none';
   if(!d||!d.items||!d.items.length){stats.innerHTML='';bar.style.display='none';grid.innerHTML=wait(st.day);bindEv(grid);return}
@@ -497,7 +499,7 @@ document.addEventListener('fullscreenchange',function(){if(!document.fullscreenE
   $$('[data-c]',grid).forEach(function(b){b.onclick=function(){var v=b.dataset.c;try{navigator.clipboard.writeText(v).then(function(){b.textContent='✓ copiado';setTimeout(function(){b.textContent='🎟️ '+v},1500)})}catch(e){}ev('cupom')}});
   $$('[data-p]',grid).forEach(function(b){b.onclick=function(){openP(b.dataset.p)}});bindEv(grid)}
  more.onclick=function(){st.lim+=12;draw()};
- q.addEventListener('input',function(){st.q=norm(q.value.trim());st.lim=12;draw()});
+ q.addEventListener('input',function(){st.q=norm(q.value.trim());if(st.q)st.cat='Todas';st.lim=12;draw()});
  tabs.forEach(function(b){b.onclick=function(){st.day=b.dataset.d;st.cat='Todas';st.lim=12;draw();ev('bf_'+b.dataset.d)}});draw()})();
 setCat('Destaques');
 function setTheme(m){root.classList.toggle('lt',m==='lt');try{localStorage.setItem('gt1111theme',m)}catch(e){}C=pal();$$('.theme button').forEach(function(b){b.classList.toggle('on',b.dataset.t===m)});render();if(mod.classList.contains('on'))draw();ev('tema_'+m)}

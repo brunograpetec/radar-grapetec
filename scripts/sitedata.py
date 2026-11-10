@@ -49,6 +49,8 @@ UPD=os.environ.get('UPD','10/11/2026 às 15h26');ATE=os.environ.get('ATE','10/11
 OFERTAS=len(set(r['link_post'] for r in allp if r['fora_da_curva']!='sim'))
 data=dict(gen='2026-11-10',upd=UPD,ate=ATE,d0='2026-10-01',days=41,total_posts=18523,ofertas=OFERTAS,P=P,T=therm,A=ach,
           stores={v:k for k,v in SC.items()})
+import os as _o
+if _o.path.exists('dias.json'): data['dias']=json.load(open('dias.json'))
 s=json.dumps(data,ensure_ascii=False,separators=(',',':'))
 open('site_data.json','w').write(s); print(len(s),'bytes',len(P),'produtos'); print([ (a['n'],a['post']) for a in ach])
 import collections; print(collections.Counter(p['selo'] for p in P)); print(therm)

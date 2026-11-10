@@ -20,7 +20,7 @@ Ryzen 5 5600X;Processadores;15;20;760,0;717,0;-5,7;699,0;2026-10-31;AliExpress;8
 Ryzen 5 5600XT;Processadores;11;22;768,1;768,2;0,0;759,0;2026-10-10;Shopee;828,0;2026-10-11;768,2;2026-11-10;Shopee
 Ryzen 5 7500F;Processadores;12;25;767,0;781,0;1,8;716,0;2026-10-28;Shopee;811,44;2026-11-08;774,64;2026-11-10;Shopee
 Ryzen 5 7600;Processadores;14;27;831,54;841,34;1,2;643,0;2026-10-30;Shopee;999,0;2026-10-21;781,08;2026-11-05;Shopee
-Ryzen 5 7600X;Processadores;26;39;891,0;908,09;1,9;821,0;2026-10-28;Shopee;999,99;2026-10-13;873,0;2026-11-10;Shopee
+Ryzen 5 7600X;Processadores;26;40;891,0;908,09;1,9;821,0;2026-10-28;Shopee;999,99;2026-10-13;873,0;2026-11-10;Shopee
 Ryzen 5 7600X3D;Processadores;29;52;1601,0;1424,0;-11,1;1423,0;2026-11-04;KaBuM;1619,99;2026-10-07;1424,0;2026-11-09;KaBuM
 Ryzen 5 8400F;Processadores;26;56;739,99;740,0;0,0;588,8;2026-10-10;Shopee;759,99;2026-10-29;739,0;2026-11-09;Amazon
 Ryzen 5 8500G;Processadores;28;43;749,0;799,99;6,8;597,0;2026-10-19;Mercado Livre;800,0;2026-10-22;799,0;2026-11-08;Amazon
@@ -40,11 +40,11 @@ Ryzen 9 7900;Processadores;8;13;1789,32;1789,32;0,0;1627,0;2026-10-27;Amazon;191
 Ryzen 9 7900X;Processadores;6;6;1899,99;1899,0;-0,1;1899,0;2026-11-06;Amazon;1899,99;2026-11-10;1899,99;2026-11-10;Amazon
 Ryzen 9 9900X;Processadores;7;10;2199,99;2099,49;-4,6;2099,0;2026-11-06;Amazon;2199,99;2026-10-13;2099,0;2026-11-10;Amazon
 Ryzen 9 9950X3D;Processadores;9;14;3737,0;;;3737,0;2026-10-09;KaBuM;3779,0;2026-10-06;3737,0;2026-10-20;KaBuM
-Placa-mãe A520 (mais barata);Placas-mãe;39;200;334,0;318,6;-4,6;224,0;2026-11-07;Mercado Livre;849,0;2026-10-17;310,0;2026-11-10;Mercado Livre
+Placa-mãe A520 (mais barata);Placas-mãe;39;201;334,0;318,6;-4,6;224,0;2026-11-07;Mercado Livre;849,0;2026-10-17;310,0;2026-11-10;Mercado Livre
 Placa-mãe A620 (mais barata);Placas-mãe;15;25;419,99;550,0;31,0;323,1;2026-10-09;Amazon;767,0;2026-10-07;553,0;2026-11-09;Mercado Livre
 Placa-mãe B450 (mais barata);Placas-mãe;28;61;385,0;326,33;-15,2;263,0;2026-11-07;Mercado Livre;667,26;2026-10-06;326,66;2026-11-10;Mercado Livre
 Placa-mãe B550 (mais barata);Placas-mãe;41;430;479,0;437,69;-8,6;371,54;2026-11-09;Mercado Livre;664,0;2026-10-01;371,55;2026-11-10;Shopee
-Placa-mãe B650 (mais barata);Placas-mãe;38;260;669,75;665,38;-0,7;564,0;2026-11-01;AliExpress;899,0;2026-10-02;722,99;2026-11-10;Amazon
+Placa-mãe B650 (mais barata);Placas-mãe;38;261;669,75;665,38;-0,7;564,0;2026-11-01;AliExpress;899,0;2026-10-02;722,99;2026-11-10;Amazon
 Placa-mãe B850 (mais barata);Placas-mãe;33;145;780,0;846,5;8,5;599,0;2026-11-10;Mercado Livre;1148,98;2026-10-26;599,0;2026-11-10;Mercado Livre
 Placa-mãe X870 (mais barata);Placas-mãe;10;19;1677,0;2435,0;45,2;1478,0;2026-10-30;Shopee;4358,0;2026-10-11;2435,0;2026-11-05;KaBuM
 Memória DDR4 16GB (mais barata);Memória RAM;32;68;622,89;638,0;2,4;399,0;2026-10-17;Terabyte;786,6;2026-10-25;661,48;2026-11-10;Shopee
@@ -80,7 +80,7 @@ Air cooler Montech NX600;Coolers;9;11;152,0;161,0;5,9;143,0;2026-10-05;KaBuM;179
 Air cooler Pichau Falcon;Coolers;13;18;86,0;99,75;16,0;80,0;2026-10-19;Pichau;104,5;2026-10-11;99,75;2026-11-02;Pichau
 Air cooler Redragon AK400;Coolers;29;44;141,55;140,6;-0,7;113,05;2026-10-13;Shopee;148,0;2026-10-28;140,6;2026-11-09;Amazon
 Water cooler 240mm (mais barato);Coolers;35;106;165,28;175,61;6,2;119,0;2026-10-10;Shopee;283,49;2026-10-22;179,55;2026-11-10;Shopee
-Water cooler 360mm (mais barato);Coolers;39;304;229,99;207,09;-10,0;185,89;2026-11-06;Mercado Livre;338,31;2026-10-19;195,0;2026-11-10;Mercado Livre
+Water cooler 360mm (mais barato);Coolers;39;305;229,99;207,09;-10,0;185,89;2026-11-06;Mercado Livre;338,31;2026-10-19;195,0;2026-11-10;Mercado Livre
 Water cooler Arctic Liquid Freezer III Pro 360;Coolers;18;26;731,0;683,0;-6,6;474,0;2026-11-03;Amazon;791,2;2026-10-20;683,09;2026-11-09;Amazon
 Water cooler G-Storm HX700 360;Coolers;14;18;345,3;349,13;1,1;325,0;2026-10-28;Shopee;363,38;2026-11-08;325,38;2026-11-10;Shopee
 Water cooler Kalkan Alpha 360;Coolers;17;19;338,0;;;298,0;2026-10-22;Amazon;338,31;2026-10-29;338,31;2026-10-29;Amazon
@@ -124,7 +124,7 @@ Controle DualShock 4;Controles;9;11;211,25;199,49;-5,6;170,98;2026-11-05;Amazon;
 Controle GameSir G7 Pro;Controles;6;14;;322,0;;310,0;2026-11-03;AliExpress;333,0;2026-11-07;333,0;2026-11-07;AliExpress
 Controle GameSir T3;Controles;12;12;79,0;133,0;68,4;66,91;2026-10-19;Shopee;182,0;2026-11-06;84,0;2026-11-08;Shopee
 Controle Xbox sem fio;Controles;8;16;625,57;;;346,75;2026-10-12;Shopee;691,05;2026-10-07;616,0;2026-10-28;Shopee
-Microfone Fifine SuperFrame;Setup e acessórios;12;17;94,0;159,0;69,1;79,0;2026-10-13;Terabyte;180,5;2026-10-31;159,0;2026-11-08;Terabyte
+Microfone Fifine SuperFrame;Setup e acessórios;13;18;94,0;124,0;31,9;79,0;2026-10-13;Terabyte;180,5;2026-10-31;89,0;2026-11-10;Terabyte
 Mousepad Apex Control;Setup e acessórios;9;9;69,49;;;59,9;2026-10-27;Mercado Livre;69,5;2026-10-21;59,9;2026-10-27;Mercado Livre
 Notebook Acer Nitro V15;Notebooks;14;23;5394,0;6021,5;11,6;4679,0;2026-10-08;KaBuM;7199,0;2026-11-03;7199,0;2026-11-03;Amazon
 Notebook Asus TUF Gaming;Notebooks;13;26;5719,0;4185,0;-26,8;4185,0;2026-10-22;Shopee;7999,0;2026-10-15;4185,0;2026-11-06;Shopee

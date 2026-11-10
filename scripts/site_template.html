@@ -179,6 +179,49 @@
 #gt1111.pres .sticky{display:none!important}
 @media (max-width:900px){#gt1111 .hero{grid-template-columns:1fr}#gt1111 .ach{grid-template-columns:1fr 1fr}#gt1111 .tiles{grid-template-columns:1fr 1fr}#gt1111 .check{grid-template-columns:1fr}}
 @media (max-width:620px){#gt1111 .therm{grid-template-columns:1fr 1fr}#gt1111 .tc{padding:13px}#gt1111 .tc .big{font-size:22px}#gt1111 .tc .t1{font-size:13px;flex-direction:column;align-items:flex-start;gap:6px}#gt1111 .ach{grid-template-columns:1fr}#gt1111 .sticky{display:flex}#gt1111 .top .tbtn{display:none}#gt1111 .stats{gap:18px}#gt1111 .stat b{font-size:24px}#gt1111 .stats{grid-template-columns:repeat(2,auto)}#gt1111 .tile b{font-size:18px}#gt1111 .tile{padding:10px}#gt1111 .clock b{font-size:26px}#gt1111 .panel{padding:16px;border-radius:18px}#gt1111 .mod{padding:8px}}
+
+#gt1111 .bf{--bf1:#ff2d95;--bf2:#ff7a00;--bf3:#ffd400;position:relative;border-radius:28px;padding:3px;background:linear-gradient(120deg,var(--bf1),var(--bf2),var(--bf3),var(--bf1));background-size:300% 300%;animation:gtBfGrad 6s ease infinite}
+@keyframes gtBfGrad{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+#gt1111 .bfin{background:radial-gradient(1200px 400px at 10% -10%,rgba(255,45,149,.18),transparent 60%),radial-gradient(900px 400px at 100% 0%,rgba(255,122,0,.14),transparent 60%),var(--bg);border-radius:25px;padding:26px}
+#gt1111 .bfhead{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap}
+#gt1111 .bftag{display:inline-flex;align-items:stretch;border-radius:10px;overflow:hidden;font-weight:800;letter-spacing:.06em;font-size:13px;box-shadow:0 0 28px rgba(255,45,149,.45)}
+#gt1111 .bftag b{background:#0a0a0c;color:#fff;padding:7px 10px;border:2px solid #fff;border-right:0;border-radius:10px 0 0 10px}
+#gt1111 .bftag i{font-style:normal;background:linear-gradient(90deg,var(--bf1),var(--bf2),var(--bf3));color:#140006;padding:7px 10px}
+#gt1111 .bf h2{font-size:clamp(30px,4.4vw,52px);line-height:1;margin:14px 0 6px;font-weight:800;letter-spacing:-.02em}
+#gt1111 .bf h2 span{background:linear-gradient(90deg,var(--bf1),var(--bf2) 55%,var(--bf3));-webkit-background-clip:text;background-clip:text;color:transparent}
+#gt1111 .bf .lead2{color:var(--mut);margin:0;max-width:620px}
+#gt1111 .bftabs{display:inline-flex;gap:6px;background:var(--s1);border:1px solid var(--bd);border-radius:14px;padding:5px}
+#gt1111 .bftabs button{padding:10px 14px;border-radius:10px;font-size:14px;font-weight:600;color:var(--mut);display:flex;flex-direction:column;align-items:flex-start;line-height:1.15}
+#gt1111 .bftabs button small{font-size:10px;letter-spacing:.14em;font-weight:700;opacity:.8}
+#gt1111 .bftabs button.on{background:linear-gradient(90deg,var(--bf1),var(--bf2));color:#140006;box-shadow:0 6px 24px rgba(255,45,149,.35)}
+#gt1111 .bfstats{display:flex;gap:22px;margin:18px 0 18px;flex-wrap:wrap;color:var(--mut);font-size:14px}
+#gt1111 .bfstats b{color:var(--ink);font-size:20px;margin-right:6px}
+#gt1111 .bfgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+#gt1111 .bfc{position:relative;background:var(--s1);border:1px solid var(--bd);border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:8px;overflow:hidden;animation:gtIn .5s both;transition:transform .18s,border-color .18s,box-shadow .18s}
+#gt1111 .bfc:hover{transform:translateY(-4px);border-color:var(--bf1);box-shadow:0 14px 40px rgba(255,45,149,.22)}
+#gt1111 .bfc .rk{position:absolute;top:12px;right:14px;font-size:12px;color:var(--dim);font-weight:700}
+#gt1111 .bfc .off{align-self:flex-start;font-size:26px;font-weight:800;padding:4px 12px;border-radius:12px;background:linear-gradient(90deg,var(--bf1),var(--bf2),var(--bf3));color:#140006;box-shadow:0 0 22px rgba(255,122,0,.35)}
+#gt1111 .bfc .off small{font-size:11px;font-weight:700;margin-left:4px;letter-spacing:.04em}
+#gt1111 .bfc .rec{font-size:10.5px;font-weight:800;letter-spacing:.12em;color:var(--bf3);display:flex;align-items:center;gap:6px}
+#gt1111 .bfc .rec::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--bf3);box-shadow:0 0 10px var(--bf3);animation:gtPulse 1.4s infinite}
+#gt1111.lt .bfc .rec{color:#b45309}
+#gt1111 .bfc h4{margin:0;font-size:17px;font-weight:700;line-height:1.2}
+#gt1111 .bfc .sub{font-size:12px;color:var(--dim);line-height:1.3;min-height:31px}
+#gt1111 .bfc .pr{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+#gt1111 .bfc .pr b{font-size:26px;font-weight:800}
+#gt1111 .bfc .pr s{color:var(--dim);font-size:13px}
+#gt1111 .bfc .meta{font-size:12.5px;color:var(--mut)}
+#gt1111 .bfc .cup{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+#gt1111 .bfc .cup button{font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:700;padding:5px 9px;border-radius:8px;border:1px dashed var(--bf2);color:var(--ink);background:rgba(255,122,0,.08)}
+#gt1111 .bfc .cup .es{font-size:11px;font-weight:700;color:var(--badt);background:rgba(255,107,107,.12);padding:5px 8px;border-radius:8px}
+#gt1111 .bfc .acts{display:flex;gap:8px;margin-top:auto;padding-top:6px}
+#gt1111 .bfc .acts a,#gt1111 .bfc .acts button{flex:1;text-align:center;font-size:13px;font-weight:600;padding:9px;border-radius:10px;border:1px solid var(--bd);color:var(--ink)}
+#gt1111 .bfc .acts a:hover,#gt1111 .bfc .acts button:hover{border-color:var(--bf1)}
+#gt1111 .bfwait{text-align:center;padding:40px 16px;border:1px dashed var(--bd);border-radius:18px}
+#gt1111 .bfwait b{display:block;font-size:22px;margin-bottom:6px}
+#gt1111 .bfwait p{color:var(--mut);margin:0 0 16px}
+#gt1111 .bfnote{font-size:12.5px;color:var(--dim);margin-top:14px}
+@media (max-width:620px){#gt1111 .bfin{padding:16px}#gt1111 .bftabs{width:100%}#gt1111 .bftabs button{flex:1}}
 @media (prefers-reduced-motion:reduce){#gt1111 *{animation:none!important;transition:none!important}}
 
 #gt1111.lt{--bg:#f7f6f9;--s0:#faf9fc;--s1:#ffffff;--s2:#f1edf6;--bd:#e4dfea;--ink:#141217;--mut:#5b5563;--dim:#8a8492;--ac:#7b2cbf;--ac2:#5a189a;--act:#6a1fb0;--ok:#1f9d62;--okt:#12744a;--warn:#d98e04;--warnt:#8a5a00;--bad:#e5484d;--badt:#b3261e;--inset:#f4f1f7;--onac:#ffffff;--gridc:rgba(123,44,191,.06);--track:rgba(0,0,0,.07);--ovl:rgba(18,16,22,.45);--orb1:#e4c7ff;--orb2:#f2e6ff;--orbo:.75;--g1:#3c096c;--p1:#ffffff;--c1:#8a3fd1;--c2:#008da3;--c3:#b8730a;}
@@ -221,13 +264,21 @@
  </div>
 </div>
 
+<section id="gtBf"><div class="wrap"><div class="bf"><div class="bfin">
+ <div class="bfhead"><div><span class="bftag"><b>BLACK</b><i>FRIDAY · 11.11</i></span><h2>🔥 Achados <span>do dia</span></h2><p class="lead2">As maiores quedas de preço que passaram no canal no dia, comparadas com a mediana dos dias anteriores. Preço de Black, com cupom, na hora em que saiu.</p></div>
+ <div class="bftabs" id="gtBfTabs"><button data-d="2026-11-10"><small>ESQUENTA</small>10/11</button><button data-d="2026-11-11"><small>DIA D</small>11/11</button></div></div>
+ <div class="bfstats" id="gtBfStats"></div>
+ <div class="bfgrid" id="gtBfGrid"></div>
+ <p class="bfnote">Queda = quanto o preço ficou abaixo da mediana do menor preço diário desse produto nos dias anteriores. Oferta relâmpago acaba rápido: confira sempre no post.</p>
+</div></div></div></section>
+
 <section><div class="wrap">
- <div class="sh"><div><div class="k">01 · TERMÔMETRO</div><h2>Pra onde o preço foi</h2><p>Mediana do menor preço por dia de cada produto, outubro × novembro. Toca numa categoria pra ver as peças.</p></div></div>
+ <div class="sh"><div><div class="k">02 · TERMÔMETRO</div><h2>Pra onde o preço foi</h2><p>Mediana do menor preço por dia de cada produto, outubro × novembro. Toca numa categoria pra ver as peças.</p></div></div>
  <div class="therm" id="gtTherm"></div>
 </div></section>
 
 <section id="gtRadar"><div class="wrap">
- <div class="sh"><div><div class="k">02 · RADAR</div><h2>O que você quer comprar?</h2><p>Toca num produto pra ver a curva completa, o meu preço-alvo e comparar com outras peças.</p></div></div>
+ <div class="sh"><div><div class="k">03 · RADAR</div><h2>O que você quer comprar?</h2><p>Toca num produto pra ver a curva completa, o meu preço-alvo e comparar com outras peças.</p></div></div>
  <div class="tools"><label class="search"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a99bb5" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="gtQ" type="search" placeholder="Busca: 5700X, 9070, B550, fonte 650W…" autocomplete="off"></label></div>
  <div class="chips" id="gtChips"></div>
  <div class="cards" id="gtCards"></div>
@@ -235,13 +286,13 @@
 </div></section>
 
 <section><div class="wrap">
- <div class="sh"><div><div class="k">03 · PROVA REAL</div><h2>Quem estava no canal pegou</h2><p>Preços que passaram no canal nesse período. Oferta boa dura minutos, por isso vale estar dentro.</p></div></div>
+ <div class="sh"><div><div class="k">04 · PROVA REAL</div><h2>Quem estava no canal pegou</h2><p>Preços que passaram no canal nesse período. Oferta boa dura minutos, por isso vale estar dentro.</p></div></div>
  <div class="ach" id="gtAch"></div>
  <div class="banner"><div><b>Não perde a próxima.</b><div style="color:var(--mut);font-size:14px">Placa, processador, SSD e monitor com preço no Pix, cupom e link pronto.</div></div><div class="ctas"><a class="cta wa" href="https://grapetec.com.br/whatsapp" target="_blank" rel="noopener" data-ev="WhatsApp_prova">__WA__<span>Entrar no WhatsApp</span></a><a class="cta tg" href="https://t.me/grape_tec" target="_blank" rel="noopener" data-ev="Telegram_prova">__TG__<span>Telegram</span></a></div></div>
 </div></section>
 
 <section><div class="wrap">
- <div class="sh"><div><div class="k">04 · CHECKLIST DA VIRADA</div><h2>Deixa tudo pronto antes da meia-noite</h2><p>Marca o que já fez. Fica salvo no seu celular.</p></div></div>
+ <div class="sh"><div><div class="k">05 · CHECKLIST DA VIRADA</div><h2>Deixa tudo pronto antes da meia-noite</h2><p>Marca o que já fez. Fica salvo no seu celular.</p></div></div>
  <div class="check" id="gtCheck"></div>
  <div class="prog"><i id="gtProg"></i></div>
 </div></section>
@@ -397,6 +448,20 @@ bindEv(root);
 /* ---------- presentation ---------- */
 $('#gtPres').onclick=function(){root.classList.toggle('pres');try{if(root.classList.contains('pres')){(root.requestFullscreen||root.webkitRequestFullscreen).call(root);root.style.overflowY='auto'}else if(document.fullscreenElement){document.exitFullscreen();root.style.overflowY=''}}catch(e){}};
 document.addEventListener('fullscreenchange',function(){if(!document.fullscreenElement){root.classList.remove('pres');root.style.overflowY=''}});
+
+/* ---------- achados do dia (Black) ---------- */
+(function(){var DD=D.dias||{},tabs=$$('#gtBfTabs button'),grid=$('#gtBfGrid'),stats=$('#gtBfStats');if(!grid)return;
+ var cur=null;tabs.forEach(function(b){var d=DD[b.dataset.d];if(d&&d.items&&d.items.length)cur=b.dataset.d});if(!cur)cur='2026-11-10';
+ function show(day){cur=day;tabs.forEach(function(b){b.classList.toggle('on',b.dataset.d===day)});var d=DD[day];grid.innerHTML='';
+  if(!d||!d.items||!d.items.length){stats.innerHTML='';grid.innerHTML='<div class="bfwait" style="grid-column:1/-1"><b>'+(day==='2026-11-11'?'A caçada do 11/11 começa à meia-noite 🔥':'Ainda sem achados nesse dia')+'</b><p>'+(day==='2026-11-11'?'Os cupons caem na virada. Entra no grupo pra pegar na hora — aqui eu atualizo os melhores de manhã.':'Volte mais tarde.')+'</p><div class="ctas" style="justify-content:center"><a class="cta wa" href="https://grapetec.com.br/whatsapp" target="_blank" rel="noopener" data-ev="WhatsApp_bf">WhatsApp</a><a class="cta tg" href="https://t.me/grape_tec" target="_blank" rel="noopener" data-ev="Telegram_bf">Telegram</a></div></div>';bindEv(grid);return}
+  var recs=d.items.filter(function(x){return x.rec}).length;
+  stats.innerHTML='<span><b class="mono">'+d.ofertas+'</b>ofertas de hardware e setup nesse dia</span><span><b class="mono">'+d.total+'</b>abaixo da mediana</span><span><b class="mono" style="color:var(--bf3)">'+recs+'</b>bateram o menor preço do radar</span>';
+  d.items.forEach(function(x,i){var c=document.createElement('div');c.className='bfc';c.style.animationDelay=(i%12)*40+'ms';
+   c.innerHTML='<span class="rk">#'+(i+1)+'</span><span class="off mono">-'+Math.round(x.drop)+'%<small>vs média</small></span>'+(x.rec?'<span class="rec">MENOR PREÇO DO RADAR</span>':'')+'<h4>'+x.n+'</h4><div class="sub">'+(x.bucket?x.t:x.cat)+'</div><div class="pr"><b class="mono">'+brl(x.p)+'</b><s>média '+brl(x.med,0)+'</s></div><div class="meta">'+x.loja+(x.h?' · '+x.h.replace(':','h'):'')+'</div>'+(x.cup?'<div class="cup"><button data-c="'+x.cup+'" title="Copiar cupom">🎟️ '+x.cup+'</button>'+(x.esg?'<span class="es">esgotou às '+x.esg.replace(':','h')+'</span>':'')+'</div>':'')+'<div class="acts"><a href="https://t.me/grape_tec/'+x.post+'" target="_blank" rel="noopener" data-ev="Post_bf">Ver post</a>'+(byId[x.id]?'<button data-p="'+x.id+'">Ver curva</button>':'')+'</div>';
+   grid.appendChild(c)});
+  $$('[data-c]',grid).forEach(function(b){b.onclick=function(){var v=b.dataset.c;try{navigator.clipboard.writeText(v).then(function(){b.textContent='✓ copiado';setTimeout(function(){b.textContent='🎟️ '+v},1500)})}catch(e){}ev('cupom')}});
+  $$('[data-p]',grid).forEach(function(b){b.onclick=function(){openP(b.dataset.p)}});bindEv(grid)}
+ tabs.forEach(function(b){b.onclick=function(){show(b.dataset.d);ev('bf_'+b.dataset.d)}});show(cur)})();
 setCat('Destaques');
 function setTheme(m){root.classList.toggle('lt',m==='lt');try{localStorage.setItem('gt1111theme',m)}catch(e){}C=pal();$$('.theme button').forEach(function(b){b.classList.toggle('on',b.dataset.t===m)});render();if(mod.classList.contains('on'))draw();ev('tema_'+m)}
 $$('.theme button').forEach(function(b){b.onclick=function(){setTheme(b.dataset.t)}});$$('.theme button').forEach(function(b){b.classList.toggle('on',b.dataset.t===(root.classList.contains('lt')?'lt':'dk'))});

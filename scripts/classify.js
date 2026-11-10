@@ -20,17 +20,17 @@ const R=[
 function extra(t,T,price,p,out){for(const [cat,re,M] of R){if(!re.test(t))continue;if(ACC.test(T)&&cat!=='Teclado'&&cat!=='Mouse')break;if(/\b(kit|combo)\b/.test(T))break;
   if(cat==='TV'){const s=T.match(/\b(32|40|43|50|55|58|60|65|70|75|85)\s?(?:"|''|pol|polegadas|\b)/);if(s&&(/4k|uhd/.test(T)||+s[1]>=43)){const sz=+s[1];const b=sz<=43?43:sz<=50?50:sz<=55?55:sz<=65?65:null;if(b)out.push([p.id,p.d,`Smart TV ${b}" 4K (mais barata)`,price,st(p.txt),t.slice(0,80).replace(/\|/g,'/')])}break}
   for(const [r,k] of M)if(r.test(T)){out.push([p.id,p.d,k,price,st(p.txt),t.slice(0,80).replace(/\|/g,'/')]);break}break}}
-const [,,inF,d0,d1]=process.argv;
-const J=JSON.parse(fs.readFileSync(inF,'utf8'));
+const [,,inF,d0,d1,...more]=process.argv;
+const J={messages:[]};const seen=new Set();for(const f of [inF,...more]){for(const m of JSON.parse(fs.readFileSync(f,'utf8')).messages){if(seen.has(m.id))continue;seen.add(m.id);J.messages.push(m)}}
 const flat=x=>typeof x==='string'?x:Array.isArray(x)?x.map(flat).join(''):(x&&x.text)||'';
-const hw=[],ex=[];let n=0;
+const hw=[],ex=[],CU=[],ES=[];let n=0;
 for(const m of J.messages){if(m.type!=='message')continue;const d=m.date.slice(0,10);if(d<d0||d>d1)continue;n++;
- const txt=flat(m.text);const p={id:+m.id,d,txt};const i=txt.indexOf('💰');if(i<0)continue;
+ const txt=flat(m.text);const es=txt.match(/cupom\s+([A-Z0-9]{4,})\s+esgotad/i)||txt.match(/\b([A-Z0-9]{5,})\b[^\n]{0,20}esgotad/i);if(es)ES.push([m.id,m.date,es[1].toUpperCase()]);const cu=(txt.split('💰')[1]||'').match(/cupom[:\s]*([A-Za-z0-9]{4,})/i);CU.push([m.id,m.date.slice(11,16),cu?cu[1].toUpperCase():'']);const p={id:+m.id,d,txt};const i=txt.indexOf('💰');if(i<0)continue;
  const t=txt.slice(0,i).replace(/[^\p{L}\p{N}\s\-\/\.,+]/gu,' ').replace(/\s+/g,' ').trim();
  const pm=txt.slice(i).match(/R\$\s?([\d\.]+(?:,\d{1,2})?)/);if(!pm)continue;const price=+pm[1].replace(/\./g,'').replace(',','.');if(!price)continue;
  for(const k of __keys(t))hw.push([p.id,d,k,price,st(txt),t.slice(0,80).replace(/\|/g,'/')]);
  extra(t,t.toLowerCase(),price,p,ex)}
 const csv=r=>r.map(v=>{v=String(v);return /[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v}).join(',');
 const H='post_id,data,produto,preco,loja,titulo\n';
-fs.writeFileSync('posts_raw2.csv',H+hw.map(csv).join('\n')+'\n');fs.writeFileSync('posts_extra2.csv',H+ex.map(csv).join('\n')+'\n');
+fs.writeFileSync('cupons.csv','post_id,hora,cupom\n'+CU.map(csv).join('\n')+'\n');fs.writeFileSync('esgotados.csv','post_id,datahora,cupom\n'+ES.map(csv).join('\n')+'\n');fs.writeFileSync('posts_raw2.csv',H+hw.map(csv).join('\n')+'\n');fs.writeFileSync('posts_extra2.csv',H+ex.map(csv).join('\n')+'\n');
 console.log('mensagens no período',n,'hw',hw.length,'extra',ex.length);

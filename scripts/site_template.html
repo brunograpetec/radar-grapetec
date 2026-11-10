@@ -373,7 +373,7 @@ function ev(name){try{if(window.fbq)window.fbq('trackCustom','Radar1111_'+name)}
 (function(){var n=0;function v(){if(window.fbq){try{var u=new URLSearchParams(location.search),r='';try{r=document.referrer?new URL(document.referrer).hostname:''}catch(e){}window.fbq('trackCustom','Radar1111_Visita',{origem:u.get('utm_source')||(/t\.me|telegram/.test(r)?'telegram':r)||'direto',meio:u.get('utm_medium')||''})}catch(e){}}else if(n++<10)setTimeout(v,1000)}v()})();
 function __noop(){}
 D.P.forEach(function(p){var o=PALPITES[p.id];if(o){if(o.selo)p.selo=o.selo;if(o.alvo)p.alvo=o.alvo;if(o.texto)p.txt=o.texto}});
-var byId={};D.P.forEach(function(p){byId[p.id]=p});
+var byId={};D.P.concat(D.PM||[]).forEach(function(p){byId[p.id]=p});
 function autoText(p){if(p.txt)return p.txt;var ref=p.mn||p.mo;var diff=(p.u/p.lo-1)*100;
  if(p.selo==='compra')return 'O último preço ('+brl(p.u)+') está no nível mais baixo do período, abaixo do meu alvo de '+brl(p.alvo,0)+'. Se apareceu nesse valor, pode pegar.';
  if(p.selo==='espera')return 'Está '+diff.toFixed(0)+'% acima do menor preço que já passou no canal ('+brl(p.lo)+'). Eu esperaria a Black ou um cupom melhor.';

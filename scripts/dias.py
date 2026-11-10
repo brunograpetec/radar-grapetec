@@ -54,10 +54,11 @@ for r in _virt: _vd[r['produto']][r['data']].append(float(r['preco'].replace(','
 for k,v in _vd.items():
     allv=[p for ps in v.values() for p in ps]; md=S.median(allv)
     for dd,ps in v.items():
-        ok=[p for p in ps if p>=0.55*md]
+        ok=[p for p in ps if 0.55*md<=p<=1.8*md]
         if ok: daily[k][dd]=min(ok)
 for r in _virt:
-    if float(r['preco'].replace(',','.'))<0.55*S.median([p for ps in _vd[r['produto']].values() for p in ps]): r['fora_da_curva']='sim'
+    _md=S.median([p for ps in _vd[r['produto']].values() for p in ps]);_pp=float(r['preco'].replace(',','.'))
+    if _pp<0.55*_md or _pp>1.8*_md: r['fora_da_curva']='sim'
 allp=allp+_virt
 cup={r['post_id']:r for r in csv.DictReader(open('cupons.csv',encoding='utf-8'))}
 esg={}
@@ -104,6 +105,19 @@ def build(day):
     return dict(items=L[:90],total=len(best),ofertas=n)
 D={'2026-11-10':build('2026-11-10'),'2026-11-11':build('2026-11-11')}
 json.dump(D,open('dias.json','w'),ensure_ascii=False)
+# série diária dos modelos que aparecem nos Achados (pra ter "Ver curva")
+_usados={x['k'] for v in D.values() for x in v['items'] if x['k'] in _vd}
+_ser={}
+for r in _virt:
+    k=r['produto']
+    if k not in _usados or r['fora_da_curva']=='sim': continue
+    p=float(r['preco'].replace(',','.'))
+    _m=S.median([q for ps in _vd[k].values() for q in ps])
+    if p<0.55*_m or p>1.8*_m: continue
+    cur=_ser.setdefault(k,{'c':r['categoria'],'d':{}})['d'].get(r['data'])
+    if cur is None or p<cur[0]: _ser[k]['d'][r['data']]=(p,r['loja'],int(r['link_post'].rsplit('/',1)[1]))
+_ser={k:dict(c=v['c'],id=slug(k),d=v['d']) for k,v in _ser.items()}
+json.dump(_ser,open('modelos_series.json','w'),ensure_ascii=False)
 for d,v in D.items():
     print(d,'ofertas',v['ofertas'],'achados',v['total'])
     for x in v['items'][:12]: print(f"  {x['drop']:5.1f}% {'REC' if x['rec'] else '   '} {x['n'][:34]:34} {x['p']} (med {x['med']}) {x['loja']} {x['h']} {x['cup']} {x.get('esg','')}")

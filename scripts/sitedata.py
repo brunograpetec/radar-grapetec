@@ -53,6 +53,25 @@ data=dict(gen=_lastd,upd=UPD,ate=ATE,d0='2026-10-01',days=(dt.date.fromisoformat
           stores={v:k for k,v in SC.items()})
 import os as _o
 if _o.path.exists('dias.json'): data['dias']=json.load(open('dias.json'))
+# modelos dos Achados que não estão na lista do radar: só pra abrir a curva
+PM=[]
+if _o.path.exists('modelos_series.json'):
+    ids={p['id'] for p in P}
+    for k,v in json.load(open('modelos_series.json')).items():
+        if v['id'] in ids: continue
+        sr=sorted([[(dt.date.fromisoformat(dd)-D0).days,p,SC.get(l,'?'),post] for dd,(p,l,post) in v['d'].items()])
+        if len(sr)<3: continue
+        pr=[x[1] for x in sr]; q=sorted(pr); alvo=nice(q[max(0,int(len(q)*0.25)-1)])
+        o=[x[1] for x in sr if x[0]<31]; nv=[x[1] for x in sr if x[0]>=31]
+        mo=round(S.median(o),2) if o else None; mn=round(S.median(nv),2) if nv else None
+        var=round((mn/mo-1)*100,1) if mo and mn else None
+        lo=min(sr,key=lambda x:x[1]); last=sr[-1]
+        ud=(D0+dt.timedelta(last[0])).isoformat(); ref=mn or mo
+        selo='alvo' if ud<'2026-11-01' else 'compra' if last[1]<=alvo*1.01 else 'espera' if (last[1]>=ref*1.03 or (var or 0)>3) else 'alvo'
+        inv={c:n for n,c in SC.items()}
+        PM.append(dict(id=v['id'],n=k,c=v['c'],cat_bucket=False,s=sr,mo=mo,mn=mn,v=var,lo=lo[1],lod=(D0+dt.timedelta(lo[0])).isoformat(),los=inv.get(lo[2],'?'),
+            u=last[1],ud=ud,ul=inv.get(last[2],'?'),posts=len(sr),dias=len(sr),alvo=alvo,selo=selo,f=False))
+data['PM']=PM
 s=json.dumps(data,ensure_ascii=False,separators=(',',':'))
 open('site_data.json','w').write(s); print(len(s),'bytes',len(P),'produtos'); print([ (a['n'],a['post']) for a in ach])
 import collections; print(collections.Counter(p['selo'] for p in P)); print(therm)

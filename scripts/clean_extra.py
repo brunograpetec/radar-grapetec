@@ -8,7 +8,8 @@ for r in R:
     if k=='Controle 8BitDo Ultimate 2': k='Controle 8BitDo Ultimate 2C' if re.search(r'ultimate 2c',t) else 'Controle 8BitDo Ultimate 2'
     if k.startswith('Smart TV'):
         m=re.search(r'\b(32|40|43|50|55|58|60|65|70|75|85)\b',t); sz=m and m.group(1)
-        if sz=='43': k='Smart TV 43" (mais barata)'
+        if sz=='32': k='Smart TV 32" (mais barata)'
+        elif sz=='43': k='Smart TV 43" (mais barata)'
         elif sz in ('50','55','65') and re.search(r'4k|uhd',t): k=f'Smart TV {sz}" 4K (mais barata)'
         else: continue
     if k=='Celular Xiaomi Poco X8': continue

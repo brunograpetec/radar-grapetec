@@ -1,10 +1,24 @@
 import os as _os;OUT=_os.environ.get('OUT','/mnt/user-data/outputs/base_precos_grape_tec')
-IMG={}
+IMG={};URL={}
+import re as _re
+def _link(t):
+    i=t.lower().find('link do produto')
+    for s in ([t[i:]] if i>=0 else [])+[t]:
+        for u in _re.findall(r'https?://[^\s<>"]+',s):
+            u=u.rstrip('.,);')
+            h=_re.sub(r'^https?://','',u).split('/')[0].lower()
+            if any(x in h for x in ('t.me','telegram','youtube','youtu.be','grapetec','kpages','gvgmall')): continue
+            if h.startswith('lista.') or u.rstrip('/').count('/')<3: continue
+            return u
+    return ''
 if _os.environ.get('POSTS'):
     import json as _j
     import glob as _g
     for _f in _g.glob(_os.path.join(_os.environ['POSTS'],'*.json')):
-        IMG.update({str(m['id']):m['photo'] for m in _j.load(open(_f))['messages'] if m.get('photo')})
+        for m in _j.load(open(_f))['messages']:
+            if m.get('photo'): IMG[str(m['id'])]=m['photo']
+            u=_link(m.get('text',''))
+            if u: URL[str(m['id'])]=u
 import csv,json,statistics as S,collections,re
 # usa a base limpa (sem fora da curva) + cupons/hora
 allp=list(csv.DictReader(open(OUT+'/todos_os_posts_classificados.csv',encoding='utf-8-sig'),delimiter=';'))
@@ -33,6 +47,7 @@ def build(day):
         it=dict(k=k,id=slug(k.replace(' (mais barata)','').replace(' (mais barato)','')),n=k.replace(' (mais barata)','').replace(' (mais barato)',''),t=r['titulo'][:70],bucket=k.endswith(')') and 'mais bar' in k,
                 p=price,med=round(med,2),lo=lo,drop=round(drop,1),rec=price<lo,loja=r['loja'],h=c.get('hora',''),cup=c.get('cupom',''),post=int(pid),cat=r['categoria'])
         if pid in IMG: it['img']=IMG[pid]
+        if pid in URL: it['url']=URL[pid]
         if it['cup'] and it['cup'] in esg and esg[it['cup']][:10]==day and esg[it['cup']][11:16]>=it['h']: it['esg']=esg[it['cup']][11:16]
         mk=MARCAS.get(str(pid),{})
         if not it.get('esg') and mk.get('esg') and day==mk.get('d',day): it['esg']=mk['esg'];it['esgsrc']=mk['src']

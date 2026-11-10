@@ -25,7 +25,7 @@ const J={messages:[]};const seen=new Set();for(const f of [inF,...more]){for(con
 const flat=x=>typeof x==='string'?x:Array.isArray(x)?x.map(flat).join(''):(x&&x.text)||'';
 const hw=[],ex=[],CU=[],ES=[];let n=0;
 for(const m of J.messages){if(m.type!=='message')continue;const d=m.date.slice(0,10);if(d<d0||d>d1)continue;n++;
- const txt=flat(m.text);const es=txt.match(/cupom\s+([A-Z0-9]{4,})\s+esgotad/i)||txt.match(/\b([A-Z0-9]{5,})\b[^\n]{0,20}esgotad/i);if(es)ES.push([m.id,m.date,es[1].toUpperCase()]);const cu=(txt.split('💰')[1]||'').match(/cupom[:\s]*([A-Za-z0-9]{4,})/i);CU.push([m.id,m.date.slice(11,16),cu?cu[1].toUpperCase():'']);const p={id:+m.id,d,txt};const _mi=txt.search(/💰\s*R\$/u);const i=_mi>=0?_mi:txt.indexOf('💰',txt.trimStart().startsWith('💰')?txt.indexOf('💰')+2:0);if(i<0)continue;
+ const txt=flat(m.text);const es=txt.match(/cupom\s+([A-Z0-9]{4,})\s+esgotad/i)||txt.match(/\b([A-Z0-9]{5,})\b[^\n]{0,20}esgotad/i);if(es)ES.push([m.id,m.date,es[1].toUpperCase()]);const _cs=(txt.split('💰')[1]||''),_ci=_cs.search(/cupom/i),cu=_ci<0?null:_cs.slice(_ci+5,_ci+90).match(/(?:^|[^A-Za-z0-9])((?=[A-Z0-9]*[A-Z])[A-Z0-9]{4,})(?![A-Za-z0-9])/);CU.push([m.id,m.date.slice(11,16),cu?cu[1].toUpperCase():'']);const p={id:+m.id,d,txt};const _mi=txt.search(/💰\s*R\$/u);const i=_mi>=0?_mi:txt.indexOf('💰',txt.trimStart().startsWith('💰')?txt.indexOf('💰')+2:0);if(i<0)continue;
  const t=txt.slice(0,i).replace(/[^\p{L}\p{N}\s\-\/\.,+]/gu,' ').replace(/\s+/g,' ').trim();
  const pm=txt.slice(i).match(/R\$\s?([\d\.]+(?:,\d{1,2})?)/);if(!pm)continue;const price=+pm[1].replace(/\./g,'').replace(',','.');if(!price)continue;
  for(const k of __keys(t))hw.push([p.id,d,k,price,st(txt),t.slice(0,80).replace(/\|/g,'/')]);

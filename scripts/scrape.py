@@ -1,9 +1,9 @@
 """Lê as páginas públicas t.me/s/grape_tec e junta os posts novos em dados/posts.json.
 
-Uso: python3 scripts/scrape.py dados/posts.json [arquivo.html ...]
+Uso: python3 scripts/scrape.py dados/posts [arquivo.html ...]   (um .json por dia)
 (com arquivos .html, usa eles no lugar da internet — serve pra testar)
 """
-import json, re, sys, html, time, datetime as dt, urllib.request
+import json, re, sys, os, glob, html, time, datetime as dt, urllib.request
 
 CANAL = 'grape_tec'
 BRT = dt.timezone(dt.timedelta(hours=-3))
@@ -45,9 +45,14 @@ def le_pagina(h):
 
 
 def main():
-    arq = sys.argv[1]
-    base = json.load(open(arq, encoding='utf-8'))
-    por_id = {m['id']: m for m in base['messages']}
+    pasta = sys.argv[1]
+    antes = {}
+    por_id = {}
+    for f in glob.glob(os.path.join(pasta, '*.json')):
+        s = open(f, encoding='utf-8').read()
+        antes[os.path.basename(f)[:-5]] = s
+        for m in json.loads(s)['messages']:
+            por_id[m['id']] = m
     ultimo = max(int(i) for i in por_id)
     agora = dt.datetime.now(BRT)
     ontem = (agora - dt.timedelta(days=1)).strftime('%Y-%m-%d')
@@ -88,7 +93,14 @@ def main():
         if not arquivos:
             time.sleep(0.7)
     L = sorted(por_id.values(), key=lambda m: int(m['id']))
-    json.dump({'messages': L}, open(arq, 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
+    dias = {}
+    for m in L:
+        dias.setdefault(m['date'][:10], []).append(m)
+    for d, ms in dias.items():
+        s = json.dumps({'messages': ms}, ensure_ascii=False, separators=(',', ':'))
+        if antes.get(d) != s:
+            open(os.path.join(pasta, d + '.json'), 'w', encoding='utf-8').write(s)
+            print('gravou', d)
     print(f'posts novos: {novos} · total {len(L)} · último {L[-1]["id"]} {L[-1]["date"]}')
 
 

@@ -20,7 +20,7 @@ const R=[
 function extra(t,T,price,p,out){for(const [cat,re,M] of R){if(!re.test(t))continue;if(ACC.test(T)&&cat!=='Teclado'&&cat!=='Mouse')break;if(/\b(kit|combo)\b/.test(T))break;
   if(cat==='TV'){const s=T.match(/\b(32|40|43|50|55|58|60|65|70|75|85)\s?(?:"|''|pol|polegadas|\b)/);if(s&&(/4k|uhd/.test(T)||+s[1]>=43)){const sz=+s[1];const b=sz<=43?43:sz<=50?50:sz<=55?55:sz<=65?65:null;if(b)out.push([p.id,p.d,`Smart TV ${b}" 4K (mais barata)`,price,st(p.txt),t.slice(0,80).replace(/\|/g,'/')])}break}
   for(const [r,k] of M)if(r.test(T)){out.push([p.id,p.d,k,price,st(p.txt),t.slice(0,80).replace(/\|/g,'/')]);break}break}}
-const [,,inF,d0,d1,...more]=process.argv;
+const _a=process.argv.slice(2),_dt=_a.filter(x=>/^\d{4}-\d\d-\d\d$/.test(x)),d0=_dt[0],d1=_dt[1],_fs=_a.filter(x=>!/^\d{4}-\d\d-\d\d$/.test(x)),inF=_fs[0],more=_fs.slice(1);
 const J={messages:[]};const seen=new Set();for(const f of [inF,...more]){for(const m of JSON.parse(fs.readFileSync(f,'utf8')).messages){if(seen.has(m.id))continue;seen.add(m.id);J.messages.push(m)}}
 const flat=x=>typeof x==='string'?x:Array.isArray(x)?x.map(flat).join(''):(x&&x.text)||'';
 const hw=[],ex=[],CU=[],ES=[];let n=0;

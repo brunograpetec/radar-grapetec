@@ -2,7 +2,9 @@ import os as _os;OUT=_os.environ.get('OUT','/mnt/user-data/outputs/base_precos_g
 IMG={}
 if _os.environ.get('POSTS'):
     import json as _j
-    IMG={str(m['id']):m['photo'] for m in _j.load(open(_os.environ['POSTS']))['messages'] if m.get('photo')}
+    import glob as _g
+    for _f in _g.glob(_os.path.join(_os.environ['POSTS'],'*.json')):
+        IMG.update({str(m['id']):m['photo'] for m in _j.load(open(_f))['messages'] if m.get('photo')})
 import csv,json,statistics as S,collections,re
 # usa a base limpa (sem fora da curva) + cupons/hora
 allp=list(csv.DictReader(open(OUT+'/todos_os_posts_classificados.csv',encoding='utf-8-sig'),delimiter=';'))

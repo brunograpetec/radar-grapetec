@@ -1,6 +1,7 @@
+import os as _os;OUT=_os.environ.get('OUT','/mnt/user-data/outputs/base_precos_grape_tec')
 import json,csv,re,unicodedata,statistics as S,datetime as dt
 summ=json.load(open('summ.json'))
-rows=list(csv.DictReader(open('/mnt/user-data/outputs/base_precos_grape_tec/menor_preco_por_dia.csv',encoding='utf-8-sig'),delimiter=';'))
+rows=list(csv.DictReader(open(OUT+'/menor_preco_por_dia.csv',encoding='utf-8-sig'),delimiter=';'))
 SC={'KaBuM':'K','Amazon':'A','Shopee':'S','Mercado Livre':'M','AliExpress':'X','Pichau':'P','Terabyte':'T','Magalu':'G','?':'?'}
 D0=dt.date(2026,10,1)
 ser={}
@@ -34,7 +35,7 @@ ach=[dict(n='Ryzen 7 7800X3D',p=763.29,d='2026-11-08',l='KaBuM',ref=1660,post=22
      dict(n='RX 7600',p=767,d='2026-10-29',l='Shopee',ref=1799,post=None,tag='Possível erro de preço'),
      dict(n='Ryzen 9 9950X3D',p=1279,d='2026-10-23',l='Terabyte',ref=3737,post=None,tag='Possível erro de preço')]
 import csv as _c
-allp=list(_c.DictReader(open('/mnt/user-data/outputs/base_precos_grape_tec/todos_os_posts_classificados.csv',encoding='utf-8-sig'),delimiter=';'))
+allp=list(_c.DictReader(open(OUT+'/todos_os_posts_classificados.csv',encoding='utf-8-sig'),delimiter=';'))
 def postof(prod,d,price):
     for r in allp:
         if r['produto']==prod and r['data']==d and abs(float(r['preco'].replace(',','.'))-price)<0.01: return int(r['link_post'].rsplit('/',1)[1])
@@ -47,7 +48,8 @@ for nm in ['RX 9070 XT','RTX 5060','RTX 5060 Ti 16GB','Ryzen 5 7600','Water cool
 import os
 UPD=os.environ.get('UPD','10/11/2026 às 15h26');ATE=os.environ.get('ATE','10/11 às 15h26')
 OFERTAS=len(set(r['link_post'] for r in allp if r['fora_da_curva']!='sim'))
-data=dict(gen='2026-11-10',upd=UPD,ate=ATE,d0='2026-10-01',days=41,total_posts=18523,ofertas=OFERTAS,P=P,T=therm,A=ach,
+_lastd=max(r['data'] for r in rows)
+data=dict(gen=_lastd,upd=UPD,ate=ATE,d0='2026-10-01',days=(dt.date.fromisoformat(_lastd)-D0).days+1,total_posts=int(os.environ.get('TOTAL','18523')),ofertas=OFERTAS,P=P,T=therm,A=ach,
           stores={v:k for k,v in SC.items()})
 import os as _o
 if _o.path.exists('dias.json'): data['dias']=json.load(open('dias.json'))

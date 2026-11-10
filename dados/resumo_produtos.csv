@@ -40,7 +40,7 @@ Ryzen 9 7900;Processadores;8;13;1789,32;1789,32;0,0;1627,0;2026-10-27;Amazon;191
 Ryzen 9 7900X;Processadores;6;6;1899,99;1899,0;-0,1;1899,0;2026-11-06;Amazon;1899,99;2026-11-10;1899,99;2026-11-10;Amazon
 Ryzen 9 9900X;Processadores;7;10;2199,99;2099,49;-4,6;2099,0;2026-11-06;Amazon;2199,99;2026-10-13;2099,0;2026-11-10;Amazon
 Ryzen 9 9950X3D;Processadores;9;14;3737,0;;;3737,0;2026-10-09;KaBuM;3779,0;2026-10-06;3737,0;2026-10-20;KaBuM
-Placa-mãe A520 (mais barata);Placas-mãe;39;201;334,0;318,6;-4,6;224,0;2026-11-07;Mercado Livre;849,0;2026-10-17;310,0;2026-11-10;Mercado Livre
+Placa-mãe A520 (mais barata);Placas-mãe;39;202;334,0;318,6;-4,6;224,0;2026-11-07;Mercado Livre;849,0;2026-10-17;310,0;2026-11-10;Mercado Livre
 Placa-mãe A620 (mais barata);Placas-mãe;15;25;419,99;550,0;31,0;323,1;2026-10-09;Amazon;767,0;2026-10-07;553,0;2026-11-09;Mercado Livre
 Placa-mãe B450 (mais barata);Placas-mãe;28;61;385,0;326,33;-15,2;263,0;2026-11-07;Mercado Livre;667,26;2026-10-06;326,66;2026-11-10;Mercado Livre
 Placa-mãe B550 (mais barata);Placas-mãe;41;430;479,0;437,69;-8,6;371,54;2026-11-09;Mercado Livre;664,0;2026-10-01;371,55;2026-11-10;Shopee
@@ -69,7 +69,7 @@ Fonte XPG Core Reactor II VE 850W;Fontes;19;37;478,15;453,0;-5,3;427,0;2026-11-0
 Fonte XPG Kyber 850W;Fontes;27;34;420,9;416,0;-1,2;328,0;2026-10-10;Mercado Livre;486,92;2026-10-17;409,0;2026-11-10;Mercado Livre
 Gabinete Acegeek Stratus Mesh;Gabinetes;13;20;84,0;102,25;21,7;79,0;2026-10-10;Shopee;125,31;2026-10-05;104,0;2026-11-08;Shopee
 Gabinete G-Storm Sentinel;Gabinetes;12;12;142,78;142,78;0,0;114,9;2026-10-10;Mercado Livre;142,78;2026-11-07;139,39;2026-11-10;Mercado Livre
-Gabinete Kalkan Asgard;Gabinetes;17;19;349,99;293,33;-16,2;293,33;2026-10-05;Amazon;360,0;2026-10-20;293,33;2026-11-10;Amazon
+Gabinete Kalkan Asgard;Gabinetes;17;20;349,99;293,33;-16,2;293,33;2026-10-05;Amazon;360,0;2026-10-20;293,33;2026-11-10;Amazon
 Gabinete Lian Li Vector V100;Gabinetes;9;17;406,0;;;356,8;2026-10-09;Amazon;539,0;2026-10-17;419,99;2026-10-30;Terabyte
 Gabinete Mancer CV450;Gabinetes;29;49;177,0;196,56;11,1;154,0;2026-10-10;Shopee;338,58;2026-10-31;156,56;2026-11-10;Shopee
 Gabinete Mancer CV700L;Gabinetes;16;23;230,28;249,38;8,3;195,0;2026-10-05;Shopee;385,0;2026-10-10;296,4;2026-11-10;Shopee
@@ -103,7 +103,7 @@ Monitor 4K (mais barato);Monitores;33;92;1005,0;998,0;-0,7;899,0;2026-10-08;Amaz
 "Monitor Ultrawide 34"" QHD (mais barato)";Monitores;37;167;1195,08;1329,0;11,2;1059,0;2026-10-28;Shopee;1947,0;2026-10-26;1120,0;2026-11-10;Mercado Livre
 Mouse AOC GM510;Mouses;7;7;92,0;78,2;-15,0;70,0;2026-10-31;Amazon;92,0;2026-10-28;78,2;2026-11-08;Amazon
 Mouse HyperX Pulsefire Haste (1 e 2);Mouses;6;7;251,99;241,0;-4,4;159,0;2026-10-21;Amazon;305,84;2026-10-06;241,0;2026-11-07;Amazon
-Mouse Logitech G203;Mouses;12;18;85,4;85,0;-0,5;74,0;2026-10-11;Amazon;99,0;2026-10-12;80,91;2026-11-09;Amazon
+Mouse Logitech G203;Mouses;13;19;85,4;85,0;-0,5;74,0;2026-10-11;Amazon;99,0;2026-10-12;80,91;2026-11-10;Amazon
 Mouse Logitech G305;Mouses;18;27;179,45;179,9;0,3;149,0;2026-10-10;Amazon;199,98;2026-10-22;179,9;2026-11-09;Amazon
 Mouse Redragon K1NG 1K;Mouses;16;19;83,98;;;63,99;2026-10-10;Amazon;88,36;2026-10-08;83,99;2026-10-31;Amazon
 Mouse Redragon King Pro;Mouses;17;21;189,25;165,99;-12,3;152,0;2026-10-08;Amazon;324,1;2026-10-18;165,99;2026-11-09;Amazon
@@ -116,7 +116,7 @@ Fone Havit H630BT;Headsets e fones;9;13;97,0;110,0;13,4;94,05;2026-10-12;Shopee;
 Headset Logitech G335;Headsets e fones;7;12;286,3;;;279,0;2026-10-05;Amazon;422,99;2026-10-08;286,3;2026-10-30;Shopee
 Headset Pichau Vega Pro;Headsets e fones;11;13;106,31;120,16;13,0;79,79;2026-10-28;Pichau;125,31;2026-11-05;115,0;2026-11-08;Pichau
 Headset Redragon Cragblade;Headsets e fones;8;8;153,61;;;153,0;2026-10-17;Amazon;153,61;2026-10-21;153,61;2026-10-21;Amazon
-Headset Redragon Zeus Lite;Headsets e fones;12;13;149,0;147,99;-0,7;116,0;2026-10-10;Amazon;150,0;2026-10-31;145,99;2026-11-08;Amazon
+Headset Redragon Zeus Lite;Headsets e fones;13;14;149,0;145,99;-2,0;116,0;2026-10-10;Amazon;150,0;2026-10-31;139,99;2026-11-10;Amazon
 Headset Redragon Zeus Pro;Headsets e fones;13;22;299,0;273,0;-8,7;253,0;2026-11-07;Mercado Livre;299,0;2026-10-11;273,0;2026-11-08;Mercado Livre
 Controle 8BitDo Ultimate 2;Controles;9;9;198,5;241,0;21,4;196,0;2026-10-19;AliExpress;252,0;2026-11-09;252,0;2026-11-09;AliExpress
 Controle DualSense (PS5);Controles;25;56;370,6;349,59;-5,7;269,0;2026-10-10;Mercado Livre;577,9;2026-10-02;338,0;2026-11-08;Mercado Livre

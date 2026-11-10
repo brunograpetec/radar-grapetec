@@ -217,7 +217,28 @@
 #gt1111 .bfc .acts{display:flex;gap:8px;margin-top:auto;padding-top:6px}
 #gt1111 .bfc .acts a,#gt1111 .bfc .acts button{flex:1;text-align:center;font-size:13px;font-weight:600;padding:9px;border-radius:10px;border:1px solid var(--bd);color:var(--ink)}
 #gt1111 .bfc .acts a:hover,#gt1111 .bfc .acts button:hover{border-color:var(--bf1)}
-#gt1111 .bfwait{text-align:center;padding:40px 16px;border:1px dashed var(--bd);border-radius:18px}
+#gt1111 
+#gt1111 .bfbar{margin:4px 0 18px}
+#gt1111 .bfbar .search{margin-bottom:12px}
+#gt1111 .bfchips{display:flex;gap:8px;flex-wrap:wrap}
+#gt1111 .bfchip{padding:8px 13px;border-radius:999px;border:1px solid var(--bd);background:var(--s1);font-size:13.5px;color:var(--mut);transition:all .15s}
+#gt1111 .bfchip:hover{color:var(--ink);border-color:var(--bf2)}
+#gt1111 .bfchip em{font-style:normal;opacity:.7;margin-left:5px;font-size:11.5px}
+#gt1111 .bfchip.on{background:linear-gradient(90deg,var(--bf1),var(--bf2));color:#140006;border-color:transparent;font-weight:700;box-shadow:0 4px 18px rgba(255,45,149,.3)}
+#gt1111 .bfchip.esgt{border-style:dashed}
+#gt1111 .bfchip.esgt.on{background:var(--s2,var(--s1));color:var(--ink);border-color:var(--badt);box-shadow:none}
+#gt1111 .bfc .ph{position:relative;margin:-16px -16px 4px;height:150px;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;border-bottom:1px solid var(--bd)}
+#gt1111 .bfc .ph img{width:100%;height:100%;object-fit:contain}
+#gt1111 .bfc .ph .noimg{font-size:12px;color:#8a7f95;font-weight:600;letter-spacing:.04em}
+#gt1111 .bfc .ph .off{position:absolute;left:10px;bottom:10px;font-size:22px}
+#gt1111 .bfc .ph .rk{top:10px;right:10px;background:rgba(10,10,12,.75);color:#fff;padding:3px 8px;border-radius:8px}
+#gt1111 .bfc .ph .gonetag{position:absolute;top:10px;left:10px;background:#d63c3c;color:#fff;font-size:11px;font-weight:800;letter-spacing:.06em;padding:4px 8px;border-radius:8px}
+#gt1111 .bfc.gone{opacity:.62}
+#gt1111 .bfc.gone .ph img{filter:grayscale(1)}
+#gt1111 .bfmore{display:block;margin:18px auto 0;padding:12px 22px;border-radius:12px;border:1px solid var(--bf2);color:var(--ink);font-weight:700;font-size:14px;background:rgba(255,122,0,.08)}
+#gt1111 .bfmore:hover{background:rgba(255,122,0,.16)}
+@media(max-width:640px){#gt1111 .bfchips{flex-wrap:nowrap;overflow-x:auto;padding-bottom:6px;margin:0 -16px;padding-left:16px;padding-right:16px;scrollbar-width:none}#gt1111 .bfchip{flex:0 0 auto}#gt1111 .bfc .ph{height:170px}}
+.bfwait{text-align:center;padding:40px 16px;border:1px dashed var(--bd);border-radius:18px}
 #gt1111 .bfwait b{display:block;font-size:22px;margin-bottom:6px}
 #gt1111 .bfwait p{color:var(--mut);margin:0 0 16px}
 #gt1111 .bfnote{font-size:12.5px;color:var(--dim);margin-top:14px}
@@ -268,7 +289,9 @@
  <div class="bfhead"><div><span class="bftag"><b>BLACK</b><i>FRIDAY · 11.11</i></span><h2>🔥 Achados <span>do dia</span></h2><p class="lead2">As maiores quedas de preço que passaram no canal no dia, comparadas com a mediana dos dias anteriores. Preço de Black, com cupom, na hora em que saiu.</p></div>
  <div class="bftabs" id="gtBfTabs"><button data-d="2026-11-10"><small>ESQUENTA</small>10/11</button><button data-d="2026-11-11"><small>DIA D</small>11/11</button></div></div>
  <div class="bfstats" id="gtBfStats"></div>
+ <div class="bfbar" id="gtBfBar"><label class="search"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a99bb5" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="gtBfQ" type="search" placeholder="Procura no dia: 5700X, B550, monitor…" autocomplete="off"></label><div class="bfchips" id="gtBfChips"></div></div>
  <div class="bfgrid" id="gtBfGrid"></div>
+ <button class="bfmore" id="gtBfMore" style="display:none"></button>
  <p class="bfnote">Queda = quanto o preço ficou abaixo da mediana do menor preço diário desse produto nos dias anteriores. Oferta relâmpago acaba rápido: confira sempre no post.</p>
 </div></div></div></section>
 
@@ -450,18 +473,32 @@ $('#gtPres').onclick=function(){root.classList.toggle('pres');try{if(root.classL
 document.addEventListener('fullscreenchange',function(){if(!document.fullscreenElement){root.classList.remove('pres');root.style.overflowY=''}});
 
 /* ---------- achados do dia (Black) ---------- */
-(function(){var DD=D.dias||{},tabs=$$('#gtBfTabs button'),grid=$('#gtBfGrid'),stats=$('#gtBfStats');if(!grid)return;
- var cur=null;tabs.forEach(function(b){var d=DD[b.dataset.d];if(d&&d.items&&d.items.length)cur=b.dataset.d});if(!cur)cur='2026-11-10';
- function show(day){cur=day;tabs.forEach(function(b){b.classList.toggle('on',b.dataset.d===day)});var d=DD[day];grid.innerHTML='';
-  if(!d||!d.items||!d.items.length){stats.innerHTML='';grid.innerHTML='<div class="bfwait" style="grid-column:1/-1"><b>'+(day==='2026-11-11'?'A caçada do 11/11 começa à meia-noite 🔥':'Ainda sem achados nesse dia')+'</b><p>'+(day==='2026-11-11'?'Os cupons caem na virada. Entra no grupo pra pegar na hora — aqui eu atualizo os melhores de manhã.':'Volte mais tarde.')+'</p><div class="ctas" style="justify-content:center"><a class="cta wa" href="https://grapetec.com.br/whatsapp" target="_blank" rel="noopener" data-ev="WhatsApp_bf">WhatsApp</a><a class="cta tg" href="https://t.me/grape_tec" target="_blank" rel="noopener" data-ev="Telegram_bf">Telegram</a></div></div>';bindEv(grid);return}
-  var recs=d.items.filter(function(x){return x.rec}).length;
-  stats.innerHTML='<span><b class="mono">'+d.ofertas+'</b>ofertas de hardware e setup nesse dia</span><span><b class="mono">'+d.total+'</b>abaixo da mediana</span><span><b class="mono hot" style="color:var(--bf3)">'+recs+'</b>bateram o menor preço do radar</span>';
-  d.items.forEach(function(x,i){var c=document.createElement('div');c.className='bfc';c.style.animationDelay=(i%12)*40+'ms';
-   c.innerHTML='<span class="rk">#'+(i+1)+'</span><span class="off mono">-'+Math.round(x.drop)+'%<small>vs média</small></span>'+(x.rec?'<span class="rec">MENOR PREÇO DO RADAR</span>':'')+'<h4>'+x.n+'</h4><div class="sub">'+(x.bucket?x.t:x.cat)+'</div><div class="pr"><b class="mono">'+brl(x.p)+'</b><s>média '+brl(x.med,0)+'</s></div><div class="meta">'+x.loja+(x.h?' · '+x.h.replace(':','h'):'')+'</div>'+(x.cup?'<div class="cup"><button data-c="'+x.cup+'" title="Copiar cupom">🎟️ '+x.cup+'</button>'+(x.esg?'<span class="es">esgotou às '+x.esg.replace(':','h')+'</span>':'')+'</div>':'')+'<div class="acts"><a href="https://t.me/grape_tec/'+x.post+'" target="_blank" rel="noopener" data-ev="Post_bf">Ver post</a>'+(byId[x.id]?'<button data-p="'+x.id+'">Ver curva</button>':'')+'</div>';
-   grid.appendChild(c)});
+(function(){var DD=D.dias||{},tabs=$$('#gtBfTabs button'),grid=$('#gtBfGrid'),stats=$('#gtBfStats'),bar=$('#gtBfBar'),chips=$('#gtBfChips'),q=$('#gtBfQ'),more=$('#gtBfMore');if(!grid)return;
+ var CO=['Placas de vídeo','Processadores','Placas-mãe','Memória RAM','SSD','Fontes','Gabinetes','Coolers','Monitores','Mouses','Teclados','Headsets e fones','Controles','Setup e acessórios','Notebooks','Consoles','TVs','Celulares, tablets e relógios'];
+ var st={day:null,cat:'Todas',q:'',esg:false,lim:12};
+ tabs.forEach(function(b){var d=DD[b.dataset.d];if(d&&d.items&&d.items.length)st.day=b.dataset.d});if(!st.day)st.day='2026-11-10';
+ function wait(day){return '<div class="bfwait" style="grid-column:1/-1"><b>'+(day==='2026-11-11'?'A caçada do 11/11 começa à meia-noite 🔥':'Ainda sem achados nesse dia')+'</b><p>'+(day==='2026-11-11'?'Os cupons caem na virada. Entra no grupo pra pegar na hora — esta lista se atualiza sozinha a cada 10 minutos.':'Volte mais tarde.')+'</p><div class="ctas" style="justify-content:center"><a class="cta wa" href="https://grapetec.com.br/whatsapp" target="_blank" rel="noopener" data-ev="WhatsApp_bf">WhatsApp</a><a class="cta tg" href="https://t.me/grape_tec" target="_blank" rel="noopener" data-ev="Telegram_bf">Telegram</a></div></div>'}
+ function base(d){return d.items.filter(function(x){return st.esg?!x.alt:!x.esg})}
+ function card(x,i){var c=document.createElement('div');c.className='bfc'+(x.esg?' gone':'');c.style.animationDelay=(i%12)*40+'ms';
+  c.innerHTML='<div class="ph">'+(x.img?'<img loading="lazy" referrerpolicy="no-referrer" src="'+x.img+'" alt="" onerror="this.remove()">':'<span class="noimg">'+x.cat+'</span>')+'<span class="off mono">-'+Math.round(x.drop)+'%<small>vs média</small></span><span class="rk">#'+(i+1)+'</span>'+(x.esg?'<span class="gonetag">ESGOTOU '+x.esg.replace(':','h')+'</span>':'')+'</div>'+
+  (x.rec?'<span class="rec">MENOR PREÇO DO RADAR</span>':'')+'<h4>'+x.n+'</h4><div class="sub">'+(x.bucket?x.t:x.cat)+'</div><div class="pr"><b class="mono">'+brl(x.p)+'</b><s>média '+brl(x.med,0)+'</s></div><div class="meta">'+x.loja+(x.h?' · saiu '+x.h.replace(':','h'):'')+'</div>'+(x.cup?'<div class="cup"><button data-c="'+x.cup+'" title="Copiar cupom">🎟️ '+x.cup+'</button></div>':'')+'<div class="acts"><a href="https://t.me/grape_tec/'+x.post+'" target="_blank" rel="noopener" data-ev="Post_bf">Ver post</a>'+(byId[x.id]?'<button data-p="'+x.id+'">Ver curva</button>':'')+'</div>';return c}
+ function draw(){var d=DD[st.day];tabs.forEach(function(b){b.classList.toggle('on',b.dataset.d===st.day)});grid.innerHTML='';more.style.display='none';
+  if(!d||!d.items||!d.items.length){stats.innerHTML='';bar.style.display='none';grid.innerHTML=wait(st.day);bindEv(grid);return}
+  bar.style.display='';var all=base(d),nEsg=d.items.filter(function(x){return x.esg}).length,recs=all.filter(function(x){return x.rec}).length;
+  stats.innerHTML='<span><b class="mono">'+d.ofertas+'</b>ofertas de hardware e setup no dia</span><span><b class="mono">'+d.total+'</b>abaixo da média</span><span><b class="mono hot" style="color:var(--bf3)">'+recs+'</b>no menor preço do radar</span>';
+  var cnt={};all.forEach(function(x){cnt[x.cat]=(cnt[x.cat]||0)+1});var cats=CO.filter(function(c){return cnt[c]});if(st.cat!=='Todas'&&!cnt[st.cat])st.cat='Todas';
+  chips.innerHTML=['Todas'].concat(cats).map(function(c){return '<button class="bfchip'+(st.cat===c?' on':'')+'" data-k="'+c+'">'+c+'<em>'+(c==='Todas'?all.length:cnt[c])+'</em></button>'}).join('')+(nEsg?'<button class="bfchip esgt'+(st.esg?' on':'')+'" data-esg="1">'+(st.esg?'✓ ':'')+'Mostrar esgotados<em>'+nEsg+'</em></button>':'');
+  $$('.bfchip[data-k]',chips).forEach(function(b){b.onclick=function(){st.cat=b.dataset.k;st.lim=12;draw();ev('bf_cat')}});
+  $$('.bfchip[data-esg]',chips).forEach(function(b){b.onclick=function(){st.esg=!st.esg;st.lim=12;draw()}});
+  var L=all.filter(function(x){return (st.cat==='Todas'||x.cat===st.cat)&&(!st.q||norm(x.n+' '+x.t+' '+x.cat+' '+x.loja).indexOf(st.q)>=0)});
+  if(!L.length){grid.innerHTML='<div class="bfwait" style="grid-column:1/-1"><b>Nada com “'+q.value+'” nesse dia</b><p>Tenta outro nome ou toca em “Todas”.</p></div>';return}
+  L.slice(0,st.lim).forEach(function(x,i){grid.appendChild(card(x,i))});
+  if(L.length>st.lim){more.style.display='';more.textContent='Ver mais '+Math.min(12,L.length-st.lim)+' de '+(L.length-st.lim)+' restantes'}
   $$('[data-c]',grid).forEach(function(b){b.onclick=function(){var v=b.dataset.c;try{navigator.clipboard.writeText(v).then(function(){b.textContent='✓ copiado';setTimeout(function(){b.textContent='🎟️ '+v},1500)})}catch(e){}ev('cupom')}});
   $$('[data-p]',grid).forEach(function(b){b.onclick=function(){openP(b.dataset.p)}});bindEv(grid)}
- tabs.forEach(function(b){b.onclick=function(){show(b.dataset.d);ev('bf_'+b.dataset.d)}});show(cur)})();
+ more.onclick=function(){st.lim+=12;draw()};
+ q.addEventListener('input',function(){st.q=norm(q.value.trim());st.lim=12;draw()});
+ tabs.forEach(function(b){b.onclick=function(){st.day=b.dataset.d;st.cat='Todas';st.lim=12;draw();ev('bf_'+b.dataset.d)}});draw()})();
 setCat('Destaques');
 function setTheme(m){root.classList.toggle('lt',m==='lt');try{localStorage.setItem('gt1111theme',m)}catch(e){}C=pal();$$('.theme button').forEach(function(b){b.classList.toggle('on',b.dataset.t===m)});render();if(mod.classList.contains('on'))draw();ev('tema_'+m)}
 $$('.theme button').forEach(function(b){b.onclick=function(){setTheme(b.dataset.t)}});$$('.theme button').forEach(function(b){b.classList.toggle('on',b.dataset.t===(root.classList.contains('lt')?'lt':'dk'))});

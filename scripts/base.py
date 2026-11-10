@@ -37,7 +37,9 @@ for x in clean:
         c['n']+=1
         if x['p']<c['p']: dd[x['d']].update({kk:x[kk] for kk in ('p','s','id','t')})
 keep={k:v for k,v in daily.items() if len(v)>=6}
-DAYS=[(dt.date(2026,10,1)+dt.timedelta(i)).isoformat() for i in range(41)]
+import os
+_last=max(d for v in daily.values() for d in v)
+DAYS=[(dt.date(2026,10,1)+dt.timedelta(i)).isoformat() for i in range((dt.date.fromisoformat(_last)-dt.date(2026,10,1)).days+1)]
 summ=[]
 for k,v in keep.items():
     oct_=[v[d]['p'] for d in v if d<'2026-11-01']; nov=[v[d]['p'] for d in v if d>='2026-11-01']
@@ -49,7 +51,7 @@ for k,v in keep.items():
         menor=lo['p'],menor_data=lo['d'],menor_loja=lo['s'],maior=hi['p'],maior_data=hi['d'],ultimo=last['p'],ultimo_data=last['d'],ultimo_loja=last['s']))
 CO=['Placas de vídeo','Processadores','Placas-mãe','Memória RAM','SSD','Fontes','Gabinetes','Coolers','Monitores','Mouses','Teclados','Headsets e fones','Controles','Setup e acessórios','Notebooks','Consoles','TVs','Celulares, tablets e relógios']
 summ.sort(key=lambda s:(CO.index(s['categoria']),s['produto']))
-OUT='/mnt/user-data/outputs/base_precos_grape_tec'
+OUT=os.environ.get('OUT','/mnt/user-data/outputs/base_precos_grape_tec')
 import os; os.makedirs(OUT,exist_ok=True)
 with open(f'{OUT}/menor_preco_por_dia.csv','w',newline='',encoding='utf-8-sig') as f:
     w=csv.writer(f,delimiter=';'); w.writerow(['data','categoria','produto','menor_preco','loja','posts_no_dia','titulo_da_oferta','link_post'])
@@ -65,7 +67,7 @@ with open(f'{OUT}/todos_os_posts_classificados.csv','w',newline='',encoding='utf
     for x in sorted(rows,key=lambda x:(x['d'],x['id'])):
         if x['k'] not in keep: continue
         w.writerow([x['d'],x['c'],x['k'],str(x['p']).replace('.',','),x['s'],x['t'],f"https://t.me/grape_tec/{x['id']}",'sim' if (x['k'],x['id']) in ol else ''])
-json.dump({'periodo':['2026-10-01','2026-11-09'],'fonte':'t.me/grape_tec','produtos':[dict(s_,serie=[{'data':d,'preco':keep[s_['produto']][d]['p'],'loja':keep[s_['produto']][d]['s'],'post':keep[s_['produto']][d]['id']} for d in sorted(keep[s_['produto']])]) for s_ in summ]},open(f'{OUT}/base_precos.json','w',encoding='utf-8'),ensure_ascii=False)
+json.dump({'periodo':['2026-10-01',DAYS[-1]],'fonte':'t.me/grape_tec','produtos':[dict(s_,serie=[{'data':d,'preco':keep[s_['produto']][d]['p'],'loja':keep[s_['produto']][d]['s'],'post':keep[s_['produto']][d]['id']} for d in sorted(keep[s_['produto']])]) for s_ in summ]},open(f'{OUT}/base_precos.json','w',encoding='utf-8'),ensure_ascii=False)
 json.dump(summ,open('summ.json','w'),ensure_ascii=False); json.dump({k:{d:[v[d]['p'],v[d]['s']] for d in v} for k,v in keep.items()},open('keep.json','w'),ensure_ascii=False)
 print(len(rows),'posts válidos',dropped,'| produtos:',len(summ),'| fora da curva:',len(outl))
 for k,x,m in sorted(outl,key=lambda o:o[1]['d']):

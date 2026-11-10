@@ -214,8 +214,8 @@
 #gt1111 .bfc .cup{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
 #gt1111 .bfc .cup button{font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:700;padding:5px 9px;border-radius:8px;border:1px dashed var(--bf2);color:var(--ink);background:rgba(255,122,0,.08)}
 #gt1111 .bfc .cup .es{font-size:11px;font-weight:700;color:var(--badt);background:rgba(255,107,107,.12);padding:5px 8px;border-radius:8px}
-#gt1111 .bfc .acts{display:flex;gap:8px;margin-top:auto;padding-top:6px}
-#gt1111 .bfc .acts a,#gt1111 .bfc .acts button{flex:1;text-align:center;font-size:13px;font-weight:600;padding:9px;border-radius:10px;border:1px solid var(--bd);color:var(--ink)}
+#gt1111 .bfc .acts{display:flex;gap:8px;margin-top:auto;padding-top:8px}
+#gt1111 .bfc .acts a,#gt1111 .bfc .acts button{flex:1;text-align:center;font-size:12.5px;font-weight:600;padding:7px 8px;border-radius:10px;border:1px solid var(--bd);color:var(--ink)}
 #gt1111 .bfc .acts a:hover,#gt1111 .bfc .acts button:hover{border-color:var(--bf1)}
 #gt1111 
 #gt1111 .card h4 .tvtag,#gt1111 .tvtag{display:block!important;margin-top:6px;font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--act,var(--ac));text-transform:uppercase}
@@ -246,11 +246,11 @@
 #gt1111 .bfc.gone .ph img{filter:grayscale(1)}
 #gt1111 .bfc .avs{font-size:12px;color:#f5b041;background:rgba(245,176,65,.1);border:1px solid rgba(245,176,65,.35);border-radius:8px;padding:6px 8px;margin-top:8px}
 #gt1111.lt .bfc .avs{color:#9a5b00}
-#gt1111 .bfc .acts.hasbuy .buy{flex:2.3}#gt1111 .bfc .acts.hasbuy button{flex:1}
-#gt1111 .bfc .acts .buy{background:linear-gradient(90deg,var(--bf1),var(--bf2));color:#140006!important;font-weight:800;border:0;box-shadow:0 6px 20px rgba(255,45,149,.28)}
-#gt1111 .bfc .acts .buy:hover{filter:brightness(1.08)}
+
+#gt1111 .bfc .acts .buy{font-weight:700;border:0!important;white-space:nowrap}
+#gt1111 .bfc .acts .buy:hover{filter:brightness(1.1)}
 #gt1111 .bfc .vpost{display:block;text-align:center;font-size:12px;color:var(--dim);margin-top:8px;text-decoration:underline}
-#gt1111 .bfc .cup small{display:block;font-size:11px;color:var(--dim);margin-top:4px}
+#gt1111 .bfc .cup.nocup{font-size:12px;color:var(--dim);padding:6px 0}
 #gt1111 .bfmore{display:block;margin:18px auto 0;padding:12px 22px;border-radius:12px;border:1px solid var(--bf2);color:var(--ink);font-weight:700;font-size:14px;background:rgba(255,122,0,.08)}
 #gt1111 .bfmore:hover{background:rgba(255,122,0,.16)}
 @media(max-width:640px){#gt1111 .bfchips{flex-wrap:nowrap;overflow-x:auto;padding-bottom:6px;margin:0 -16px;padding-left:16px;padding-right:16px;scrollbar-width:none}#gt1111 .bfchip{flex:0 0 auto}#gt1111 .bfc .ph{height:160px}#gt1111 .bfstats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}#gt1111 .bfstats span{display:flex;flex-direction:column;font-size:12px;line-height:1.25;background:var(--s1);border:1px solid var(--bd);border-radius:12px;padding:10px}#gt1111 .bfstats b{font-size:22px;margin:0 0 2px}}
@@ -499,6 +499,7 @@ document.addEventListener('fullscreenchange',function(){if(!document.fullscreenE
 /* ---------- achados do dia (Black) ---------- */
 (function(){var DD=D.dias||{},tabs=$$('#gtBfTabs button'),grid=$('#gtBfGrid'),stats=$('#gtBfStats'),bar=$('#gtBfBar'),chips=$('#gtBfChips'),q=$('#gtBfQ'),more=$('#gtBfMore');if(!grid)return;
  var CO=['Placas de vídeo','Processadores','Placas-mãe','Memória RAM','SSD','Fontes','Gabinetes','Coolers','Monitores','Mouses','Teclados','Headsets e fones','Controles','Setup e acessórios','Notebooks','Consoles','TVs','Celulares, tablets e relógios'];
+ function lojaCor(l){var c={'Mercado Livre':['#FFE600','#2D3277'],'Amazon':['#00A8E1','#fff'],'KaBuM':['#FF6500','#fff'],'Shopee':['#EE4D2D','#fff'],'Terabyte':['#F28C00','#111'],'AliExpress':['#E62E04','#fff'],'Pichau':['#E2231A','#fff'],'Magalu':['#0086FF','#fff'],'Casas Bahia':['#0033C6','#fff'],'Americanas':['#E60014','#fff'],'Nuuvem':['#7B2CBF','#fff'],'Samsung':['#1428A0','#fff']}[l]||['#3a3344','#fff'];return 'background:'+c[0]+';color:'+c[1]+'!important'}
  var IC={'Placas de vídeo':'🎮','Processadores':'🧠','Placas-mãe':'🧩','Memória RAM':'⚡','SSD':'💾','Fontes':'🔌','Gabinetes':'🗄️','Coolers':'❄️','Monitores':'🖥️','Mouses':'🖱️','Teclados':'⌨️','Headsets e fones':'🎧','Controles':'🕹️','Setup e acessórios':'🪑','Notebooks':'💻','Consoles':'🎮','TVs':'📺','Celulares, tablets e relógios':'📱'};
  var st={day:null,cat:'Todas',q:'',esg:false,lim:12};
  tabs.forEach(function(b){var d=DD[b.dataset.d];if(d&&d.items&&d.items.length)st.day=b.dataset.d});if(!st.day)st.day='2026-11-10';
@@ -506,7 +507,7 @@ document.addEventListener('fullscreenchange',function(){if(!document.fullscreenE
  function base(d){return d.items.filter(function(x){return st.esg?!x.alt:!x.esg})}
  function card(x,i){var c=document.createElement('div');c.className='bfc'+(x.esg?' gone':'');c.style.animationDelay=(i%12)*40+'ms';
   c.innerHTML='<div class="ph'+(x.img?'':' no')+'">'+(x.img?'<img loading="lazy" referrerpolicy="no-referrer" src="'+x.img+'" alt="" onerror="this.parentNode.classList.add(\'no\');this.outerHTML=\'<span class=noimg><i>🛒</i>Ver no post</span>\'">':'<span class="noimg"><i>'+(IC[x.cat]||'🛒')+'</i>'+x.cat+'</span>')+'<span class="off mono">-'+Math.round(x.drop)+'%<small>vs média</small></span><span class="rk">#'+(i+1)+'</span>'+(x.esg?'<span class="gonetag">'+(x.esgsrc==='galera'?'GALERA AVISOU ':'ESGOTOU ')+x.esg.replace(':','h')+'</span>':'')+'</div>'+
-  (x.rec?'<span class="rec">MENOR PREÇO DO RADAR</span>':'')+'<h4>'+x.n+'</h4><div class="sub">'+(x.bucket?x.t:x.cat)+'</div><div class="pr"><b class="mono">'+brl(x.p)+'</b><s>média '+brl(x.med,0)+'</s></div><div class="meta">'+x.loja+(x.h?' · saiu '+x.h.replace(':','h'):'')+'</div>'+(x.av?'<div class="avs">⚠️ Alguém comentou que não funcionou. Confere no post.</div>':'')+(x.cup?'<div class="cup"><button data-c="'+x.cup+'" data-u="'+(x.url||'')+'" title="Copia o cupom e abre a loja">🎟️ '+x.cup+'</button>'+(x.url?'<small>toque pra copiar e abrir a loja</small>':'')+'</div>':'')+'<div class="acts'+(x.url?' hasbuy':'')+'">'+(x.url?'<a class="buy" href="'+x.url+'" target="_blank" rel="noopener sponsored nofollow" data-ev="Loja_bf">🛒 Comprar '+({'Mercado Livre':'no Mercado Livre','Amazon':'na Amazon','KaBuM':'na KaBuM','Shopee':'na Shopee','AliExpress':'no AliExpress','Terabyte':'na Terabyte','Pichau':'na Pichau','Magalu':'no Magalu'}[x.loja]||'na loja')+'</a>':'<a href="https://t.me/grape_tec/'+x.post+'" target="_blank" rel="noopener" data-ev="Post_bf">Ver post</a>')+(byId[x.id]?'<button data-p="'+x.id+'">Ver curva</button>':'')+'</div>'+(x.url?'<a class="vpost" href="https://t.me/grape_tec/'+x.post+'" target="_blank" rel="noopener" data-ev="Post_bf">ver o post no Telegram</a>':'');return c}
+  (x.rec?'<span class="rec">MENOR PREÇO DO RADAR</span>':'')+'<h4>'+x.n+'</h4><div class="sub">'+(x.bucket?x.t:x.cat)+'</div><div class="pr"><b class="mono">'+brl(x.p)+'</b><s>média '+brl(x.med,0)+'</s></div><div class="meta">'+x.loja+(x.h?' · saiu '+x.h.replace(':','h'):'')+'</div>'+(x.av?'<div class="avs">⚠️ Alguém comentou que não funcionou. Confere no post.</div>':'')+(x.cup?'<div class="cup"><button data-c="'+x.cup+'" data-u="'+(x.url||'')+'" title="Copia o cupom e abre a loja">🎟️ '+x.cup+'</button>'+'</div>':'<div class="cup nocup">sem cupom · preço direto</div>')+'<div class="acts'+(x.url?' hasbuy':'')+'">'+(x.url?'<a class="buy" style="'+lojaCor(x.loja)+'" href="'+x.url+'" target="_blank" rel="noopener sponsored nofollow" data-ev="Loja_bf">'+(x.loja||'Loja')+' ↗</a>':'<a href="https://t.me/grape_tec/'+x.post+'" target="_blank" rel="noopener" data-ev="Post_bf">Ver post</a>')+(byId[x.id]?'<button data-p="'+x.id+'">Ver curva</button>':'')+'</div>'+(x.url?'<a class="vpost" href="https://t.me/grape_tec/'+x.post+'" target="_blank" rel="noopener" data-ev="Post_bf">ver o post no Telegram</a>':'');return c}
  function draw(){var d=DD[st.day];tabs.forEach(function(b){b.classList.toggle('on',b.dataset.d===st.day)});grid.innerHTML='';more.style.display='none';
   if(!d||!d.items||!d.items.length){stats.innerHTML='';bar.style.display='none';grid.innerHTML=wait(st.day);bindEv(grid);return}
   bar.style.display='';var all=base(d),nEsg=d.items.filter(function(x){return x.esg}).length,recs=all.filter(function(x){return x.rec}).length;

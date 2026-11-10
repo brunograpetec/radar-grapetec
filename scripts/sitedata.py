@@ -49,7 +49,8 @@ import os
 UPD=os.environ.get('UPD','10/11/2026 às 15h26');ATE=os.environ.get('ATE','10/11 às 15h26')
 OFERTAS=len(set(r['link_post'] for r in allp if r['fora_da_curva']!='sim'))
 _lastd=max(r['data'] for r in rows)
-data=dict(gen=_lastd,upd=UPD,ate=ATE,d0='2026-10-01',days=(dt.date.fromisoformat(_lastd)-D0).days+1,total_posts=int(os.environ.get('TOTAL','18523')),ofertas=OFERTAS,P=P,T=therm,A=ach,
+import time as _t
+data=dict(ts=int(_t.time()),gen=_lastd,upd=UPD,ate=ATE,d0='2026-10-01',days=(dt.date.fromisoformat(_lastd)-D0).days+1,total_posts=int(os.environ.get('TOTAL','18523')),ofertas=OFERTAS,P=P,T=therm,A=ach,
           stores={v:k for k,v in SC.items()})
 import os as _o
 if _o.path.exists('dias.json'): data['dias']=json.load(open('dias.json'))

@@ -22,9 +22,38 @@ if _os.environ.get('POSTS'):
 import csv,json,statistics as S,collections,re
 # usa a base limpa (sem fora da curva) + cupons/hora
 allp=list(csv.DictReader(open(OUT+'/todos_os_posts_classificados.csv',encoding='utf-8-sig'),delimiter=';'))
+_NOFERTAS={}
+for r in allp: _NOFERTAS[r['data']]=_NOFERTAS.get(r['data'],0)+1
+# placas-mãe por modelo (marca + chipset + linha), além do grupo "mais barata"
+_BR={'asus':'ASUS','gigabyte':'Gigabyte','msi':'MSI','asrock':'ASRock','biostar':'Biostar','mancer':'Mancer','husky':'Husky','maxsun':'Maxsun','pcware':'PCWare','afox':'Afox','bluecase':'Bluecase','duex':'Duex'}
+_SER=[('rog strix','ROG Strix'),('strix','ROG Strix'),('tuf','TUF Gaming'),('prime','Prime'),('aorus elite','Aorus Elite'),('aorus','Aorus'),('gaming x','Gaming X'),('ds3h','DS3H'),('tomahawk','Tomahawk'),('mortar','Mortar'),('gaming plus','Gaming Plus'),('steel legend','Steel Legend'),('phantom','Phantom Gaming'),('pg lightning','PG Lightning'),('lightning','PG Lightning'),('hdv','HDV'),('eagle','Eagle'),('ultra durable','Ultra Durable'),('nexus','Nexus'),('challenger','Challenger'),('terminator','Terminator'),('force','Force'),('ayw','AYW'),('pro','PRO')]
+def mobo(t):
+    t=t.lower()
+    b=re.search(r'\b(%s)\b'%'|'.join(_BR),t); ch=re.search(r'\b([abxz]\d{3}e?)(m)?\b|\b([abxz]\d{3}e?)m[-\s]',t)
+    if not b or not ch: return None
+    c=(ch.group(1) or ch.group(3)).upper(); m='M' if (ch.group(2) or ch.group(3) or re.search(c.lower()+r'm',t)) else ''
+    s=next((n for k,n in _SER if k in t),'')
+    if not s: return None
+    extra=' Plus' if s=='TUF Gaming' and re.search(r'\bplus\b',t) else ''
+    return f"Placa-mãe {_BR[b.group(1)]} {s} {c}{m}{extra}"
+_virt=[]
+for r in allp:
+    if r['produto'].startswith('Placa-mãe') and r['fora_da_curva']!='sim':
+        mk=mobo(r['titulo'])
+        if mk: _virt.append(dict(r,produto=mk,_mod=1))
 daily=collections.defaultdict(dict)
 for r in csv.DictReader(open(OUT+'/menor_preco_por_dia.csv',encoding='utf-8-sig'),delimiter=';'):
     daily[r['produto']][r['data']]=float(r['menor_preco'].replace(',','.'))
+_vd=collections.defaultdict(lambda:collections.defaultdict(list))
+for r in _virt: _vd[r['produto']][r['data']].append(float(r['preco'].replace(',','.')))
+for k,v in _vd.items():
+    allv=[p for ps in v.values() for p in ps]; md=S.median(allv)
+    for dd,ps in v.items():
+        ok=[p for p in ps if p>=0.55*md]
+        if ok: daily[k][dd]=min(ok)
+for r in _virt:
+    if float(r['preco'].replace(',','.'))<0.55*S.median([p for ps in _vd[r['produto']].values() for p in ps]): r['fora_da_curva']='sim'
+allp=allp+_virt
 cup={r['post_id']:r for r in csv.DictReader(open('cupons.csv',encoding='utf-8'))}
 esg={}
 MARCAS={}
@@ -57,8 +86,11 @@ def build(day):
     L=list(best.values())
     for k,a in avail.items():
         if best[k].get('esg'): L.append(dict(a,alt=1))
+    # mesmo post no grupo "mais barata" e no modelo: fica o do modelo
+    mp={x['post'] for x in L if x['k'] in _vd}
+    L=[x for x in L if x['k'] in _vd or x['post'] not in mp]
     L=sorted(L,key=lambda x:(-x['rec'],-x['drop']))
-    n=sum(1 for r in allp if r['data']==day)
+    n=_NOFERTAS.get(day,0)
     return dict(items=L[:90],total=len(best),ofertas=n)
 D={'2026-11-10':build('2026-11-10'),'2026-11-11':build('2026-11-11')}
 json.dump(D,open('dias.json','w'),ensure_ascii=False)

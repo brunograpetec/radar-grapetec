@@ -204,7 +204,7 @@
 #gt1111 .bfc .off small{font-size:11px;font-weight:700;margin-left:4px;letter-spacing:.04em}
 #gt1111 .bfc .rec{font-size:10.5px;font-weight:800;letter-spacing:.12em;color:var(--bf3);display:flex;align-items:center;gap:6px}
 #gt1111 .bfc .rec::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--bf3);box-shadow:0 0 10px var(--bf3);animation:gtPulse 1.4s infinite}
-#gt1111.lt .bfc .rec{color:#b45309}
+#gt1111.lt .bfc .rec{color:#b45309}.lt .bfstats b.hot{color:#c2410c!important}@media(max-width:640px){.bfstats{gap:6px 16px;margin:14px 0}.bfstats span{flex:1 1 100%}}
 #gt1111 .bfc h4{margin:0;font-size:17px;font-weight:700;line-height:1.2}
 #gt1111 .bfc .sub{font-size:12px;color:var(--dim);line-height:1.3;min-height:31px}
 #gt1111 .bfc .pr{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
@@ -455,7 +455,7 @@ document.addEventListener('fullscreenchange',function(){if(!document.fullscreenE
  function show(day){cur=day;tabs.forEach(function(b){b.classList.toggle('on',b.dataset.d===day)});var d=DD[day];grid.innerHTML='';
   if(!d||!d.items||!d.items.length){stats.innerHTML='';grid.innerHTML='<div class="bfwait" style="grid-column:1/-1"><b>'+(day==='2026-11-11'?'A caçada do 11/11 começa à meia-noite 🔥':'Ainda sem achados nesse dia')+'</b><p>'+(day==='2026-11-11'?'Os cupons caem na virada. Entra no grupo pra pegar na hora — aqui eu atualizo os melhores de manhã.':'Volte mais tarde.')+'</p><div class="ctas" style="justify-content:center"><a class="cta wa" href="https://grapetec.com.br/whatsapp" target="_blank" rel="noopener" data-ev="WhatsApp_bf">WhatsApp</a><a class="cta tg" href="https://t.me/grape_tec" target="_blank" rel="noopener" data-ev="Telegram_bf">Telegram</a></div></div>';bindEv(grid);return}
   var recs=d.items.filter(function(x){return x.rec}).length;
-  stats.innerHTML='<span><b class="mono">'+d.ofertas+'</b>ofertas de hardware e setup nesse dia</span><span><b class="mono">'+d.total+'</b>abaixo da mediana</span><span><b class="mono" style="color:var(--bf3)">'+recs+'</b>bateram o menor preço do radar</span>';
+  stats.innerHTML='<span><b class="mono">'+d.ofertas+'</b>ofertas de hardware e setup nesse dia</span><span><b class="mono">'+d.total+'</b>abaixo da mediana</span><span><b class="mono hot" style="color:var(--bf3)">'+recs+'</b>bateram o menor preço do radar</span>';
   d.items.forEach(function(x,i){var c=document.createElement('div');c.className='bfc';c.style.animationDelay=(i%12)*40+'ms';
    c.innerHTML='<span class="rk">#'+(i+1)+'</span><span class="off mono">-'+Math.round(x.drop)+'%<small>vs média</small></span>'+(x.rec?'<span class="rec">MENOR PREÇO DO RADAR</span>':'')+'<h4>'+x.n+'</h4><div class="sub">'+(x.bucket?x.t:x.cat)+'</div><div class="pr"><b class="mono">'+brl(x.p)+'</b><s>média '+brl(x.med,0)+'</s></div><div class="meta">'+x.loja+(x.h?' · '+x.h.replace(':','h'):'')+'</div>'+(x.cup?'<div class="cup"><button data-c="'+x.cup+'" title="Copiar cupom">🎟️ '+x.cup+'</button>'+(x.esg?'<span class="es">esgotou às '+x.esg.replace(':','h')+'</span>':'')+'</div>':'')+'<div class="acts"><a href="https://t.me/grape_tec/'+x.post+'" target="_blank" rel="noopener" data-ev="Post_bf">Ver post</a>'+(byId[x.id]?'<button data-p="'+x.id+'">Ver curva</button>':'')+'</div>';
    grid.appendChild(c)});

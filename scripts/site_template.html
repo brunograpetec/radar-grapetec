@@ -365,6 +365,8 @@ function iso2(s){return s.slice(8)+'/'+s.slice(5,7)}
 function pct(v){if(v==null)return '—';return (v>0.5?'▲ ':v<-0.5?'▼ ':'= ')+Math.abs(v).toFixed(1).replace('.',',')+'%'}
 function cls(v){return v==null||Math.abs(v)<=0.5?'flat':v>0?'up':'down'}
 function ev(name){try{if(window.fbq)window.fbq('trackCustom','Radar1111_'+name)}catch(e){}}
+(function(){var n=0;function v(){if(window.fbq){try{var u=new URLSearchParams(location.search),r='';try{r=document.referrer?new URL(document.referrer).hostname:''}catch(e){}window.fbq('trackCustom','Radar1111_Visita',{origem:u.get('utm_source')||(/t\.me|telegram/.test(r)?'telegram':r)||'direto',meio:u.get('utm_medium')||''})}catch(e){}}else if(n++<10)setTimeout(v,1000)}v()})();
+function __noop(){}
 D.P.forEach(function(p){var o=PALPITES[p.id];if(o){if(o.selo)p.selo=o.selo;if(o.alvo)p.alvo=o.alvo;if(o.texto)p.txt=o.texto}});
 var byId={};D.P.forEach(function(p){byId[p.id]=p});
 function autoText(p){if(p.txt)return p.txt;var ref=p.mn||p.mo;var diff=(p.u/p.lo-1)*100;

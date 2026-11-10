@@ -13,6 +13,9 @@ for r in csv.DictReader(open(OUT+'/menor_preco_por_dia.csv',encoding='utf-8-sig'
     daily[r['produto']][r['data']]=float(r['menor_preco'].replace(',','.'))
 cup={r['post_id']:r for r in csv.DictReader(open('cupons.csv',encoding='utf-8'))}
 esg={}
+MARCAS={}
+if _os.environ.get('MARCAS') and _os.path.exists(_os.environ['MARCAS']):
+    import json as _j2;MARCAS=_j2.load(open(_os.environ['MARCAS']))
 for r in csv.DictReader(open('esgotados.csv',encoding='utf-8')): esg.setdefault(r['cupom'],r['datahora'])
 def slug(s):
     import unicodedata; return re.sub(r'[^a-z0-9]+','-',unicodedata.normalize('NFKD',s).encode('ascii','ignore').decode().lower()).strip('-')
@@ -31,6 +34,9 @@ def build(day):
                 p=price,med=round(med,2),lo=lo,drop=round(drop,1),rec=price<lo,loja=r['loja'],h=c.get('hora',''),cup=c.get('cupom',''),post=int(pid),cat=r['categoria'])
         if pid in IMG: it['img']=IMG[pid]
         if it['cup'] and it['cup'] in esg and esg[it['cup']][:10]==day and esg[it['cup']][11:16]>=it['h']: it['esg']=esg[it['cup']][11:16]
+        mk=MARCAS.get(str(pid),{})
+        if not it.get('esg') and mk.get('esg') and day==mk.get('d',day): it['esg']=mk['esg'];it['esgsrc']=mk['src']
+        elif not it.get('esg') and mk.get('av'): it['av']=1
         if k not in best or it['drop']>best[k]['drop']: best[k]=it
         if not it.get('esg') and (k not in avail or it['drop']>avail[k]['drop']): avail[k]=it
     L=list(best.values())

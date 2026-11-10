@@ -8,6 +8,8 @@ node --max-old-space-size=3000 ../scripts/classify.js 2026-10-01 2026-12-31 ../d
 python3 ../scripts/clean_extra.py
 mkdir -p base; export OUT=base POSTS=../dados/posts
 python3 ../scripts/base.py
+python3 ../scripts/comentarios.py ../site_data.json ../dados/comentarios.json || true
+export MARCAS=../dados/comentarios.json
 python3 ../scripts/dias.py
 eval "$(python3 - <<'P'
 import json,datetime as dt

@@ -1,0 +1,150 @@
+﻿produto;categoria;dias_com_oferta;posts;mediana_out;mediana_nov;var_out_nov;menor;menor_data;menor_loja;maior;maior_data;ultimo;ultimo_data;ultimo_loja
+RTX 5050;Placas de vídeo;32;138;2069,0;2069,0;0,0;1799,0;2026-11-04;Mercado Livre;2378,22;2026-10-04;2039,0;2026-11-10;KaBuM
+RTX 5060;Placas de vídeo;36;259;2564,0;2599,0;1,4;2160,0;2026-10-16;Mercado Livre;2799,99;2026-10-25;2541,0;2026-11-10;KaBuM
+RTX 5060 Ti 16GB;Placas de vídeo;18;41;4139,0;4164,0;0,6;2497,0;2026-10-29;Shopee;4409,0;2026-11-05;4164,0;2026-11-10;KaBuM
+RTX 5060 Ti 8GB;Placas de vídeo;32;102;2901,0;3036,5;4,7;2699,0;2026-10-19;KaBuM;3199,0;2026-11-04;2980,0;2026-11-10;KaBuM
+RTX 5070;Placas de vídeo;39;133;5038,9;5056,0;0,3;4435,0;2026-10-05;Amazon;5911,0;2026-11-01;5056,0;2026-11-10;KaBuM
+RTX 5070 Ti;Placas de vídeo;17;30;7982,0;8009,5;0,3;7379,0;2026-11-02;KaBuM;9399,0;2026-11-04;8628,0;2026-11-09;Shopee
+RTX 5080;Placas de vídeo;14;24;10697,0;11204,0;4,7;9813,0;2026-11-09;Amazon;12799,0;2026-11-01;10709,0;2026-11-10;KaBuM
+RX 7600;Placas de vídeo;32;142;1799,0;1799,0;0,0;1551,0;2026-10-15;Shopee;2035,0;2026-11-01;1799,0;2026-11-09;KaBuM
+RX 9050;Placas de vídeo;25;60;1999,99;1829,5;-8,5;1637,0;2026-11-02;KaBuM;2197,88;2026-10-13;1729,0;2026-11-10;Mercado Livre
+RX 9060 XT 16GB;Placas de vídeo;27;63;3571,28;3589,99;0,5;2524,0;2026-10-12;Shopee;4099,0;2026-10-20;3562,49;2026-11-08;Mercado Livre
+RX 9060 XT 8GB;Placas de vídeo;14;26;2524,0;;;2424,0;2026-10-11;Shopee;2764,0;2026-10-09;2708,0;2026-10-31;Shopee
+RX 9070;Placas de vídeo;24;48;4680,0;4499,0;-3,9;4049,0;2026-10-27;KaBuM;4981,8;2026-10-10;4436,0;2026-11-10;KaBuM
+RX 9070 GRE;Placas de vídeo;15;22;4481,69;4646,0;3,7;3999,0;2026-10-20;Terabyte;4969,75;2026-10-14;4646,0;2026-11-05;Shopee
+RX 9070 XT;Placas de vídeo;22;40;5114,0;5151,5;0,7;3937,51;2026-10-20;Shopee;5599,0;2026-10-10;5084,0;2026-11-05;KaBuM
+Ryzen 5 5500;Processadores;37;118;469,5;453,0;-3,5;397,0;2026-10-10;Mercado Livre;511,0;2026-10-07;413,0;2026-11-10;Mercado Livre
+Ryzen 5 5500X3D;Processadores;21;46;1250,0;1250,0;0,0;1158,0;2026-10-10;Shopee;1291,0;2026-11-04;1187,0;2026-11-09;AliExpress
+Ryzen 5 5600;Processadores;12;23;766,37;;;680,0;2026-10-10;Shopee;802,84;2026-10-20;708,15;2026-10-28;Shopee
+Ryzen 5 5600X;Processadores;15;20;760,0;717,0;-5,7;699,0;2026-10-31;AliExpress;827,08;2026-10-06;719,0;2026-11-10;AliExpress
+Ryzen 5 5600XT;Processadores;11;22;768,1;768,2;0,0;759,0;2026-10-10;Shopee;828,0;2026-10-11;768,2;2026-11-10;Shopee
+Ryzen 5 7500F;Processadores;12;25;767,0;781,0;1,8;716,0;2026-10-28;Shopee;811,44;2026-11-08;774,64;2026-11-10;Shopee
+Ryzen 5 7600;Processadores;14;27;831,54;841,34;1,2;643,0;2026-10-30;Shopee;999,0;2026-10-21;781,08;2026-11-05;Shopee
+Ryzen 5 7600X;Processadores;26;39;891,0;908,09;1,9;821,0;2026-10-28;Shopee;999,99;2026-10-13;873,0;2026-11-10;Shopee
+Ryzen 5 7600X3D;Processadores;29;52;1601,0;1424,0;-11,1;1423,0;2026-11-04;KaBuM;1619,99;2026-10-07;1424,0;2026-11-09;KaBuM
+Ryzen 5 8400F;Processadores;26;56;739,99;740,0;0,0;588,8;2026-10-10;Shopee;759,99;2026-10-29;739,0;2026-11-09;Amazon
+Ryzen 5 8500G;Processadores;28;43;749,0;799,99;6,8;597,0;2026-10-19;Mercado Livre;800,0;2026-10-22;799,0;2026-11-08;Amazon
+Ryzen 5 8600G;Processadores;30;45;969,99;949,99;-2,1;820,0;2026-11-04;Mercado Livre;970,0;2026-10-20;949,99;2026-11-10;Amazon
+Ryzen 5 9600X;Processadores;31;55;1091,63;1049,99;-3,8;1011,0;2026-10-28;Shopee;1291,65;2026-10-14;1049,99;2026-11-10;Amazon
+Ryzen 7 5700;Processadores;32;56;853,02;775,08;-9,1;624,0;2026-11-10;Mercado Livre;899,26;2026-10-25;624,0;2026-11-10;Mercado Livre
+Ryzen 7 5700X;Processadores;41;234;972,0;894,5;-8,0;737,0;2026-11-10;Mercado Livre;1035,0;2026-10-03;737,0;2026-11-10;Mercado Livre
+Ryzen 7 5800X3D;Processadores;30;54;1824,49;1804,01;-1,1;1671,0;2026-10-20;Mercado Livre;2080,0;2026-10-04;1701,0;2026-11-10;Mercado Livre
+Ryzen 7 5800XT;Processadores;24;34;1334,98;1272,4;-4,7;1263,0;2026-11-07;KaBuM;1394,99;2026-10-08;1263,8;2026-11-10;KaBuM
+Ryzen 7 7700;Processadores;24;45;1267,3;1222,73;-3,5;1149,08;2026-10-28;Shopee;1494,14;2026-11-09;1494,0;2026-11-10;Amazon
+Ryzen 7 7800X3D;Processadores;21;39;1768,0;1660,0;-6,1;1637,0;2026-11-03;KaBuM;1955,92;2026-10-07;1637,0;2026-11-03;KaBuM
+Ryzen 7 8700G;Processadores;13;16;1399,99;1399,99;0,0;1381,0;2026-10-06;Mercado Livre;1785,05;2026-11-10;1785,05;2026-11-10;Amazon
+Ryzen 7 9700X;Processadores;20;42;1383,5;1300,0;-6,0;1283,0;2026-10-31;AliExpress;1397,53;2026-10-25;1301,0;2026-11-10;AliExpress
+Ryzen 7 9800X3D;Processadores;32;90;2191,0;2118,5;-3,3;2041,0;2026-11-07;KaBuM;2416,0;2026-10-19;2041,0;2026-11-10;KaBuM
+Ryzen 9 5900XT;Processadores;12;14;1838,64;1779,0;-3,2;1779,0;2026-11-07;KaBuM;2049,0;2026-10-10;1779,0;2026-11-08;KaBuM
+Ryzen 9 7900;Processadores;8;13;1789,32;1789,32;0,0;1627,0;2026-10-27;Amazon;1914,32;2026-10-24;1839,32;2026-11-03;Amazon
+Ryzen 9 7900X;Processadores;6;6;1899,99;1899,0;-0,1;1899,0;2026-11-06;Amazon;1899,99;2026-11-10;1899,99;2026-11-10;Amazon
+Ryzen 9 9900X;Processadores;7;10;2199,99;2099,49;-4,6;2099,0;2026-11-06;Amazon;2199,99;2026-10-13;2099,0;2026-11-10;Amazon
+Ryzen 9 9950X3D;Processadores;9;14;3737,0;;;3737,0;2026-10-09;KaBuM;3779,0;2026-10-06;3737,0;2026-10-20;KaBuM
+Placa-mãe A520 (mais barata);Placas-mãe;39;200;334,0;318,6;-4,6;224,0;2026-11-07;Mercado Livre;849,0;2026-10-17;310,0;2026-11-10;Mercado Livre
+Placa-mãe A620 (mais barata);Placas-mãe;15;25;419,99;550,0;31,0;323,1;2026-10-09;Amazon;767,0;2026-10-07;553,0;2026-11-09;Mercado Livre
+Placa-mãe B450 (mais barata);Placas-mãe;28;61;385,0;326,33;-15,2;263,0;2026-11-07;Mercado Livre;667,26;2026-10-06;326,66;2026-11-10;Mercado Livre
+Placa-mãe B550 (mais barata);Placas-mãe;41;430;479,0;437,69;-8,6;371,54;2026-11-09;Mercado Livre;664,0;2026-10-01;371,55;2026-11-10;Shopee
+Placa-mãe B650 (mais barata);Placas-mãe;38;260;669,75;665,38;-0,7;564,0;2026-11-01;AliExpress;899,0;2026-10-02;722,99;2026-11-10;Amazon
+Placa-mãe B850 (mais barata);Placas-mãe;33;145;780,0;846,5;8,5;599,0;2026-11-10;Mercado Livre;1148,98;2026-10-26;599,0;2026-11-10;Mercado Livre
+Placa-mãe X870 (mais barata);Placas-mãe;10;19;1677,0;2435,0;45,2;1478,0;2026-10-30;Shopee;4358,0;2026-10-11;2435,0;2026-11-05;KaBuM
+Memória DDR4 16GB (mais barata);Memória RAM;32;68;622,89;638,0;2,4;399,0;2026-10-17;Terabyte;786,6;2026-10-25;661,48;2026-11-10;Shopee
+Memória DDR4 8GB (mais barata);Memória RAM;34;109;323,0;232,0;-28,2;190,0;2026-11-05;AliExpress;399,0;2026-10-17;281,0;2026-11-07;AliExpress
+Memória DDR5 16GB (mais barata);Memória RAM;27;42;1430,1;1477,25;3,3;1405,73;2026-10-07;Amazon;1789,1;2026-10-29;1780,0;2026-11-10;Mercado Livre
+Memória DDR5 32GB (mais barata);Memória RAM;7;12;2636,5;2748,0;4,2;1896,0;2026-10-12;Amazon;3377,0;2026-10-28;2748,53;2026-11-10;Amazon
+Memória DDR5 8GB (mais barata);Memória RAM;28;57;788,0;884,17;12,2;687,67;2026-10-30;Shopee;1084,68;2026-10-14;839,13;2026-11-09;Mercado Livre
+SSD Kingston NV3 1TB;SSD;15;22;866,0;772,1;-10,8;741,0;2026-11-10;Mercado Livre;899,0;2026-11-05;741,0;2026-11-10;Mercado Livre
+SSD Kootion X15 1TB;SSD;10;19;619,0;688,0;11,1;601,6;2026-11-01;AliExpress;708,63;2026-11-09;708,63;2026-11-09;AliExpress
+SSD NVMe 1TB (mais barato);SSD;36;134;709,0;708,63;-0,1;466,0;2026-10-05;Mercado Livre;873,08;2026-10-29;679,0;2026-11-10;Mercado Livre
+SSD NVMe 2TB (mais barato);SSD;28;63;1377,35;1367,34;-0,7;884,63;2026-11-02;AliExpress;1788,0;2026-10-18;1241,0;2026-11-10;Mercado Livre
+SSD NVMe 500GB (mais barato);SSD;22;58;356,0;324,23;-8,9;291,0;2026-10-15;Amazon;596,0;2026-10-28;328,86;2026-11-09;AliExpress
+Fonte 650W 80 Plus Bronze (mais barata);Fontes;36;120;238,0;199,97;-16,0;188,0;2026-11-05;Amazon;287,9;2026-10-19;209,0;2026-11-10;Shopee
+Fonte 750W 80 Plus Bronze (mais barata);Fontes;30;66;266,0;295,0;10,9;188,0;2026-11-06;Mercado Livre;339,99;2026-10-29;299,99;2026-11-09;Amazon
+Fonte 750W 80 Plus Gold (mais barata);Fontes;34;68;328,37;318,0;-3,2;294,0;2026-10-30;Shopee;360,05;2026-10-04;297,0;2026-11-10;Mercado Livre
+Fonte 850W 80 Plus Gold (mais barata);Fontes;34;79;439,9;416,0;-5,4;328,0;2026-10-10;Mercado Livre;520,63;2026-10-15;409,0;2026-11-10;Mercado Livre
+Fonte Cooler Master ATX 3.1 750W;Fontes;34;63;322,91;318,0;-1,5;279,0;2026-10-10;Mercado Livre;351,09;2026-10-16;315,1;2026-11-10;Shopee
+Fonte MSI MAG A650BN 650W;Fontes;29;48;240,55;269,8;12,2;212,24;2026-10-09;Shopee;299,0;2026-10-02;246,39;2026-11-10;Mercado Livre
+Fonte Mach1 Steady 750W;Fontes;14;24;260,0;206,0;-20,8;188,0;2026-11-06;Mercado Livre;260,99;2026-10-24;188,0;2026-11-06;Mercado Livre
+Fonte Rise Mode Elektra 650W;Fontes;30;64;251,0;245,38;-2,2;206,0;2026-10-20;KaBuM;278,0;2026-10-08;209,0;2026-11-10;Shopee
+Fonte XPG Core Reactor II VE 850W;Fontes;19;37;478,15;453,0;-5,3;427,0;2026-11-06;Mercado Livre;512,0;2026-10-13;427,0;2026-11-06;Mercado Livre
+Fonte XPG Kyber 850W;Fontes;27;34;420,9;416,0;-1,2;328,0;2026-10-10;Mercado Livre;486,92;2026-10-17;409,0;2026-11-10;Mercado Livre
+Gabinete Acegeek Stratus Mesh;Gabinetes;13;20;84,0;102,25;21,7;79,0;2026-10-10;Shopee;125,31;2026-10-05;104,0;2026-11-08;Shopee
+Gabinete G-Storm Sentinel;Gabinetes;12;12;142,78;142,78;0,0;114,9;2026-10-10;Mercado Livre;142,78;2026-11-07;139,39;2026-11-10;Mercado Livre
+Gabinete Kalkan Asgard;Gabinetes;17;19;349,99;293,33;-16,2;293,33;2026-10-05;Amazon;360,0;2026-10-20;293,33;2026-11-10;Amazon
+Gabinete Lian Li Vector V100;Gabinetes;9;17;406,0;;;356,8;2026-10-09;Amazon;539,0;2026-10-17;419,99;2026-10-30;Terabyte
+Gabinete Mancer CV450;Gabinetes;29;49;177,0;196,56;11,1;154,0;2026-10-10;Shopee;338,58;2026-10-31;156,56;2026-11-10;Shopee
+Gabinete Mancer CV700L;Gabinetes;16;23;230,28;249,38;8,3;195,0;2026-10-05;Shopee;385,0;2026-10-10;296,4;2026-11-10;Shopee
+Gabinete Redragon Wideload Pro;Gabinetes;13;26;323,99;318,0;-1,8;315,0;2026-10-09;Amazon;368,0;2026-10-07;318,98;2026-11-10;Amazon
+Air cooler Cooler Master Hyper 212;Coolers;6;10;60,0;;;55,0;2026-10-28;Shopee;70,0;2026-10-08;55,0;2026-10-31;Shopee
+Air cooler Mach1 Boreal;Coolers;19;40;104,0;110,83;6,6;83,0;2026-10-07;Amazon;121,38;2026-10-25;110,83;2026-11-10;Shopee
+Air cooler Montech NX600;Coolers;9;11;152,0;161,0;5,9;143,0;2026-10-05;KaBuM;179,43;2026-10-14;161,0;2026-11-06;KaBuM
+Air cooler Pichau Falcon;Coolers;13;18;86,0;99,75;16,0;80,0;2026-10-19;Pichau;104,5;2026-10-11;99,75;2026-11-02;Pichau
+Air cooler Redragon AK400;Coolers;29;44;141,55;140,6;-0,7;113,05;2026-10-13;Shopee;148,0;2026-10-28;140,6;2026-11-09;Amazon
+Water cooler 240mm (mais barato);Coolers;35;106;165,28;175,61;6,2;119,0;2026-10-10;Shopee;283,49;2026-10-22;179,55;2026-11-10;Shopee
+Water cooler 360mm (mais barato);Coolers;39;304;229,99;207,09;-10,0;185,89;2026-11-06;Mercado Livre;338,31;2026-10-19;195,0;2026-11-10;Mercado Livre
+Water cooler Arctic Liquid Freezer III Pro 360;Coolers;18;26;731,0;683,0;-6,6;474,0;2026-11-03;Amazon;791,2;2026-10-20;683,09;2026-11-09;Amazon
+Water cooler G-Storm HX700 360;Coolers;14;18;345,3;349,13;1,1;325,0;2026-10-28;Shopee;363,38;2026-11-08;325,38;2026-11-10;Shopee
+Water cooler Kalkan Alpha 360;Coolers;17;19;338,0;;;298,0;2026-10-22;Amazon;338,31;2026-10-29;338,31;2026-10-29;Amazon
+Water cooler Thermalright Aqua Elite 360;Coolers;7;11;356,25;;;313,0;2026-10-10;Shopee;361,0;2026-10-12;361,0;2026-10-12;Shopee
+Monitor 4K (mais barato);Monitores;33;92;1005,0;998,0;-0,7;899,0;2026-10-08;Amazon;7299,9;2026-10-13;959,0;2026-11-10;Amazon
+"Monitor AOC U27B3A (4K 27"")";Monitores;17;42;999,0;998,0;-0,1;899,0;2026-10-08;Amazon;999,0;2026-10-24;959,0;2026-11-10;Amazon
+"Monitor Asus VG34WQML5A (QHD 34"" UW)";Monitores;23;44;1619,99;1844,98;13,9;1529,0;2026-10-20;Mercado Livre;1947,48;2026-10-27;1709,0;2026-11-05;KaBuM
+"Monitor Full HD 24"" 144–200Hz (mais barato)";Monitores;40;461;461,42;449,0;-2,7;375,0;2026-10-06;Mercado Livre;598,49;2026-11-01;445,0;2026-11-10;Mercado Livre
+"Monitor Full HD 27"" 144Hz+ (mais barato)";Monitores;37;274;584,0;581,34;-0,5;479,0;2026-10-09;Mercado Livre;1186,55;2026-10-02;578,68;2026-11-10;Mercado Livre
+"Monitor Gigabyte GS24F14 (FHD 24"")";Monitores;28;41;502,0;457,5;-8,9;443,0;2026-11-07;Mercado Livre;539,0;2026-10-08;457,0;2026-11-10;Mercado Livre
+"Monitor HQ 32C180 (QHD 32"")";Monitores;22;31;900,0;934,0;3,8;808,0;2026-10-10;Shopee;943,05;2026-11-01;937,0;2026-11-10;Shopee
+"Monitor LG 34G600A (QHD 34"" UW)";Monitores;11;19;1653,0;1573,0;-4,8;1333,0;2026-11-10;Mercado Livre;1800,0;2026-11-04;1333,0;2026-11-10;Mercado Livre
+"Monitor LG UltraGear 24G411 (FHD 24"")";Monitores;31;101;539,1;539,05;-0,0;431,0;2026-10-10;Mercado Livre;597,0;2026-10-02;574,0;2026-11-09;Mercado Livre
+"Monitor LG UltraGear 27G411B (FHD 27"")";Monitores;28;55;678,5;619,76;-8,7;557,68;2026-11-05;Mercado Livre;739,0;2026-10-06;578,68;2026-11-10;Mercado Livre
+"Monitor OLED QHD 27"" (mais barato)";Monitores;22;54;3035,04;3208,5;5,7;2899,0;2026-10-08;Shopee;3599,99;2026-10-28;3184,0;2026-11-10;Mercado Livre
+"Monitor QHD 27"" 144Hz+ (mais barato)";Monitores;36;213;809,0;842,0;4,1;607,11;2026-10-23;Shopee;1304,0;2026-10-11;661,0;2026-11-10;Shopee
+"Monitor Samsung Odyssey G5 (QHD 27"")";Monitores;29;47;886,0;926,1;4,5;701,0;2026-11-04;Mercado Livre;989,01;2026-11-02;856,1;2026-11-10;Amazon
+"Monitor Samsung UJ59 (4K 32"")";Monitores;16;21;1043,0;957,0;-8,2;957,0;2026-11-06;Mercado Livre;1174,9;2026-10-25;957,0;2026-11-06;Mercado Livre
+"Monitor TCL 25G64 (FHD 25"" Mini LED)";Monitores;37;98;1167,0;1044,14;-10,5;983,0;2026-10-30;Shopee;1260,65;2026-10-18;1045,0;2026-11-10;Shopee
+"Monitor Ultrawide 34"" QHD (mais barato)";Monitores;37;167;1195,08;1329,0;11,2;1059,0;2026-10-28;Shopee;1947,0;2026-10-26;1120,0;2026-11-10;Mercado Livre
+Mouse AOC GM510;Mouses;7;7;92,0;78,2;-15,0;70,0;2026-10-31;Amazon;92,0;2026-10-28;78,2;2026-11-08;Amazon
+Mouse HyperX Pulsefire Haste (1 e 2);Mouses;6;7;251,99;241,0;-4,4;159,0;2026-10-21;Amazon;305,84;2026-10-06;241,0;2026-11-07;Amazon
+Mouse Logitech G203;Mouses;12;18;85,4;85,0;-0,5;74,0;2026-10-11;Amazon;99,0;2026-10-12;80,91;2026-11-09;Amazon
+Mouse Logitech G305;Mouses;18;27;179,45;179,9;0,3;149,0;2026-10-10;Amazon;199,98;2026-10-22;179,9;2026-11-09;Amazon
+Mouse Redragon K1NG 1K;Mouses;16;19;83,98;;;63,99;2026-10-10;Amazon;88,36;2026-10-08;83,99;2026-10-31;Amazon
+Mouse Redragon King Pro;Mouses;17;21;189,25;165,99;-12,3;152,0;2026-10-08;Amazon;324,1;2026-10-18;165,99;2026-11-09;Amazon
+Teclado Logitech Pebble Keys;Teclados;7;10;159,0;149,0;-6,3;143,0;2026-10-07;Amazon;212,41;2026-10-13;149,0;2026-11-07;Amazon
+Teclado Redragon Dark Avenger;Teclados;22;25;139,62;134,13;-3,9;119,62;2026-10-11;Amazon;148,83;2026-10-04;128,64;2026-11-09;Amazon
+Teclado Redragon Fizz;Teclados;22;28;153,67;138,99;-9,6;123,0;2026-10-10;Amazon;179,91;2026-10-28;135,0;2026-11-10;Amazon
+Teclado TGT Sherman V3;Teclados;7;8;74,0;;;66,91;2026-10-19;Shopee;87,83;2026-10-27;87,83;2026-10-27;Shopee
+Teclado magnético (mais barato);Teclados;22;48;209,0;163,5;-21,8;126,0;2026-10-08;AliExpress;330,0;2026-11-09;227,99;2026-11-10;Mercado Livre
+Fone Havit H630BT;Headsets e fones;9;13;97,0;110,0;13,4;94,05;2026-10-12;Shopee;110,0;2026-11-06;110,0;2026-11-06;Shopee
+Headset Logitech G335;Headsets e fones;7;12;286,3;;;279,0;2026-10-05;Amazon;422,99;2026-10-08;286,3;2026-10-30;Shopee
+Headset Pichau Vega Pro;Headsets e fones;11;13;106,31;120,16;13,0;79,79;2026-10-28;Pichau;125,31;2026-11-05;115,0;2026-11-08;Pichau
+Headset Redragon Cragblade;Headsets e fones;8;8;153,61;;;153,0;2026-10-17;Amazon;153,61;2026-10-21;153,61;2026-10-21;Amazon
+Headset Redragon Zeus Lite;Headsets e fones;12;13;149,0;147,99;-0,7;116,0;2026-10-10;Amazon;150,0;2026-10-31;145,99;2026-11-08;Amazon
+Headset Redragon Zeus Pro;Headsets e fones;13;22;299,0;273,0;-8,7;253,0;2026-11-07;Mercado Livre;299,0;2026-10-11;273,0;2026-11-08;Mercado Livre
+Controle 8BitDo Ultimate 2;Controles;9;9;198,5;241,0;21,4;196,0;2026-10-19;AliExpress;252,0;2026-11-09;252,0;2026-11-09;AliExpress
+Controle DualSense (PS5);Controles;25;56;370,6;349,59;-5,7;269,0;2026-10-10;Mercado Livre;577,9;2026-10-02;338,0;2026-11-08;Mercado Livre
+Controle DualShock 4;Controles;9;11;211,25;199,49;-5,6;170,98;2026-11-05;Amazon;232,9;2026-10-05;170,98;2026-11-05;Amazon
+Controle GameSir G7 Pro;Controles;6;14;;322,0;;310,0;2026-11-03;AliExpress;333,0;2026-11-07;333,0;2026-11-07;AliExpress
+Controle GameSir T3;Controles;12;12;79,0;133,0;68,4;66,91;2026-10-19;Shopee;182,0;2026-11-06;84,0;2026-11-08;Shopee
+Controle Xbox sem fio;Controles;8;16;625,57;;;346,75;2026-10-12;Shopee;691,05;2026-10-07;616,0;2026-10-28;Shopee
+Microfone Fifine SuperFrame;Setup e acessórios;12;17;94,0;159,0;69,1;79,0;2026-10-13;Terabyte;180,5;2026-10-31;159,0;2026-11-08;Terabyte
+Mousepad Apex Control;Setup e acessórios;9;9;69,49;;;59,9;2026-10-27;Mercado Livre;69,5;2026-10-21;59,9;2026-10-27;Mercado Livre
+Notebook Acer Nitro V15;Notebooks;14;23;5394,0;6021,5;11,6;4679,0;2026-10-08;KaBuM;7199,0;2026-11-03;7199,0;2026-11-03;Amazon
+Notebook Asus TUF Gaming;Notebooks;13;26;5719,0;4185,0;-26,8;4185,0;2026-10-22;Shopee;7999,0;2026-10-15;4185,0;2026-11-06;Shopee
+Notebook Asus Vivobook Go;Notebooks;29;55;2759,08;2667,04;-3,3;2200,71;2026-10-04;Mercado Livre;3194,0;2026-10-16;2667,08;2026-11-10;Shopee
+Notebook Lenovo IdeaPad Slim;Notebooks;31;71;2884,0;2719,0;-5,7;2495,0;2026-11-06;Mercado Livre;3571,0;2026-10-13;2668,0;2026-11-09;Mercado Livre
+Notebook Lenovo LOQ;Notebooks;13;20;5579,0;5224,0;-6,4;4551,0;2026-10-30;Mercado Livre;5752,0;2026-11-04;4699,0;2026-11-10;Mercado Livre
+Notebook VAIO FE16;Notebooks;15;33;2961,0;2861,0;-3,4;2675,0;2026-10-20;Mercado Livre;3569,01;2026-10-10;2830,0;2026-11-07;Mercado Livre
+Nintendo Switch 2;Consoles;10;11;3587,0;3535,0;-1,4;3494,0;2026-10-10;Shopee;3812,07;2026-10-02;3535,0;2026-11-03;AliExpress
+Nintendo Switch Lite;Consoles;25;31;1304,1;1353,83;3,8;1217,0;2026-11-06;Mercado Livre;1375,5;2026-10-27;1353,83;2026-11-09;Shopee
+Nintendo Switch OLED;Consoles;15;28;1837,04;1799,0;-2,1;1682,0;2026-10-10;Shopee;2185,0;2026-10-24;1702,0;2026-11-09;Shopee
+PlayStation 5 Pro;Consoles;7;7;6618,53;6999,0;5,7;6356,0;2026-10-14;Shopee;6999,0;2026-11-09;6999,0;2026-11-09;KaBuM
+PlayStation 5 Slim;Consoles;22;41;3777,5;3799,0;0,6;3587,0;2026-10-11;Shopee;3989,05;2026-11-02;3799,0;2026-11-06;Mercado Livre
+"Smart TV 43"" (mais barata)";TVs;35;132;1253,32;1164,4;-7,1;989,0;2026-10-10;Shopee;1684,9;2026-10-12;1299,99;2026-11-10;Amazon
+"Smart TV 50"" 4K (mais barata)";TVs;35;101;1887,0;1759,01;-6,8;1442,0;2026-10-10;Shopee;2107,0;2026-10-01;1819,0;2026-11-10;Mercado Livre
+"Smart TV 55"" 4K (mais barata)";TVs;26;62;2161,0;2155,07;-0,3;1859,0;2026-10-29;Amazon;2913,06;2026-11-01;1998,0;2026-11-09;Mercado Livre
+"Smart TV 65"" 4K (mais barata)";TVs;27;69;2949,0;2816,0;-4,5;2636,0;2026-11-06;Mercado Livre;3675,63;2026-10-16;2798,0;2026-11-09;Mercado Livre
+Celular Motorola Moto G35;Celulares, tablets e relógios;10;10;829,0;829,0;0,0;829,0;2026-10-08;Amazon;899,1;2026-10-03;829,0;2026-11-09;Amazon
+Celular Samsung Galaxy A17;Celulares, tablets e relógios;24;37;747,0;842,57;12,8;608,0;2026-10-14;Amazon;899,1;2026-10-23;890,0;2026-11-08;Mercado Livre
+Celular Samsung Galaxy A36;Celulares, tablets e relógios;11;13;1169,11;1185,3;1,4;1116,0;2026-11-04;Mercado Livre;1579,0;2026-10-20;1160,72;2026-11-10;Mercado Livre
+Celular Samsung Galaxy A57;Celulares, tablets e relógios;8;12;1799,0;1619,0;-10,0;1480,28;2026-10-28;Shopee;2038,3;2026-10-27;1619,0;2026-11-09;Mercado Livre
+Smartwatch Samsung Galaxy Fit3;Celulares, tablets e relógios;13;16;183,0;185,0;1,1;159,0;2026-10-10;Amazon;197,79;2026-10-24;185,0;2026-11-09;Amazon
+Tablet Huawei MatePad SE;Celulares, tablets e relógios;9;10;854,13;854,05;-0,0;779,0;2026-10-08;Amazon;949,05;2026-10-30;854,05;2026-11-09;Amazon
+Tablet Xiaomi Redmi Pad;Celulares, tablets e relógios;6;6;1057,31;;;1039,6;2026-10-19;Shopee;1481,2;2026-10-12;1394,72;2026-10-31;Mercado Livre

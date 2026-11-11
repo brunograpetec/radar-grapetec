@@ -16,10 +16,11 @@ const R=[
 ['Tablet',/^\s*(tablet|ipad)/i,[[/matepad se/,'Tablet Huawei MatePad SE'],[/idea ?tab/,'Tablet Lenovo Idea Tab'],[/redmi pad/,'Tablet Xiaomi Redmi Pad']]],
 ['Smartwatch',/^\s*(smartwatch|rel[oó]gio|pulseira)/i,[[/fit3/,'Smartwatch Samsung Galaxy Fit3']]],
 ['Microfone',/^\s*microfone/i,[[/fifine.*(sfm2|superframe)|superframe.*fifine/,'Microfone Fifine SuperFrame']]],
-['Mousepad',/^\s*mouse ?pad/i,[[/apex control/,'Mousepad Apex Control']]]];
+['Mousepad',/^\s*mouse ?pad/i,[[/apex control/,'Mousepad Apex Control']]],
+['Cadeira',/^\s*cadeira/i,[[/tgc12/,'Cadeira ThunderX3 TGC12'],[/infantil|massage|capa |almofada|rodinha|rod[ií]zio|tapete|banqueta|poltrona/,'__x'],[/gamer|racer/,'Cadeira gamer (mais barata)'],[/escrit[oó]rio|ergon[oô]mica|presidente|diretor|mesh|office/,'Cadeira de escritório (mais barata)']]]];
 function extra(t,T,price,p,out){for(const [cat,re,M] of R){if(!re.test(t))continue;if(ACC.test(T)&&cat!=='Teclado'&&cat!=='Mouse')break;if(/\b(kit|combo)\b/.test(T))break;
   if(cat==='TV'){if(!/projetor|antena|controle remoto|soundbar|tv stick|tv box|suporte/.test(T))out.push([p.id,p.d,'Smart TV',price,st(p.txt),t.slice(0,140).replace(/\|/g,'/')]);break}
-  for(const [r,k] of M)if(r.test(T)){out.push([p.id,p.d,k,price,st(p.txt),t.slice(0,80).replace(/\|/g,'/')]);break}break}}
+  for(const [r,k] of M)if(r.test(T)){if(k==='__x')break;out.push([p.id,p.d,k,price,st(p.txt),t.slice(0,80).replace(/\|/g,'/')]);break}break}}
 const _a=process.argv.slice(2),_dt=_a.filter(x=>/^\d{4}-\d\d-\d\d$/.test(x)),d0=_dt[0],d1=_dt[1],_fs=_a.filter(x=>!/^\d{4}-\d\d-\d\d$/.test(x)),inF=_fs[0],more=_fs.slice(1);
 const J={messages:[]};const seen=new Set();for(const f of [inF,...more]){for(const m of JSON.parse(fs.readFileSync(f,'utf8')).messages){if(seen.has(m.id))continue;seen.add(m.id);J.messages.push(m)}}
 const flat=x=>typeof x==='string'?x:Array.isArray(x)?x.map(flat).join(''):(x&&x.text)||'';

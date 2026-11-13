@@ -38,4 +38,5 @@ python3 ../scripts/pcideal.py ../pcideal_data.json || true
 python3 ../scripts/fotos.py ../pcideal_data.json ../dados/fotos.json || true
 python3 ../scripts/pcideal.py ../pcideal_data.json || true
 cp site_data.json ../site_data.json
+python3 ../scripts/homedata.py ../site_data.json ../pcideal_data.json ../home_data.json || true
 echo "ok: $UPD"

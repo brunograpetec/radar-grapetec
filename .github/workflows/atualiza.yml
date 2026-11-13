@@ -27,7 +27,7 @@ jobs:
             git rebase --abort 2>/dev/null || true
             git fetch -q origin main && git reset -q --hard origin/main
             if bash scripts/atualiza.sh; then
-              git add site_data.json pcideal_data.json dados/posts/ dados/comentarios.json dados/fotos.json 2>/dev/null || git add site_data.json dados/posts/
+              git add site_data.json pcideal_data.json home_data.json dados/posts/ dados/comentarios.json dados/fotos.json 2>/dev/null || git add site_data.json dados/posts/
               if ! git diff --cached --quiet; then
                 git commit -qm "Atualização automática $(TZ=America/Sao_Paulo date '+%d/%m %H:%M')"
                 if ! git push -q; then

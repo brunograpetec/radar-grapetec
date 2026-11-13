@@ -137,6 +137,14 @@
 #pci .mpv iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 #pci .mapa2.comvideo{border-radius:0 0 20px 20px;border-top:0}
 @media print{#pci .mpv{display:none!important}#pci .mapa2.comvideo{border-radius:20px;border-top:2px solid #7b2cbf!important}}
+#pci .salvos{margin-top:18px;background:var(--s1);border:1px solid var(--bd);border-radius:14px;padding:12px 14px}
+#pci .sl1{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 0;border-top:1px solid var(--bd)}
+#pci .sl1:first-of-type{border-top:0}
+#pci .sl1 b{display:block;font-size:14.5px}#pci .sl1 span{font-size:12.5px;color:var(--mut)}
+#pci .sla{display:flex;gap:6px;flex:none}
+#pci .btn.del:hover{border-color:#ff8a8a;color:#ff8a8a}
+#pci .opt.go.novo{margin:16px 0 0}
+@media print{#pci .opt.go.novo,#pci .salvos{display:none!important}}
 #pci .parts{display:grid;gap:12px;margin-bottom:16px}
 #pci .part{background:var(--s1);border:1px solid var(--bd);border-radius:16px;padding:16px;display:grid;grid-template-columns:1fr 210px;gap:16px;align-items:start}
 #pci .pl{display:grid;gap:8px;min-width:0}
@@ -329,6 +337,7 @@ function render(){
     step++; render(); {const y = app.getBoundingClientRect().top + scrollY - 80; if(scrollY > y) scrollTo({top:y, behavior:'smooth'});}
   });
   const bk = document.getElementById('pciBack'); if(bk) bk.onclick = () => { step--; render(); };
+  if(step===0) mostraSalvos();
   app.querySelectorAll('.mf').forEach(b => b.onclick = () => { st[b.dataset.k] = b.dataset.v; render(); });
   const mg = document.getElementById('pciMonGo');
   if(mg) mg.onclick = () => { if(!st.mres) return; st.mon = st.mres; step++; render(); };
@@ -360,6 +369,15 @@ function misto(){
   return `<div class="mx"><div class="mxt">Arrasta a bolinha: quanto vai no cartão?</div>
     <input type="range" id="pciParc" min="5" max="95" step="5" value="${st.parc}" aria-label="Porcentagem parcelada">
     ${mistoInfo()}<button class="opt go" id="pciGo"><b>Continuar →</b></button></div>`;
+}
+function mostraSalvos(){
+  const L = salvos(); if(!L.length) return;
+  const bx = document.createElement('div'); bx.className = 'salvos';
+  bx.innerHTML = `<div class="itl">Seus PCs salvos neste navegador</div>` + L.map((x,i)=>`<div class="sl1"><div><b>${esc(x.mapa||'PC')}</b><span>${R(x.total||0)} · montado em ${new Date(x.quando).toLocaleDateString('pt-BR')} · os preços se atualizam</span></div>
+    <div class="sla"><button class="btn" data-ver="${i}">Ver →</button><button class="btn del" data-del="${i}" title="Apagar este PC">🗑</button></div></div>`).join('');
+  bx.querySelectorAll('[data-ver]').forEach(b => b.onclick = () => { const o = le(L[+b.dataset.ver].c); if(!o) return; st = Object.assign({itens:{}, parc:30}, o); step = Q.length; render(); scrollTo({top: app.getBoundingClientRect().top + scrollY - 80}); });
+  bx.querySelectorAll('[data-del]').forEach(b => b.onclick = () => { const k = +b.dataset.del; const N = salvos().filter((_,i)=>i!==k); gravaSalvos(N); render(); });
+  const pr = app.querySelector('.prog'); if(pr) pr.parentNode.insertBefore(bx, pr);
 }
 function head(full){
   return `<header><img class="logo" src="${LOGO}" alt="Grape Tec"><div class="brand"><b>Grape Tec · PC Ideal</b><span>preços dos meus posts dos últimos 30 dias</span></div></header>` +
@@ -759,7 +777,7 @@ function result(){
      <div class="bar"><i style="width:${pct.toFixed(1)}%"></i></div>
      <div class="sub">${sobra>=0?`${R(sobra)} abaixo do seu orçamento de ${R(s.orc)}`:`${R(-sobra)} acima do seu orçamento de ${R(s.orc)} (explico no Raio-X)`}${s.pag!=='pix'?' · margem pro parcelado':''}</div>
      <div class="mapa">${mapa}</div>
-     <div class="sv"><button class="btn" id="pciPdf">📄 Salvar em PDF</button><button class="btn" id="pciLink">🔗 Copiar link do meu PC</button><span class="old">fica salvo neste navegador também</span></div>
+     <div class="sv"><button class="btn" id="pciPdf">📄 Salvar em PDF</button><button class="btn" id="pciLink">🔗 Copiar link do meu PC</button><button class="btn" data-inicio="1">↺ Montar outro PC</button><span class="old">fica salvo neste navegador também</span></div>
      <div class="pdate">Montado em ${new Date().toLocaleDateString('pt-BR')} · grapetec.com.br</div></div>
    ${ytId(VIDEO_URL) ? `<div class="mpv"><iframe src="https://www.youtube-nocookie.com/embed/${ytId(VIDEO_URL)}?rel=0" title="Como usar o seu mapa" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>` : ''}<div class="mapa2${ytId(VIDEO_URL)?' comvideo':''}">
      <svg class="mp-ill" viewBox="0 0 120 90" aria-hidden="true"><rect x="8" y="14" width="34" height="62" rx="4" fill="none" stroke="currentColor" stroke-width="3"/><path d="M42 14l36 10v62l-36-10zM78 24l34-10v62l-34 10" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M20 34c6 8 14 4 18 12s16 10 26 4 18 2 26-6" fill="none" stroke="#c77dff" stroke-width="3" stroke-dasharray="5 5" stroke-linecap="round"/><circle cx="92" cy="44" r="7" fill="#c77dff"/><path d="M92 51v10" stroke="#c77dff" stroke-width="3" stroke-linecap="round"/></svg>
@@ -788,9 +806,11 @@ function result(){
        <a class="tg" href="https://t.me/grape_tec" target="_blank" rel="noopener" data-ev="telegram">${TG}<span><small>SAI PRIMEIRO AQUI</small>Canal do Telegram</span></a></div></div>
      <a class="rd" href="https://grapetec.com.br/radar" target="_blank" rel="noopener" data-ev="radar"><div class="rdi">${RADAR}</div><div><h4>Radar de preços</h4><p>Veja a curva de preço de cada peça e saiba se a oferta é boa mesmo.</p><em>Abrir o Radar →</em></div></a>
    </div>
+   <button class="opt go novo" data-inicio="1"><b>↺ Voltar ao início e montar outro PC</b></button>
    <p class="foot">Atualizado com os posts até ${dia(DATA.gen)} · Compre pelos links: você me ajuda sem pagar nada a mais.</p>`;
   document.getElementById('pciRedo').onclick = refaz;
-  salva();
+  app.querySelectorAll('[data-inicio]').forEach(b => b.onclick = () => { refaz(); scrollTo({top: app.getBoundingClientRect().top + scrollY - 80, behavior:'smooth'}); });
+  salva({mapa:`${b.cpu} + ${GN}`, total:Math.round(b.geral), orc:s.orc});
   const pc = {cpu:b.cpu, gpu:b.apu?'vídeo integrado':b.gpu, placa_mae:b.mobo.it.n, memoria:b.ram+'GB '+ramT, ssd:b.ss.it.n, fonte:b.ps.it.n,
     cooler:b.co.box?'cooler box':b.co.it.n, gabinete:b.ca.it.n, monitor:A.mon?A.mon.it.n:'', perifericos:[A.kb&&'teclado',A.mouse&&'mouse',A.head&&'headset'].filter(Boolean).join('+'),
     plataforma:b.pl, total_pc:Math.round(b.tot), total:Math.round(b.geral)};
@@ -821,10 +841,12 @@ function result(){
 /* ---------- salvar / restaurar o projeto ---------- */
 const CHAVES = ['itens','orc','pag','parc','jogo','mres','mhz','mpan','mon','plat','vis','net'];
 function codifica(){ const o = {}; CHAVES.forEach(k => { if(st[k]!==undefined) o[k] = st[k]; }); return btoa(unescape(encodeURIComponent(JSON.stringify(o)))).replace(/=+$/,''); }
-function salva(){
+function salvos(){ try { const L = JSON.parse(localStorage.getItem('pcideal_salvos')||'[]'); return Array.isArray(L) ? L : []; } catch(_){ return []; } }
+function gravaSalvos(L){ try { localStorage.setItem('pcideal_salvos', JSON.stringify(L.slice(0,10))); } catch(_){} }
+function salva(info){
   const c = codifica();
   try { history.replaceState(null, '', location.pathname + location.search + '#pc=' + c); } catch(_){}
-  try { localStorage.setItem('pcideal_ultimo', c); } catch(_){}
+  if(info){ const L = salvos().filter(x => x.c !== c); L.unshift(Object.assign({c, quando:new Date().toISOString()}, info)); gravaSalvos(L); }
 }
 function le(c){ try { const o = JSON.parse(decodeURIComponent(escape(atob(c)))); return o && o.orc && o.jogo && o.vis && o.net ? o : null; } catch(_){ return null; } }
 function refaz(){ st = {itens:{}, parc:30}; step = 0; try { history.replaceState(null, '', location.pathname + location.search); } catch(_){} render(); }
@@ -833,15 +855,6 @@ const hm = (location.hash.match(/#pc=([A-Za-z0-9+/]+)/)||[])[1];
 const doLink = hm && le(hm);
 if(doLink){ st = Object.assign({itens:{}, parc:30}, doLink); step = Q.length; fire('PCIdeal_Reaberto'); }
 render();
-if(!doLink){
-  let ult = null; try { ult = le(localStorage.getItem('pcideal_ultimo')||''); } catch(_){}
-  if(ult){
-    const bx = document.createElement('div'); bx.className = 'resume';
-    bx.innerHTML = `<div><b>Você já montou um PC aqui</b><span>${R(ult.orc)} · ${{mix:'jogo de tudo',fps:'FPS / Battle Royale',aaa:'modo campanha'}[ult.jogo]||''}. Os preços são atualizados.</span></div><button class="opt go" style="width:auto;margin:0">Ver meu PC →</button>`;
-    bx.querySelector('button').onclick = () => { st = Object.assign({itens:{}, parc:30}, ult); step = Q.length; render(); };
-    const pr = app.querySelector('.prog'); if(pr) pr.parentNode.insertBefore(bx, pr);
-  }
-}
 })();
 </script>
 </body>

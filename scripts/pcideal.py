@@ -12,9 +12,15 @@ SITE = os.environ.get('SITE', 'site_data.json')
 dest = sys.argv[1] if len(sys.argv) > 1 else 'pcideal_data.json'
 
 TXT = {}
+FOTO = {}
 for f in glob.glob(os.path.join(POSTS, '*.json')):
     for m in json.load(open(f))['messages']:
         TXT[str(m['id'])] = (m['date'], m.get('text', ''))
+        if m.get('photo'): FOTO[str(m['id'])] = m['photo']
+_ff = os.environ.get('FOTOS', 'dados/fotos.json')
+if os.path.exists(_ff):
+    for k, v in json.load(open(_ff)).items():
+        if v and v[0]: FOTO[k] = v[0]
 fim = max(v[0][:10] for v in TXT.values())
 D30 = (dt.date.fromisoformat(fim) - dt.timedelta(days=30)).isoformat()
 D10 = (dt.date.fromisoformat(fim) - dt.timedelta(days=10)).isoformat()
@@ -116,7 +122,7 @@ for (cat, nome), L in rows.items():
     u = link(t)
     it = dict(n=nome, med=round(med), p25=round(q(0.25)), p75=round(q(0.75)), lo=round(ps[0]), np=len(L),
               p=round(best[1], 2), d=best[0], loja=best[2] or loja_de(u), post=int(best[3]), url=u, cup=cupom(t),
-              t=best[4][:110], a=ATTR.get(nome, {}))
+              t=best[4][:110], a=ATTR.get(nome, {}), img=FOTO.get(str(best[3]), ''))
     if cat == 'ram':
         m = re.search(r'DDR(\d) (?:(\d)x)?(\d+)GB (\d+)MHz', nome)
         it['a'] = dict(ddr=int(m.group(1)), mods=int(m.group(2) or 1), cap=int(m.group(3)), mhz=int(m.group(4)))

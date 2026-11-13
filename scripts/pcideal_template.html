@@ -51,15 +51,55 @@
 #pci .raio p{color:#ddd8e6;margin-bottom:8px;font-size:15px}
 #pci .raio p:last-child{margin-bottom:0}
 #pci .parts{display:grid;gap:12px;margin-bottom:16px}
-#pci .part{background:var(--s1);border:1px solid var(--bd);border-radius:16px;padding:16px 18px;display:grid;grid-template-columns:1fr auto;gap:6px 14px}
+#pci .part{background:var(--s1);border:1px solid var(--bd);border-radius:16px;padding:16px;display:grid;grid-template-columns:1fr 210px;gap:16px;align-items:start}
+#pci .pl{display:grid;gap:8px;min-width:0}
 #pci .part .k{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--dim)}
-#pci .part .n{font-size:17px;font-weight:600;line-height:1.3}
-#pci .part .pr{text-align:right;font-family:var(--mono);font-weight:700;font-size:18px;white-space:nowrap}
-#pci .part .pr small{display:block;font-family:"Readex Pro",system-ui,sans-serif;font-weight:400;font-size:12px;color:var(--mut)}
-#pci .norte{grid-column:1/-1;background:var(--s2);border-left:3px solid var(--ac);border-radius:8px;padding:10px 12px;font-size:14px;color:#e4dfeb}
+#pci .part .n{font-size:17px;font-weight:600;line-height:1.3;margin-top:-4px}
+#pci .norte{background:var(--s2);border-left:3px solid var(--ac);border-radius:8px;padding:10px 12px;font-size:14px;color:#e4dfeb}
 #pci .norte b{color:var(--act)}
-#pci .why{grid-column:1/-1;color:var(--mut);font-size:14px}
-#pci .acts{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:2px}
+#pci .why{color:#cfc9d8;font-size:14px}
+#pci .xtra{font-size:13.5px;color:var(--mut);border-top:1px dashed var(--bd);padding-top:8px}
+#pci .xtra b{color:var(--ink);font-weight:600}
+#pci .pbox{background:var(--s2);border:1px solid var(--bd);border-radius:14px;overflow:hidden}
+#pci .ph{display:block;position:relative;aspect-ratio:1/1;background:#fff linear-gradient(135deg,#1d1a22,#141317);overflow:hidden}
+#pci .ph img{width:100%;height:100%;object-fit:cover;display:block;background:#fff}
+#pci .sl{white-space:nowrap;position:absolute;left:8px;top:8px;font-size:11px;font-weight:600;padding:3px 8px;border-radius:999px;background:rgba(10,10,12,.82);color:var(--mut);backdrop-filter:blur(4px)}
+#pci .sl.hot{color:var(--okt)}#pci .sl.ok{color:var(--okt)}#pci .sl.hi{color:var(--warnt)}
+#pci .pi{padding:10px 12px 12px;display:grid;gap:6px}
+#pci .pp{font-family:var(--mono);font-weight:800;font-size:19px;letter-spacing:-.01em}
+#pci .ps{font-size:12px;color:var(--mut);margin-top:-4px}
+#pci .cupb{all:unset;box-sizing:border-box;cursor:pointer;font-family:var(--mono);font-size:12px;color:var(--warnt);border:1px dashed rgba(255,176,32,.55);border-radius:8px;padding:5px 8px;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#pci .cupb:hover{background:rgba(255,176,32,.08)}
+#pci .btn.buy{text-align:center;text-decoration:none}
+#pci .vp{font-size:12px;color:var(--dim);text-align:center;text-decoration:none}
+#pci .vp:hover{color:var(--act)}
+#pci a.me{display:grid;grid-template-columns:120px 1fr;gap:18px;align-items:center;text-decoration:none;color:var(--onac);background:linear-gradient(135deg,var(--ac),var(--ac2));border-radius:20px;padding:18px;margin-bottom:16px;transition:.15s}
+#pci a.me:hover{transform:translateY(-2px)}
+#pci a.me .foto{width:120px;height:120px;border-radius:50%;overflow:hidden;background:#fff;border:3px solid rgba(255,255,255,.6)}
+#pci a.me .foto img{width:100%;height:100%;object-fit:cover}
+#pci a.me small{display:block;font-size:13px;color:#3b1a55;font-weight:600}
+#pci a.me b{display:block;font-size:clamp(22px,4vw,30px);letter-spacing:-.01em;line-height:1.1;margin:2px 0 6px}
+#pci a.me span{display:block;font-size:14px;color:#2a0f40}
+#pci a.me span b{display:inline;font-size:inherit}
+#pci a.me em{display:inline-block;font-style:normal;font-weight:700;margin-top:10px;background:var(--onac);color:var(--act);border-radius:999px;padding:7px 14px;font-size:14px}
+#pci .ch{display:grid;grid-template-columns:1.4fr 1fr;gap:12px}
+#pci .chb,#pci a.rd{background:var(--s1);border:1px solid var(--bd);border-radius:18px;padding:18px}
+#pci .ch h4{font-size:17px;margin-bottom:4px}
+#pci .ch p{color:var(--mut);font-size:14px}
+#pci .chr{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+#pci .chr a{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);border:1px solid var(--bd);border-radius:14px;padding:12px;background:var(--s2);font-weight:600;font-size:14.5px;transition:.15s}
+#pci .chr a svg{width:28px;height:28px;flex:none}
+#pci .chr a.wa svg{color:var(--wa)}#pci .chr a.tg svg{color:var(--tg)}
+#pci .chr a.wa:hover{border-color:var(--wa)}#pci .chr a.tg:hover{border-color:var(--tg)}
+#pci .chr a small{display:block;font-size:10.5px;letter-spacing:.08em;color:var(--mut);font-weight:500}
+#pci a.rd{display:flex;gap:14px;text-decoration:none;color:var(--ink);transition:.15s}
+#pci a.rd:hover{border-color:var(--ac)}
+#pci .rdi{width:56px;height:56px;flex:none;border-radius:14px;background:rgba(199,125,255,.12);color:var(--ac);display:grid;place-items:center}
+#pci .rdi svg{width:34px;height:34px}
+#pci a.rd em{display:block;font-style:normal;color:var(--act);font-size:14px;margin-top:8px;font-weight:600}
+#pci img.logo{width:42px;height:42px;border-radius:12px;object-fit:contain;background:none}
+@media (max-width:640px){#pci .part{grid-template-columns:1fr}#pci .pbox{display:grid;grid-template-columns:120px 1fr}#pci .ph{aspect-ratio:auto;min-height:120px}#pci a.me{grid-template-columns:76px 1fr;gap:12px}#pci a.me .foto{width:76px;height:76px}#pci .ch{grid-template-columns:1fr}#pci .sl{font-size:10px;left:6px;top:6px}}
+@media (max-width:380px){#pci .chr{grid-template-columns:1fr}}
 #pci .btn{all:unset;cursor:pointer;font-size:13px;border:1px solid var(--bd);border-radius:999px;padding:5px 12px;color:var(--ink)}
 #pci .btn:hover{border-color:var(--ac);color:var(--act)}
 #pci .cup{font-family:var(--mono);font-size:12px;color:var(--warnt);border:1px dashed rgba(255,176,32,.5);border-radius:8px;padding:3px 8px}
@@ -80,13 +120,14 @@
 #pci .cta a.main span{color:#3b1a55}
 #pci .foot{color:var(--dim);font-size:12px;margin-top:20px}
 #pci .alt{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 0}
-@media (max-width:560px){#pci .part{grid-template-columns:1fr}#pci .part .pr{text-align:left}}
 </style>
 </head>
 <body style="margin:0;background:#0a0a0c">
 <div id="pci"><div class="orb"></div><div class="wrap" id="pciApp"></div></div>
 <script>
 const DATA = window.__PCIDATA || /*DATA*/null;
+const LOGO = 'data:image/webp;base64,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';
+const FOTO_BRUNO = '';
 (function(){
 const P = DATA.parts, app = document.getElementById('pciApp');
 const R = v => 'R$ ' + Math.round(v).toLocaleString('pt-BR');
@@ -178,7 +219,7 @@ function render(){
   const bk = document.getElementById('pciBack'); if(bk) bk.onclick = () => { step--; render(); };
 }
 function head(full){
-  return `<header><div class="logo">G</div><div class="brand"><b>Grape Tec · PC Ideal</b><span>preços dos meus posts dos últimos 30 dias</span></div></header>` +
+  return `<header><img class="logo" src="${LOGO}" alt="Grape Tec"><div class="brand"><b>Grape Tec · PC Ideal</b><span>preços dos meus posts dos últimos 30 dias</span></div></header>` +
    (full ? `<h1>Monte seu <em>PC Ideal</em></h1><p class="lead">Responde 7 perguntas, só clicando. Eu monto o PC completo com as 8 peças, do jeito que faço nas minhas consultorias, usando os preços reais que passaram no canal no último mês.</p>` : '');
 }
 
@@ -314,18 +355,39 @@ function monta(s){
   return best;
 }
 
-/* ---------- Texto no estilo da consultoria ---------- */
-const lojaBtn = it => it.url ? `<a class="btn" href="${esc(it.url)}" target="_blank" rel="noopener" data-ev="${esc(it.n)}">${esc(it.loja||'Loja')} ↗</a>` : '';
-const postBtn = it => `<a class="btn" href="https://t.me/grape_tec/${it.post}" target="_blank" rel="noopener">post ↗</a>`;
-const cupTag = it => it.cup ? `<span class="cup">cupom ${esc(it.cup)}</span>` : '';
+/* ---------- Texto no estilo da consultoria (com variação) ---------- */
+const pick = a => a[Math.floor(Math.random()*a.length)];
 const dia = d => d ? d.slice(8,10)+'/'+d.slice(5,7) : '';
-function card(k, nome, preco, it, norte, why, extra){
-  return `<div class="part"><div><div class="k">${k}</div><div class="n">${esc(nome)}</div></div>
-   <div class="pr">${R2(preco)}<small>${extra||('oferta de '+dia(it.d)+' · '+esc(it.loja||''))}</small></div>
-   <div class="norte"><b>Norte:</b> ${norte}</div>
-   <div class="why">${why}</div>
-   <div class="acts">${lojaBtn(it)}${postBtn(it)}${cupTag(it)}<span class="old">mediana 30 dias ${R(it.med)} · ${it.np} ofertas</span></div></div>`;
+const WA = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.4L3 21l2.1-5.6A8.4 8.4 0 1 1 21 11.5z"/><path d="M9 9.5c.3 1.8 2.6 4.3 4.6 4.8l1.2-1.1 1.7.8"/></svg>';
+const TG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 3.5 2.8 10.7c-.9.4-.9 1.6.1 1.9l4.7 1.5 1.8 5.6c.3.8 1.3 1 1.9.4l2.6-2.5 4.7 3.5c.7.5 1.7.1 1.9-.7L23 4.9c.2-1-.7-1.8-1.5-1.4z"/><path d="m7.6 14.1 9.9-6.6-7.4 8.2"/></svg>';
+const RADAR = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5.5" opacity=".6"/><circle cx="12" cy="12" r="2" opacity=".4"/><path d="M12 12 18.4 5.6"/><circle cx="16" cy="9" r="1.2" fill="currentColor"/></svg>';
+function selo(it){
+  if(it.p <= it.lo*1.01 && it.np>=4) return ['hot','menor preço do mês'];
+  if(it.p < it.p25) return ['ok','abaixo do normal'];
+  if(it.p > it.p75*1.02) return ['hi','acima do normal hoje'];
+  return ['mid','no preço normal'];
 }
+function pbox(it, preco, sub){
+  const sl = selo(it);
+  return `<div class="pbox">
+    <a class="ph" href="https://t.me/grape_tec/${it.post}" target="_blank" rel="noopener" data-ev="post">${it.img?`<img src="${esc(it.img)}" alt="" loading="lazy" onerror="this.remove()">`:''}<span class="sl ${sl[0]}">${sl[1]}</span></a>
+    <div class="pi"><div class="pp">${R2(preco)}</div><div class="ps">${sub||(esc(it.loja||'')+' · '+dia(it.d))}</div>
+    ${it.cup?`<button class="cupb" data-c="${esc(it.cup)}" data-u="${esc(it.url||'')}" title="Copia o cupom e abre a loja">🎟️ ${esc(it.cup)}</button>`:''}
+    ${it.url?`<a class="btn buy" href="${esc(it.url)}" target="_blank" rel="noopener sponsored" data-ev="loja">${esc(it.loja||'Loja')} ↗</a>`:''}
+    <a class="vp" href="https://t.me/grape_tec/${it.post}" target="_blank" rel="noopener" data-ev="post">ver o post</a></div></div>`;
+}
+function card(k, nome, preco, it, norte, why, sub, extra){
+  return `<div class="part"><div class="pl"><div class="k">${k}</div><div class="n">${esc(nome)}</div>
+   <div class="norte"><b>Norte:</b> ${norte}</div><div class="why">${why}</div>${extra?`<div class="xtra">${extra}</div>`:''}
+   <div class="old">normal no mês ${R(it.med)} · ${it.np} ofertas no canal</div></div>${pbox(it, preco, sub)}</div>`;
+}
+const gpuNear = (name, dir) => {
+  const L = Object.keys(GPU).map(n => ({n, g:GPU[n], it:(P.gpu||[]).find(x=>x.n===n)})).filter(x=>x.it).sort((a,b)=>a.g.i-b.g.i || a.it.p-b.it.p);
+  const i = L.findIndex(x=>x.n===name), me = L[i];
+  if(dir>0){ for(let j=i+1;j<L.length;j++) if(L[j].g.i >= me.g.i*1.08 && L[j].it.p > me.it.p) return L[j]; }
+  else { for(let j=i-1;j>=0;j--) if(L[j].g.i <= me.g.i*0.95 && L[j].it.p < me.it.p) return L[j]; }
+  return null;
+};
 
 function result(){
   const s = st, b = monta(s), aq = s.vis!=='perf';
@@ -338,30 +400,53 @@ function result(){
   }
   const C = CPU[b.cpu], G = GPU[b.gpu];
   const sobra = s.orc - b.tot;
-  const gpuName = b.gpu;
-  const mapa = `${b.cpu} + ${gpuName} + ${b.ram}GB ${b.pl==='AM4'?'DDR4':'DDR5'} + SSD ${b.ss.kind==='500'?'500GB':b.ss.kind==='2t'?'2TB':'1TB'} + fonte ${b.ps.it.n.match(/(\d{3,4})W/)?.[1]||b.ps.w}W`;
-  const resTxt = {fhd60:'Full HD', fhd:'Full HD de alta taxa', qhd:'QHD', uhd:'4K'}[s.mon];
-  const jogoTxt = {fps:'jogo competitivo, onde FPS alto e estável é o que manda', aaa:'jogos de mundo aberto e lançamentos, onde quem carrega é a placa de vídeo', mix:'um pouco de tudo, então equilibrei processador e placa de vídeo', work:'jogo e trabalho, então pesei mais núcleos e memória'}[s.jogo];
-  let raio = [`Fala! Montei o seu pensando em <b>${jogoTxt}</b>, em <b>${resTxt}</b>.`,
-    `O coração da máquina ficou no <b>${b.cpu} + ${gpuName}</b>.`];
-  if(b.pl==='AM4') raio.push(s.plat==='am4' ? 'Fiquei no AM4 como você pediu: memória DDR4 é bem mais barata hoje, e esse dinheiro vira desempenho.' :
-    'Escolhi <b>AM4</b>: hoje a memória DDR5 está muito cara, e com esse orçamento a diferença vai direto pra placa de vídeo. É desempenho por real.');
-  else raio.push(s.plat==='am5' ? 'Fomos de <b>AM5</b>, como você pediu: plataforma nova, que recebe processadores futuros sem trocar a placa-mãe.' :
-    'Aqui já compensa ir de <b>AM5</b>: plataforma nova, DDR5, e quando quiser subir de processador é só trocar ele.');
-  raio.push({perf:'Você pediu <b>performance acima de tudo</b>, então não gastei um real a mais com visual: o dinheiro foi pra processador e placa de vídeo.',
-    equil:'Você pediu <b>equilíbrio</b>: o desempenho vem primeiro, mas o PC fica bonito, com gabinete aquário.',
-    estetica:'Você disse que <b>estética importa muito</b>: entrou water cooler 360mm e gabinete aquário caprichado, mesmo tirando um pouco da performance.'}[s.vis]);
-  if(s.pag==='cartao') raio.push(`Como vai ser no cartão, deixei uma margem: o PC fechou em <b>${R(b.tot)}</b> com preço de oferta, e o resto do orçamento é pra absorver a diferença do parcelamento.`);
-  if(s.mon==='fhd60' && s.jogo!=='aaa') raio.push('Um conselho: com monitor 60Hz você não enxerga o FPS que esse PC entrega. Assim que der, um Full HD 144Hz muda o jogo.');
-  if(s.mon==='uhd' && G.i<200) raio.push('Sendo sincero: 4K pede muita placa de vídeo. Esse PC roda, mas em 4K você vai precisar baixar gráficos ou usar upscaling (DLSS/FSR).');
-  if(sobra > 1500 && s.pag!=='cartao') raio.push(`Sobrou <b>${R(sobra)}</b>: não tem placa de vídeo acima dessa nas ofertas do mês, então eu guardaria pro monitor ou periféricos.`);
-  if(s.mon!=='uhd' && s.mon!=='qhd' && G.v>=16) raio.push(`Os ${G.v}GB de memória de vídeo já deixam a máquina preparada para ir para QHD no futuro.`);
-
-  // norte de cada peça
   const ramT = b.pl==='AM4'?'DDR4':'DDR5';
-  const nCpu = `${b.cpu}, ${C.d}. Normal no último mês: <b>${faixa(b.cI.p25, b.cI.p75)}</b>. Abaixo de ${R(r50(b.cI.p25))} é compra.`;
+  const mapa = `${b.cpu} + ${b.gpu} + ${b.ram}GB ${ramT} + SSD ${b.ss.kind==='500'?'500GB':b.ss.kind==='2t'?'2TB':'1TB'} + fonte ${b.ps.it.n.match(/(\d{3,4})W/)?.[1]||b.ps.w}W`;
+  const resTxt = {fhd60:'Full HD', fhd:'Full HD de alta taxa', qhd:'QHD', uhd:'4K'}[s.mon];
+
+  /* ----- Raio-X: muda conforme as respostas e os preços ----- */
+  const raio = [];
+  raio.push(pick({
+    fps:[`Fala! Seu foco é <b>competitivo</b>, então pensei em FPS alto e estável, que é o que ganha partida.`, `Fala! Pra <b>FPS e Battle Royale</b> o processador pesa muito mais do que a galera imagina, e foi aí que eu mirei.`, `Fala! Jogo competitivo pede <b>frame alto e sem engasgo</b>. Montei o seu em cima disso.`],
+    aaa:[`Fala! Pra <b>mundo aberto e lançamento</b>, quem carrega o PC é a placa de vídeo, então foi pra ela que eu puxei o dinheiro.`, `Fala! Seu negócio é <b>jogo bonito, AAA</b>. Aqui a placa de vídeo manda, e o resto da máquina tem que acompanhar sem sobrar.`, `Fala! Pra rodar <b>GTA, Cyberpunk e o que vier</b>, eu priorizei a placa de vídeo e montei o resto em volta dela.`],
+    mix:[`Fala! Como você joga <b>de tudo</b>, equilibrei processador e placa de vídeo: nenhum dos dois segura o outro.`, `Fala! Pra quem joga <b>um pouco de tudo</b>, o segredo é equilíbrio, e foi isso que eu busquei.`],
+    work:[`Fala! Como o PC vai <b>trabalhar e jogar</b>, eu pesei mais núcleos e memória, sem deixar o jogo de lado.`, `Fala! PC de <b>trabalho + jogo</b> precisa de núcleo e memória sobrando. Montei pensando nisso.`]
+  }[s.jogo]));
+  raio.push(pick([`O coração da máquina ficou no <b>${b.cpu} + ${b.gpu}</b>, rodando em ${resTxt}.`, `A dupla que manda aqui é <b>${b.cpu} + ${b.gpu}</b>, pensando em ${resTxt}.`, `O mapa é <b>${b.cpu} + ${b.gpu}</b>. Pra ${resTxt}, é um conjunto muito bem casado.`]));
+  // plataforma: compara de verdade com a outra
+  let alt = null;
+  if(s.plat==='auto'){ alt = monta(Object.assign({}, s, {plat: b.pl==='AM4'?'am5':'am4'})); }
+  if(b.pl==='AM4'){
+    let t = s.plat==='am4' ? 'Fiquei no <b>AM4</b>, como você pediu.' : pick(['Escolhi <b>AM4</b>.', 'Fui de <b>AM4</b>, e não foi por acaso.', 'Aqui eu fico no <b>AM4</b>.']);
+    const r16 = pickRam(5,16), r16b = pickRam(4,16);
+    if(r16 && r16b) t += ` Hoje 16GB de DDR5 custam uns <b>${R(r16.preco)}</b> contra <b>${R(r16b.preco)}</b> em DDR4, e essa diferença vira placa de vídeo.`;
+    if(alt) t += ` Se fosse AM5 com esse dinheiro, daria <b>${alt.cpu} + ${alt.gpu}</b>: ${alt.gpu===b.gpu?'a mesma placa, gastando mais':'placa de vídeo mais fraca'}.`;
+    raio.push(t);
+  } else {
+    let t = s.plat==='am5' ? 'Fomos de <b>AM5</b>, como você pediu: plataforma nova, que recebe processadores futuros sem trocar a placa-mãe.' : pick(['Aqui já compensa ir de <b>AM5</b>: plataforma nova, e quando quiser subir de processador é só trocar ele.', 'Com esse orçamento eu já vou de <b>AM5</b>. Você paga mais na memória DDR5, mas ganha uma plataforma com futuro.']);
+    if(alt) t += ` No AM4 sairia <b>${alt.cpu} + ${alt.gpu}</b>, ${alt.tot < b.tot ? R(b.tot-alt.tot)+' mais barato' : 'quase o mesmo preço'}, mas sem caminho de upgrade.`;
+    raio.push(t);
+  }
+  raio.push({perf:pick(['Você pediu <b>performance acima de tudo</b>: não gastei um real a mais com visual.', '<b>Performance acima de tudo</b>: cooler de torre e gabinete simples, e o dinheiro foi pra onde dá FPS.']),
+    equil:pick(['Você pediu <b>equilíbrio</b>: desempenho primeiro, mas com um gabinete aquário bonito.', '<b>Equilíbrio</b>: o PC fica bonito sem roubar dinheiro do processador e da placa.']),
+    estetica:pick(['Você disse que <b>estética importa muito</b>: entrou water cooler 360mm e gabinete caprichado, mesmo tirando um pouco da performance.', 'Como o <b>visual pesa pra você</b>, coloquei water cooler 360mm e um gabinete à altura. Custou um degrau de placa de vídeo, mas o PC fica lindo.'])}[s.vis]);
+  // a melhor oportunidade da lista
+  const itens = [['o processador',b.cI],['a placa de vídeo',b.gI],['a placa-mãe',b.mobo.it],['o SSD',b.ss.it],['a fonte',b.ps.it],['o '+(b.co.wc?'water cooler':'cooler'),b.co.it],['o gabinete',b.ca.it]];
+  const opp = itens.map(x=>[x[0],x[1],x[1].med-x[1].p]).sort((a,c)=>c[2]-a[2])[0];
+  if(opp && opp[2] > 40) raio.push(pick([`A melhor oportunidade da lista é ${opp[0]}: a oferta tá <b>${R(opp[2])} abaixo</b> do normal do mês.`, `Fica de olho n${opp[0].slice(0,1)} ${opp[0].slice(2)}: tá <b>${R(opp[2])} abaixo</b> do que costuma custar. Se ainda estiver valendo, garante.`]));
+  if(s.pag==='cartao') raio.push(`Como vai ser no cartão, deixei uma margem: fechou em <b>${R(b.tot)}</b> com preço de oferta, e o resto é pra absorver o parcelamento.`);
+  if(s.mon==='fhd60' && s.jogo!=='aaa') raio.push('Um conselho: com monitor 60Hz você não enxerga o FPS que esse PC entrega. Assim que der, um Full HD 144Hz muda o jogo.');
+  if(s.mon==='uhd' && G.i<200) raio.push('Sendo sincero: 4K pede muita placa de vídeo. Vai rodar, mas com upscaling (DLSS/FSR) e gráficos ajustados.');
+  if(sobra > 1500 && s.pag!=='cartao') raio.push(`Sobrou <b>${R(sobra)}</b>: não tem placa acima dessa nas ofertas do mês, então eu guardaria pro monitor ou periféricos.`);
+
+  /* ----- norte e porquê de cada peça ----- */
+  const nCpu = `${b.cpu}, ${C.d}. Normal no mês: <b>${faixa(b.cI.p25, b.cI.p75)}</b>. Abaixo de ${R(r50(b.cI.p25))} é compra.`;
   const gpus = (P.gpu||[]).find(x=>x.n===b.gpu);
   const nGpu = `O alvo é a <b>${b.gpu}</b>, não a marca. Qualquer ${b.gpu} na faixa <b>${faixa(gpus.p25, gpus.p75)}</b> serve; não precisa ser triple fan.`;
+  const up = gpuNear(b.gpu, 1), dn = gpuNear(b.gpu, -1);
+  let xGpu = '';
+  if(up) xGpu += `<b>Quer esticar?</b> A ${up.n} custa ${R(up.it.p - b.gI.p)} a mais e entrega uns ${Math.round((up.g.i/G.i-1)*100)}% a mais. `;
+  if(dn) xGpu += `<b>Por que não a ${dn.n}?</b> Economiza ${R(b.gI.p - dn.it.p)}, mas perde uns ${Math.round((1-dn.g.i/G.i)*100)}% de desempenho.`;
   const chip = b.mobo.it.a.Chipset;
   const nMobo = `Chipset <b>${chip}</b> (${b.pl}, ${ramT})${s.net==='wifi'?', <b>com Wi-Fi</b>':''}. Faixa ${chip}: <b>${faixa(b.mobo.fx[0], b.mobo.fx[1])}</b>.${s.net!=='wifi'?' No cabo, não precisa pagar por Wi-Fi.':''}`;
   const nRam = `Memória <b>2x${b.ram/2} = ${b.ram}GB ${ramT}</b>${ramT==='DDR4'?' 3200MHz':' 5600–6000MHz'}, sempre em dois pentes (dual channel).${b.rr.fx?` Cada pente na faixa <b>${faixa(b.rr.fx[0], b.rr.fx[1])}</b>.`:''}`;
@@ -374,25 +459,36 @@ function result(){
   const nPsu = wN>=850 && G.w<850 ? `Fonte <b>750–850W Gold</b>, faixa ${faixa(b.ps.fx[0], b.ps.fx[1])}. Ela não é pra placa de hoje: <b>prepara pra upgrades</b> de GPU sem trocar a fonte.` :
     `Fonte <b>${G.w}W ${b.ps.it.a['Certificação']}</b> de marca boa, faixa ${faixa(b.ps.fx[0], b.ps.fx[1])}. ${G.w<=650?'650W já atende esse conjunto, não precisa gastar mais.':'Na medida pra essa placa.'}`;
   const nCo = b.co.wc ? `Water cooler <b>360mm</b>, faixa ${faixa(b.co.fx[0], b.co.fx[1])}. Radiador na parte de cima do gabinete.` :
-    `Air cooler simples de torre, faixa ${faixa(b.co.fx[0], b.co.fx[1])}. ${C.x3d?'':'Esse processador é tranquilo de refrigerar.'}`;
-  const nCa = b.co.wc ? `Gabinete mid tower que aceite <b>radiador 360mm no topo</b>${aqT()}.` : (aq ? `Gabinete aquário com fans, sem tirar dinheiro do desempenho.` : `Gabinete com boa ventilação (frente em tela). Não precisa gastar aqui.`);
-  function aqT(){ return aq ? ', estilo aquário' : ''; }
+    `Air cooler de torre, faixa ${faixa(b.co.fx[0], b.co.fx[1])}. ${C.x3d?'':'Esse processador é tranquilo de refrigerar.'}`;
+  const nCa = b.co.wc ? `Gabinete mid tower que aceite <b>radiador 360mm no topo</b>${aq?', estilo aquário':''}.` : (aq ? `Gabinete aquário com fans, sem tirar dinheiro do desempenho.` : `Gabinete com boa ventilação. Não precisa gastar aqui.`);
 
+  const W = {
+    cpu: C.x3d ? pick(['3D V-Cache é cache extra que vira FPS, principalmente no competitivo.', 'O X3D é o que dá aquele frame mínimo alto, sem engasgo.']) :
+         C.c>=8 ? pick(['8 núcleos envelhecem melhor: jogo novo usa cada vez mais.', 'Com 8 núcleos ele aguenta jogo, Discord, navegador e live aberta junto.']) :
+         pick(['Segura essa placa de vídeo sem gargalo, e o que sobrou foi pro FPS.', 'Pra esse orçamento é o ponto certo: mais que isso tiraria da placa de vídeo.']),
+    gpu: pick([`É a peça que mais pesa no FPS${s.mon==='qhd'||s.mon==='uhd'?' em '+resTxt:''}.`, 'Junto com o processador, é onde o dinheiro faz diferença de verdade.']) + (G.v>=16?` ${G.v}GB de VRAM dão longevidade.`:''),
+    mobo: pick([`Fecha a plataforma ${b.pl} sem pagar por recurso que você não vai usar.`, `Boa de VRM pra esse processador e sem frescura.`]),
+    ram: b.ram===32 ? '32GB dão conforto pra multitarefa, edição e jogo pesado.' : pick(['16GB em dual channel é o certo pra essa máquina.', 'Dois pentes rendem mais que um: o processador agradece.']),
+    ssd: pick(['Windows e jogos carregando rápido, sem pagar por velocidade que jogo não usa.', 'Pra jogo, um NVMe de 3.000 MB/s carrega igual um de 7.000. A diferença fica no bolso.']),
+    psu: pick(['Fonte protege o resto do PC. Aqui não se economiza em marca ruim.', 'Fonte boa é seguro do PC inteiro.']),
+    co: b.co.wc ? pick(['Refrigera com folga e fecha o visual da montagem.', 'Temperatura baixa e um PC bonito por dentro.']) : pick(['Resolve com folga sem tirar dinheiro do desempenho.', 'Simples, silencioso e dá conta do recado.']),
+    ca: aq ? pick(['Bonito, com vidro, e cabe tudo com folga.', 'Vitrine pro hardware sem estourar o orçamento.']) : pick(['Ventilação boa e preço baixo. Gabinete não dá FPS.', 'Cabe tudo, ventila bem, e o dinheiro ficou nas peças que importam.']),
+  };
   const ramNome = b.rr.qtd===2 ? `2x ${b.rr.it.n.replace('Memória ','')}` : b.rr.it.n.replace('Memória ','');
   const parts = [
-    card('Processador', b.cpu, b.cI.p, b.cI, nCpu, C.x3d ? 'Por que escolhi: tecnologia 3D V-Cache, focada em FPS. É onde o competitivo ganha.' : 'Por que escolhi: é a base da máquina, junto com a placa de vídeo é onde o dinheiro faz diferença.'),
-    card('Placa de vídeo', (b.gI.t || b.gpu).replace(/^Placa\s+(de\s+)?v[ií]deo\s*/i,'').replace(/^Placa gráfica\s*/i,''), b.gI.p, b.gI, nGpu, `Por que escolhi: é a peça que mais pesa no FPS${s.mon!=='fhd60'&&s.mon!=='fhd'?' em '+resTxt:''}. ${G.v>=16?G.v+'GB de VRAM dão longevidade.':''}`),
-    card('Placa-mãe', b.mobo.it.n.replace('Placa-mãe ',''), b.mobo.preco, b.mobo.it, nMobo, `Por que escolhi: fecha a plataforma ${b.pl} sem jogar dinheiro em recurso que não é prioridade.`),
-    card('Memória', ramNome, b.rr.preco, b.rr.it, nRam, b.ram===32 ? 'Por que escolhi: 32GB dão conforto pra multitarefa, edição e jogos pesados.' : 'Por que escolhi: 16GB em dual channel é o equilíbrio certo pra essa máquina.', b.rr.qtd===2 ? `2 × ${R2(b.rr.it.p)} · ${esc(b.rr.it.loja)}` : ''),
-    card('SSD', b.ss.it.n.replace('SSD ',''), b.ss.preco, b.ss.it, nSsd, 'Por que escolhi: Windows, programas e jogos carregando rápido, sem pagar por velocidade que jogo não usa.'),
-    card('Fonte', b.ps.it.n.replace('Fonte ',''), b.ps.preco, b.ps.it, nPsu, 'Por que escolhi: fonte é a peça que protege o resto. Aqui não se economiza em marca ruim.'),
-    card('Refrigeração', b.co.it.n, b.co.preco, b.co.it, nCo, b.co.wc ? 'Por que escolhi: boa refrigeração e fecha a estética da montagem.' : 'Por que escolhi: resolve com folga sem tirar dinheiro do desempenho.'),
-    card('Gabinete', b.ca.it.n.replace('Gabinete ',''), b.ca.preco, b.ca.it, nCa, 'Por que escolhi: custo-benefício da oferta, comporta bem a proposta da montagem.'),
+    card('Processador', b.cpu, b.cI.p, b.cI, nCpu, W.cpu),
+    card('Placa de vídeo', (b.gI.t || b.gpu).replace(/^Placa\s+(de\s+)?v[ií]deo\s*/i,'').replace(/^Placa gráfica\s*/i,''), b.gI.p, b.gI, nGpu, W.gpu, '', xGpu),
+    card('Placa-mãe', b.mobo.it.n.replace('Placa-mãe ',''), b.mobo.preco, b.mobo.it, nMobo, W.mobo),
+    card('Memória', ramNome, b.rr.preco, b.rr.it, nRam, W.ram, b.rr.qtd===2 ? `2 × ${R2(b.rr.it.p)} · ${esc(b.rr.it.loja)}` : ''),
+    card('SSD', b.ss.it.n.replace('SSD ',''), b.ss.preco, b.ss.it, nSsd, W.ssd),
+    card('Fonte', b.ps.it.n.replace('Fonte ',''), b.ps.preco, b.ps.it, nPsu, W.psu),
+    card('Refrigeração', b.co.it.n, b.co.preco, b.co.it, nCo, W.co),
+    card('Gabinete', b.ca.it.n.replace('Gabinete ',''), b.ca.preco, b.ca.it, nCa, W.ca),
   ];
   const linhas = [['Processador',b.cpu,b.cI.p],['Placa de vídeo',b.gpu,b.gI.p],['Placa-mãe',b.mobo.it.n.replace('Placa-mãe ',''),b.mobo.preco],['Memória',b.ram+'GB '+ramT,b.rr.preco],['SSD',b.ss.it.n.replace('SSD ',''),b.ss.preco],['Fonte',b.ps.it.n.replace('Fonte ',''),b.ps.preco],['Refrigeração',b.co.it.n,b.co.preco],['Gabinete',b.ca.it.n.replace('Gabinete ',''),b.ca.preco]];
   const pct = Math.min(100, b.tot/s.orc*100);
   const futuro = b.pl==='AM5' ? `Daqui a 1 ou 2 anos o primeiro upgrade é a <b>placa de vídeo</b>. Processador, placa-mãe, memória e fonte já foram escolhidos pra você não precisar reconstruir o PC.` :
-    `No AM4 o teto de processador é o <b>Ryzen 7 5800X3D</b>. Se um dia quiser mais, a troca de placa de vídeo é a primeira; plataforma nova só quando o AM4 não der mais conta.`;
+    (b.cpu==='Ryzen 7 5800X3D' ? `Você já está no topo do AM4. O próximo passo, lá na frente, é a <b>placa de vídeo</b>.` : `No AM4 o teto é o <b>Ryzen 7 5800X3D</b>. Se um dia quiser mais, primeiro troca a placa de vídeo, depois o processador, sem mexer no resto.`);
 
   app.innerHTML = head(false) + chips +
    `<div class="hero"><div class="sub">Seu PC Ideal</div><div class="tot">${R(b.tot)}</div>
@@ -409,14 +505,24 @@ function result(){
      ${b.pl==='AM4'?'<li>Pagar DDR5 caro agora sem orçamento pra isso</li>':'<li>Voltar pro AM4 tendo orçamento pra AM5</li>'}
      <li>Fonte genérica sem certificação</li></ul>
      <p style="margin-top:10px;color:#ddd8e6;font-size:14.5px">${futuro}</p></div>
-   <div class="raio"><h3>Quer que eu revise pessoalmente?</h3>
-     <p>Esse é o mapa automático. Na consultoria eu olho seu caso, suas peças atuais (upgrade) e te entrego a configuração certinha <b>em até 24h</b>.</p>
-     <div class="cta"><a class="main" href="https://jobrufe.kpages.online/montageminteligente" target="_blank" rel="noopener" id="pciCta"><b>ME AJUDA, BRUNÃO</b><span>Consultoria Montagem Inteligente</span></a>
-     <a href="https://grapetec.com.br/ofertas" target="_blank" rel="noopener"><b>Canais de ofertas</b><span>WhatsApp e Telegram</span></a>
-     <a href="https://grapetec.com.br/radar" target="_blank" rel="noopener"><b>Radar de preços</b><span>histórico de cada peça</span></a></div></div>
+   <a class="me" href="https://jobrufe.kpages.online/montageminteligente" target="_blank" rel="noopener" id="pciCta">
+     <div class="foto">${FOTO_BRUNO?`<img src="${FOTO_BRUNO}" alt="Brunão">`:`<img src="${LOGO}" alt="Grape Tec">`}</div>
+     <div><small>Quer que eu revise pessoalmente?</small><b>ME AJUDA, BRUNÃO</b><span>Esse é o mapa automático. Na consultoria eu olho o seu caso (inclusive upgrade) e te entrego a configuração certinha <b>em até 24h</b>. Desde 2009, mais de 5 mil PCs montados.</span><em>Quero a consultoria →</em></div></a>
+   <div class="ch">
+     <div class="chb"><h4>Ofertas no seu celular</h4><p>As peças desse PC aparecem lá primeiro, com cupom e link pronto.</p>
+       <div class="chr"><a class="wa" href="https://grapetec.com.br/whatsapp" target="_blank" rel="noopener" data-ev="whatsapp">${WA}<span><small>GRÁTIS</small>Grupo do WhatsApp</span></a>
+       <a class="tg" href="https://t.me/grape_tec" target="_blank" rel="noopener" data-ev="telegram">${TG}<span><small>SAI PRIMEIRO AQUI</small>Canal do Telegram</span></a></div></div>
+     <a class="rd" href="https://grapetec.com.br/radar" target="_blank" rel="noopener" data-ev="radar"><div class="rdi">${RADAR}</div><div><h4>Radar de preços</h4><p>Veja a curva de preço de cada peça e saiba se a oferta é boa mesmo.</p><em>Abrir o Radar →</em></div></a>
+   </div>
    <p class="foot">Atualizado com os posts até ${dia(DATA.gen)} · Compre pelos links: você me ajuda sem pagar nada a mais.</p>`;
   document.getElementById('pciRedo').onclick = () => { st={}; step=0; render(); };
-  app.querySelectorAll('a[data-ev]').forEach(a => a.onclick = () => fire('PCIdeal_Loja', {p:a.dataset.ev}));
+  app.querySelectorAll('a[data-ev]').forEach(a => a.addEventListener('click', () => fire('PCIdeal_'+a.dataset.ev)));
+  app.querySelectorAll('.cupb').forEach(bt => bt.onclick = () => {
+    const c = bt.dataset.c, u = bt.dataset.u;
+    try { navigator.clipboard.writeText(c); } catch(_){}
+    bt.textContent = '✓ copiado'; setTimeout(()=>{ bt.textContent = '🎟️ '+c; }, 2500);
+    fire('PCIdeal_cupom'); if(u) window.open(u, '_blank', 'noopener');
+  });
   const c = document.getElementById('pciCta'); if(c) c.onclick = () => fire('PCIdeal_Consultoria');
 }
 fire('PCIdeal_Visita');

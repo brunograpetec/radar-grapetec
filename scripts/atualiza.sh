@@ -33,6 +33,9 @@ print(f"export UPD='{d:%d/%m/%Y} às {d:%H}h{d:%M}' ATE='{d:%d/%m} às {d:%H}h{d
 P
 )"
 python3 ../scripts/sitedata.py
-SITE=site_data.json OUT=base POSTS=../dados/posts python3 ../scripts/pcideal.py ../pcideal_data.json || true
+export SITE=site_data.json OUT=base POSTS=../dados/posts FOTOS=../dados/fotos.json
+python3 ../scripts/pcideal.py ../pcideal_data.json || true
+python3 ../scripts/fotos.py ../pcideal_data.json ../dados/fotos.json || true
+python3 ../scripts/pcideal.py ../pcideal_data.json || true
 cp site_data.json ../site_data.json
 echo "ok: $UPD"

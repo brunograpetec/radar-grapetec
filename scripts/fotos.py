@@ -13,6 +13,7 @@ def main():
     except Exception:
         return
     posts = [str(x['post']) for v in (d.get('dias') or {}).values() for x in v.get('items', [])]
+    posts += [str(x['post']) for v in (d.get('parts') or {}).values() for x in v]   # pcideal_data.json
     agora = time.time(); fim = agora + 100; feitos = falhas = 0
     for p in sorted(dict.fromkeys(posts), key=lambda p: F.get(p, [None, 0])[1]):
         if agora - F.get(p, [None, 0])[1] < VALIDADE: continue

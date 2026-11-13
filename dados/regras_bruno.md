@@ -80,3 +80,5 @@ Regras que o Bruno passou e que o algoritmo segue. Anotar aqui cada regra nova (
 - Avaliação do Brunão com nota: gargalo processador x placa, PCIe 3.0 + placa x8, placa-mãe de entrada com processador forte, SSD 500GB, fonte não Gold em placa forte, air cooler em processador quente, water cooler exagerado em 6 núcleos, gabinete simples em PC acima de R$7k.
 - Compara com o que o montador guiado faria com o mesmo dinheiro e oferece "ver o PC que eu montaria".
 - Mapa/PDF reforça: entrar nos canais e que são os melhores preços do nosso banco de ofertas nesse período.
+- Refrigeração no "Eu sei montar": filtros Air cooler / Water cooler 240 / Water cooler 360 (400/420 quase não passa). Cooler box só aparece em Todos/Air.
+- Gabinete (e qualquer peça) abre só com os compatíveis com o que já foi escolhido (ex.: water 360 → só gabinete que cabe 360). Os incompatíveis ficam num "ver X que não são compatíveis".

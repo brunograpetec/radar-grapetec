@@ -1095,8 +1095,8 @@ function mmOpts(sec){
   }
   if(sec==='psu') return by('psu', x => (!f.cert || x.a['Certificação']===f.cert) && (!f.mod || (f.mod==='full') === /Full/.test(x.a.Modular||'')) && (!f.pot || watts(x) >= +f.pot)).map(x => ({id:x.n, it:x, preco:x.p, nome:x.n.replace('Fonte ',''), sub:`${/\d{3}W/.test(x.n)?'':watts(x)+'W · '}${x.a['Certificação']||''} · ${x.a.Modular||''}`}));
   if(sec==='co'){
-    const L = by('cooler', x => !f.tipo || x.a.Tipo===f.tipo || (f.tipo==='Water cooler' && /Water/.test(x.n))).map(x => ({id:x.n, it:x, preco:x.p, nome:x.n, sub: /Water/.test(x.n) ? `Water cooler · radiador ${radMm(x)}mm` : 'Air cooler'}));
-    if(m.cpu && /^Ryzen 5 (5500|5600|7600|8400F|8500G|8600G)$|8700G/.test(m.cpu)) L.unshift({id:'box', it:null, preco:0, nome:'Cooler box (vem com o processador)', sub:'confere se a oferta é box'});
+    const L = by('cooler', x => !f.tipo || (f.tipo==='air' ? !/Water/.test(x.n) : /Water/.test(x.n) && radMm(x)===+f.tipo)).map(x => ({id:x.n, it:x, preco:x.p, nome:x.n, sub: /Water/.test(x.n) ? `Water cooler · radiador ${radMm(x)}mm` : 'Air cooler'}));
+    if((!f.tipo || f.tipo==='air') && m.cpu && /^Ryzen 5 (5500|5600|7600|8400F|8500G|8600G)$|8700G/.test(m.cpu)) L.unshift({id:'box', it:null, preco:0, nome:'Cooler box (vem com o processador)', sub:'confere se a oferta é box'});
     return L;
   }
   if(sec==='ca') return by('case', x => caseSpec(x.n)).map(x => { const c = caseSpec(x.n); return {id:x.n, it:x, preco:x.p, nome:x.n.replace('Gabinete ',''), sub:`${c.tam} · placa-mãe ${c.mobo.filter(y=>y!=='ITX').join('/')} · radiador até ${c.rad}mm · GPU até ${c.gpu}mm`, spec:c}; });
@@ -1166,7 +1166,7 @@ function montar(){
     ram: [['ramcap','16','16GB (2x8)'],['ramcap','32','32GB (2x16)']],
     ssd: [['cap','','Todas'],['cap','500GB','500GB'],['cap','1TB','1TB'],['cap','2TB','2TB'],['intf','Gen3','NVMe PCIe 3.0'],['intf','Gen4','NVMe PCIe 4.0']],
     psu: [['pot','','Todas'],['pot','650','650W+'],['pot','750','750W+'],['pot','850','850W+'],['cert','Bronze','Bronze'],['cert','Gold','Gold'],['mod','full','Full modular']],
-    co: [['tipo','','Todos'],['tipo','Air cooler','Air cooler'],['tipo','Water cooler','Water cooler']],
+    co: [['tipo','','Todos'],['tipo','air','Air cooler'],['tipo','240','Water cooler 240'],['tipo','360','Water cooler 360']],
   };
   if(!f.ramcap) f.ramcap = '16';
   const av = mmAvalia();
@@ -1174,7 +1174,10 @@ function montar(){
   h += `<div class="mmsec"><div class="mmt"><b>1. Plataforma</b></div><div class="its">${[['AM4','AM4 · DDR4','mais barato hoje'],['AM5','AM5 · DDR5','plataforma nova']].map(o=>`<button class="it mmpl ${m.pl===o[0]?'on':''}" data-v="${o[0]}"><i>${m.pl===o[0]?'✓':''}</i>${o[1]}<small>${o[2]}</small></button>`).join('')}</div></div>`;
   if(m.pl){
     MM_SECS.slice(1).forEach(([sec, nome], i) => {
-      const opts = mmOpts(sec).sort((a,b)=>a.preco-b.preco);
+      const todas = mmOpts(sec).sort((a,b)=>a.preco-b.preco);
+      // por padrão só aparece o que é compatível com o que já foi escolhido
+      const incomp = todas.filter(o => mmBloq(sec, o) && m[sec]!==o.id);
+      const opts = m.incomp===sec ? todas : todas.filter(o => !incomp.includes(o));
       const esc_ = m[sec] && opts.find(o=>o.id===m[sec]);
       const aberto = m.open===sec || !esc_;
       const tem = i===0 || MM_SECS.slice(1, i+1).every(([k]) => m[k]);
@@ -1182,9 +1185,12 @@ function montar(){
       if(aberto && tem){
         if(FILT[sec]) h += `<div class="its">${FILT[sec].map(c=>chip(...c)).join('')}</div>`;
         if(sec==='ssd') h += `<p class="old" style="margin:-6px 0 8px">SATA não passou no canal no último mês, por isso só aparece NVMe.</p>`;
+        if(sec==='ca' && incomp.length && m.incomp!==sec){ const co = (P.cooler||[]).find(x=>x.n===m.co), mob = (P.mobo||[]).find(x=>x.n===m.mobo), g = GPU[m.gpu];
+          h += `<p class="old" style="margin:-6px 0 8px">✔ Só gabinetes que cabem ${[mob&&'placa-mãe '+moboTam(mob), co&&radMm(co)&&'water cooler '+radMm(co)+'mm', g&&g.i>=175&&'a '+m.gpu].filter(Boolean).join(', ')}.</p>`; }
         const vis = m.mais===sec ? opts : opts.slice(0, 8);
         h += `<div class="mml">${vis.map(o => { const bl = mmBloq(sec, o); return `<button class="mo ${m[sec]===o.id?'on':''} ${bl?'bl':''}" data-s="${sec}" data-id="${esc(o.id)}" ${bl?'disabled':''}><span class="mon">${esc(o.nome)}<small>${bl?'⚠ '+bl:o.sub}</small></span><span class="mop">${o.preco?R2(o.preco):'R$ 0'}${o.it?`<small>${esc(o.it.loja||'')} · ${idade(o.it)===0?'hoje':idade(o.it)===1?'ontem':'há '+idade(o.it)+' dias'}</small>`:''}</span></button>`; }).join('') || '<p class="old">Nada passou no canal com esse filtro no último mês.</p>'}</div>`;
         if(opts.length > 8 && m.mais!==sec) h += `<button class="lnk mmmais" data-s="${sec}">ver mais ${opts.length-8} opções ▾</button>`;
+        if(incomp.length && m.incomp!==sec) h += `<button class="lnk mminc" data-s="${sec}" style="margin-left:14px">ver ${incomp.length} que não ${incomp.length>1?'são compatíveis':'é compatível'} ▾</button>`;
       } else if(!tem) h += `<p class="old">Escolhe a peça anterior primeiro.</p>`;
       h += `</div>`;
     });
@@ -1209,12 +1215,13 @@ function montar(){
   document.getElementById('pciVoltaGuiado').onclick = () => { refaz(); };
   app.querySelectorAll('.mmpl').forEach(b => b.onclick = () => { if(m.pl!==b.dataset.v){ st.mm = {pl:b.dataset.v, f:{}}; } render(); });
   app.querySelectorAll('.mmf').forEach(b => b.onclick = () => { const k = b.dataset.k, v = b.dataset.v; m.f[k] = m.f[k]===v && v ? '' : v; render(); });
-  app.querySelectorAll('.mo').forEach(b => b.onclick = () => { const s = b.dataset.s; m[s] = b.dataset.id; m.open = ''; m.ver = false; m.mais = '';
+  app.querySelectorAll('.mo').forEach(b => b.onclick = () => { const s = b.dataset.s; m[s] = b.dataset.id; m.open = ''; m.ver = false; m.mais = ''; m.incomp = '';
     // trocou algo antes: limpa o que pode ter ficado incompatível
     if(s==='cpu'){ if(m.co==='box') m.co = ''; if(m.gpu==='iGPU' && !(CPU[m.cpu].apu||CPU[m.cpu].igb)) m.gpu = ''; }
     ['psu','ca'].forEach(k => { if(m[k]){ const o = mmOpts(k).find(x=>x.id===m[k]); if(o && mmBloq(k,o)) m[k] = ''; } });
     render(); const nx = MM_SECS.find(([k]) => k!=='pl' && !m[k]); const el = nx && document.getElementById('mm_'+nx[0]); if(el) el.scrollIntoView({behavior:'smooth', block:'start'}); });
   app.querySelectorAll('.mmtroca').forEach(b => b.onclick = () => { m.open = b.dataset.s; render(); });
+  app.querySelectorAll('.mminc').forEach(b => b.onclick = () => { m.incomp = b.dataset.s; render(); });
   app.querySelectorAll('.mmmais').forEach(b => b.onclick = () => { m.mais = b.dataset.s; render(); });
   const okb = document.getElementById('pciMMok'); if(okb) okb.onclick = () => { m.ver = true; fire('PCIdeal_Manual'); coleta('manual', {total: av.tot, cpu:m.cpu, gpu:m.gpu, nota:av.nota}); render(); const r = document.getElementById('mmres'); if(r) r.scrollIntoView({behavior:'smooth'}); };
   const vm = document.getElementById('pciVerMeu'); if(vm) vm.onclick = () => { st = {itens:{}, parc:30, orc: Math.max(4000, Math.ceil(av.tot/1000)*1000), pag:'pix', jogo:'mix', mres:'fhd', mhz:'144', mon:'fhd', plat:'auto', vis:'perf', net:'cabo', gmodo: m.gpu==='iGPU'?'igpu':'auto'}; step = Q.length; render(); };

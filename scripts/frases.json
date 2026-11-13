@@ -127,10 +127,10 @@
     "Jogo novo pede cada vez mais memória: 32GB deixam a máquina tranquila."
   ],
   "why_ssd": [
-    "Windows e jogos carregando rápido, sem pagar por velocidade que jogo não usa.",
-    "Pra jogo, um NVMe de 3.000 MB/s carrega igual um de 7.000. A diferença fica no bolso.",
+    "Windows e jogos carregando rápido. O PCIe 3.0 supre as necessidades de hoje, pode ficar tranquilo.",
+    "Pra jogo, a diferença de um PCIe 3.0 pra um 4.0 não é gritante: você mantém o mesmo desempenho e o dinheiro vai pra onde dá FPS.",
     "1TB dá espaço pro Windows e uma boa biblioteca de jogos.",
-    "SSD NVMe deixa tudo rápido. Mais que isso, pra jogo, é dinheiro que não volta."
+    "SSD NVMe deixa tudo rápido. Hoje o 3.0 é o melhor custo-benefício, e em jogo você não sente diferença."
   ],
   "why_psu": [
     "Fonte protege o resto do PC. Aqui não se economiza em marca ruim.",

@@ -681,7 +681,7 @@ function score(cpu, gpu, s, ram, ssd){
   if(s.jogo==='mix' && c.pl==='AM5'){ if(c.x3d) sc -= 8; if(cpu==='Ryzen 7 9700X') sc += 4; else if(cpu==='Ryzen 7 7700') sc += 2; }   // casual no AM5: octa-core sem 3D V-Cache
   if(s.jogo==='work') sc = .55*sc + .45*(c.c*10*(c.pl==='AM5'?1.15:1));
   if(ram===32) sc += s.jogo==='work' ? 10 : (s.mon==='uhd' ? 4.5 : 2.5);   // 4K: o ideal é 2x16GB (sem tirar da placa de vídeo)
-  if(ssd==='1t'||ssd==='1t4') sc += 4; if(ssd==='2t') sc += 5.5; if(ssd==='1t4') sc += .5;
+  if(ssd==='1t'||ssd==='1t4') sc += 8; if(ssd==='2t') sc += 9.5; if(ssd==='1t4') sc += .5;
   if(s.plat==='auto' && c.pl==='AM5') sc *= 1.02;  // empate técnico → AM5 leva pela vida útil
   // equilíbrio: processador não pode segurar demais a placa
   if(gpu!=='iGPU'){
@@ -737,7 +737,7 @@ function monta(s){
         const rr = pickRam(C.pl==='AM4'?4:5, ram); if(!rr) continue;
         for(const sk of ['500','1t','1t4','2t']){
           if(sk==='1t4' && C.pl!=='AM5') continue;
-          if(sk==='500' && s.orc>=5500) continue;               // de 5,5 mil pra cima é 1TB
+          if(sk==='500' && s.orc>=12000) continue;              // regra do Bruno: 1TB sempre que der; 500GB só pra não derrubar placa de vídeo/processador
           if(sk==='2t' && s.orc<10000 && s.jogo!=='work') continue;
           const ss = pickSsd(sk); if(!ss) continue;
           const top = s.orc>=12000;
@@ -918,10 +918,10 @@ function result(){
   const nMobo = `Chipset <b>${chip}</b> (${b.pl}, ${ramT})${b.wifi?', <b>com Wi-Fi</b>':''}. Faixa ${chip}: <b>${faixa(b.mobo.fx[0], b.mobo.fx[1])}</b>.${s.net!=='wifi'?' No cabo, não precisa pagar por Wi-Fi.':(b.wifi?'':' <b>Sem Wi-Fi na placa</b>: a versão com Wi-Fi não coube sem abrir mão de outra peça. Usa um <b>adaptador Wi-Fi USB</b> (dongle, uns R$ 40–80) e pronto.')}`;
   const nRam = `Memória <b>2x${b.ram/2} = ${b.ram}GB ${ramT}</b>${ramT==='DDR4'?' 3200MHz':' 5600–6000MHz'}, sempre em dois pentes (dual channel).${b.rr.fx?` Cada pente na faixa <b>${faixa(b.rr.fx[0], b.rr.fx[1])}</b>.`:''}`;
   const ssK = b.ss.kind;
-  const nSsd = ssK==='500' ? `SSD <b>500GB NVMe</b> pra começar, faixa <b>${faixa(b.ss.fx[0], b.ss.fx[1])}</b>. Depois, com calma, você coloca mais um.` :
+  const nSsd = ssK==='500' ? `SSD <b>500GB NVMe</b> pra começar, faixa <b>${faixa(b.ss.fx[0], b.ss.fx[1])}</b>. O ideal é 1TB, mas aqui preferi não tirar da placa de vídeo nem do processador. Depois, com calma, você coloca mais um.` :
     ssK==='2t' ? `SSD <b>2TB NVMe</b>, faixa <b>${faixa(b.ss.fx[0], b.ss.fx[1])}</b>: espaço pra biblioteca grande e projetos.` :
     ssK==='1t4' ? `SSD <b>1TB NVMe PCIe 4.0</b>, faixa <b>${faixa(b.ss.fx[0], b.ss.fx[1])}</b>.` :
-    `SSD <b>1TB na faixa ${faixa(b.ss.fx[0], b.ss.fx[1])}, NVMe PCIe 3.0, 2.000–3.000 MB/s</b>. Pra jogo isso sobra.`;
+    `SSD <b>1TB na faixa ${faixa(b.ss.fx[0], b.ss.fx[1])}, NVMe PCIe 3.0, 2.000–3.000 MB/s</b>. Pode ficar tranquilo: o 3.0 supre as necessidades de hoje, e em jogo a diferença pro 4.0 não é gritante.`;
   const wN = +(b.ps.it.n.match(/(\d{3,4})W/)||b.ps.it.a['Potência'].match(/(\d+)W$/))[1];
   const nPsu = wN>=850 && G.w<850 ? `Fonte <b>750–850W Gold</b>, faixa ${faixa(b.ps.fx[0], b.ps.fx[1])}. Ela não é pra placa de hoje: <b>prepara pra upgrades</b> de GPU sem trocar a fonte.` :
     `Fonte <b>${G.w}W ${b.ps.it.a['Certificação']}</b> de marca boa, faixa ${faixa(b.ps.fx[0], b.ps.fx[1])}. ${G.w<=650?'650W já atende esse conjunto, não precisa gastar mais.':'Na medida pra essa placa.'}`;

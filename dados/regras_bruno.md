@@ -68,3 +68,6 @@ Regras que o Bruno passou e que o algoritmo segue. Anotar aqui cada regra nova (
 
 ## Air cooler x water cooler
 - Air cooler (AK400) é pra enxugar valor e liberar dinheiro pra placa de vídeo/processador. Pode com: AM4 (5500, 5600, 5700X, 5800XT…) menos X3D; AM5 6 núcleos sem X3D; octa-core 9700X e 7700. Nunca com X3D (5800X3D, 7600X3D, 7800X3D, 9800X3D), 7700X e 12 núcleos: esses vão de water cooler 360, com gabinete compatível (radiador 360 no topo). (13/11/2026)
+
+## SSD
+- 1TB sempre que der (NVMe PCIe 3.0, pelo preço). 500GB só quando o orçamento apertar, pra não derrubar placa de vídeo nem processador (e explicar). Texto: o 3.0 supre as necessidades de hoje; em jogo a diferença pro 4.0 não é gritante (nada de "carrega igual"). (13/11/2026)

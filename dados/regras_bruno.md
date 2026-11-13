@@ -44,3 +44,7 @@ Regras que o Bruno passou e que o algoritmo segue. Anotar aqui cada regra nova (
 
 ## 4K e memória
 - PC pra 4K: tentar 32GB (2x16GB). Se não couber sem tirar da placa de vídeo, fica 16GB (2x8GB) e explica: a placa de 16GB de VRAM é a primeira memória que o jogo usa; depois, quando a RAM baratear, vende os 2x8 e coloca 2x16. (13/11/2026)
+
+## Vídeo integrado (detalhe)
+- Ao escolher "Vídeo integrado", aparecem: tipo (integrado forte = série G / processador forte com vídeo básico, pra comprar placa logo / Brunão decide) e orçamento da placa de vídeo DEPOIS (nada, até 2, 3, 4,5 ou 6,5 mil). A placa futura NÃO entra no total; aparece como "Upgrade planejado" e a fonte já é escolhida pra ela. (13/11/2026)
+- Processador sempre antes da memória (nunca rebaixa processador por 32GB); 32GB entra quando o orçamento permite (~R$ 7,5 mil+ no PC). Processador casado com a placa futura (sem 9800X3D pra placa de entrada); o que sobrar vira caixa pra placa. Placa-mãe razoável (B650/B850 de entrada). (13/11/2026)

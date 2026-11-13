@@ -213,6 +213,7 @@
   #pci .barra div{flex:1}#pci .barra small{display:block;font-size:11px;color:var(--mut)}#pci .barra b{font-family:var(--mono);font-size:19px}
 }
 @media print{#pci .barra,#pci .mais{display:none!important}#pci .det{display:grid!important}}
+#pci .parts.fut .part{border-style:dashed;border-color:var(--ac)}
 #pci .parts{display:grid;gap:12px;margin-bottom:16px}
 #pci .part{background:var(--s1);border:1px solid var(--bd);border-radius:16px;padding:16px;display:grid;grid-template-columns:1fr 210px;gap:16px;align-items:start}
 #pci .pl{display:grid;gap:8px;min-width:0}
@@ -323,16 +324,16 @@ const CPU = {
  'Ryzen 5 5500X3D':  {pl:'AM4', g:95,  c:6, x3d:1, d:'tem 3D V-Cache, o cache extra que dá FPS em jogo competitivo'},
  'Ryzen 7 5800X3D':  {pl:'AM4', g:108, c:8, x3d:1, d:'8 núcleos com 3D V-Cache: o melhor processador de jogo do AM4'},
  'Ryzen 5 7500F':    {pl:'AM5', g:100, c:6, d:'6 núcleos Zen 4 no AM5, a porta de entrada da plataforma nova'},
- 'Ryzen 5 7600':     {pl:'AM5', g:100, c:6, d:'6 núcleos Zen 4 no AM5, com vídeo integrado pra emergência'},
- 'Ryzen 5 7600X':    {pl:'AM5', g:103, c:6, d:'6 núcleos Zen 4, um pouco mais de clock que o 7600'},
- 'Ryzen 5 9600X':    {pl:'AM5', g:110, c:6, d:'6 núcleos Zen 5, muito forte por núcleo'},
- 'Ryzen 7 7700':     {pl:'AM5', g:108, c:8, d:'8 núcleos e 16 threads no AM5: joga bem, trabalha bem e aguenta upgrade de GPU'},
- 'Ryzen 7 9700X':    {pl:'AM5', g:115, c:8, d:'8 núcleos Zen 5, excelente pra jogo e trabalho'},
- 'Ryzen 5 7600X3D':  {pl:'AM5', g:125, c:6, x3d:1, d:'3D V-Cache no AM5 por um preço menor que o 7800X3D'},
- 'Ryzen 7 7800X3D':  {pl:'AM5', g:135, c:8, x3d:1, d:'8 núcleos com 3D V-Cache, referência em FPS'},
- 'Ryzen 7 9800X3D':  {pl:'AM5', g:150, c:8, x3d:1, d:'o processador de jogo mais forte que existe hoje'},
- 'Ryzen 9 7900':     {pl:'AM5', g:110, c:12, d:'12 núcleos: pra quem edita, renderiza e joga'},
- 'Ryzen 9 9900X':    {pl:'AM5', g:118, c:12, d:'12 núcleos Zen 5: muito forte em edição e 3D'},
+ 'Ryzen 5 7600':     {igb:1, ig:8, pl:'AM5', g:100, c:6, d:'6 núcleos Zen 4 no AM5, com vídeo integrado pra emergência'},
+ 'Ryzen 5 7600X':    {igb:1, ig:8, pl:'AM5', g:103, c:6, d:'6 núcleos Zen 4, um pouco mais de clock que o 7600'},
+ 'Ryzen 5 9600X':    {igb:1, ig:8, pl:'AM5', g:110, c:6, d:'6 núcleos Zen 5, muito forte por núcleo'},
+ 'Ryzen 7 7700':     {igb:1, ig:8, pl:'AM5', g:108, c:8, d:'8 núcleos e 16 threads no AM5: joga bem, trabalha bem e aguenta upgrade de GPU'},
+ 'Ryzen 7 9700X':    {igb:1, ig:8, pl:'AM5', g:115, c:8, d:'8 núcleos Zen 5, excelente pra jogo e trabalho'},
+ 'Ryzen 5 7600X3D':  {igb:1, ig:8, pl:'AM5', g:125, c:6, x3d:1, d:'3D V-Cache no AM5 por um preço menor que o 7800X3D'},
+ 'Ryzen 7 7800X3D':  {igb:1, ig:8, pl:'AM5', g:135, c:8, x3d:1, d:'8 núcleos com 3D V-Cache, referência em FPS'},
+ 'Ryzen 7 9800X3D':  {igb:1, ig:8, pl:'AM5', g:150, c:8, x3d:1, d:'o processador de jogo mais forte que existe hoje'},
+ 'Ryzen 9 7900':     {igb:1, ig:8, pl:'AM5', g:110, c:12, d:'12 núcleos: pra quem edita, renderiza e joga'},
+ 'Ryzen 9 9900X':    {igb:1, ig:8, pl:'AM5', g:118, c:12, d:'12 núcleos Zen 5: muito forte em edição e 3D'},
  'Ryzen 5 8500G':    {pl:'AM5', g:78,  c:6, apu:'Radeon 740M', ig:28, d:'6 núcleos com vídeo integrado (Radeon 740M): dá pra jogar sem placa de vídeo enquanto ela não chega'},
  'Ryzen 5 8600G':    {pl:'AM5', g:85,  c:6, apu:'Radeon 760M', ig:40, d:'6 núcleos com o vídeo integrado mais forte da linha (Radeon 760M)'},
  'Ryzen 7 8700G':    {pl:'AM5', g:92,  c:8, apu:'Radeon 780M', ig:50, d:'8 núcleos com Radeon 780M integrada, a melhor APU que existe'},
@@ -435,6 +436,8 @@ function render(){
   const cur = st[q.k];
   const itens = q.itens ? `<div class="itl">O que entra no orçamento?</div><div class="its">${ITENS.map(i=>`<button class="it ${i[0]==='pc'||st.itens[i[0]]?'on':''} ${i[0]==='pc'?'lock':''}" data-i="${i[0]}"><i>${i[0]==='pc'||st.itens[i[0]]?'✓':'+'}</i><span class="iic">${ITIC[i[0]]}</span>${i[1]}${i[2]?`<small>${i[2]}</small>`:''}</button>`).join('')}</div><div class="itl">Placa de vídeo</div><div class="its">${[['auto','Deixa o Brunão decidir','monto o melhor pro seu valor'],['dgpu','Com placa de vídeo','mais desempenho já, roda os pesados'],['igpu','Vídeo integrado','começa no AM5 e coloca a placa depois']].map(o=>`<button class="it gm ${(st.gmodo||'auto')===o[0]?'on':''}" data-g="${o[0]}"><i>${(st.gmodo||'auto')===o[0]?'✓':''}</i><span class="iic g">${o[0]==='auto'?`<img class="bri s" src="${FOTO_BRUNO}" alt="">`:ILL[o[0]]}</span>${o[1]}<small>${o[2]}</small></button>`).join('')}</div>
      ${st.gmodo==='dgpu'?`<p class="gmx">Com placa de vídeo você joga os jogos pesados desde o primeiro dia. Em orçamento curto ela entra num AM4, que tem menos caminho de upgrade lá na frente.</p>`:st.gmodo==='igpu'?`<p class="gmx">Com vídeo integrado o PC já nasce no AM5, a plataforma nova, e você coloca a placa de vídeo depois sem trocar nada. Até lá, roda os competitivos leves (CS2, Valorant, LoL) no gráfico baixo. Jogo pesado, só depois da placa.</p>`:''}
+     ${st.gmodo==='igpu' ? `<div class="itl">Que tipo de vídeo integrado?</div><div class="its">${[['auto','Deixa o Brunão decidir',''],['apu','Integrado forte','série G: joga leve já'],['cpu','Processador forte','vídeo básico, placa logo depois']].map(o=>`<button class="it gx ${(st.itipo||'auto')===o[0]?'on':''}" data-k="itipo" data-v="${o[0]}"><i>${(st.itipo||'auto')===o[0]?'✓':''}</i>${o[1]}${o[2]?`<small>${o[2]}</small>`:''}</button>`).join('')}</div>
+       <div class="itl">Quanto você pensa em gastar na placa de vídeo depois? <span style="text-transform:none;letter-spacing:0">(não entra no total de agora)</span></div><div class="its">${[['0','Nada, fico no integrado'],['2000','até R$ 2 mil'],['3000','até R$ 3 mil'],['4500','até R$ 4,5 mil'],['6500','até R$ 6,5 mil']].map(o=>`<button class="it gx ${String(st.gfut||0)===o[0]?'on':''}" data-k="gfut" data-v="${o[0]}"><i>${String(st.gfut||0)===o[0]?'✓':''}</i>${o[1]}</button>`).join('')}</div>` : ''}
      <div class="itl">Quanto, no total?</div>` : '';
   app.innerHTML = head(step===0) +
    `<div class="prog">${Q.map((_,i)=>`<i class="${i<=step?'on':''}"></i>`).join('')}</div>
@@ -450,6 +453,7 @@ function render(){
   bindTema();
   const bk = document.getElementById('pciBack'); if(bk) bk.onclick = () => { step--; render(); };
   if(step===0) mostraSalvos();
+  app.querySelectorAll('.gx').forEach(b => b.onclick = () => { st[b.dataset.k] = b.dataset.k==='gfut' ? +b.dataset.v : b.dataset.v; render(); });
   app.querySelectorAll('.gm').forEach(b => b.onclick = () => { st.gmodo = b.dataset.g; render(); });
   app.querySelectorAll('.mf').forEach(b => b.onclick = () => { st[b.dataset.k] = b.dataset.v; render(); });
   const mg = document.getElementById('pciMonGo');
@@ -635,6 +639,13 @@ function setup(s){
 
 function score(cpu, gpu, s, ram, ssd){
   const c = CPU[cpu], g = gpu==='iGPU' ? {i:c.ig, v:0, w:500} : GPU[gpu];
+  if(gpu==='iGPU' && s.gmodo==='igpu'){
+    // processador vem antes da memória: CPU pesa muito mais que os 32GB
+    // processador casado com a placa que vem depois (não adianta 9800X3D pra uma placa de entrada)
+    const f = futGpu(s), need = f ? .3*f.g.i + 52 : 115;
+    const base = itipo(s)==='cpu' ? Math.min(c.g, need+12)*2 + .03*c.g + (c.c>=8?4:0) + (s.jogo==='fps'&&c.x3d?6:0) : c.ig*2 + c.g*.6;
+    return base + (ram===32?(s.orc>=7500?6:3):0) + (ssd==='1t'||ssd==='1t4'?4:ssd==='2t'?5.5:0);
+  }
   let gi = g.i;
   if(s.mon==='qhd'){ gi = (g.q || g.i*.8) * .9; }
   if(s.mon==='uhd'){ gi *= .46; if(g.v<=8) gi *= .7; else if(g.v<=12) gi *= .9; }
@@ -655,6 +666,17 @@ function score(cpu, gpu, s, ram, ssd){
   return sc;
 }
 
+function itipo(s){ const t = s.itipo || 'auto'; return t!=='auto' ? t : ((+s.gfut||0) > 0 ? 'cpu' : 'apu'); }
+// placa de vídeo pro upgrade (fora do orçamento): a mais forte que cabe no valor que ele separou
+function futGpu(s){
+  const gf = +s.gfut || 0; if(!gf) return null;
+  let best = null;
+  for(const n in GPU){ const g = GPU[n], it = (P.gpu||[]).find(x=>x.n===n); if(!it || it.p > gf) continue;
+    if((s.mon==='qhd'||s.mon==='uhd') && g.v<=8) continue;
+    const v = s.mon==='qhd' ? (g.q||g.i*.8) : g.i;
+    if(!best || v > best.v || (v===best.v && it.p < best.it.p)) best = {n, g, it, v}; }
+  return best;
+}
 function monta(s){
   const teto = s.orc * fator(s);
   const plats = s.plat==='am4' ? ['AM4'] : s.plat==='am5' ? ['AM5'] : ['AM4','AM5'];
@@ -666,7 +688,8 @@ function monta(s){
     if(!cI || !plats.includes(C.pl)) continue;
     if(s.jogo!=='work' && C.c>=12) continue;
     if(s.gmodo==='dgpu' && C.apu) continue;
-    if(s.gmodo==='igpu' && !C.apu) continue;
+    const itp = itipo(s);
+    if(s.gmodo==='igpu'){ if(C.pl!=='AM5') continue; if(itp==='apu' && !C.apu) continue; if(itp==='cpu' && !C.igb) continue; }
     // Wi-Fi é preferência, não obrigação: tento a placa com Wi-Fi (mesmo chipset); se não couber sem sacrificar o resto, vai sem e ele usa um adaptador USB
     const mobos = [];
     if(s.net==='wifi'){ const mw = pickMobo(C.pl, s, cpu, ctx, true); if(mw) mobos.push(mw); }
@@ -674,7 +697,7 @@ function monta(s){
     for(const mobo of mobos){
     const temWifi = mobo.it.a['Wi-Fi']==='Com Wi-Fi';
     const pcie3 = /^Ryzen 5 5500$/.test(cpu) || /A520|B450/.test(mobo.it.a.Chipset||'');
-    for(const gpu of (C.apu ? ['iGPU'] : Object.keys(GPU))){
+    for(const gpu of ((C.apu || s.gmodo==='igpu') ? ['iGPU'] : Object.keys(GPU))){
       const gI = gpu==='iGPU' ? {p:0, n:'iGPU'} : (P.gpu||[]).find(x=>x.n===gpu); if(!gI) continue;
       const G = gpu==='iGPU' ? {i:C.ig, v:0, w:500} : GPU[gpu];
       // regra do Bruno: QHD/4K pede placa com MAIS de 8GB (9060 XT 16GB, 9070 GRE, 5070, 9070, 9070 XT pra cima)
@@ -683,7 +706,7 @@ function monta(s){
       if(pcie3 && G.i>=175) continue;
       const lanePen = (pcie3 && (G.x8 || G.inc)) ? .92 : 1;
       for(const ram of [16,32]){
-        if(C.apu && ram===32 && s.jogo!=='work') continue;   // sem placa: o dinheiro que sobra é pra placa de vídeo, não pra 32GB
+        if(s.gmodo!=='igpu' && C.apu && ram===32 && s.jogo!=='work') continue;
         const rr = pickRam(C.pl==='AM4'?4:5, ram); if(!rr) continue;
         for(const sk of ['500','1t','1t4','2t']){
           if(sk==='1t4' && C.pl!=='AM5') continue;
@@ -692,7 +715,8 @@ function monta(s){
           const ss = pickSsd(sk); if(!ss) continue;
           const top = s.orc>=12000;
           const gold = (s.orc>=5500 && !C.apu) || G.w>=750;
-          const w = (C.pl==='AM5' || s.orc>=8000) ? Math.max(G.w, 850) : G.w;
+          const fut = s.gmodo==='igpu' ? futGpu(s) : null;
+          const w = Math.max((C.pl==='AM5' || s.orc>=8000) ? Math.max(G.w, 850) : G.w, fut ? fut.g.w : 0);
           const ps = pickPsu(w, gold); if(!ps) continue;
           const wc = est || QUENTE.test(cpu) || s.orc>=10000;
           const co = ((C.apu || (/^Ryzen 5 (5500|5600|7600)$/.test(cpu) && s.orc<5000)) && !wc && !aq) ? {box:1, preco:0, wc:false, it:null} : pickCooler(wc, top || (est && s.orc>=8000)); if(!co) continue;
@@ -701,9 +725,9 @@ function monta(s){
           // gabinete decente é obrigatório acima de 7 mil: se só ele estoura, passo até R$ 250 e explico
           const folga = s.orc>=7000 ? 250 : 0;
           if(tot > teto + folga) continue;
-          const sc = score(cpu, gpu, s, ram, sk) * lanePen - (tot > teto ? 100 : 0) + (s.net==='wifi' && temWifi ? 3 : 0);
+          const sc = score(cpu, gpu, s, ram, sk) * lanePen - (tot > teto ? 100 : 0) + (s.net==='wifi' && temWifi ? 3 : 0) - (s.gmodo==='igpu' ? tot*.004 : 0);   // no integrado, o que sobra vira placa de vídeo
           if(!best || sc > best.sc + .01 || (Math.abs(sc-best.sc)<=.01 && tot < best.tot))
-            best = {sc, tot, cpu, gpu, cI, gI, mobo, rr, ss, ps, co, ca, ram, pl:C.pl, teto, apu:!!C.apu, wifi:temWifi};
+            best = {sc, tot, cpu, gpu, cI, gI, mobo, rr, ss, ps, co, ca, ram, pl:C.pl, teto, apu:(!!C.apu || s.gmodo==='igpu'), wifi:temWifi, fut, itp};
         }
       }
     }
@@ -784,7 +808,9 @@ function result(){
     return;
   }
   const C = CPU[b.cpu], G = b.apu ? {i:C.ig, v:0, w:500} : GPU[b.gpu];
-  const GN = b.apu ? 'vídeo integrado ' + C.apu : b.gpu;
+  const VI = C.apu || 'Radeon básica';
+  const GN = b.apu ? 'vídeo integrado ' + VI : b.gpu;
+  const FUT = b.fut;
   const sm = b.res;
   const sobra = s.orc - b.geral;
   const A = b.acc || {};
@@ -795,13 +821,19 @@ function result(){
   /* ----- Raio-X: muda conforme as respostas e os preços ----- */
   const raio = [];
   raio.push(T('abre_'+(s.jogo||'mix')));
-  raio.push(T('dupla', {cpu:b.cpu, gpu:GN, res:resTxt}));
+  if(b.apu && !C.apu) raio.push(`O coração da máquina é o <b>${b.cpu}</b>, ${C.d}.`);
+  else raio.push(T('dupla', {cpu:b.cpu, gpu:GN, res:resTxt}));
   if(b.accTot > 0){
     const oq = [A.mon&&'monitor', A.kb&&'teclado', A.mouse&&'mouse', A.head&&'headset'].filter(Boolean);
     const oqs = oq.length>1 ? oq.slice(0,-1).join(', ')+' e '+oq[oq.length-1] : oq[0];
     raio.push(T('acc', {orc:R(s.orc), acc:R(b.accTot), oq:oqs}));
   }
-  if(b.apu) raio.push(pick([`Sendo direto: com esse valor pra tudo, não cabe placa de vídeo sem matar o resto. Fui de <b>${b.cpu}</b>, que tem vídeo integrado: roda CS2, Valorant, Fortnite e LoL no gráfico baixo, em Full HD. A plataforma e a fonte já ficam prontas pra você <b>colocar a placa de vídeo depois</b>.`, `Aqui a jogada é começar sem placa de vídeo: o <b>${b.cpu}</b> tem vídeo integrado e segura os competitivos no baixo. Quando juntar mais um pouco, a placa de vídeo entra e o resto do PC já está pronto pra ela.`]));
+  if(b.apu && s.gmodo==='igpu'){
+    if(C.apu) raio.push(`Fui de <b>${b.cpu}</b>, que tem o vídeo integrado <b>${C.apu}</b>: roda CS2, Valorant, Fortnite e LoL no gráfico baixo, em Full HD. A plataforma AM5 e a fonte já ficam prontas pra placa de vídeo.`);
+    else raio.push(`Fui de <b>${b.cpu}</b>: processador forte agora, com um vídeo básico só pra ligar a tela. Jogar de verdade, só com a placa, então esse é um PC pra quem vai comprar a placa de vídeo <b>logo na sequência</b>.`);
+    if(FUT) raio.push(`Pro upgrade, com até ${R(+s.gfut)} a indicação hoje é a <b>${FUT.n}</b> (uns ${R(FUT.it.p)}). Ela não entra no total de agora, e a fonte já foi escolhida pra aguentar ela.`);
+    else raio.push(`Você escolheu ficar no integrado por enquanto. Quando quiser a placa de vídeo, a plataforma já está pronta: é só encaixar.`);
+  } else if(b.apu) raio.push(pick([`Sendo direto: com esse valor pra tudo, não cabe placa de vídeo sem matar o resto. Fui de <b>${b.cpu}</b>, que tem vídeo integrado: roda CS2, Valorant, Fortnite e LoL no gráfico baixo, em Full HD. A plataforma e a fonte já ficam prontas pra você <b>colocar a placa de vídeo depois</b>.`, `Aqui a jogada é começar sem placa de vídeo: o <b>${b.cpu}</b> tem vídeo integrado e segura os competitivos no baixo. Quando juntar mais um pouco, a placa de vídeo entra e o resto do PC já está pronto pra ela.`]));
   if(b.cpu==='Ryzen 5 5500' && !b.apu && (G.x8 || /9060 XT/.test(b.gpu))) raio.push(G.x8 ? `O Ryzen 5 5500 trabalha em PCIe 3.0. Essa placa usa só 8 linhas (x8), então perde um pouco de desempenho nele. Coube no orçamento, mas se der, prefira uma <b>RX 9060 XT</b>, que é x16.` : `O Ryzen 5 5500 trabalha em PCIe 3.0, então escolhi uma placa <b>x16</b>: ela não perde desempenho nessa plataforma, diferente das x8 (RTX 5050/5060, RX 7600).`);
   if(s.net==='wifi' && !b.wifi) raio.push(`Sobre o Wi-Fi: tentei uma placa-mãe com Wi-Fi, mas dentro desse orçamento ia ter que tirar dinheiro de peça mais importante (placa-mãe certa ou placa de vídeo). Não vale. Vai sem, e um <b>adaptador Wi-Fi USB</b> de uns R$ 40–80 resolve.`);
   // plataforma: compara de verdade com a outra
@@ -829,13 +861,13 @@ function result(){
   if(sm==='uhd' && b.ram===16 && !b.apu) raio.push(`Pra 4K o ideal é <b>32GB (2x16GB)</b>, mas não coube sem tirar da placa de vídeo. Preferi assim: sua placa já tem <b>${G.v}GB de memória de vídeo</b>, e é nela que o jogo busca primeiro. Os 16GB de RAM dão conta no padrão custo-benefício. Lá na frente, quando a memória baratear, você vende os 2x8GB e coloca 2x16GB.`);
   if(sm==='uhd' && G.i<200) raio.push('Sendo sincero: 4K pede muita placa de vídeo. Vai rodar, mas com upscaling (DLSS/FSR) e gráficos ajustados.');
   if(b.tot > b.pcOrc + 1) raio.push(`<b>Passei ${R(b.tot - b.pcOrc)} do orçamento</b>, e foi de propósito: num PC desse nível eu não monto com gabinete baratinho. Precisa caber tudo direito (placa-mãe, ${b.co.wc?'radiador de 360mm, ':''}placa de vídeo) e ventilar bem.`);
-  if(b.apu && sobra > 300) raio.push(`Sobrou <b>${R(sobra)}</b>. Guarda esse dinheiro: ele já é o começo da sua placa de vídeo.`);
+  if(b.apu && sobra > 300) raio.push(`Sobrou <b>${R(sobra)}</b>. Guarda esse dinheiro: ele já é o começo da sua placa de vídeo${FUT?` (falta uns ${R(Math.max(0,FUT.it.p - sobra))} pra ${FUT.n})`:''}.`);
   else if(sobra > 1500 && s.pag==='pix') raio.push(`Sobrou <b>${R(sobra)}</b>: não tem placa acima dessa nas ofertas do mês, então eu guardaria pro monitor ou periféricos.`);
 
   /* ----- norte e porquê de cada peça ----- */
   const nCpu = `${b.cpu}, ${C.d}. Normal no mês: <b>${faixa(b.cI.p25, b.cI.p75)}</b>. Abaixo de ${R(r50(b.cI.p25))} é compra.`;
   const gpus = (P.gpu||[]).find(x=>x.n===b.gpu) || {p25:0,p75:0};
-  const nGpu = b.apu ? `Sem placa de vídeo por enquanto: o <b>${C.apu}</b> do processador faz o papel. Quando for comprar a placa, mira numa <b>RTX 5060 / RX 9060 XT</b> pra cima.` : `O alvo é a <b>${b.gpu}</b>, não a marca. Qualquer ${b.gpu} na faixa <b>${faixa(gpus.p25, gpus.p75)}</b> serve; não precisa ser triple fan.`;
+  const nGpu = b.apu ? (FUT ? `Sem placa de vídeo por enquanto: o vídeo <b>${VI}</b> do processador segura até ela chegar. O próximo passo é a <b>${FUT.n}</b> (veja abaixo).` : `Sem placa de vídeo por enquanto: o <b>${VI}</b> do processador faz o papel. Quando for comprar a placa, mira numa <b>RTX 5060 / RX 9060 XT</b> pra cima.`) : `O alvo é a <b>${b.gpu}</b>, não a marca. Qualquer ${b.gpu} na faixa <b>${faixa(gpus.p25, gpus.p75)}</b> serve; não precisa ser triple fan.`;
   const up = b.apu ? null : gpuNear(b.gpu, 1), dn = b.apu ? null : gpuNear(b.gpu, -1);
   let xGpu = '';
   if(up) xGpu += `<b>Quer esticar?</b> A ${up.n} custa ${R(up.it.p - b.gI.p)} a mais e entrega uns ${Math.round((up.g.i/G.i-1)*100)}% a mais. `;
@@ -871,7 +903,7 @@ function result(){
   const ramNome = b.rr.qtd===2 ? `2x ${b.rr.it.n.replace('Memória ','')}` : b.rr.it.n.replace('Memória ','');
   const parts = [
     card('Processador', b.cpu, b.cI.p, b.cI, nCpu, W.cpu, '', '', [`${C.c} núcleos / ${C.c*2} threads`, b.pl, C.x3d?'3D V-Cache':'', C.apu?'vídeo integrado '+C.apu:''], meter('Força em jogos', C.g/150) + meter('Trabalho pesado', C.c*(C.pl==='AM5'?1.15:1)/14)),
-    b.apu ? cardSem('Placa de vídeo', 'Vídeo integrado ' + C.apu, nGpu, 'Começa jogando com o vídeo do processador e coloca a placa depois, sem trocar nada.', 'vem no processador') : card('Placa de vídeo', (b.gI.t || b.gpu).replace(/^Placa\s+(de\s+)?v[ií]deo\s*/i,'').replace(/^Placa gráfica\s*/i,''), b.gI.p, b.gI, nGpu, W.gpu, '', xGpu, [b.gpu, G.v+'GB '+(G.mem||''), G.ln ? G.pcie+' x'+G.ln : '', G.tdp ? G.tdp+'W · fonte '+G.w+'W' : 'fonte '+G.w+'W', G.i>=200?'QHD com folga':G.i>=140?'Full HD no alto · QHD':'Full HD'], meter('Desempenho', G.i/270)),
+    b.apu ? cardSem('Placa de vídeo', 'Vídeo integrado ' + VI, nGpu, C.apu ? 'Começa jogando com o vídeo do processador e coloca a placa depois, sem trocar nada.' : 'Esse vídeo é só pra ligar a tela e usar o PC. Pra jogar de verdade, a placa de vídeo vem logo depois.', 'vem no processador') : card('Placa de vídeo', (b.gI.t || b.gpu).replace(/^Placa\s+(de\s+)?v[ií]deo\s*/i,'').replace(/^Placa gráfica\s*/i,''), b.gI.p, b.gI, nGpu, W.gpu, '', xGpu, [b.gpu, G.v+'GB '+(G.mem||''), G.ln ? G.pcie+' x'+G.ln : '', G.tdp ? G.tdp+'W · fonte '+G.w+'W' : 'fonte '+G.w+'W', G.i>=200?'QHD com folga':G.i>=140?'Full HD no alto · QHD':'Full HD'], meter('Desempenho', G.i/270)),
     card('Placa-mãe', b.mobo.it.n.replace('Placa-mãe ',''), b.mobo.preco, b.mobo.it, nMobo, W.mobo),
     card('Memória', ramNome, b.rr.preco, b.rr.it, nRam, W.ram, b.rr.qtd===2 ? `2 × ${R2(b.rr.it.p)} · ${esc(b.rr.it.loja)}` : '', '', [b.ram+'GB', ramT, b.rr.it.a.mhz+'MHz', 'dual channel (2 pentes)']),
     card('SSD', b.ss.it.n.replace('SSD ',''), b.ss.preco, b.ss.it, nSsd, W.ssd),
@@ -890,6 +922,10 @@ function result(){
     `SSD NVMe M.2 vai direto no slot da placa-mãe, sem cabo`,
   ];
   const accCards = [];
+  const futCard = FUT ? card('Próximo passo · fora do orçamento de agora', (FUT.it.t||FUT.n).replace(/^Placa\s+(de\s+)?v[ií]deo\s*/i,''), FUT.it.p, FUT.it,
+    `O alvo é a <b>${FUT.n}</b>, não a marca. Faixa normal: <b>${faixa(FUT.it.p25, FUT.it.p75)}</b>. Fica de olho no canal e compra quando bater.`,
+    `É a placa mais forte que cabe nos ${R(+s.gfut)} que você separou, e ${FUT.g.v>8?'tem memória de vídeo sobrando pra durar':'é a escolha certa pra Full HD'}.`, '', '',
+    [FUT.n, FUT.g.v+'GB '+(FUT.g.mem||''), FUT.g.ln ? FUT.g.pcie+' x'+FUT.g.ln : '', 'fonte '+FUT.g.w+'W'], meter('Desempenho', FUT.g.i/270)) : '';
   if(A.mon){ const m = A.mon.it.a; accCards.push(card('Monitor', A.mon.it.n.replace('Monitor ',''), A.mon.preco, A.mon.it,
      `Monitor <b>${m['Resolução']}${m.Taxa?' '+m.Taxa:''}</b>${m.Tamanho?', '+m.Tamanho:''}${m.Painel?', painel '+m.Painel:''}. Faixa normal desse modelo: <b>${faixa(A.mon.fx[0], A.mon.fx[1])}</b>.${A.mon.relax==='painel'?` <b>Não passou nenhum ${s.mpan} com essa resolução no último mês</b>, então fui no melhor que apareceu.`:A.mon.relax==='taxa'?' <b>Não passou nenhum com essa taxa no último mês</b>, então fui no melhor que apareceu.':''}`,
      A.mon.res==='fhd' ? T('why_mon_fhd') : A.mon.res==='qhd' ? T('why_mon_qhd') : 'Nitidez máxima. Lembre que em 4K a placa de vídeo trabalha muito mais.')); }
@@ -919,6 +955,7 @@ function result(){
        <div class="mp-c"><a class="wa" href="https://grapetec.com.br/whatsapp" target="_blank" rel="noopener" data-ev="mapa_whatsapp">${WA}WhatsApp</a><a class="tg" href="https://t.me/grape_tec" target="_blank" rel="noopener" data-ev="mapa_telegram">${TG}Telegram</a><span class="mp-u">grapetec.com.br/ofertas</span></div></div></div>
    <div class="raio"><h3>1. O Raio-X</h3>${raio.map(p=>`<p>${p}</p>`).join('')}</div>
    <div class="sec">2. A Máquina</div><div class="parts">${parts.join('')}</div>
+   ${futCard?`<div class="sec">Upgrade planejado: placa de vídeo</div><div class="parts fut">${futCard}</div>`:''}
    ${accCards.length?`<div class="sec">3. ${A.mon?(accCards.length>1?'Monitor e periféricos':'Monitor'):'Periféricos'}</div><div class="parts">${accCards.join('')}</div>`:''}
    <div class="raio"><h3>${accCards.length?4:3}. Resumo financeiro</h3><table>${linhas.map(l=>`<tr><td>${l[0]} <span class="old">·</span> ${lnk(l)}</td><td>${R2(l[2])}</td></tr>`).join('')}${linhasAcc.length?`<tr class="st"><td>Subtotal PC</td><td>${R2(b.tot)}</td></tr>`+linhasAcc.map(l=>`<tr><td>${l[0]} <span class="old">·</span> ${lnk(l)}</td><td>${R2(l[2])}</td></tr>`).join(''):''}<tr class="t"><td>Total</td><td>${R2(b.geral)}</td></tr></table>
      <p class="foot" style="margin-top:10px">Preços das ofertas que passaram no canal nos últimos 30 dias. Oferta acaba: <b>use o norte de cada peça</b> e acompanhe o canal, não compre correndo uma alternativa mais cara.</p></div>
@@ -975,7 +1012,7 @@ function result(){
   if(window.matchMedia){ const mq = matchMedia('print'); const f = e => e.matches ? tira() : volta(); mq.addEventListener ? mq.addEventListener('change', f) : mq.addListener(f); }
 })();
 /* ---------- salvar / restaurar o projeto ---------- */
-const CHAVES = ['itens','gmodo','orc','pag','parc','jogo','mres','mhz','mpan','mon','plat','vis','net'];
+const CHAVES = ['itens','gmodo','itipo','gfut','orc','pag','parc','jogo','mres','mhz','mpan','mon','plat','vis','net'];
 function codifica(){ const o = {}; CHAVES.forEach(k => { if(st[k]!==undefined) o[k] = st[k]; }); return btoa(unescape(encodeURIComponent(JSON.stringify(o)))).replace(/=+$/,''); }
 function salvos(){ try { const L = JSON.parse(localStorage.getItem('pcideal_salvos')||'[]'); return Array.isArray(L) ? L : []; } catch(_){ return []; } }
 function gravaSalvos(L){ try { localStorage.setItem('pcideal_salvos', JSON.stringify(L.slice(0,10))); } catch(_){} }

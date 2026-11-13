@@ -72,3 +72,11 @@ Regras que o Bruno passou e que o algoritmo segue. Anotar aqui cada regra nova (
 ## SSD
 - 1TB sempre que der (NVMe PCIe 3.0, pelo preço). 500GB só quando o orçamento apertar, pra não derrubar placa de vídeo nem processador (e explicar). Texto: o 3.0 supre as necessidades de hoje; em jogo a diferença pro 4.0 não é gritante (nada de "carrega igual"). (13/11/2026)
 - Vídeo integrado: recomendação de placa de vídeo só aparece no card "Upgrade planejado" (com o orçamento que ele escolheu). Sem orçamento de placa, não sugerir placa genérica. (13/11/2026)
+
+## 13/11/2026 — modo "Eu sei montar"
+- Botão roxo discreto "Eu sei montar" ao lado do Claro/Escuro. Abre o montador manual (link #montar; PC montado fica no link #mm=…).
+- A pessoa escolhe: plataforma AM4/AM5 → processador → placa-mãe (filtro chipset e Wi-Fi) → memória (16GB 2x8 ou 32GB 2x16, sempre dois pentes) → SSD (capacidade, NVMe 3.0/4.0; SATA só se passar no canal) → placa de vídeo (ou vídeo integrado se o processador tiver) → fonte (Bronze/Gold, potência mínima, full modular) → refrigeração (air, water, box) → gabinete.
+- Sempre compatível: fonte fraca pra placa, gabinete que não cabe placa-mãe/radiador/placa de vídeo aparecem bloqueados com o motivo.
+- Avaliação do Brunão com nota: gargalo processador x placa, PCIe 3.0 + placa x8, placa-mãe de entrada com processador forte, SSD 500GB, fonte não Gold em placa forte, air cooler em processador quente, water cooler exagerado em 6 núcleos, gabinete simples em PC acima de R$7k.
+- Compara com o que o montador guiado faria com o mesmo dinheiro e oferece "ver o PC que eu montaria".
+- Mapa/PDF reforça: entrar nos canais e que são os melhores preços do nosso banco de ofertas nesse período.

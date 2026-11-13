@@ -156,6 +156,27 @@
 #pci .bri.s{width:22px;height:22px;border-width:1.5px}
 #pci .it.on .iic{color:var(--ink)}
 #pci header{position:relative}
+#pci .sei{all:unset;cursor:pointer;white-space:nowrap;margin-left:auto;font-size:12.5px;font-weight:600;border:1px solid var(--ac);border-radius:999px;padding:5px 11px;color:var(--ac);background:rgba(199,125,255,.10)}
+#pci .sei:hover{background:rgba(199,125,255,.2)}
+#pci .sei + .tema{margin-left:6px}
+#pci .mmtop{margin:8px 0 18px}#pci .mmh{font-size:26px;margin:0 0 6px}
+#pci .mmsec{border:1px solid var(--bd);background:var(--s1);border-radius:16px;padding:14px 16px;margin-bottom:12px}
+#pci .mmsec.feito{border-color:rgba(199,125,255,.45)}
+#pci .mmt{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:baseline;margin-bottom:10px}#pci .mmt>b{font-size:16px}
+#pci .mmsec.feito .mmt{margin-bottom:0}
+#pci .mmsel{color:var(--mut);font-size:14px}#pci .mmsel b{color:var(--ink);font-family:var(--mono)}
+#pci .mmt .lnk{font-size:12.5px;margin-left:auto}
+#pci .mml{display:grid;gap:6px}
+#pci .mo{all:unset;cursor:pointer;display:flex;justify-content:space-between;gap:12px;align-items:center;border:1px solid var(--bd);background:var(--s2);border-radius:12px;padding:10px 14px}
+#pci .mo:hover{border-color:var(--ac)}#pci .mo.on{border-color:var(--ac);background:rgba(199,125,255,.12)}
+#pci .mo.bl{opacity:.45;cursor:not-allowed}#pci .mo.bl small{color:#ff9f6b}
+#pci .mon{font-weight:600;font-size:14.5px}#pci .mon small,#pci .mop small{display:block;font-weight:400;font-size:12px;color:var(--mut);margin-top:2px}
+#pci .mop{text-align:right;font-family:var(--mono);font-weight:700;white-space:nowrap}#pci .mop small{font-family:inherit}
+#pci .barra.mmbar{display:flex;position:sticky;bottom:0;z-index:40;gap:10px;align-items:center;margin:14px 0;padding:12px 16px;border-radius:14px;background:var(--s1);border:1px solid var(--bd);box-shadow:0 -8px 24px rgba(0,0,0,.25)}
+#pci .mmbar div{flex:1}#pci .mmbar small{display:block;font-size:11px;color:var(--mut)}#pci .mmbar b{font-family:var(--mono);font-size:20px}
+#pci .hero .nota{display:inline-flex;gap:8px;align-items:baseline;margin:6px 0 10px}#pci .hero .nota b{font-size:34px;font-family:var(--mono);color:var(--ac)}#pci .hero .nota span{color:var(--mut);font-size:13px}
+@media print{#pci .sei,#pci .tema,#pci .mmsec,#pci .mmtop,#pci .mmbar{display:none!important}}
+@media (max-width:560px){#pci .sei{font-size:11.5px;padding:5px 9px}#pci .mo{padding:10px 12px;gap:8px}#pci .mon{font-size:13.5px}#pci .mop{font-size:13.5px}#pci .mop small{font-size:10.5px}}
 #pci .tema{all:unset;cursor:pointer;margin-left:auto;font-size:12.5px;border:1px solid var(--bd);border-radius:999px;padding:5px 11px;color:var(--mut);background:var(--s1)}
 #pci .tema:hover{border-color:var(--ac);color:var(--ink)}
 /* tema claro */
@@ -430,6 +451,7 @@ const fator = s => 1 - .08*parcPct(s)/100;   // ~8% a mais em média no que for 
 const ITENS = [['pc','PC','obrigatório'],['mon','Monitor',''],['kb','Teclado',''],['mouse','Mouse',''],['head','Headset','']];
 
 function render(){
+  if(st.modo==='manual') return montar();
   if(step >= Q.length) return result();
   let q = Q[step];
   if(q.alt && st.itens.mon) q = Object.assign({}, q, q.alt);
@@ -489,7 +511,8 @@ function misto(){
     <input type="range" id="pciParc" min="5" max="95" step="5" value="${st.parc}" aria-label="Porcentagem parcelada">
     ${mistoInfo()}<button class="opt go" id="pciGo"><b>Continuar →</b></button></div>`;
 }
-function bindTema(){ const t = document.getElementById('pciTema'); if(t) t.onclick = () => { const r = document.getElementById('pci'); r.classList.toggle('claro'); try { localStorage.setItem('pcideal_tema', r.classList.contains('claro')?'claro':'escuro'); } catch(_){} t.innerHTML = r.classList.contains('claro')?'🌙 Escuro':'☀️ Claro'; }; }
+function bindTema(){ const sb = document.getElementById('pciSei'); if(sb){ if(st.modo==='manual'){ sb.innerHTML = '🧭 Montador guiado'; sb.onclick = () => refaz(); } else sb.onclick = () => { st.modo = 'manual'; fire('PCIdeal_EuSeiMontar'); render(); scrollTo({top: app.getBoundingClientRect().top + scrollY - 80, behavior:'smooth'}); }; }
+  const t = document.getElementById('pciTema'); if(t) t.onclick = () => { const r = document.getElementById('pci'); r.classList.toggle('claro'); try { localStorage.setItem('pcideal_tema', r.classList.contains('claro')?'claro':'escuro'); } catch(_){} t.innerHTML = r.classList.contains('claro')?'🌙 Escuro':'☀️ Claro'; }; }
 try { if(localStorage.getItem('pcideal_tema')==='claro') document.getElementById('pci').classList.add('claro'); } catch(_){}
 function mostraSalvos(){
   const L = salvos(); if(!L.length) return;
@@ -501,7 +524,7 @@ function mostraSalvos(){
   const pr = app.querySelector('.prog'); if(pr) pr.parentNode.insertBefore(bx, pr);
 }
 function head(full){
-  return `<header><img class="logo" src="${LOGO}" alt="Grape Tec"><div class="brand"><b>Grape Tec · PC Ideal</b><span>preços dos meus posts dos últimos 30 dias</span></div><button class="tema" id="pciTema" title="Mudar tema" aria-label="Mudar tema">${document.getElementById('pci').classList.contains('claro')?'🌙 Escuro':'☀️ Claro'}</button></header>` +
+  return `<header><img class="logo" src="${LOGO}" alt="Grape Tec"><div class="brand"><b>Grape Tec · PC Ideal</b><span>preços dos meus posts dos últimos 30 dias</span></div><button class="sei" id="pciSei" title="Montar escolhendo peça por peça">🛠 Eu sei montar</button><button class="tema" id="pciTema" title="Mudar tema" aria-label="Mudar tema">${document.getElementById('pci').classList.contains('claro')?'🌙 Escuro':'☀️ Claro'}</button></header>` +
    (full ? `<h1>Monte seu <em>PC Ideal</em></h1><p class="lead">Responde 7 perguntas, só clicando. Eu monto o PC completo com as 8 peças, do jeito que faço nas minhas consultorias, usando os preços reais que passaram no canal no último mês.</p>` : '');
 }
 
@@ -988,12 +1011,7 @@ function result(){
      <div class="mapa">${mapa}</div>
      <div class="sv"><button class="btn" id="pciPdf">📄 Salvar em PDF</button><button class="btn" id="pciLink">🔗 Copiar link do meu PC</button><button class="btn" data-inicio="1">↺ Montar outro PC</button><span class="old">fica salvo neste navegador também</span></div>
      <div class="pdate">Montado em ${new Date().toLocaleDateString('pt-BR')} · grapetec.com.br</div></div>
-   ${acima}${ytId(VIDEO_URL) ? `<div class="mpv"><iframe src="https://www.youtube-nocookie.com/embed/${ytId(VIDEO_URL)}?rel=0" title="Como usar o seu mapa" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>` : ''}<div class="mapa2${ytId(VIDEO_URL)?' comvideo':''}">
-     <svg class="mp-ill" viewBox="0 0 120 90" aria-hidden="true"><rect x="8" y="14" width="34" height="62" rx="4" fill="none" stroke="currentColor" stroke-width="3"/><path d="M42 14l36 10v62l-36-10zM78 24l34-10v62l-34 10" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M20 34c6 8 14 4 18 12s16 10 26 4 18 2 26-6" fill="none" stroke="#c77dff" stroke-width="3" stroke-dasharray="5 5" stroke-linecap="round"/><circle cx="92" cy="44" r="7" fill="#c77dff"/><path d="M92 51v10" stroke="#c77dff" stroke-width="3" stroke-linecap="round"/></svg>
-     <div class="mp-t"><b>Isso aqui é o seu MAPA, não um carrinho de compras.</b>
-       <span>As ofertas abaixo são as que passaram no meu canal. Oferta acaba rápido, e algumas provavelmente já expiraram. Mas pelo histórico, <b>a chance de você pegar essas peças nesses preços é grande</b>: elas sempre voltam.</span>
-       <ol><li><b>Guarda esse mapa</b> (PDF ou link)</li><li><b>Entra no canal de ofertas</b></li><li><b>Compra cada peça quando ela bater o preço do norte</b>, até montar igualzinho</li></ol>
-       <div class="mp-c"><a class="wa" href="https://grapetec.com.br/whatsapp" target="_blank" rel="noopener" data-ev="mapa_whatsapp">${WA}WhatsApp</a><a class="tg" href="https://t.me/grape_tec" target="_blank" rel="noopener" data-ev="mapa_telegram">${TG}Telegram</a><span class="mp-u">grapetec.com.br/ofertas</span></div></div></div>
+   ${acima}${mapaHTML()}
    <div class="raio"><h3>1. O Raio-X</h3>${raio.map(p=>`<p>${p}</p>`).join('')}</div>
    <div class="sec">2. A Máquina</div><div class="parts">${parts.join('')}</div>
    ${futCard?`<div class="sec">Upgrade planejado: placa de vídeo</div><div class="parts fut">${futCard}</div>`:''}
@@ -1010,12 +1028,7 @@ function result(){
    <a class="me" href="https://jobrufe.kpages.online/montageminteligente" target="_blank" rel="noopener" id="pciCta">
      <div class="foto">${FOTO_BRUNO?`<img src="${FOTO_BRUNO}" alt="Brunão">`:`<img src="${LOGO}" alt="Grape Tec">`}</div>
      <div><small>Quer que eu revise pessoalmente?</small><b>ME <u>AJUDA</u>, BRUNÃO</b><span><svg class="cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="4.5" width="15" height="14" rx="2"/><path d="M3 9h15M7.5 2.5v4M13.5 2.5v4"/><circle cx="17.5" cy="17.5" r="4.2" fill="#c77dff"/><path d="M17.5 15.6v2l1.3 1"/></svg>Esse é o mapa automático. Na consultoria eu olho o seu caso (inclusive upgrade) e te entrego a configuração certinha <b>em até 24h</b>. Desde 2009, mais de 5 mil PCs montados.</span><em>Quero a consultoria →</em></div></a>
-   <div class="ch">
-     <div class="chb"><h4>Ofertas no seu celular</h4><p>As peças desse PC aparecem lá primeiro, com cupom e link pronto.</p>
-       <div class="chr"><a class="wa" href="https://grapetec.com.br/whatsapp" target="_blank" rel="noopener" data-ev="whatsapp">${WA}<span><small>GRÁTIS</small>Grupo do WhatsApp</span></a>
-       <a class="tg" href="https://t.me/grape_tec" target="_blank" rel="noopener" data-ev="telegram">${TG}<span><small>SAI PRIMEIRO AQUI</small>Canal do Telegram</span></a></div></div>
-     <a class="rd" href="https://grapetec.com.br/radar" target="_blank" rel="noopener" data-ev="radar"><div class="rdi">${RADAR}</div><div><h4>Radar de preços</h4><p>Veja a curva de preço de cada peça e saiba se a oferta é boa mesmo.</p><em>Abrir o Radar →</em></div></a>
-   </div>
+   ${canaisHTML()}
    <button class="opt go novo" data-inicio="1"><b>↺ Voltar ao início e montar outro PC</b></button>
    <p class="foot">Atualizado com os posts até ${dia(DATA.gen)} · Compre pelos links: você me ajuda sem pagar nada a mais.</p>`;
   document.getElementById('pciRedo').onclick = refaz;
@@ -1044,6 +1057,184 @@ function result(){
   });
   const c = document.getElementById('pciCta'); if(c) c.onclick = () => { fire('PCIdeal_Consultoria'); coleta('consultoria', {total: window.__pciUltimo && window.__pciUltimo.total}); };
 }
+function mapaHTML(manual){ return `${ytId(VIDEO_URL) ? `<div class="mpv"><iframe src="https://www.youtube-nocookie.com/embed/${ytId(VIDEO_URL)}?rel=0" title="Como usar o seu mapa" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>` : ''}<div class="mapa2${ytId(VIDEO_URL)?' comvideo':''}">
+     <svg class="mp-ill" viewBox="0 0 120 90" aria-hidden="true"><rect x="8" y="14" width="34" height="62" rx="4" fill="none" stroke="currentColor" stroke-width="3"/><path d="M42 14l36 10v62l-36-10zM78 24l34-10v62l-34 10" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M20 34c6 8 14 4 18 12s16 10 26 4 18 2 26-6" fill="none" stroke="#c77dff" stroke-width="3" stroke-dasharray="5 5" stroke-linecap="round"/><circle cx="92" cy="44" r="7" fill="#c77dff"/><path d="M92 51v10" stroke="#c77dff" stroke-width="3" stroke-linecap="round"/></svg>
+     <div class="mp-t"><b>Isso aqui é o seu MAPA, não um carrinho de compras.</b>${manual?'<span>Você montou, eu conferi. <b>Esses são os melhores preços que passaram no nosso banco de ofertas nesse período</b> pra cada peça que você escolheu.</span>':''}
+       <span>As ofertas abaixo são as que passaram no meu canal. Oferta acaba rápido, e algumas provavelmente já expiraram. Mas pelo histórico, <b>a chance de você pegar essas peças nesses preços é grande</b>: elas sempre voltam.</span>
+       <ol><li><b>Guarda esse mapa</b> (PDF ou link)</li><li><b>Entra no canal de ofertas</b></li><li><b>Compra cada peça quando ela bater o preço do norte</b>, até montar igualzinho</li></ol>
+       <div class="mp-c"><a class="wa" href="https://grapetec.com.br/whatsapp" target="_blank" rel="noopener" data-ev="mapa_whatsapp">${WA}WhatsApp</a><a class="tg" href="https://t.me/grape_tec" target="_blank" rel="noopener" data-ev="mapa_telegram">${TG}Telegram</a><span class="mp-u">grapetec.com.br/ofertas</span></div></div></div>`; }
+function canaisHTML(){ return `<div class="ch">
+     <div class="chb"><h4>Ofertas no seu celular</h4><p>As peças desse PC aparecem lá primeiro, com cupom e link pronto.</p>
+       <div class="chr"><a class="wa" href="https://grapetec.com.br/whatsapp" target="_blank" rel="noopener" data-ev="whatsapp">${WA}<span><small>GRÁTIS</small>Grupo do WhatsApp</span></a>
+       <a class="tg" href="https://t.me/grape_tec" target="_blank" rel="noopener" data-ev="telegram">${TG}<span><small>SAI PRIMEIRO AQUI</small>Canal do Telegram</span></a></div></div>
+     <a class="rd" href="https://grapetec.com.br/radar" target="_blank" rel="noopener" data-ev="radar"><div class="rdi">${RADAR}</div><div><h4>Radar de preços</h4><p>Veja a curva de preço de cada peça e saiba se a oferta é boa mesmo.</p><em>Abrir o Radar →</em></div></a>
+   </div>`; }
+/* =================== MODO "EU SEI MONTAR" =================== */
+const MM_SECS = [
+  ['pl','Plataforma'],['cpu','Processador'],['mobo','Placa-mãe'],['ram','Memória'],['ssd','SSD'],['gpu','Placa de vídeo'],['psu','Fonte'],['co','Refrigeração'],['ca','Gabinete']
+];
+const mmGet = () => (st.mm = st.mm || {pl:'', f:{}});
+const radMm = it => /360/.test(it.n + ((it.a||{}).Radiador||'')) ? 360 : /Water/.test(it.n) ? 240 : 0;
+const watts = it => { const m = ((it.a||{})['Potência']||'').match(/(\d+)W$/) || (it.n||'').match(/(\d{3,4})W/); return m ? +m[1] : 0; };
+function mmOpts(sec){
+  const m = mmGet(), f = m.f, C = CPU[m.cpu];
+  const ddr = m.pl==='AM4' ? 4 : 5;
+  if(sec==='cpu') return (P.cpu||[]).filter(x => CPU[x.n] && CPU[x.n].pl===m.pl).map(x => ({id:x.n, it:x, preco:x.p, nome:x.n, sub:`${CPU[x.n].c} núcleos${CPU[x.n].x3d?' · 3D V-Cache':''}${CPU[x.n].apu?' · vídeo '+CPU[x.n].apu:CPU[x.n].igb?' · vídeo básico':' · sem vídeo'}`}));
+  if(sec==='mobo') return by('mobo', x => x.a.Plataforma===m.pl && (!f.chip || x.a.Chipset===f.chip) && (!f.wifi || (f.wifi==='sim') === (x.a['Wi-Fi']==='Com Wi-Fi'))).map(x => ({id:x.n, it:x, preco:x.p, nome:x.n.replace('Placa-mãe ',''), sub:`${x.a.Chipset} · ${x.a.Tamanho||'mATX'} · ${x.a['Wi-Fi']||''}`}));
+  if(sec==='ram'){
+    const cap = +(f.ramcap||16), por = cap/2, out = [];
+    by('ram', x => x.a.ddr===ddr && x.a.mods===1 && x.a.cap===por && isG(x) && (ddr===4 ? x.a.mhz>=3200 : x.a.mhz>=5200)).forEach(x => out.push({id:'2x '+x.n, it:x, preco:2*x.p, qtd:2, nome:'2x '+x.n.replace('Memória ',''), sub:`${cap}GB em dual channel · ${x.a.mhz}MHz · 2 × ${R2(x.p)}`}));
+    by('ram', x => x.a.ddr===ddr && x.a.mods===2 && x.a.cap===por && isG(x)).forEach(x => out.push({id:x.n, it:x, preco:x.p, qtd:1, nome:x.n.replace('Memória ',''), sub:`kit ${cap}GB · ${x.a.mhz}MHz`}));
+    return out;
+  }
+  if(sec==='ssd') return by('ssd', x => (!f.cap || x.a.Capacidade===f.cap) && (!f.intf || (f.intf==='Gen4' ? /Gen4/.test(x.a.Interface) : !/Gen4/.test(x.a.Interface)))).map(x => ({id:x.n, it:x, preco:x.p, nome:x.n.replace('SSD ',''), sub:`${x.a.Capacidade} · ${x.a.Interface==='NVMe'?'NVMe':x.a.Interface}`}));
+  if(sec==='gpu'){
+    const L = Object.keys(GPU).map(n => ({n, g:GPU[n], it:(P.gpu||[]).find(x=>x.n===n)})).filter(x=>x.it).map(x => ({id:x.n, it:x.it, preco:x.it.p, nome:x.n, sub:`${x.g.v}GB · ${x.g.ln?x.g.pcie+' x'+x.g.ln:''} · desempenho ${x.g.i} · pede fonte ${x.g.w}W`, g:x.g}));
+    if(C && (C.apu || C.igb)) L.unshift({id:'iGPU', it:null, preco:0, nome:'Sem placa por enquanto (vídeo integrado)', sub: C.apu ? `${C.apu}: joga leve` : 'vídeo básico: só pra usar o PC'});
+    return L;
+  }
+  if(sec==='psu') return by('psu', x => (!f.cert || x.a['Certificação']===f.cert) && (!f.mod || (f.mod==='full') === /Full/.test(x.a.Modular||'')) && (!f.pot || watts(x) >= +f.pot)).map(x => ({id:x.n, it:x, preco:x.p, nome:x.n.replace('Fonte ',''), sub:`${/\d{3}W/.test(x.n)?'':watts(x)+'W · '}${x.a['Certificação']||''} · ${x.a.Modular||''}`}));
+  if(sec==='co'){
+    const L = by('cooler', x => !f.tipo || x.a.Tipo===f.tipo || (f.tipo==='Water cooler' && /Water/.test(x.n))).map(x => ({id:x.n, it:x, preco:x.p, nome:x.n, sub: /Water/.test(x.n) ? `Water cooler · radiador ${radMm(x)}mm` : 'Air cooler'}));
+    if(m.cpu && /^Ryzen 5 (5500|5600|7600|8400F|8500G|8600G)$|8700G/.test(m.cpu)) L.unshift({id:'box', it:null, preco:0, nome:'Cooler box (vem com o processador)', sub:'confere se a oferta é box'});
+    return L;
+  }
+  if(sec==='ca') return by('case', x => caseSpec(x.n)).map(x => { const c = caseSpec(x.n); return {id:x.n, it:x, preco:x.p, nome:x.n.replace('Gabinete ',''), sub:`${c.tam} · placa-mãe ${c.mobo.filter(y=>y!=='ITX').join('/')} · radiador até ${c.rad}mm · GPU até ${c.gpu}mm`, spec:c}; });
+  return [];
+}
+// o que impede a peça (compatibilidade). Retorna o motivo ou ''.
+function mmBloq(sec, o){
+  const m = mmGet(), gpu = m.gpu && m.gpu!=='iGPU' ? GPU[m.gpu] : null;
+  if(sec==='gpu' && o.id==='iGPU') return '';
+  if(sec==='psu'){ const need = gpu ? gpu.w : 450; if(watts(o.it) < need) return `fraca pra ${m.gpu} (pede ${need}W)`; }
+  if(sec==='ca'){
+    const c = o.spec, mob = m.mobo && (P.mobo||[]).find(x=>x.n===m.mobo), co = m.co && (P.cooler||[]).find(x=>x.n===m.co);
+    if(mob && !c.mobo.includes(moboTam(mob))) return `não cabe placa-mãe ${moboTam(mob)}`;
+    if(co && radMm(co) > c.rad) return `não cabe radiador ${radMm(co)}mm`;
+    if(gpu && gpu.i>=175 && c.gpu < 330) return 'placa de vídeo grande não cabe';
+  }
+  return '';
+}
+function mmAvalia(){
+  const m = mmGet(), C = CPU[m.cpu];
+  const pick = (sec, id) => mmOpts(sec).find(o => o.id===id);
+  const sel = {}; let tot = 0;
+  for(const [k] of MM_SECS.slice(1)){ const o = m[k] ? pick(k, m[k]) : null; sel[k] = o; if(o) tot += o.preco; }
+  const g = m.gpu && m.gpu!=='iGPU' ? GPU[m.gpu] : null, ok = [], alerta = [];
+  let nota = 10;
+  if(C && g){
+    const thr = .3*g.i + 40;   // mesma régua do montador guiado (Full HD)
+    if(C.g < thr){ alerta.push(`O <b>${m.cpu}</b> vai segurar a <b>${m.gpu}</b> (gargalo). Um processador um degrau acima aproveita melhor essa placa.`); nota -= 2; }
+    else if(C.g > .3*g.i + 85){ alerta.push(`Processador forte demais pra essa placa: dá pra economizar no processador e subir a placa de vídeo.`); nota -= 1; }
+    else ok.push(`Processador e placa de vídeo equilibrados, sem gargalo.`);
+    const pcie3 = m.cpu==='Ryzen 5 5500' || (sel.mobo && /A520|B450/.test(sel.mobo.it.a.Chipset||''));
+    if(pcie3 && g.x8){ alerta.push(`Plataforma PCIe 3.0 com placa x8 (${m.gpu}): ela perde desempenho aqui. Prefira uma RX 9060 XT (x16).`); nota -= 1; }
+  }
+  if(m.gpu==='iGPU') ok.push(C && C.apu ? `Vídeo integrado ${C.apu}: joga leve agora, e a placa entra depois.` : `Vídeo básico: o PC liga e funciona, mas pra jogar precisa da placa de vídeo.`);
+  if(C && sel.mobo){ const entrada = /B650M-H|Gigabyte B650M$|HDV|A520/.test(sel.mobo.it.n); if((C.c>=8 || C.x3d) && entrada){ alerta.push(`Placa-mãe de entrada com um processador forte (${m.cpu}). Funciona, mas eu iria de uma placa com VRM melhor.`); nota -= 1; } else ok.push(`Placa-mãe à altura do processador.`); }
+  if(sel.ram){ ok.push(`Memória em dois pentes (dual channel).`); }
+  if(sel.ssd && sel.ssd.it.a.Capacidade==='500GB'){ alerta.push('SSD de 500GB enche rápido com jogo. Se der, vai de 1TB.'); nota -= .5; }
+  if(sel.psu && g){ const w = watts(sel.psu.it); if(w >= g.w + 100) ok.push(`Fonte de ${w}W com folga pra upgrade.`); if(sel.psu.it.a['Certificação']!=='Gold' && g.i>=170){ alerta.push('Pra uma placa desse nível eu iria de fonte Gold.'); nota -= .5; } }
+  if(C && sel.co){ const air = sel.co.id==='box' || (sel.co.it && !/Water/.test(sel.co.it.n)); if(sel.co.it && radMm(sel.co.it)===240 && QUENTE.test(m.cpu)){ alerta.push(`Pro ${m.cpu} eu iria de radiador 360mm: o 240 segura, mas trabalha mais quente.`); nota -= .5; } else if(air && QUENTE.test(m.cpu)){ alerta.push(`O ${m.cpu} esquenta: com ele eu uso water cooler 360mm, não air cooler.`); nota -= 1.5; } else if(!air && !QUENTE.test(m.cpu) && C.c < 8 && !C.x3d){ alerta.push(`Se o water cooler não for pela estética, ele é exagero pro ${m.cpu}: um air cooler (ou o box) segura tranquilo, e essa diferença rende mais na placa de vídeo.`); nota -= .5; } else ok.push('Refrigeração adequada pro processador.'); }
+  if(sel.ca && tot>=7000 && sel.ca.spec.tier<3){ alerta.push('Num PC desse valor eu não colocaria um gabinete tão simples: vale um aquário mid tower que caiba tudo com folga.'); nota -= 1; }
+  // comparação com o PC que eu montaria com o mesmo dinheiro
+  let meu = null;
+  if(tot > 2500 && MM_SECS.slice(1).every(([k]) => m[k])){
+    meu = monta({orc: tot, pag:'pix', jogo:'mix', mon:'fhd', plat:'auto', vis:'perf', net: sel.mobo && sel.mobo.it.a['Wi-Fi']==='Com Wi-Fi' ? 'wifi' : 'cabo', gmodo: m.gpu==='iGPU' ? 'igpu' : 'auto'}); window.__pciMeu = meu && {cpu:meu.cpu, gpu:meu.gpu, tot:meu.tot};
+  }
+  return {sel, tot, ok, alerta, nota: Math.max(0, Math.round(nota*2)/2), meu};
+}
+function mmCompara(av, m){
+  const meu = av.meu; if(!meu) return '';
+  const gi = n => n && GPU[n] ? GPU[n].i : 0, cg = n => CPU[n] ? CPU[n].g : 0;
+  const ganhoG = gi(m.gpu) ? (gi(meu.gpu) - gi(m.gpu)) / gi(m.gpu) : (gi(meu.gpu) ? 1 : 0);
+  const ganhoC = (cg(meu.cpu) - cg(m.cpu)) / Math.max(1, cg(m.cpu));
+  const ver = `<button class="lnk" id="pciVerMeu" style="color:var(--act);font-weight:600">ver o PC que eu montaria →</button>`;
+  const meuNome = `<b>${meu.cpu} + ${meu.apu ? 'vídeo integrado' : meu.gpu}</b>`;
+  const igual = meu.cpu===m.cpu && (meu.gpu===m.gpu || (meu.apu && m.gpu==='iGPU'));
+  if(ganhoG >= .05) return `<p style="margin-top:10px">Com esse mesmo dinheiro (${R(av.tot)}) eu iria de ${meuNome}: uns <b>${Math.round(ganhoG*100)}% a mais de FPS</b> na placa de vídeo, por ${R(meu.tot)}. ${ver}</p>`;
+  if(ganhoG > -.03 && ganhoC > -.03 && av.tot - meu.tot >= 400) return `<p style="margin-top:10px">Dá pra ter o mesmo desempenho gastando menos: com ${meuNome} eu fecho por <b>${R(meu.tot)}</b> (${R(av.tot - meu.tot)} a menos). ${ver}</p>`;
+  if(av.alerta.length && !igual) return `<p style="margin-top:10px">Com esse mesmo dinheiro (${R(av.tot)}) eu montaria com ${meuNome}, já com os ajustes acima. ${ver}</p>`;
+  if(av.alerta.length) return `<p style="margin-top:10px">Processador e placa de vídeo eu manteria iguais. Só ajustaria os pontos acima.</p>`;
+  return `<p style="margin-top:10px"><b>Mandou bem:</b> com esse dinheiro, eu não montaria nada muito diferente disso.</p>`;
+}
+function montar(){
+  const m = mmGet(), f = m.f;
+  const chip = (k, v, label) => `<button class="it mmf ${(f[k]||'')===v?'on':''}" data-k="${k}" data-v="${v}"><i>${(f[k]||'')===v?'✓':''}</i>${label}</button>`;
+  const FILT = {
+    mobo: m.pl==='AM4' ? [['chip','','Todos'],['chip','A520','A520'],['chip','B450','B450'],['chip','B550','B550'],['wifi','sim','com Wi-Fi'],['wifi','nao','sem Wi-Fi']] : [['chip','','Todos'],['chip','B650','B650'],['chip','B850','B850'],['wifi','sim','com Wi-Fi'],['wifi','nao','sem Wi-Fi']],
+    ram: [['ramcap','16','16GB (2x8)'],['ramcap','32','32GB (2x16)']],
+    ssd: [['cap','','Todas'],['cap','500GB','500GB'],['cap','1TB','1TB'],['cap','2TB','2TB'],['intf','Gen3','NVMe PCIe 3.0'],['intf','Gen4','NVMe PCIe 4.0']],
+    psu: [['pot','','Todas'],['pot','650','650W+'],['pot','750','750W+'],['pot','850','850W+'],['cert','Bronze','Bronze'],['cert','Gold','Gold'],['mod','full','Full modular']],
+    co: [['tipo','','Todos'],['tipo','Air cooler','Air cooler'],['tipo','Water cooler','Water cooler']],
+  };
+  if(!f.ramcap) f.ramcap = '16';
+  const av = mmAvalia();
+  let h = head(false) + `<div class="mmtop"><h2 class="mmh">🛠 Eu sei montar</h2><p class="lead" style="font-size:15px">Escolhe peça por peça. Eu só mostro o que é compatível, com o melhor preço que passou no canal no último mês, e no final avalio o seu PC.</p><button class="lnk" id="pciVoltaGuiado">← voltar pro montador guiado</button></div>`;
+  h += `<div class="mmsec"><div class="mmt"><b>1. Plataforma</b></div><div class="its">${[['AM4','AM4 · DDR4','mais barato hoje'],['AM5','AM5 · DDR5','plataforma nova']].map(o=>`<button class="it mmpl ${m.pl===o[0]?'on':''}" data-v="${o[0]}"><i>${m.pl===o[0]?'✓':''}</i>${o[1]}<small>${o[2]}</small></button>`).join('')}</div></div>`;
+  if(m.pl){
+    MM_SECS.slice(1).forEach(([sec, nome], i) => {
+      const opts = mmOpts(sec).sort((a,b)=>a.preco-b.preco);
+      const esc_ = m[sec] && opts.find(o=>o.id===m[sec]);
+      const aberto = m.open===sec || !esc_;
+      const tem = i===0 || MM_SECS.slice(1, i+1).every(([k]) => m[k]);
+      h += `<div class="mmsec ${esc_?'feito':''}" id="mm_${sec}"><div class="mmt"><b>${i+2}. ${nome}</b>${esc_?`<span class="mmsel">${esc(esc_.nome)} · <b>${R2(esc_.preco)}</b></span><button class="lnk mmtroca" data-s="${sec}">trocar</button>`:''}</div>`;
+      if(aberto && tem){
+        if(FILT[sec]) h += `<div class="its">${FILT[sec].map(c=>chip(...c)).join('')}</div>`;
+        if(sec==='ssd') h += `<p class="old" style="margin:-6px 0 8px">SATA não passou no canal no último mês, por isso só aparece NVMe.</p>`;
+        const vis = m.mais===sec ? opts : opts.slice(0, 8);
+        h += `<div class="mml">${vis.map(o => { const bl = mmBloq(sec, o); return `<button class="mo ${m[sec]===o.id?'on':''} ${bl?'bl':''}" data-s="${sec}" data-id="${esc(o.id)}" ${bl?'disabled':''}><span class="mon">${esc(o.nome)}<small>${bl?'⚠ '+bl:o.sub}</small></span><span class="mop">${o.preco?R2(o.preco):'R$ 0'}${o.it?`<small>${esc(o.it.loja||'')} · ${idade(o.it)===0?'hoje':idade(o.it)===1?'ontem':'há '+idade(o.it)+' dias'}</small>`:''}</span></button>`; }).join('') || '<p class="old">Nada passou no canal com esse filtro no último mês.</p>'}</div>`;
+        if(opts.length > 8 && m.mais!==sec) h += `<button class="lnk mmmais" data-s="${sec}">ver mais ${opts.length-8} opções ▾</button>`;
+      } else if(!tem) h += `<p class="old">Escolhe a peça anterior primeiro.</p>`;
+      h += `</div>`;
+    });
+  }
+  const completo = m.pl && MM_SECS.slice(1).every(([k]) => m[k]);
+  h += `<div class="barra mmbar"><div><small>Seu PC até agora</small><b>${R(av.tot)}</b></div>${completo?`<button class="btn" id="pciMMok">Ver avaliação →</button>`:''}</div>`;
+  if(completo && m.ver){
+    const S = av.sel;
+    h += `<div class="hero" id="mmres"><div class="sub">Seu PC, montado por você</div><div class="tot">${R(av.tot)}</div><div class="mapa">${m.cpu} + ${m.gpu==='iGPU'?'vídeo integrado':m.gpu} + ${S.ram.nome.replace(/^2x /,'2x ')} + ${S.ssd.nome}</div>
+      <div class="nota"><b>${String(av.nota).replace('.',',')}</b><span>nota do Brunão</span></div>
+      <div class="sv"><button class="btn" id="pciPdf">📄 Salvar em PDF</button><button class="btn" id="pciLink">🔗 Copiar link do meu PC</button></div><div class="pdate">Montado em ${new Date().toLocaleDateString('pt-BR')} · grapetec.com.br</div></div>`;
+    h += mapaHTML(true);
+    h += `<div class="raio"><h3>A avaliação do Brunão</h3>${av.alerta.length?`<ul class="ck no">${av.alerta.map(x=>`<li>${x}</li>`).join('')}</ul>`:''}${av.ok.length?`<ul class="ck" style="margin-top:8px">${av.ok.map(x=>`<li>${x}</li>`).join('')}</ul>`:''}
+      ${mmCompara(av, m)}
+      <p class="foot" style="margin-top:10px">Esses são os melhores preços que passaram no meu canal no último mês, depois de uma leitura minuciosa de todas as ofertas. É esse o alvo: entra nos canais e vai pegando cada peça quando ela bater esse preço.</p></div>`;
+    h += `<div class="parts">${MM_SECS.slice(1).map(([k, nome]) => { const o = S[k]; if(!o || !o.it) return cardSem(nome, o ? o.nome : '-', o ? o.sub : '', k==='gpu' ? 'A placa entra depois, sem trocar nada.' : 'Já vem com o processador.', o && o.id==='box' ? 'já incluso' : 'vem no processador');
+      return card(nome, o.nome, o.preco, o.it, `até <b>${R(o.preco)}</b> tá bom. Faixa normal no mês: ${faixa(o.it.p25*(o.qtd||1), o.it.p75*(o.qtd||1))}.`, k==='cpu' ? (CPU[m.cpu].d||'') : k==='gpu' && GPU[m.gpu] ? `${GPU[m.gpu].v}GB de VRAM${GPU[m.gpu].ln ? ', '+GPU[m.gpu].pcie+' x'+GPU[m.gpu].ln : ''}.` : /mobo|ssd|ca/.test(k) ? '' : o.sub, o.qtd===2 ? `2 pentes × ${R2(o.it.p)}` : ''); }).join('')}</div>`;
+    h += `<a class="me" href="https://jobrufe.kpages.online/montageminteligente" target="_blank" rel="noopener" id="pciCta"><div class="foto"><img src="${FOTO_BRUNO}" alt="Brunão"></div><div><small>Quer que eu revise pessoalmente?</small><b>ME <u>AJUDA</u>, BRUNÃO</b><span>Essa é a avaliação automática. Na consultoria eu olho o seu caso e te entrego a configuração certinha <b>em até 24h</b>.</span><em>Quero a consultoria →</em></div></a>` + canaisHTML() + `<button class="opt go novo" id="pciMMnovo"><b>↺ Montar outro do zero</b></button>`;
+  }
+  app.innerHTML = h;
+  bindTema(); mmSalva();
+  document.getElementById('pciVoltaGuiado').onclick = () => { refaz(); };
+  app.querySelectorAll('.mmpl').forEach(b => b.onclick = () => { if(m.pl!==b.dataset.v){ st.mm = {pl:b.dataset.v, f:{}}; } render(); });
+  app.querySelectorAll('.mmf').forEach(b => b.onclick = () => { const k = b.dataset.k, v = b.dataset.v; m.f[k] = m.f[k]===v && v ? '' : v; render(); });
+  app.querySelectorAll('.mo').forEach(b => b.onclick = () => { const s = b.dataset.s; m[s] = b.dataset.id; m.open = ''; m.ver = false; m.mais = '';
+    // trocou algo antes: limpa o que pode ter ficado incompatível
+    if(s==='cpu'){ if(m.co==='box') m.co = ''; if(m.gpu==='iGPU' && !(CPU[m.cpu].apu||CPU[m.cpu].igb)) m.gpu = ''; }
+    ['psu','ca'].forEach(k => { if(m[k]){ const o = mmOpts(k).find(x=>x.id===m[k]); if(o && mmBloq(k,o)) m[k] = ''; } });
+    render(); const nx = MM_SECS.find(([k]) => k!=='pl' && !m[k]); const el = nx && document.getElementById('mm_'+nx[0]); if(el) el.scrollIntoView({behavior:'smooth', block:'start'}); });
+  app.querySelectorAll('.mmtroca').forEach(b => b.onclick = () => { m.open = b.dataset.s; render(); });
+  app.querySelectorAll('.mmmais').forEach(b => b.onclick = () => { m.mais = b.dataset.s; render(); });
+  const okb = document.getElementById('pciMMok'); if(okb) okb.onclick = () => { m.ver = true; fire('PCIdeal_Manual'); coleta('manual', {total: av.tot, cpu:m.cpu, gpu:m.gpu, nota:av.nota}); render(); const r = document.getElementById('mmres'); if(r) r.scrollIntoView({behavior:'smooth'}); };
+  const vm = document.getElementById('pciVerMeu'); if(vm) vm.onclick = () => { st = {itens:{}, parc:30, orc: Math.max(4000, Math.ceil(av.tot/1000)*1000), pag:'pix', jogo:'mix', mres:'fhd', mhz:'144', mon:'fhd', plat:'auto', vis:'perf', net:'cabo', gmodo: m.gpu==='iGPU'?'igpu':'auto'}; step = Q.length; render(); };
+  const nv = document.getElementById('pciMMnovo'); if(nv) nv.onclick = () => { st.mm = {pl:'', f:{}}; render(); scrollTo({top: app.getBoundingClientRect().top + scrollY - 80, behavior:'smooth'}); };
+  app.querySelectorAll('.mais').forEach(bt => bt.onclick = () => { const pt = bt.closest('.part'); pt.classList.toggle('aberto'); bt.textContent = pt.classList.contains('aberto') ? 'menos detalhes ▴' : 'mais detalhes ▾'; });
+  app.querySelectorAll('a[data-ev]').forEach(a => a.addEventListener('click', () => { fire('PCIdeal_manual_'+a.dataset.ev); coleta('clique_'+a.dataset.ev, {modo:'manual'}); }));
+  const ct = document.getElementById('pciCta'); if(ct) ct.onclick = () => { fire('PCIdeal_Consultoria'); coleta('consultoria', {modo:'manual', total: av.tot}); };
+  const pdf = document.getElementById('pciPdf'); if(pdf) pdf.onclick = () => { fire('PCIdeal_PDF'); window.dispatchEvent(new Event('beforeprint')); setTimeout(() => window.print(), 50); };
+  const cl = document.getElementById('pciLink'); if(cl) cl.onclick = () => { try { navigator.clipboard.writeText(location.href); } catch(_){} cl.innerHTML = '✓ link copiado'; };
+  app.querySelectorAll('.cupb').forEach(bt => bt.onclick = () => { const c = bt.dataset.c, u = bt.dataset.u; try { navigator.clipboard.writeText(c); } catch(_){} bt.textContent = '✓ copiado'; if(u) window.open(u, '_blank', 'noopener'); });
+}
+
+// salva o PC montado à mão no link (#mm=) — só os nomes das peças
+const MM_K = ['pl','cpu','mobo','ram','ssd','gpu','psu','co','ca'];
+function mmSalva(){ const m = mmGet(), o = {}; MM_K.forEach(k => { if(m[k]) o[k] = m[k]; }); if(m.f && m.f.ramcap) o.rc = m.f.ramcap;
+  try { history.replaceState(null, '', location.pathname + location.search + (o.pl ? '#mm=' + btoa(unescape(encodeURIComponent(JSON.stringify(o)))).replace(/=+$/,'') : '#montar')); } catch(_){} }
+function mmLe(c){ try { const o = JSON.parse(decodeURIComponent(escape(atob(c)))); if(!o || !o.pl) return null; const m = {f:{ramcap:o.rc||'16'}}; MM_K.forEach(k => { if(o[k]) m[k] = o[k]; });
+  // se alguma peça sumiu do banco (oferta saiu dos 30 dias), deixa em branco pra escolher de novo
+  st.mm = m; MM_K.slice(1).forEach(k => { if(m[k] && !mmOpts(k).some(x => x.id===m[k])) delete m[k]; }); m.ver = MM_K.slice(1).every(k => m[k]); return m; } catch(_){ return null; } }
+
 /* ---------- PDF: tira o "esticar até a borda" do WordPress antes de imprimir ---------- */
 (function(){
   const root = document.getElementById('pci'); let antes = null;
@@ -1068,6 +1259,7 @@ fire('PCIdeal_Visita');
 const hm = (location.hash.match(/#pc=([A-Za-z0-9+/]+)/)||[])[1];
 const doLink = hm && le(hm);
 if(doLink){ st = Object.assign({itens:{}, parc:30}, doLink); step = Q.length; fire('PCIdeal_Reaberto'); }
+else if(/^#(montar|mm=)/.test(location.hash)){ st.modo = 'manual'; const mc = (location.hash.match(/#mm=([A-Za-z0-9+/]+)/)||[])[1]; if(mc) mmLe(mc); }
 render();
 })();
 </script>

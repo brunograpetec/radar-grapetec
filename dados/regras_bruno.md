@@ -59,3 +59,9 @@ Regras que o Bruno passou e que o algoritmo segue. Anotar aqui cada regra nova (
 - 3D V-Cache vai com water cooler 360 e gabinete maduro; 9700X é frio e aceita AK400. (13/11/2026)
 - Vídeo integrado com placa de vídeo futura: gabinete e fonte escolhidos pensando na placa que vem (gabinete mid tower decente que caiba a placa grande). (13/11/2026)
 - Vídeo integrado + "Deixa o Brunão decidir" → sempre série G (quem não manja quer jogar pelo menos um pouco desde o primeiro dia). Pro casual, o ponto certo é o 8600G (6 núcleos, força perto de um 7600, Radeon 760M). (13/11/2026)
+
+## Periféricos
+- Teclado: mecânico com fio na faixa R$ 100–200 (Redragon Dark Avenger/Fizz). Mouse: sem fio sempre que der (King Pro 1K, Logitech G305). Headset: sem fio (até ~R$ 250, ex. Zeus Pro) se couber. Sem fio só entra se não tirar nada do PC; se não der, vai com fio e explica. (13/11/2026)
+
+## Tamanho do monitor
+- Opção de tamanho ao comprar monitor: 24"/25", 27", 32"/34" (inclui ultrawide) ou Brunão decide. Brunão decide: competitivo (FPS) → 24" (no máximo 27"); casual/campanha → mínimo 27", e 32"/34" quando o orçamento deixa (~R$ 8 mil+). Preferência pessoal do Bruno é tela grande, mas segue o perfil. (13/11/2026)

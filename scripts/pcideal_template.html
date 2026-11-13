@@ -474,6 +474,7 @@ function monPanel(){
   const BR = ['auto','Deixa o Brunão escolher',''];
   let h = row('mres','Resolução', [['fhd','Full HD','1080p'],['qhd','Quad HD (2K)','1440p'],['uhd','4K','2160p'], ...(buy?[BR]:[])]);
   h += row('mhz','Taxa de atualização', [['60','60/75Hz',buy?'':'ou TV'],['144','144/165/180Hz',''],['200','200Hz ou mais',''], ...(buy?[BR]:[])]);
+  if(buy){ if(!st.mtam) st.mtam = 'auto'; h += row('mtam','Tamanho', [['24','24" / 25"','competitivo'],['27','27"',''],['32','32" / 34"','imersão, ultrawide'], BR]); }
   if(buy) h += row('mpan','Painel', [['IPS','IPS','cores'],['VA','VA','contraste'],['OLED','OLED','topo'],['Mini LED','Mini LED',''], BR]);
   return h + `<button class="opt go" id="pciMonGo" ${st.mres?'':'disabled style="opacity:.45;cursor:default"'}><b>${st.mres?'Continuar →':'Escolhe a resolução'}</b></button>`;
 }
@@ -600,44 +601,62 @@ function pickCase(aq, wc, premium, need){
 }
 
 const MON_OK = /AOC|LG|Acer|Gigabyte|Philips|Samsung|ASUS|MSI/;
-function pickMon(res, plus, hz, pan){
+// tamanho: competitivo gosta de 24" (no máximo 27"); casual/campanha no mínimo 27", e 32"/34" se der. Bruno prefere telas maiores, mas segue o perfil.
+const tamOk = (x, t) => { const n = parseInt(x.a.Tamanho||'0'); return t==='24' ? n>=23 && n<=25 : t==='27' ? n===27 : t==='32' ? n>=31 : true; };
+function pickMon(res, plus, hz, pan, tam, jogo, orc){
   const RN = {fhd:'Full HD', qhd:'QHD', uhd:'4K'}[res];
   const hzOk = x => { const t = x.a.Taxa||''; return hz==='60' ? (!t || /Até 100/.test(t)) : hz==='144' ? /144/.test(t) : hz==='200' ? /200|280/.test(t) : (res==='uhd' || /144|200|280/.test(t)); };
-  const base = x => x.a['Resolução']===RN && /Normal/.test(x.a.Formato||'') && MON_OK.test(x.n) && !/Office/.test(x.n) && x.np>=3;
+  const ord = (!tam || tam==='auto') ? (jogo==='fps' ? ['24','27'] : (orc>=8000 ? ['32','27'] : ['27','32'])) : [tam];
+  const fmtOk = (x, t) => /Normal/.test(x.a.Formato||'') || (t==='32' && /Ultrawide/.test(x.a.Formato||''));
+  const base = (x, t) => x.a['Resolução']===RN && fmtOk(x,t) && tamOk(x,t) && MON_OK.test(x.n) && !/Office/.test(x.n) && x.np>=3;
   const panOk = x => pan && pan!=='auto' ? x.a.Painel===pan : x.a.Painel!=='OLED';
-  let L = by('mon', x => base(x) && hzOk(x) && panOk(x)), relax = '';
-  if(!L.length && pan && pan!=='auto'){ L = by('mon', x => base(x) && hzOk(x) && x.a.Painel!=='OLED'); relax = 'painel'; }
-  if(!L.length){ L = by('mon', x => base(x) && x.a.Painel!=='OLED'); relax = 'taxa'; }
-  if(plus && (!hz || hz==='auto')){ const T = L.filter(x => res==='fhd' ? (x.a.Tamanho==='27"' && /200|280/.test(x.a.Taxa||'')) : res==='qhd' ? /200|280/.test(x.a.Taxa||'') : true); if(T.length) L = T; }
+  let L = [], relax = '';
+  for(const t of ord){ L = by('mon', x => base(x,t) && hzOk(x) && panOk(x)); if(L.length) break; }
+  if(!L.length && pan && pan!=='auto'){ for(const t of ord){ L = by('mon', x => base(x,t) && hzOk(x) && x.a.Painel!=='OLED'); if(L.length) break; } relax = 'painel'; }
+  if(!L.length){ for(const t of ord){ L = by('mon', x => base(x,t) && x.a.Painel!=='OLED'); if(L.length) break; } relax = 'taxa'; }
+  if(!L.length){ L = by('mon', x => x.a['Resolução']===RN && /Normal/.test(x.a.Formato||'') && MON_OK.test(x.n) && x.np>=3 && x.a.Painel!=='OLED'); relax = 'tamanho'; }
+  if(plus && (!hz || hz==='auto')){ const T = L.filter(x => res==='fhd' ? /200|280/.test(x.a.Taxa||'') : res==='qhd' ? /200|280/.test(x.a.Taxa||'') : true); if(T.length) L = T; }
   const it = cheapest(L); if(!it) return null;
   return {it, preco:it.p, fx:[it.p25, it.p75], res, relax};
 }
+// regra do Bruno: teclado mecânico com fio de R$ 100–200; mouse SEM FIO sempre que der; headset sem fio (até uns R$ 250) se couber. Se não couber, o que dá.
+const SEMFIO = /sem fio|wireless|tri-mode|bluetooth|lightspeed/i;
 function pickPer(cat, plus){
-  const RX = {mouse: plus ? /G305|King Pro/ : /G203|K1NG|King Pro|GM510/, kb: /Dark Avenger|Fizz/, head: plus ? /Zeus Pro|G335/ : /Zeus Lite|Cragblade/}[cat];
-  let L = by(cat, x => RX.test(x.n) && x.np>=3);
-  if(!L.length) L = by(cat, x => RX.test(x.n));
+  let L;
+  if(cat==='kb') L = by(cat, x => /Dark Avenger|Fizz|Shade/.test(x.n) && !SEMFIO.test(x.t) && x.p>=90 && x.p<=210);
+  else if(cat==='mouse') L = by(cat, x => plus ? SEMFIO.test(x.t) && x.p<=220 : true);
+  else L = by(cat, x => /^Headset/.test(x.n) && (plus ? SEMFIO.test(x.t) && x.p<=270 : !/G335/.test(x.n)));
+  L = L.filter(x => x.np>=3).length ? L.filter(x => x.np>=3) : L;
   let it = cheapest(L);
-  if(cat==='kb'){ const da = L.find(x=>/Dark Avenger/.test(x.n)); if(da && da.p <= it.p + 50) it = da; }
+  if(cat==='kb'){ const da = L.find(x=>/Dark Avenger/.test(x.n)); if(da && it && da.p <= it.p + 50) it = da; }
+  if(cat==='head' && !plus){ const z = L.find(x=>/Zeus Lite/.test(x.n)); if(z && it && z.p <= it.p + 50) it = z; }
   if(!it) return null;
-  return {it, preco:it.p, fx:[it.p25, it.p75]};
+  return {it, preco:it.p, fx:[it.p25, it.p75], semfio: SEMFIO.test(it.t||'')};
 }
 function setup(s){
   const it = st.itens || {};
   const res = s.mon==='auto' ? (s.orc>=10000 ? 'qhd' : 'fhd') : s.mon;
-  for(const plus of (s.orc>=10000 ? [true,false] : [false])){
+  // testa: mouse e headset sem fio / só mouse sem fio / tudo com fio. Fica com o sem fio só se o PC não perder nada por isso.
+  let melhor = null;
+  for(const [pm, ph] of [[true,true],[true,false],[false,false]]){
     const acc = {};
     let ok = true, soma = 0;
-    if(it.mon){ acc.mon = pickMon(res, plus, s.mhz, s.mpan); if(!acc.mon) ok = false; }
-    for(const k of ['kb','mouse','head']) if(it[k]){ acc[k] = pickPer(k, plus); if(!acc[k]) ok = false; }
+    if(it.mon){ acc.mon = pickMon(res, pm && s.orc>=10000, s.mhz, s.mpan, s.mtam, s.jogo, s.orc); if(!acc.mon) ok = false; }
+    if(it.kb){ acc.kb = pickPer('kb', true); if(!acc.kb) ok = false; }
+    if(it.mouse){ acc.mouse = pickPer('mouse', pm) || pickPer('mouse', false); if(!acc.mouse) ok = false; }
+    if(it.head){ acc.head = pickPer('head', ph) || pickPer('head', false); if(!acc.head) ok = false; }
     if(!ok) continue;
     for(const k in acc) soma += acc[k].preco;
     const teto = s.orc * fator(s);
     const pcOrc = teto - soma;
     const hz60 = it.mon ? (acc.mon && /Até 100/.test(acc.mon.it.a.Taxa||'') || (res==='uhd' && !(acc.mon.it.a.Taxa))) : s.mhz==='60';
     const b = monta(Object.assign({}, s, {orc: pcOrc, pag:'pix', mon: it.mon ? res : s.mon, hz60}));
-    if(b){ b.acc = acc; b.accTot = soma; b.res = it.mon ? res : s.mon; b.pcOrc = pcOrc; b.geral = b.tot + soma; return b; }
+    if(!b) continue;
+    b.acc = acc; b.accTot = soma; b.res = it.mon ? res : s.mon; b.pcOrc = pcOrc; b.geral = b.tot + soma;
+    const nota = b.sc + (acc.mouse && acc.mouse.semfio ? 1.5 : 0) + (acc.head && acc.head.semfio ? 1.5 : 0);
+    if(!melhor || nota > melhor.nota + .01) melhor = {b, nota};
   }
-  return null;
+  return melhor ? melhor.b : null;
 }
 
 function score(cpu, gpu, s, ram, ssd){
@@ -949,12 +968,12 @@ function result(){
     `É a placa mais forte que cabe nos ${R(+s.gfut)} que você separou, e ${FUT.g.v>8?'tem memória de vídeo sobrando pra durar':'é a escolha certa pra Full HD'}.`, '', '',
     [FUT.n, FUT.g.v+'GB '+(FUT.g.mem||''), FUT.g.ln ? FUT.g.pcie+' x'+FUT.g.ln : '', 'fonte '+FUT.g.w+'W'], meter('Desempenho', FUT.g.i/270)) : '';
   if(A.mon){ const m = A.mon.it.a; accCards.push(card('Monitor', A.mon.it.n.replace('Monitor ',''), A.mon.preco, A.mon.it,
-     `Monitor <b>${m['Resolução']}${m.Taxa?' '+m.Taxa:''}</b>${m.Tamanho?', '+m.Tamanho:''}${m.Painel?', painel '+m.Painel:''}. Faixa normal desse modelo: <b>${faixa(A.mon.fx[0], A.mon.fx[1])}</b>.${A.mon.relax==='painel'?` <b>Não passou nenhum ${s.mpan} com essa resolução no último mês</b>, então fui no melhor que apareceu.`:A.mon.relax==='taxa'?' <b>Não passou nenhum com essa taxa no último mês</b>, então fui no melhor que apareceu.':''}`,
+     `Monitor <b>${m['Resolução']}${m.Taxa?' '+m.Taxa:''}</b>${m.Tamanho?', '+m.Tamanho:''}${m.Painel?', painel '+m.Painel:''}. Faixa normal desse modelo: <b>${faixa(A.mon.fx[0], A.mon.fx[1])}</b>.${A.mon.relax==='painel'?` <b>Não passou nenhum ${s.mpan} com essa resolução no último mês</b>, então fui no melhor que apareceu.`:A.mon.relax==='taxa'?' <b>Não passou nenhum com essa taxa no último mês</b>, então fui no melhor que apareceu.':A.mon.relax==='tamanho'?' <b>Não passou nenhum nesse tamanho no último mês</b>, então fui no melhor que apareceu.':''}${(!s.mtam||s.mtam==='auto') ? (s.jogo==='fps' ? ' Pra competitivo eu gosto de 24": você enxerga a tela inteira sem mexer a cabeça.' : ' Pra jogar de tudo eu gosto de tela grande: 27" pra cima deixa a experiência muito mais imersiva.') : ''}`,
      A.mon.res==='fhd' ? T('why_mon_fhd') : A.mon.res==='qhd' ? T('why_mon_qhd') : 'Nitidez máxima. Lembre que em 4K a placa de vídeo trabalha muito mais.')); }
   const perTxt = T('why_per');
-  if(A.mouse) accCards.push(card('Mouse', A.mouse.it.n.replace('Mouse ',''), A.mouse.preco, A.mouse.it, `Mouse com sensor bom e leve, faixa <b>${faixa(A.mouse.fx[0], A.mouse.fx[1])}</b>.`, perTxt));
+  if(A.mouse) accCards.push(card('Mouse', A.mouse.it.n.replace('Mouse ',''), A.mouse.preco, A.mouse.it, (A.mouse.semfio ? `Mouse <b>sem fio</b>, faixa <b>${faixa(A.mouse.fx[0], A.mouse.fx[1])}</b>. Mouse é o periférico onde o fio mais atrapalha: sem fio a experiência muda.` : `Mouse com sensor bom e leve, faixa <b>${faixa(A.mouse.fx[0], A.mouse.fx[1])}</b>. O sem fio não coube agora; dá pra trocar depois.`), perTxt));
   if(A.kb) accCards.push(card('Teclado', A.kb.it.n.replace('Teclado ',''), A.kb.preco, A.kb.it, `Teclado mecânico de entrada, faixa <b>${faixa(A.kb.fx[0], A.kb.fx[1])}</b>. Com fio: não precisa pagar por wireless.`, perTxt));
-  if(A.head) accCards.push(card('Headset', A.head.it.n.replace(/^(Headset|Fone) /,''), A.head.preco, A.head.it, `Headset confortável com microfone, faixa <b>${faixa(A.head.fx[0], A.head.fx[1])}</b>.`, perTxt));
+  if(A.head) accCards.push(card('Headset', A.head.it.n.replace(/^(Headset|Fone) /,''), A.head.preco, A.head.it, (A.head.semfio ? `Headset <b>sem fio</b> com microfone, faixa <b>${faixa(A.head.fx[0], A.head.fx[1])}</b>. A mobilidade do sem fio faz muita diferença no dia a dia.` : `Headset confortável com microfone, faixa <b>${faixa(A.head.fx[0], A.head.fx[1])}</b>. O sem fio não coube agora.`), perTxt));
   const linhas = [['Processador',b.cpu,b.cI.p,b.cI],['Placa de vídeo',GN,b.gI.p,b.apu?null:b.gI],['Placa-mãe',b.mobo.it.n.replace('Placa-mãe ',''),b.mobo.preco,b.mobo.it],['Memória','2x'+(b.ram/2)+'GB '+ramT,b.rr.preco,b.rr.it],['SSD',b.ss.it.n.replace('SSD ',''),b.ss.preco,b.ss.it],['Fonte',b.ps.it.n.replace('Fonte ',''),b.ps.preco,b.ps.it],['Refrigeração',b.co.box?'cooler box':b.co.it.n,b.co.preco,b.co.it],['Gabinete',b.ca.it.n.replace('Gabinete ',''),b.ca.preco,b.ca.it]];
   const linhasAcc = [A.mon&&['Monitor',A.mon.it.n.replace('Monitor ',''),A.mon.preco,A.mon.it],A.kb&&['Teclado',A.kb.it.n.replace('Teclado ',''),A.kb.preco,A.kb.it],A.mouse&&['Mouse',A.mouse.it.n.replace('Mouse ',''),A.mouse.preco,A.mouse.it],A.head&&['Headset',A.head.it.n.replace(/^(Headset|Fone) /,''),A.head.preco,A.head.it]].filter(Boolean);
   const lnk = l => l[3] && l[3].post ? `<a class="tl" href="https://t.me/grape_tec/${l[3].post}" target="_blank" rel="noopener" data-ev="post_resumo">${esc(l[1])} ↗</a>` : `<span class="old">${esc(l[1])}</span>`;
@@ -1034,7 +1053,7 @@ function result(){
   if(window.matchMedia){ const mq = matchMedia('print'); const f = e => e.matches ? tira() : volta(); mq.addEventListener ? mq.addEventListener('change', f) : mq.addListener(f); }
 })();
 /* ---------- salvar / restaurar o projeto ---------- */
-const CHAVES = ['itens','gmodo','itipo','gfut','orc','pag','parc','jogo','mres','mhz','mpan','mon','plat','vis','net'];
+const CHAVES = ['itens','gmodo','itipo','gfut','mtam','orc','pag','parc','jogo','mres','mhz','mpan','mon','plat','vis','net'];
 function codifica(){ const o = {}; CHAVES.forEach(k => { if(st[k]!==undefined) o[k] = st[k]; }); return btoa(unescape(encodeURIComponent(JSON.stringify(o)))).replace(/=+$/,''); }
 function salvos(){ try { const L = JSON.parse(localStorage.getItem('pcideal_salvos')||'[]'); return Array.isArray(L) ? L : []; } catch(_){ return []; } }
 function gravaSalvos(L){ try { localStorage.setItem('pcideal_salvos', JSON.stringify(L.slice(0,10))); } catch(_){} }

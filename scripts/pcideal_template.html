@@ -112,10 +112,31 @@
   #pci a.me small,#pci a.me span{color:#1a1320!important}
   #pci a.me em{display:none}
   #pci .fc span{color:#3d3547!important}
+  #pci .mapa2{background:#f5f2f9!important;border-color:#7b2cbf!important;break-inside:avoid}
+  #pci .mp-t>span,#pci .mp-t ol{color:#1a1320!important}
+  #pci .mp-c a{display:none!important}#pci .mp-u{font-size:14px;font-weight:700;color:#1a1320!important}
+  #pci .mp-u:before{content:"Canais de ofertas (WhatsApp e Telegram): "}
   #pci .sec{break-after:avoid}
   #pci a.me span:after{content:" · jobrufe.kpages.online/montageminteligente";font-weight:600}
 }
 #pci .cs{font-size:12.5px;color:var(--okt);margin-top:-4px}#pci .cs b{color:var(--okt)}
+#pci .age{font-size:11px;color:var(--dim);margin-top:-4px}#pci .age.new{color:var(--okt)}
+#pci .mapa2{display:grid;grid-template-columns:120px 1fr;gap:18px;align-items:center;border:2px solid var(--ac);background:linear-gradient(135deg,rgba(199,125,255,.14),rgba(20,19,23,.6));border-radius:20px;padding:18px 20px;margin-bottom:16px}
+#pci .mp-ill{width:120px;height:90px;color:var(--ink)}
+#pci .mp-t b{color:var(--ink)}
+#pci .mp-t>b{display:block;font-size:clamp(18px,3.2vw,23px);line-height:1.2;margin-bottom:6px}
+#pci .mp-t>span{display:block;color:#d9d3e3;font-size:14.5px}
+#pci .mp-t ol{margin:10px 0 0 20px;display:grid;gap:3px;font-size:14.5px;color:#d9d3e3}
+#pci .mp-c{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px}
+#pci .mp-c a{display:inline-flex;align-items:center;gap:7px;text-decoration:none;color:var(--ink);border:1px solid var(--bd);background:var(--s2);border-radius:999px;padding:6px 13px;font-weight:600;font-size:14px}
+#pci .mp-c a svg{width:18px;height:18px}#pci .mp-c a.wa svg{color:var(--wa)}#pci .mp-c a.tg svg{color:var(--tg)}
+#pci .mp-c a.wa:hover{border-color:var(--wa)}#pci .mp-c a.tg:hover{border-color:var(--tg)}
+#pci .mp-u{font-size:12.5px;color:var(--mut)}
+@media (max-width:560px){#pci .mapa2{grid-template-columns:1fr}#pci .mp-ill{width:90px;height:68px}}
+#pci .mpv{position:relative;aspect-ratio:16/9;border-radius:20px 20px 0 0;overflow:hidden;border:2px solid var(--ac);border-bottom:0;background:#000}
+#pci .mpv iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+#pci .mapa2.comvideo{border-radius:0 0 20px 20px;border-top:0}
+@media print{#pci .mpv{display:none!important}#pci .mapa2.comvideo{border-radius:20px;border-top:2px solid #7b2cbf!important}}
 #pci .parts{display:grid;gap:12px;margin-bottom:16px}
 #pci .part{background:var(--s1);border:1px solid var(--bd);border-radius:16px;padding:16px;display:grid;grid-template-columns:1fr 210px;gap:16px;align-items:start}
 #pci .pl{display:grid;gap:8px;min-width:0}
@@ -204,6 +225,9 @@ const esc = s => String(s||'').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;',
 const fire = (e,p) => { try { window.fbq && fbq('trackCustom', e, p||{}); } catch(_){} };
 /* coleta anônima pra planilha do Bruno (Google Sheets). Sem nome, e-mail ou telefone. Vazio = desligado. */
 const COLETA_URL = '';
+/* vídeo do Bruno explicando o "mapa" (link do YouTube). Vazio = mostra só o texto. */
+const VIDEO_URL = '';
+const ytId = u => (u.match(/(?:youtu\.be\/|v=|shorts\/|embed\/)([\w-]{11})/)||[])[1] || '';
 let VID = ''; try { VID = localStorage.getItem('pcideal_vid') || (Math.random().toString(36).slice(2,10)); localStorage.setItem('pcideal_vid', VID); } catch(_){ VID = Math.random().toString(36).slice(2,10); }
 function coleta(evento, extra){
   if(!COLETA_URL) return;
@@ -344,7 +368,11 @@ function head(full){
 
 /* ---------- Escolha das peças ---------- */
 const by = (c,f) => (P[c]||[]).filter(f);
-const cheapest = L => L.slice().sort((a,b)=>a.p-b.p)[0];
+// idade da oferta em dias (em relação ao último post do canal)
+const idade = it => it && it.d && DATA.gen ? Math.max(0, Math.round((Date.parse(DATA.gen) - Date.parse(it.d)) / 864e5)) : 0;
+// regra do Bruno: preferir oferta recente (mais chance de ainda estar valendo). Oferta velha "custa" ~1% a mais por dia depois de 2 dias.
+const efetivo = it => it.p * (1 + .01*Math.max(0, idade(it) - 2));
+const cheapest = L => L.slice().sort((a,b)=>efetivo(a)-efetivo(b))[0];
 const isG = x => !/Genérica/.test(x.n);
 
 function pickRam(ddr, total){
@@ -566,7 +594,7 @@ function pbox(it, preco, sub){
   const sl = selo(it);
   return `<div class="pbox">
     <a class="ph" href="https://t.me/grape_tec/${it.post}" target="_blank" rel="noopener" data-ev="post">${it.img?`<img src="${esc(it.img)}" alt="" loading="lazy" onerror="this.remove()">`:''}<span class="sl ${sl[0]}">${sl[1]}</span></a>
-    <div class="pi"><div class="pp">${R2(preco)}</div><div class="ps">${sub||(esc(it.loja||'')+' · '+dia(it.d))}</div>
+    <div class="pi"><div class="pp">${R2(preco)}</div><div class="ps">${sub||(esc(it.loja||'')+' · '+dia(it.d))}</div><div class="age ${idade(it)<=2?'new':''}">${idade(it)===0?'postado hoje':idade(it)===1?'postado ontem':'postado há '+idade(it)+' dias'}</div>
     ${it.cup?`<button class="cupb" data-c="${esc(it.cup)}" data-u="${esc(it.url||'')}" title="Copia o cupom e abre a loja">🎟️ ${esc(it.cup)}</button>`:''}
     ${it.url?`<a class="btn buy" href="${esc(it.url)}" target="_blank" rel="noopener sponsored" data-ev="loja">${esc(it.loja||'Loja')} ↗</a>`:''}
     <a class="vp" href="https://t.me/grape_tec/${it.post}" target="_blank" rel="noopener" data-ev="post">ver o post</a></div></div>`;
@@ -733,6 +761,12 @@ function result(){
      <div class="mapa">${mapa}</div>
      <div class="sv"><button class="btn" id="pciPdf">📄 Salvar em PDF</button><button class="btn" id="pciLink">🔗 Copiar link do meu PC</button><span class="old">fica salvo neste navegador também</span></div>
      <div class="pdate">Montado em ${new Date().toLocaleDateString('pt-BR')} · grapetec.com.br</div></div>
+   ${ytId(VIDEO_URL) ? `<div class="mpv"><iframe src="https://www.youtube-nocookie.com/embed/${ytId(VIDEO_URL)}?rel=0" title="Como usar o seu mapa" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>` : ''}<div class="mapa2${ytId(VIDEO_URL)?' comvideo':''}">
+     <svg class="mp-ill" viewBox="0 0 120 90" aria-hidden="true"><rect x="8" y="14" width="34" height="62" rx="4" fill="none" stroke="currentColor" stroke-width="3"/><path d="M42 14l36 10v62l-36-10zM78 24l34-10v62l-34 10" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M20 34c6 8 14 4 18 12s16 10 26 4 18 2 26-6" fill="none" stroke="#c77dff" stroke-width="3" stroke-dasharray="5 5" stroke-linecap="round"/><circle cx="92" cy="44" r="7" fill="#c77dff"/><path d="M92 51v10" stroke="#c77dff" stroke-width="3" stroke-linecap="round"/></svg>
+     <div class="mp-t"><b>Isso aqui é o seu MAPA, não um carrinho de compras.</b>
+       <span>As ofertas abaixo são as que passaram no meu canal. Oferta acaba rápido, e algumas provavelmente já expiraram. Mas pelo histórico, <b>a chance de você pegar essas peças nesses preços é grande</b>: elas sempre voltam.</span>
+       <ol><li><b>Guarda esse mapa</b> (PDF ou link)</li><li><b>Entra no canal de ofertas</b></li><li><b>Compra cada peça quando ela bater o preço do norte</b>, até montar igualzinho</li></ol>
+       <div class="mp-c"><a class="wa" href="https://grapetec.com.br/whatsapp" target="_blank" rel="noopener" data-ev="mapa_whatsapp">${WA}WhatsApp</a><a class="tg" href="https://t.me/grape_tec" target="_blank" rel="noopener" data-ev="mapa_telegram">${TG}Telegram</a><span class="mp-u">grapetec.com.br/ofertas</span></div></div></div>
    <div class="raio"><h3>1. O Raio-X</h3>${raio.map(p=>`<p>${p}</p>`).join('')}</div>
    <div class="sec">2. A Máquina</div><div class="parts">${parts.join('')}</div>
    ${accCards.length?`<div class="sec">3. ${A.mon?(accCards.length>1?'Monitor e periféricos':'Monitor'):'Periféricos'}</div><div class="parts">${accCards.join('')}</div>`:''}

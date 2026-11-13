@@ -22,3 +22,7 @@ Regras que o Bruno passou e que o algoritmo segue. Anotar aqui cada regra nova (
 - SSD: 1TB NVMe PCIe 3.0 (2.000–3.000 MB/s) a partir de ~R$ 5,5 mil. (13/11/2026)
 - Fonte: 750–850W Gold "pra upgrade" no AM5 / a partir de ~R$ 8 mil. (13/11/2026)
 - Não usar anúncio de peça usada/seminova/open box. (13/11/2026)
+
+## Ofertas e entrega
+- Preferir ofertas recentes (mais chance de ainda estar valendo): oferta com mais de 2 dias "pesa" ~1% a mais por dia na escolha; cada peça mostra "postado hoje / ontem / há X dias". (13/11/2026)
+- Deixar explícito, antes do Raio-X e no PDF: o resultado é um MAPA, não carrinho; ofertas podem ter expirado, mas pelo histórico voltam; entrar no canal de ofertas e montar igual. Vídeo do Bruno explicando entra em cima quando ele gravar (VIDEO_URL). (13/11/2026)

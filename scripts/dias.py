@@ -80,16 +80,17 @@ if _os.environ.get('MARCAS') and _os.path.exists(_os.environ['MARCAS']):
 for r in csv.DictReader(open('esgotados.csv',encoding='utf-8')): esg.setdefault(r['cupom'],r['datahora'])
 def slug(s):
     import unicodedata; return re.sub(r'[^a-z0-9]+','-',unicodedata.normalize('NFKD',s).encode('ascii','ignore').decode().lower()).strip('-')
+import datetime as _dtt
 def build(day):
     best={};avail={}
     for r in allp:
         if r['data']!=day: continue
-        k=r['produto']; prev=[p for d,p in daily[k].items() if d<day]
+        k=r['produto']; _d30=(_dtt.date.fromisoformat(day)-_dtt.timedelta(days=30)).isoformat(); prev=[p for d,p in daily[k].items() if _d30<=d<day]
         if len(prev)<5: continue
         price=float(r['preco'].replace(',','.')); med=S.median(prev); lo=min(prev)
         if r['fora_da_curva']=='sim': continue
         drop=(1-price/med)*100
-        if drop<5: continue
+        if drop<-1: continue
         pid=r['link_post'].rsplit('/',1)[1]; c=cup.get(pid,{})
         it=dict(k=k,id=slug(k.replace(' (mais barata)','').replace(' (mais barato)','')),n=k.replace(' (mais barata)','').replace(' (mais barato)',''),t=r['titulo'][:70],bucket=k.endswith(')') and 'mais bar' in k,
                 p=price,med=round(med,2),lo=lo,drop=round(drop,1),rec=price<lo,loja=r['loja'],h=c.get('hora',''),cup=c.get('cupom',''),post=int(pid),cat=r['categoria'])
@@ -116,7 +117,7 @@ def build(day):
         if x['k'] in _vd: x['bucket']=True
     L=sorted(L,key=lambda x:(-x['drop'],-x['rec']))
     n=_NOFERTAS.get(day,0)
-    return dict(items=L[:90],total=len(best),ofertas=n)
+    return dict(items=L[:160],total=sum(1 for x in best.values() if x['drop']>=5),np=sum(1 for x in best.values() if x['drop']<5),ofertas=n)
 import datetime as _dtt
 _hoje=(_dtt.datetime.utcnow()-_dtt.timedelta(hours=3)).date()
 D={(_hoje-_dtt.timedelta(days=1)).isoformat():build((_hoje-_dtt.timedelta(days=1)).isoformat()),_hoje.isoformat():build(_hoje.isoformat())}

@@ -908,7 +908,7 @@ function result(){
   /* ----- norte e porquê de cada peça ----- */
   const nCpu = `${b.cpu}, ${C.d}. Normal no mês: <b>${faixa(b.cI.p25, b.cI.p75)}</b>. Abaixo de ${R(r50(b.cI.p25))} é compra.`;
   const gpus = (P.gpu||[]).find(x=>x.n===b.gpu) || {p25:0,p75:0};
-  const nGpu = b.apu ? (FUT ? `Sem placa de vídeo por enquanto: o vídeo <b>${VI}</b> do processador segura até ela chegar. O próximo passo é a <b>${FUT.n}</b> (veja abaixo).` : `Sem placa de vídeo por enquanto: o <b>${VI}</b> do processador faz o papel. Quando for comprar a placa, mira numa <b>RTX 5060 / RX 9060 XT</b> pra cima.`) : `O alvo é a <b>${b.gpu}</b>, não a marca. Qualquer ${b.gpu} na faixa <b>${faixa(gpus.p25, gpus.p75)}</b> serve; não precisa ser triple fan.`;
+  const nGpu = b.apu ? (FUT ? `Sem placa de vídeo por enquanto: o vídeo <b>${VI}</b> do processador segura até ela chegar. O próximo passo é a <b>${FUT.n}</b> (veja abaixo).` : `Sem placa de vídeo por enquanto: o <b>${VI}</b> do processador faz o papel. A fonte e a plataforma já estão prontas: quando quiser a placa, é só encaixar.`) : `O alvo é a <b>${b.gpu}</b>, não a marca. Qualquer ${b.gpu} na faixa <b>${faixa(gpus.p25, gpus.p75)}</b> serve; não precisa ser triple fan.`;
   const up = b.apu ? null : gpuNear(b.gpu, 1), dn = b.apu ? null : gpuNear(b.gpu, -1);
   let xGpu = '';
   if(up) xGpu += `<b>Quer esticar?</b> A ${up.n} custa ${R(up.it.p - b.gI.p)} a mais e entrega uns ${Math.round((up.g.i/G.i-1)*100)}% a mais. `;

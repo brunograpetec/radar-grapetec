@@ -71,3 +71,4 @@ Regras que o Bruno passou e que o algoritmo segue. Anotar aqui cada regra nova (
 
 ## SSD
 - 1TB sempre que der (NVMe PCIe 3.0, pelo preço). 500GB só quando o orçamento apertar, pra não derrubar placa de vídeo nem processador (e explicar). Texto: o 3.0 supre as necessidades de hoje; em jogo a diferença pro 4.0 não é gritante (nada de "carrega igual"). (13/11/2026)
+- Vídeo integrado: recomendação de placa de vídeo só aparece no card "Upgrade planejado" (com o orçamento que ele escolheu). Sem orçamento de placa, não sugerir placa genérica. (13/11/2026)

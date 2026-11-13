@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PC Ideal · Grape Tec</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+#pci{--bg:#0a0a0c;--s1:#141317;--s2:#1d1a22;--bd:#2a2631;--ink:#f5f3f8;--mut:#a7a1b0;--dim:#6d6776;--ac:#c77dff;--ac2:#7b2cbf;--act:#e2c4ff;--ok:#4cc28c;--okt:#8ff0c3;--warn:#ffb020;--warnt:#ffd27a;--onac:#1b0a28;--wa:#25d366;--tg:#229ed9;--mono:"JetBrains Mono",ui-monospace,monospace;
+  font-family:"Readex Pro",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased;min-height:100vh;position:relative;overflow:hidden}
+#pci *{box-sizing:border-box;margin:0;padding:0}
+#pci .orb{position:absolute;inset:-20% -10% auto;height:520px;background:radial-gradient(closest-side,#5a189a 0,transparent 70%);opacity:.38;pointer-events:none;filter:blur(10px)}
+#pci .wrap{position:relative;max-width:880px;margin:0 auto;padding:28px 18px 60px}
+#pci header{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+#pci .logo{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--ac),var(--ac2));display:grid;place-items:center;font-weight:700;color:var(--onac);font-size:20px}
+#pci .brand b{display:block;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);font-weight:600}
+#pci .brand span{font-size:12px;color:var(--dim)}
+#pci h1{font-size:clamp(30px,6vw,46px);line-height:1.05;letter-spacing:-.02em;margin:6px 0 10px}
+#pci h1 em{font-style:normal;background:linear-gradient(90deg,var(--ac),#ff7ad9);-webkit-background-clip:text;background-clip:text;color:transparent}
+#pci .lead{color:var(--mut);font-size:16px;max-width:620px}
+#pci .prog{display:flex;gap:6px;margin:26px 0 18px}
+#pci .prog i{flex:1;height:4px;border-radius:4px;background:var(--s2)}
+#pci .prog i.on{background:var(--ac)}
+#pci .q{background:var(--s1);border:1px solid var(--bd);border-radius:18px;padding:22px}
+#pci .q h2{font-size:21px;margin-bottom:4px}
+#pci .q p.h{color:var(--mut);font-size:14px;margin-bottom:16px}
+#pci .opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+#pci .opts.big{grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+#pci .opt{all:unset;box-sizing:border-box;cursor:pointer;border:1px solid var(--bd);background:var(--s2);border-radius:14px;padding:14px 14px;transition:.15s;display:block}
+#pci .opt:hover{border-color:var(--ac);transform:translateY(-1px)}
+#pci .opt:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+#pci .opt b{display:block;font-size:16px}
+#pci .opt span{display:block;color:var(--mut);font-size:12.5px;margin-top:3px}
+#pci .opt.sel{border-color:var(--ac);background:rgba(199,125,255,.12)}
+#pci .nav{display:flex;justify-content:space-between;align-items:center;margin-top:16px}
+#pci .lnk{all:unset;cursor:pointer;color:var(--mut);font-size:14px}
+#pci .lnk:hover{color:var(--ink)}
+#pci .chips{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 18px}
+#pci .chip{font-size:12px;border:1px solid var(--bd);border-radius:999px;padding:3px 10px;color:var(--mut)}
+/* resultado */
+#pci .hero{background:linear-gradient(135deg,rgba(123,44,191,.35),rgba(20,19,23,.9));border:1px solid var(--bd);border-radius:20px;padding:22px;margin-bottom:16px}
+#pci .hero .tot{font-family:var(--mono);font-size:clamp(30px,7vw,44px);font-weight:800;letter-spacing:-.02em}
+#pci .hero .sub{color:var(--mut);font-size:14px}
+#pci .bar{height:8px;border-radius:8px;background:rgba(255,255,255,.08);margin:12px 0 6px;overflow:hidden}
+#pci .bar i{display:block;height:100%;background:var(--ac);border-radius:8px}
+#pci .mapa{font-weight:600;font-size:17px;margin-top:12px}
+#pci .raio{background:var(--s1);border:1px solid var(--bd);border-radius:18px;padding:20px;margin-bottom:16px}
+#pci .raio h3,#pci .sec{font-size:13px;text-transform:uppercase;letter-spacing:.12em;color:var(--ac);margin-bottom:8px;font-weight:600}
+#pci .raio p{color:#ddd8e6;margin-bottom:8px;font-size:15px}
+#pci .raio p:last-child{margin-bottom:0}
+#pci .parts{display:grid;gap:12px;margin-bottom:16px}
+#pci .part{background:var(--s1);border:1px solid var(--bd);border-radius:16px;padding:16px 18px;display:grid;grid-template-columns:1fr auto;gap:6px 14px}
+#pci .part .k{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--dim)}
+#pci .part .n{font-size:17px;font-weight:600;line-height:1.3}
+#pci .part .pr{text-align:right;font-family:var(--mono);font-weight:700;font-size:18px;white-space:nowrap}
+#pci .part .pr small{display:block;font-family:"Readex Pro",system-ui,sans-serif;font-weight:400;font-size:12px;color:var(--mut)}
+#pci .norte{grid-column:1/-1;background:var(--s2);border-left:3px solid var(--ac);border-radius:8px;padding:10px 12px;font-size:14px;color:#e4dfeb}
+#pci .norte b{color:var(--act)}
+#pci .why{grid-column:1/-1;color:var(--mut);font-size:14px}
+#pci .acts{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:2px}
+#pci .btn{all:unset;cursor:pointer;font-size:13px;border:1px solid var(--bd);border-radius:999px;padding:5px 12px;color:var(--ink)}
+#pci .btn:hover{border-color:var(--ac);color:var(--act)}
+#pci .cup{font-family:var(--mono);font-size:12px;color:var(--warnt);border:1px dashed rgba(255,176,32,.5);border-radius:8px;padding:3px 8px}
+#pci .old{font-size:12px;color:var(--dim)}
+#pci table{width:100%;border-collapse:collapse;font-size:14px}
+#pci td{padding:7px 0;border-bottom:1px solid var(--bd)}
+#pci td:last-child{text-align:right;font-family:var(--mono)}
+#pci tr.t td{font-weight:700;border:0;padding-top:10px;font-size:16px}
+#pci ul.ck{list-style:none;display:grid;gap:6px;font-size:14.5px}
+#pci ul.ck li::before{content:"✔ ";color:var(--ok)}
+#pci ul.no li::before{content:"✖ ";color:#ff8a8a}
+#pci .cta{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:6px}
+#pci .cta a{text-decoration:none;color:var(--ink);background:var(--s2);border:1px solid var(--bd);border-radius:14px;padding:14px;display:block}
+#pci .cta a:hover{border-color:var(--ac)}
+#pci .cta a b{display:block}
+#pci .cta a span{font-size:13px;color:var(--mut)}
+#pci .cta a.main{background:linear-gradient(135deg,var(--ac),var(--ac2));color:var(--onac);border:0}
+#pci .cta a.main span{color:#3b1a55}
+#pci .foot{color:var(--dim);font-size:12px;margin-top:20px}
+#pci .alt{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 0}
+@media (max-width:560px){#pci .part{grid-template-columns:1fr}#pci .part .pr{text-align:left}}
+</style>
+</head>
+<body style="margin:0;background:#0a0a0c">
+<div id="pci"><div class="orb"></div><div class="wrap" id="app"></div></div>
+<script>
+const DATA = /*DATA*/null;
+(function(){
+const P = DATA.parts, app = document.getElementById('app');
+const R = v => 'R$ ' + Math.round(v).toLocaleString('pt-BR');
+const R2 = v => 'R$ ' + v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+const r50 = v => Math.round(v/50)*50;
+const faixa = (a,b) => { a=r50(a); b=r50(b); if(b<=a) b=a+50; return R(a)+'–'+b.toLocaleString('pt-BR'); };
+const esc = s => String(s||'').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fire = (e,p) => { try { window.fbq && fbq('trackCustom', e, p||{}); } catch(_){} };
+
+/* ---------- Tabelas do Brunão (desempenho relativo; GPU = por chip) ---------- */
+const CPU = {
+ 'Ryzen 5 5500':     {pl:'AM4', g:70,  c:6, d:'6 núcleos e 12 threads, o mais barato que ainda segura uma placa de vídeo de entrada'},
+ 'Ryzen 5 5600':     {pl:'AM4', g:80,  c:6, d:'6 núcleos e 12 threads, com PCIe 4.0 e mais cache que o 5500'},
+ 'Ryzen 5 5600X':    {pl:'AM4', g:81,  c:6, d:'6 núcleos e 12 threads, mesmo nível do 5600'},
+ 'Ryzen 5 5600XT':   {pl:'AM4', g:82,  c:6, d:'6 núcleos e 12 threads, mesmo nível do 5600'},
+ 'Ryzen 7 5700X':    {pl:'AM4', g:85,  c:8, d:'8 núcleos e 16 threads: base boa pra jogo, estudo e multitarefa, e envelhece bem'},
+ 'Ryzen 7 5800XT':   {pl:'AM4', g:88,  c:8, d:'8 núcleos e 16 threads, um degrau acima do 5700X'},
+ 'Ryzen 5 5500X3D':  {pl:'AM4', g:95,  c:6, x3d:1, d:'tem 3D V-Cache, o cache extra que dá FPS em jogo competitivo'},
+ 'Ryzen 7 5800X3D':  {pl:'AM4', g:108, c:8, x3d:1, d:'8 núcleos com 3D V-Cache: o melhor processador de jogo do AM4'},
+ 'Ryzen 5 7500F':    {pl:'AM5', g:100, c:6, d:'6 núcleos Zen 4 no AM5, a porta de entrada da plataforma nova'},
+ 'Ryzen 5 7600':     {pl:'AM5', g:100, c:6, d:'6 núcleos Zen 4 no AM5, com vídeo integrado pra emergência'},
+ 'Ryzen 5 7600X':    {pl:'AM5', g:103, c:6, d:'6 núcleos Zen 4, um pouco mais de clock que o 7600'},
+ 'Ryzen 5 9600X':    {pl:'AM5', g:110, c:6, d:'6 núcleos Zen 5, muito forte por núcleo'},
+ 'Ryzen 7 7700':     {pl:'AM5', g:108, c:8, d:'8 núcleos e 16 threads no AM5: joga bem, trabalha bem e aguenta upgrade de GPU'},
+ 'Ryzen 7 9700X':    {pl:'AM5', g:115, c:8, d:'8 núcleos Zen 5, excelente pra jogo e trabalho'},
+ 'Ryzen 5 7600X3D':  {pl:'AM5', g:125, c:6, x3d:1, d:'3D V-Cache no AM5 por um preço menor que o 7800X3D'},
+ 'Ryzen 7 7800X3D':  {pl:'AM5', g:135, c:8, x3d:1, d:'8 núcleos com 3D V-Cache, referência em FPS'},
+ 'Ryzen 7 9800X3D':  {pl:'AM5', g:150, c:8, x3d:1, d:'o processador de jogo mais forte que existe hoje'},
+ 'Ryzen 9 7900':     {pl:'AM5', g:110, c:12, d:'12 núcleos: pra quem edita, renderiza e joga'},
+ 'Ryzen 9 9900X':    {pl:'AM5', g:118, c:12, d:'12 núcleos Zen 5: muito forte em edição e 3D'},
+};
+const GPU = {
+ 'RX 7600':          {i:100, v:8,  w:650},
+ 'RX 9050':          {i:102, v:8,  w:650},
+ 'RTX 5050':         {i:100, v:8,  w:650},
+ 'RTX 5060':         {i:125, v:8,  w:650},
+ 'RX 9060 XT 8GB':   {i:135, v:8,  w:650},
+ 'RTX 5060 Ti 8GB':  {i:145, v:8,  w:650},
+ 'RX 9060 XT 16GB':  {i:140, v:16, w:650},
+ 'RTX 5060 Ti 16GB': {i:150, v:16, w:650},
+ 'RX 9070 GRE':      {i:175, v:12, w:750},
+ 'RTX 5070':         {i:185, v:12, w:750},
+ 'RX 9070':          {i:200, v:16, w:750},
+ 'RX 9070 XT':       {i:225, v:16, w:750},
+ 'RTX 5070 Ti':      {i:235, v:16, w:850},
+ 'RTX 5080':         {i:270, v:16, w:850},
+};
+const MARCA_OK = /ASUS|MSI|Gigabyte|ASRock|Maxsun/;
+const FONTE_OK = /MSI|Cooler Master|XPG|Rise Mode|Redragon|Cougar|Corsair|Gigabyte|Pichau|Montech|Lian Li/;
+const WC_OK = /MSI|Thermalright|Arctic|DeepCool|Redragon|Lian Li|Corsair|NZXT/;
+
+/* ---------- Perguntas (só botão) ---------- */
+const Q = [
+ {k:'orc', t:'Quanto você quer investir no PC?', h:'Só o computador (monitor e periféricos ficam de fora).', o:[
+   [4000,'R$ 4 mil','PC de entrada'],[5000,'R$ 5 mil',''],[6000,'R$ 6 mil',''],[7000,'R$ 7 mil','o mais pedido'],
+   [8000,'R$ 8 mil',''],[10000,'R$ 10 mil',''],[12000,'R$ 12 mil',''],[15000,'R$ 15 mil',''],[20000,'R$ 20 mil','topo']]},
+ {k:'pag', t:'Como você vai pagar?', h:'As ofertas do canal geralmente são à vista. No cartão eu deixo uma margem.', big:1, o:[
+   ['pix','PIX / à vista','uso o orçamento quase todo'],['cartao','Cartão parcelado','guardo ~8% de margem pro parcelamento']]},
+ {k:'jogo', t:'O que você mais vai jogar?', h:'Isso muda onde eu coloco o dinheiro: processador ou placa de vídeo.', big:1, o:[
+   ['fps','FPS / Battle Royale','CS2, Valorant, Fortnite, Warzone, Arena Breakout'],
+   ['aaa','Mundo aberto / AAA','GTA, Cyberpunk, RDR2, God of War, lançamentos'],
+   ['mix','Um pouco de tudo','competitivo e história'],
+   ['work','Jogo + trabalho','edição de vídeo, 3D, streaming']]},
+ {k:'mon', t:'E o monitor?', h:'A resolução decide quanta placa de vídeo você precisa.', big:1, o:[
+   ['fhd60','Full HD 60/75Hz','ou TV'],['fhd','Full HD 144Hz+','o padrão gamer'],['qhd','QHD (2K)','1440p'],['uhd','4K','2160p']]},
+ {k:'plat', t:'AM4 ou AM5?', h:'AM4 é mais barato hoje (memória DDR4). AM5 é a plataforma nova, que recebe processadores futuros.', big:1, o:[
+   ['auto','Deixa o Brunão decidir','escolho pelo seu orçamento'],['am4','AM4','mais desempenho por real agora'],['am5','AM5','penso em fazer upgrade depois']]},
+ {k:'vis', t:'Como você quer o visual?', h:'Estética custa pouco, mas custa.', big:1, o:[
+   ['simples','Discreto','air cooler e gabinete simples'],['aquario','Aquário com RGB','vidro, fans e water cooler 360mm']]},
+ {k:'net', t:'Internet no PC vai ser…', h:'Se for no cabo, não pago a mais por Wi-Fi na placa-mãe.', big:1, o:[
+   ['cabo','No cabo',''],['wifi','Wi-Fi','placa-mãe com Wi-Fi']]},
+];
+let st = {}, step = 0;
+
+function render(){
+  if(step >= Q.length) return result();
+  const q = Q[step];
+  const cur = st[q.k];
+  app.innerHTML = head(step===0) +
+   `<div class="prog">${Q.map((_,i)=>`<i class="${i<=step?'on':''}"></i>`).join('')}</div>
+    <div class="q"><h2>${q.t}</h2><p class="h">${q.h}</p>
+     <div class="opts ${q.big?'big':''}">${q.o.map(o=>`<button class="opt ${cur===o[0]?'sel':''}" data-v="${o[0]}"><b>${o[1]}</b>${o[2]?`<span>${o[2]}</span>`:''}</button>`).join('')}</div>
+     <div class="nav">${step?'<button class="lnk" id="back">← voltar</button>':'<span></span>'}<span class="old">${step+1} de ${Q.length}</span></div></div>`;
+  app.querySelectorAll('.opt').forEach(b => b.onclick = () => {
+    const v = b.dataset.v; st[q.k] = isNaN(+v) ? v : +v; step++; render(); scrollTo({top: app.offsetTop - 10, behavior:'smooth'});
+  });
+  const bk = document.getElementById('back'); if(bk) bk.onclick = () => { step--; render(); };
+}
+function head(full){
+  return `<header><div class="logo">G</div><div class="brand"><b>Grape Tec · PC Ideal</b><span>preços dos meus posts dos últimos 30 dias</span></div></header>` +
+   (full ? `<h1>Monte seu <em>PC Ideal</em></h1><p class="lead">Responde 7 perguntas, só clicando. Eu monto o PC completo com as 8 peças, do jeito que faço nas minhas consultorias, usando os preços reais que passaram no canal no último mês.</p>` : '');
+}
+
+/* ---------- Escolha das peças ---------- */
+const by = (c,f) => (P[c]||[]).filter(f);
+const cheapest = L => L.slice().sort((a,b)=>a.p-b.p)[0];
+const isG = x => !/Genérica/.test(x.n);
+
+function pickRam(ddr, total){
+  const cap = total/2;
+  const mods = by('ram', x => x.a.ddr===ddr && x.a.cap===cap && x.a.mods===1 && x.np>=3 && isG(x) && (ddr===4 ? x.a.mhz>=3200 : x.a.mhz>=5200));
+  const kits = by('ram', x => x.a.ddr===ddr && x.a.cap===cap && x.a.mods===2 && isG(x) && (ddr===4 ? x.a.mhz>=3200 : x.a.mhz>=5200));
+  const m = cheapest(mods), k = cheapest(kits);
+  const cls = by('ram', x => x.a.ddr===ddr && x.a.cap===cap && x.a.mods===1);
+  const ps = cls.map(x=>x.med).sort((a,b)=>a-b);
+  const fx = ps.length ? [ps[Math.floor(ps.length*.25)], ps[Math.floor(ps.length*.75)]] : null;
+  if(m && (!k || 2*m.p <= k.p)) return {it:m, preco:2*m.p, qtd:2, fx};
+  if(k) return {it:k, preco:k.p, qtd:1, fx: fx && [fx[0]*2, fx[1]*2]};
+  return null;
+}
+function pickMobo(pl, s, cpu, ctx){
+  const wifi = s.net==='wifi';
+  let L = by('mobo', x => x.a.Plataforma===pl && MARCA_OK.test(x.a.Marca||x.n) && x.np>=4 && (!wifi || x.a['Wi-Fi']==='Com Wi-Fi'));
+  let chip, tier;
+  if(pl==='AM4'){
+    chip = (ctx.orc<4500 && !CPU[cpu].x3d && CPU[cpu].c<=6) ? /A520|B550/ : /B550/;
+    tier = (CPU[cpu].x3d || ctx.orc>=8000) ? /TUF|Aorus|Gaming Plus|Phantom|Steel Legend/ : null;
+  } else {
+    chip = (ctx.orc>=10000 || s.plat==='am5') ? /B850|B650/ : /B650|B850/;
+    tier = ctx.orc>=10000 ? /B850|TUF/ : null;
+  }
+  L = L.filter(x => chip.test(x.a.Chipset||x.n));
+  if(tier){ const T = L.filter(x=>tier.test(x.n)); if(T.length) L = T; }
+  const it = cheapest(L); if(!it) return null;
+  const cls = by('mobo', x => x.a.Plataforma===pl && x.a.Chipset===it.a.Chipset).map(x=>x.med).sort((a,b)=>a-b);
+  return {it, preco:it.p, fx:[cls[Math.floor(cls.length*.25)], cls[Math.floor(cls.length*.75)]]};
+}
+function pickSsd(kind){
+  const cap = kind==='500'?'500GB':kind==='2t'?'2TB':'1TB';
+  const g4 = kind==='1t4';
+  let L = by('ssd', x => x.a.Capacidade===cap && x.np>=4 && (g4 ? /Gen4/.test(x.a.Interface) : true));
+  const it = cheapest(L); if(!it) return null;
+  const cls = by('ssd', x => x.a.Capacidade===cap && (g4 ? /Gen4/.test(x.a.Interface) : !/Gen4/.test(x.a.Interface))).map(x=>x.med).sort((a,b)=>a-b);
+  return {it, preco:it.p, fx:[cls[Math.floor(cls.length*.25)], cls[Math.floor(cls.length*.75)]], kind};
+}
+function pickPsu(w, gold){
+  const okW = x => { const m = (x.a['Potência']||'').match(/(\d+)W$/); const n = m?+m[1]:0; return n>=w; };
+  let L = by('psu', x => FONTE_OK.test(x.n) && okW(x) && x.np>=4 && (!gold || x.a['Certificação']==='Gold'));
+  if(!L.length) L = by('psu', x => okW(x) && x.np>=3 && (!gold || x.a['Certificação']==='Gold'));
+  const it = cheapest(L); if(!it) return null;
+  const cls = by('psu', x => okW(x) && x.a['Certificação']===it.a['Certificação']).map(x=>x.med).sort((a,b)=>a-b);
+  return {it, preco:it.p, fx:[cls[0], cls[cls.length-1]], w, gold};
+}
+function pickCooler(wc, premium){
+  let L = wc ? by('cooler', x => x.a.Tipo==='Water cooler' && /360/.test(x.n) && WC_OK.test(x.n) && x.np>=5 && (!premium || /Arctic|Thermalright/.test(x.n)))
+             : by('cooler', x => x.a.Tipo==='Air cooler' && /AK400|Hyper 212|NX600|Boreal/.test(x.n) && x.np>=4);
+  if(wc && premium && !L.length) return pickCooler(true,false);
+  // água: prefiro o MSI A12 360 (é o que eu mais indico) se estiver na faixa
+  let it = cheapest(L);
+  if(wc && !premium){ const msi = L.find(x=>/MSI/.test(x.n)); if(msi && msi.p <= it.p + 80) it = msi; }
+  if(!wc){ const ak = L.find(x=>/AK400/.test(x.n)); if(ak) it = ak; }
+  if(!it) return null;
+  const cls = L.map(x=>x.med).sort((a,b)=>a-b);
+  return {it, preco:it.p, fx:[cls[0], cls[cls.length-1]], wc};
+}
+function pickCase(aq, wc, premium){
+  let L;
+  if(premium) L = by('case', x => /Lian Li|Wideload/.test(x.n));
+  else if(wc) L = by('case', x => /CV700L|Wideload/.test(x.n));
+  else if(aq) L = by('case', x => /CV450 \(9 fans\)|CV700L/.test(x.n));
+  else L = by('case', x => /CV450$|G-Storm|Mancer CV450/.test(x.n) && !/9 fans/.test(x.n));
+  const it = premium ? L.sort((a,b)=>b.p-a.p)[0] : cheapest(L);
+  if(!it) return null;
+  return {it, preco:it.p, fx:[it.p25, it.p75]};
+}
+
+function score(cpu, gpu, s, ram, ssd){
+  const c = CPU[cpu], g = GPU[gpu];
+  let gi = g.i;
+  if(s.mon==='qhd'){ gi *= .72; if(g.v<=8) gi *= .86; }
+  if(s.mon==='uhd'){ gi *= .46; if(g.v<=8) gi *= .7; else if(g.v<=12) gi *= .9; }
+  let mult = {fps:1.25, aaa:1.9, mix:1.55, work:1.6}[s.jogo];
+  if(s.mon==='qhd') mult *= 1.3; if(s.mon==='uhd') mult *= 1.75; if(s.mon==='fhd60') mult *= 1.4;
+  let sc = Math.min(gi, c.g*mult) + .12*Math.max(gi, c.g*mult);
+  if(c.c>=8) sc += 3;                       // 8 núcleos envelhecem melhor
+  if(s.jogo==='fps' && c.x3d) sc += 6;      // cache 3D no competitivo
+  if(s.jogo==='work') sc = .55*sc + .45*(c.c*10*(c.pl==='AM5'?1.15:1));
+  if(ram===32) sc += s.jogo==='work' ? 10 : 2.5;
+  if(ssd==='1t'||ssd==='1t4') sc += 4; if(ssd==='2t') sc += 5.5; if(ssd==='1t4') sc += .5;
+  if(s.plat==='auto' && c.pl==='AM5') sc *= 1.02;  // empate técnico → AM5 leva pela vida útil
+  // equilíbrio: processador não pode segurar demais a placa
+  if(c.g < .3*g.i + 40) sc -= 40;
+  return sc;
+}
+
+function monta(s){
+  const teto = s.orc * (s.pag==='cartao' ? .92 : 1);
+  const plats = s.plat==='am4' ? ['AM4'] : s.plat==='am5' ? ['AM5'] : ['AM4','AM5'];
+  const ctx = {orc:s.orc};
+  const aq = s.vis==='aquario';
+  let best = null;
+  for(const cpu in CPU){
+    const C = CPU[cpu], cI = (P.cpu||[]).find(x=>x.n===cpu);
+    if(!cI || !plats.includes(C.pl)) continue;
+    if(s.jogo!=='work' && C.c>=12) continue;
+    const mobo = pickMobo(C.pl, s, cpu, ctx); if(!mobo) continue;
+    for(const gpu in GPU){
+      const gI = (P.gpu||[]).find(x=>x.n===gpu); if(!gI) continue;
+      const G = GPU[gpu];
+      for(const ram of [16,32]){
+        const rr = pickRam(C.pl==='AM4'?4:5, ram); if(!rr) continue;
+        for(const sk of ['500','1t','1t4','2t']){
+          if(sk==='1t4' && C.pl!=='AM5') continue;
+          if(sk==='500' && s.orc>=5500) continue;               // de 5,5 mil pra cima é 1TB
+          if(sk==='2t' && s.orc<10000 && s.jogo!=='work') continue;
+          const ss = pickSsd(sk); if(!ss) continue;
+          const top = s.orc>=12000;
+          const gold = s.orc>=5500 || G.w>=750;
+          const w = (C.pl==='AM5' || s.orc>=8000) ? Math.max(G.w, 850) : G.w;
+          const ps = pickPsu(w, gold); if(!ps) continue;
+          const wc = aq || C.x3d && s.orc>=8000 || s.orc>=10000 || /9700X|9900X|7900/.test(cpu);
+          const co = pickCooler(wc, top); if(!co) continue;
+          const ca = pickCase(aq, co.wc, top && aq); if(!ca) continue;
+          const tot = cI.p + gI.p + mobo.preco + rr.preco + ss.preco + ps.preco + co.preco + ca.preco;
+          if(tot > teto) continue;
+          const sc = score(cpu, gpu, s, ram, sk);
+          if(!best || sc > best.sc + .01 || (Math.abs(sc-best.sc)<=.01 && tot < best.tot))
+            best = {sc, tot, cpu, gpu, cI, gI, mobo, rr, ss, ps, co, ca, ram, pl:C.pl, teto};
+        }
+      }
+    }
+  }
+  return best;
+}
+
+/* ---------- Texto no estilo da consultoria ---------- */
+const lojaBtn = it => it.url ? `<a class="btn" href="${esc(it.url)}" target="_blank" rel="noopener" data-ev="${esc(it.n)}">${esc(it.loja||'Loja')} ↗</a>` : '';
+const postBtn = it => `<a class="btn" href="https://t.me/grape_tec/${it.post}" target="_blank" rel="noopener">post ↗</a>`;
+const cupTag = it => it.cup ? `<span class="cup">cupom ${esc(it.cup)}</span>` : '';
+const dia = d => d ? d.slice(8,10)+'/'+d.slice(5,7) : '';
+function card(k, nome, preco, it, norte, why, extra){
+  return `<div class="part"><div><div class="k">${k}</div><div class="n">${esc(nome)}</div></div>
+   <div class="pr">${R2(preco)}<small>${extra||('oferta de '+dia(it.d)+' · '+esc(it.loja||''))}</small></div>
+   <div class="norte"><b>Norte:</b> ${norte}</div>
+   <div class="why">${why}</div>
+   <div class="acts">${lojaBtn(it)}${postBtn(it)}${cupTag(it)}<span class="old">mediana 30 dias ${R(it.med)} · ${it.np} ofertas</span></div></div>`;
+}
+
+function result(){
+  const s = st, b = monta(s);
+  fire('PCIdeal_Resultado', {orc:s.orc, jogo:s.jogo, mon:s.mon, plat:s.plat});
+  const chips = `<div class="chips">${[R(s.orc), s.pag==='cartao'?'cartão':'PIX', {fps:'FPS/BR',aaa:'AAA',mix:'de tudo',work:'jogo + trabalho'}[s.jogo], {fhd60:'Full HD 60Hz',fhd:'Full HD 144Hz+',qhd:'QHD',uhd:'4K'}[s.mon], {auto:'plataforma: Brunão decide',am4:'AM4',am5:'AM5'}[s.plat], s.vis==='aquario'?'aquário':'discreto', s.net==='wifi'?'Wi-Fi':'cabo'].map(x=>`<span class="chip">${x}</span>`).join('')}<button class="lnk" id="redo" style="font-size:12px;margin-left:6px">refazer ↺</button></div>`;
+  if(!b){
+    app.innerHTML = head(false) + chips + `<div class="raio"><h3>Não fechou</h3><p>Com esse orçamento e essas escolhas eu não consegui fechar um PC completo com as ofertas do último mês. Tenta subir um degrau no orçamento, trocar pra AM4 ou ir de visual discreto.</p></div>`;
+    document.getElementById('redo').onclick = () => { st={}; step=0; render(); };
+    return;
+  }
+  const C = CPU[b.cpu], G = GPU[b.gpu];
+  const sobra = s.orc - b.tot;
+  const gpuName = b.gpu;
+  const mapa = `${b.cpu} + ${gpuName} + ${b.ram}GB ${b.pl==='AM4'?'DDR4':'DDR5'} + SSD ${b.ss.kind==='500'?'500GB':b.ss.kind==='2t'?'2TB':'1TB'} + fonte ${b.ps.it.n.match(/(\d{3,4})W/)?.[1]||b.ps.w}W`;
+  const resTxt = {fhd60:'Full HD', fhd:'Full HD de alta taxa', qhd:'QHD', uhd:'4K'}[s.mon];
+  const jogoTxt = {fps:'jogo competitivo, onde FPS alto e estável é o que manda', aaa:'jogos de mundo aberto e lançamentos, onde quem carrega é a placa de vídeo', mix:'um pouco de tudo, então equilibrei processador e placa de vídeo', work:'jogo e trabalho, então pesei mais núcleos e memória'}[s.jogo];
+  let raio = [`Fala! Montei o seu pensando em <b>${jogoTxt}</b>, em <b>${resTxt}</b>.`,
+    `O coração da máquina ficou no <b>${b.cpu} + ${gpuName}</b>.`];
+  if(b.pl==='AM4') raio.push(s.plat==='am4' ? 'Fiquei no AM4 como você pediu: memória DDR4 é bem mais barata hoje, e esse dinheiro vira desempenho.' :
+    'Escolhi <b>AM4</b>: hoje a memória DDR5 está muito cara, e com esse orçamento a diferença vai direto pra placa de vídeo. É desempenho por real.');
+  else raio.push(s.plat==='am5' ? 'Fomos de <b>AM5</b>, como você pediu: plataforma nova, que recebe processadores futuros sem trocar a placa-mãe.' :
+    'Aqui já compensa ir de <b>AM5</b>: plataforma nova, DDR5, e quando quiser subir de processador é só trocar ele.');
+  if(s.pag==='cartao') raio.push(`Como vai ser no cartão, deixei uma margem: o PC fechou em <b>${R(b.tot)}</b> com preço de oferta, e o resto do orçamento é pra absorver a diferença do parcelamento.`);
+  if(s.mon==='fhd60' && s.jogo!=='aaa') raio.push('Um conselho: com monitor 60Hz você não enxerga o FPS que esse PC entrega. Assim que der, um Full HD 144Hz muda o jogo.');
+  if(s.mon==='uhd' && G.i<200) raio.push('Sendo sincero: 4K pede muita placa de vídeo. Esse PC roda, mas em 4K você vai precisar baixar gráficos ou usar upscaling (DLSS/FSR).');
+  if(sobra > 1500 && s.pag!=='cartao') raio.push(`Sobrou <b>${R(sobra)}</b>: não tem placa de vídeo acima dessa nas ofertas do mês, então eu guardaria pro monitor ou periféricos.`);
+  if(s.mon!=='uhd' && s.mon!=='qhd' && G.v>=16) raio.push(`Os ${G.v}GB de memória de vídeo já deixam a máquina preparada para ir para QHD no futuro.`);
+
+  // norte de cada peça
+  const ramT = b.pl==='AM4'?'DDR4':'DDR5';
+  const nCpu = `${b.cpu}, ${C.d}. Normal no último mês: <b>${faixa(b.cI.p25, b.cI.p75)}</b>. Abaixo de ${R(r50(b.cI.p25))} é compra.`;
+  const gpus = (P.gpu||[]).find(x=>x.n===b.gpu);
+  const nGpu = `O alvo é a <b>${b.gpu}</b>, não a marca. Qualquer ${b.gpu} na faixa <b>${faixa(gpus.p25, gpus.p75)}</b> serve; não precisa ser triple fan.`;
+  const chip = b.mobo.it.a.Chipset;
+  const nMobo = `Chipset <b>${chip}</b> (${b.pl}, ${ramT})${s.net==='wifi'?', <b>com Wi-Fi</b>':''}. Faixa ${chip}: <b>${faixa(b.mobo.fx[0], b.mobo.fx[1])}</b>.${s.net!=='wifi'?' No cabo, não precisa pagar por Wi-Fi.':''}`;
+  const nRam = `Memória <b>2x${b.ram/2} = ${b.ram}GB ${ramT}</b>${ramT==='DDR4'?' 3200MHz':' 5600–6000MHz'}, sempre em dois pentes (dual channel).${b.rr.fx?` Cada pente na faixa <b>${faixa(b.rr.fx[0], b.rr.fx[1])}</b>.`:''}`;
+  const ssK = b.ss.kind;
+  const nSsd = ssK==='500' ? `SSD <b>500GB NVMe</b> pra começar, faixa <b>${faixa(b.ss.fx[0], b.ss.fx[1])}</b>. Depois, com calma, você coloca mais um.` :
+    ssK==='2t' ? `SSD <b>2TB NVMe</b>, faixa <b>${faixa(b.ss.fx[0], b.ss.fx[1])}</b>: espaço pra biblioteca grande e projetos.` :
+    ssK==='1t4' ? `SSD <b>1TB NVMe PCIe 4.0</b>, faixa <b>${faixa(b.ss.fx[0], b.ss.fx[1])}</b>.` :
+    `SSD <b>1TB na faixa ${faixa(b.ss.fx[0], b.ss.fx[1])}, NVMe PCIe 3.0, 2.000–3.000 MB/s</b>. Pra jogo isso sobra.`;
+  const wN = +(b.ps.it.n.match(/(\d{3,4})W/)||b.ps.it.a['Potência'].match(/(\d+)W$/))[1];
+  const nPsu = wN>=850 && G.w<850 ? `Fonte <b>750–850W Gold</b>, faixa ${faixa(b.ps.fx[0], b.ps.fx[1])}. Ela não é pra placa de hoje: <b>prepara pra upgrades</b> de GPU sem trocar a fonte.` :
+    `Fonte <b>${G.w}W ${b.ps.it.a['Certificação']}</b> de marca boa, faixa ${faixa(b.ps.fx[0], b.ps.fx[1])}. ${G.w<=650?'650W já atende esse conjunto, não precisa gastar mais.':'Na medida pra essa placa.'}`;
+  const nCo = b.co.wc ? `Water cooler <b>360mm</b>, faixa ${faixa(b.co.fx[0], b.co.fx[1])}. Radiador na parte de cima do gabinete.` :
+    `Air cooler simples de torre, faixa ${faixa(b.co.fx[0], b.co.fx[1])}. ${C.x3d?'':'Esse processador é tranquilo de refrigerar.'}`;
+  const nCa = b.co.wc ? `Gabinete mid tower que aceite <b>radiador 360mm no topo</b>${aqT()}.` : (s.vis==='aquario' ? `Gabinete aquário com fans, sem tirar dinheiro do desempenho.` : `Gabinete com boa ventilação (frente em tela). Não precisa gastar aqui.`);
+  function aqT(){ return s.vis==='aquario' ? ', estilo aquário' : ''; }
+
+  const ramNome = b.rr.qtd===2 ? `2x ${b.rr.it.n.replace('Memória ','')}` : b.rr.it.n.replace('Memória ','');
+  const parts = [
+    card('Processador', b.cpu, b.cI.p, b.cI, nCpu, C.x3d ? 'Por que escolhi: tecnologia 3D V-Cache, focada em FPS. É onde o competitivo ganha.' : 'Por que escolhi: é a base da máquina, junto com a placa de vídeo é onde o dinheiro faz diferença.'),
+    card('Placa de vídeo', (b.gI.t || b.gpu).replace(/^Placa\s+(de\s+)?v[ií]deo\s*/i,'').replace(/^Placa gráfica\s*/i,''), b.gI.p, b.gI, nGpu, `Por que escolhi: é a peça que mais pesa no FPS${s.mon!=='fhd60'&&s.mon!=='fhd'?' em '+resTxt:''}. ${G.v>=16?G.v+'GB de VRAM dão longevidade.':''}`),
+    card('Placa-mãe', b.mobo.it.n.replace('Placa-mãe ',''), b.mobo.preco, b.mobo.it, nMobo, `Por que escolhi: fecha a plataforma ${b.pl} sem jogar dinheiro em recurso que não é prioridade.`),
+    card('Memória', ramNome, b.rr.preco, b.rr.it, nRam, b.ram===32 ? 'Por que escolhi: 32GB dão conforto pra multitarefa, edição e jogos pesados.' : 'Por que escolhi: 16GB em dual channel é o equilíbrio certo pra essa máquina.', b.rr.qtd===2 ? `2 × ${R2(b.rr.it.p)} · ${esc(b.rr.it.loja)}` : ''),
+    card('SSD', b.ss.it.n.replace('SSD ',''), b.ss.preco, b.ss.it, nSsd, 'Por que escolhi: Windows, programas e jogos carregando rápido, sem pagar por velocidade que jogo não usa.'),
+    card('Fonte', b.ps.it.n.replace('Fonte ',''), b.ps.preco, b.ps.it, nPsu, 'Por que escolhi: fonte é a peça que protege o resto. Aqui não se economiza em marca ruim.'),
+    card('Refrigeração', b.co.it.n, b.co.preco, b.co.it, nCo, b.co.wc ? 'Por que escolhi: boa refrigeração e fecha a estética da montagem.' : 'Por que escolhi: resolve com folga sem tirar dinheiro do desempenho.'),
+    card('Gabinete', b.ca.it.n.replace('Gabinete ',''), b.ca.preco, b.ca.it, nCa, 'Por que escolhi: custo-benefício da oferta, comporta bem a proposta da montagem.'),
+  ];
+  const linhas = [['Processador',b.cpu,b.cI.p],['Placa de vídeo',b.gpu,b.gI.p],['Placa-mãe',b.mobo.it.n.replace('Placa-mãe ',''),b.mobo.preco],['Memória',b.ram+'GB '+ramT,b.rr.preco],['SSD',b.ss.it.n.replace('SSD ',''),b.ss.preco],['Fonte',b.ps.it.n.replace('Fonte ',''),b.ps.preco],['Refrigeração',b.co.it.n,b.co.preco],['Gabinete',b.ca.it.n.replace('Gabinete ',''),b.ca.preco]];
+  const pct = Math.min(100, b.tot/s.orc*100);
+  const futuro = b.pl==='AM5' ? `Daqui a 1 ou 2 anos o primeiro upgrade é a <b>placa de vídeo</b>. Processador, placa-mãe, memória e fonte já foram escolhidos pra você não precisar reconstruir o PC.` :
+    `No AM4 o teto de processador é o <b>Ryzen 7 5800X3D</b>. Se um dia quiser mais, a troca de placa de vídeo é a primeira; plataforma nova só quando o AM4 não der mais conta.`;
+
+  app.innerHTML = head(false) + chips +
+   `<div class="hero"><div class="sub">Seu PC Ideal</div><div class="tot">${R(b.tot)}</div>
+     <div class="bar"><i style="width:${pct.toFixed(1)}%"></i></div>
+     <div class="sub">${sobra>=0?`${R(sobra)} abaixo do seu orçamento de ${R(s.orc)}`:''}${s.pag==='cartao'?' · margem pro cartão':''}</div>
+     <div class="mapa">${mapa}</div></div>
+   <div class="raio"><h3>1. O Raio-X</h3>${raio.map(p=>`<p>${p}</p>`).join('')}</div>
+   <div class="sec">2. A Máquina</div><div class="parts">${parts.join('')}</div>
+   <div class="raio"><h3>3. Resumo financeiro</h3><table>${linhas.map(l=>`<tr><td>${l[0]} <span class="old">· ${esc(l[1])}</span></td><td>${R2(l[2])}</td></tr>`).join('')}<tr class="t"><td>Total</td><td>${R2(b.tot)}</td></tr></table>
+     <p class="foot" style="margin-top:10px">Preços das ofertas que passaram no canal nos últimos 30 dias. Oferta acaba: <b>use o norte de cada peça</b> e acompanhe o canal, não compre correndo uma alternativa mais cara.</p></div>
+   <div class="raio"><h3>4. O que eu não faria agora</h3><ul class="ck no">
+     <li>Cortar processador ou placa de vídeo pra pagar estética ou periférico</li>
+     <li>Comprar memória em um pente só: são sempre dois</li>
+     ${b.pl==='AM4'?'<li>Pagar DDR5 caro agora sem orçamento pra isso</li>':'<li>Voltar pro AM4 tendo orçamento pra AM5</li>'}
+     <li>Fonte genérica sem certificação</li></ul>
+     <p style="margin-top:10px;color:#ddd8e6;font-size:14.5px">${futuro}</p></div>
+   <div class="raio"><h3>Quer que eu revise pessoalmente?</h3>
+     <p>Esse é o mapa automático. Na consultoria eu olho seu caso, suas peças atuais (upgrade) e te entrego a configuração certinha <b>em até 24h</b>.</p>
+     <div class="cta"><a class="main" href="https://jobrufe.kpages.online/montageminteligente" target="_blank" rel="noopener" id="ctaC"><b>ME AJUDA, BRUNÃO</b><span>Consultoria Montagem Inteligente</span></a>
+     <a href="https://grapetec.com.br/ofertas" target="_blank" rel="noopener"><b>Canais de ofertas</b><span>WhatsApp e Telegram</span></a>
+     <a href="https://grapetec.com.br/radar" target="_blank" rel="noopener"><b>Radar de preços</b><span>histórico de cada peça</span></a></div></div>
+   <p class="foot">Atualizado com os posts até ${dia(DATA.gen)} · Compre pelos links: você me ajuda sem pagar nada a mais.</p>`;
+  document.getElementById('redo').onclick = () => { st={}; step=0; render(); };
+  app.querySelectorAll('a[data-ev]').forEach(a => a.onclick = () => fire('PCIdeal_Loja', {p:a.dataset.ev}));
+  const c = document.getElementById('ctaC'); if(c) c.onclick = () => fire('PCIdeal_Consultoria');
+}
+fire('PCIdeal_Visita');
+render();
+})();
+</script>
+</body>
+</html>

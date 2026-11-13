@@ -89,6 +89,32 @@
 #pci a.me span svg.cal{width:34px;height:34px;float:left;margin:0 10px 0 0;color:#2a0f40}
 #pci a.me .foto{border:4px solid rgba(255,255,255,.85);box-shadow:0 0 0 3px rgba(199,125,255,.6),0 10px 30px rgba(40,0,80,.45)}
 #pci a.tl{color:var(--mut);font-size:13px;text-decoration:none;border-bottom:1px dotted var(--dim)}#pci a.tl:hover{color:var(--act);border-color:var(--act)}
+#pci .sv{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:14px}
+#pci .sv .btn{background:rgba(10,10,12,.35)}
+#pci .pdate{display:none}
+#pci .resume{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;background:rgba(199,125,255,.1);border:1px solid var(--ac);border-radius:14px;padding:12px 14px;margin-top:18px}
+#pci .resume b{display:block}#pci .resume span{font-size:13px;color:var(--mut)}
+@media print{
+  @page{margin:12mm}
+  body *{visibility:hidden!important}
+  #pci,#pci *{visibility:visible!important}
+  #pci{position:absolute!important;left:0!important;top:0!important;width:100%!important;margin:0!important;min-height:0!important;overflow:visible!important;
+    --bg:#fff;--s1:#fff;--s2:#f5f2f9;--bd:#ddd6e6;--ink:#1a1320;--mut:#5d5568;--dim:#7c7487;--act:#6a1fb0;--okt:#178a55;--warnt:#9a5b00;background:#fff!important;color:#1a1320!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  #pci .orb,#pci .chips .lnk,#pci .sv,#pci .acts,#pci .cupb,#pci .btn.buy,#pci .vp,#pci .ch,#pci .resume{display:none!important}
+  #pci .wrap{max-width:none;padding:0}
+  #pci .hero{background:#f5f2f9!important}
+  #pci .pdate{display:block;margin-top:8px;font-size:12px;color:#5d5568}
+  #pci .part,#pci .raio,#pci .hero,#pci a.me{break-inside:avoid}
+  #pci .norte,#pci .why,#pci .raio p{color:#1a1320!important}
+  #pci .part{grid-template-columns:1fr 150px}
+  #pci .ph{aspect-ratio:1/1}
+  #pci a.me{background:#f5f2f9!important;color:#1a1320!important;border:1px solid #ddd6e6}
+  #pci a.me small,#pci a.me span{color:#1a1320!important}
+  #pci a.me em{display:none}
+  #pci .fc span{color:#3d3547!important}
+  #pci .sec{break-after:avoid}
+  #pci a.me span:after{content:" · jobrufe.kpages.online/montageminteligente";font-weight:600}
+}
 #pci .parts{display:grid;gap:12px;margin-bottom:16px}
 #pci .part{background:var(--s1);border:1px solid var(--bd);border-radius:16px;padding:16px;display:grid;grid-template-columns:1fr 210px;gap:16px;align-items:start}
 #pci .pl{display:grid;gap:8px;min-width:0}
@@ -538,7 +564,7 @@ function result(){
     let minimo = 0;
     for(let o = s.orc + 250; o <= s.orc + 4000; o += 250){ if(setup(Object.assign({}, s, {orc:o}))){ minimo = o; break; } }
     app.innerHTML = head(false) + chips + `<div class="raio"><h3>Não fechou</h3>${minimo?`<p>Com essas escolhas, hoje o mínimo pra fechar tudo é uns <b>${R(minimo)}</b>.</p>`:''}<p>Com esse orçamento e essas escolhas eu não consegui fechar um PC completo com as ofertas do último mês. Tenta subir um degrau no orçamento, tirar algum item (monitor ou periférico) da conta, trocar pra AM4 ou escolher performance em vez de estética.</p></div>`;
-    document.getElementById('pciRedo').onclick = () => { st={itens:{}, parc:30}; step=0; render(); };
+    document.getElementById('pciRedo').onclick = refaz;
     return;
   }
   const C = CPU[b.cpu], G = b.apu ? {i:C.ig, v:0, w:500} : GPU[b.gpu];
@@ -657,7 +683,9 @@ function result(){
    `<div class="hero"><div class="sub">${b.accTot?'Seu setup completo':'Seu PC Ideal'}</div><div class="tot">${R(b.geral)}</div>
      <div class="bar"><i style="width:${pct.toFixed(1)}%"></i></div>
      <div class="sub">${sobra>=0?`${R(sobra)} abaixo do seu orçamento de ${R(s.orc)}`:''}${s.pag!=='pix'?' · margem pro parcelado':''}</div>
-     <div class="mapa">${mapa}</div></div>
+     <div class="mapa">${mapa}</div>
+     <div class="sv"><button class="btn" id="pciPdf">📄 Salvar em PDF</button><button class="btn" id="pciLink">🔗 Copiar link do meu PC</button><span class="old">fica salvo neste navegador também</span></div>
+     <div class="pdate">Montado em ${new Date().toLocaleDateString('pt-BR')} · grapetec.com.br</div></div>
    <div class="raio"><h3>1. O Raio-X</h3>${raio.map(p=>`<p>${p}</p>`).join('')}</div>
    <div class="sec">2. A Máquina</div><div class="parts">${parts.join('')}</div>
    ${accCards.length?`<div class="sec">3. ${A.mon?(accCards.length>1?'Monitor e periféricos':'Monitor'):'Periféricos'}</div><div class="parts">${accCards.join('')}</div>`:''}
@@ -679,7 +707,10 @@ function result(){
      <a class="rd" href="https://grapetec.com.br/radar" target="_blank" rel="noopener" data-ev="radar"><div class="rdi">${RADAR}</div><div><h4>Radar de preços</h4><p>Veja a curva de preço de cada peça e saiba se a oferta é boa mesmo.</p><em>Abrir o Radar →</em></div></a>
    </div>
    <p class="foot">Atualizado com os posts até ${dia(DATA.gen)} · Compre pelos links: você me ajuda sem pagar nada a mais.</p>`;
-  document.getElementById('pciRedo').onclick = () => { st={itens:{}, parc:30}; step=0; render(); };
+  document.getElementById('pciRedo').onclick = refaz;
+  salva();
+  const pdf = document.getElementById('pciPdf'); if(pdf) pdf.onclick = () => { fire('PCIdeal_PDF'); window.print(); };
+  const cl = document.getElementById('pciLink'); if(cl) cl.onclick = () => { const u = location.href; try { navigator.clipboard.writeText(u); } catch(_){} cl.innerHTML = '✓ link copiado'; fire('PCIdeal_Link'); setTimeout(()=>{ cl.innerHTML = '🔗 Copiar link do meu PC'; }, 2500); };
   app.querySelectorAll('a[data-ev]').forEach(a => a.addEventListener('click', () => fire('PCIdeal_'+a.dataset.ev)));
   app.querySelectorAll('.cupb').forEach(bt => bt.onclick = () => {
     const c = bt.dataset.c, u = bt.dataset.u;
@@ -689,8 +720,30 @@ function result(){
   });
   const c = document.getElementById('pciCta'); if(c) c.onclick = () => fire('PCIdeal_Consultoria');
 }
+/* ---------- salvar / restaurar o projeto ---------- */
+const CHAVES = ['itens','orc','pag','parc','jogo','mres','mhz','mpan','mon','plat','vis','net'];
+function codifica(){ const o = {}; CHAVES.forEach(k => { if(st[k]!==undefined) o[k] = st[k]; }); return btoa(unescape(encodeURIComponent(JSON.stringify(o)))).replace(/=+$/,''); }
+function salva(){
+  const c = codifica();
+  try { history.replaceState(null, '', location.pathname + location.search + '#pc=' + c); } catch(_){}
+  try { localStorage.setItem('pcideal_ultimo', c); } catch(_){}
+}
+function le(c){ try { const o = JSON.parse(decodeURIComponent(escape(atob(c)))); return o && o.orc && o.jogo && o.vis && o.net ? o : null; } catch(_){ return null; } }
+function refaz(){ st = {itens:{}, parc:30}; step = 0; try { history.replaceState(null, '', location.pathname + location.search); } catch(_){} render(); }
 fire('PCIdeal_Visita');
+const hm = (location.hash.match(/#pc=([A-Za-z0-9+/]+)/)||[])[1];
+const doLink = hm && le(hm);
+if(doLink){ st = Object.assign({itens:{}, parc:30}, doLink); step = Q.length; fire('PCIdeal_Reaberto'); }
 render();
+if(!doLink){
+  let ult = null; try { ult = le(localStorage.getItem('pcideal_ultimo')||''); } catch(_){}
+  if(ult){
+    const bx = document.createElement('div'); bx.className = 'resume';
+    bx.innerHTML = `<div><b>Você já montou um PC aqui</b><span>${R(ult.orc)} · ${{mix:'jogo de tudo',fps:'FPS / Battle Royale',aaa:'modo campanha'}[ult.jogo]||''}. Os preços são atualizados.</span></div><button class="opt go" style="width:auto;margin:0">Ver meu PC →</button>`;
+    bx.querySelector('button').onclick = () => { st = Object.assign({itens:{}, parc:30}, ult); step = Q.length; render(); };
+    const pr = app.querySelector('.prog'); if(pr) pr.parentNode.insertBefore(bx, pr);
+  }
+}
 })();
 </script>
 </body>

@@ -214,6 +214,7 @@
 }
 @media print{#pci .barra,#pci .mais{display:none!important}#pci .det{display:grid!important}}
 #pci .parts.fut .part{border-style:dashed;border-color:var(--ac)}
+#pci .acima{border:2px solid var(--warn);background:rgba(255,176,32,.08);border-radius:16px;padding:14px 16px;margin-bottom:16px;display:grid;gap:4px}#pci .acima b{color:var(--warnt)}#pci .acima span{font-size:14.5px;color:var(--ink)}#pci .acima span b{color:var(--ink)}
 #pci .parts{display:grid;gap:12px;margin-bottom:16px}
 #pci .part{background:var(--s1);border:1px solid var(--bd);border-radius:16px;padding:16px;display:grid;grid-template-columns:1fr 210px;gap:16px;align-items:start}
 #pci .pl{display:grid;gap:8px;min-width:0}
@@ -701,7 +702,8 @@ function monta(s){
       const gI = gpu==='iGPU' ? {p:0, n:'iGPU'} : (P.gpu||[]).find(x=>x.n===gpu); if(!gI) continue;
       const G = gpu==='iGPU' ? {i:C.ig, v:0, w:500} : GPU[gpu];
       // regra do Bruno: QHD/4K pede placa com MAIS de 8GB (9060 XT 16GB, 9070 GRE, 5070, 9070, 9070 XT pra cima)
-      if((s.mon==='qhd' || s.mon==='uhd') && G.v<=8) continue;
+      if(gpu!=='iGPU' && (s.mon==='qhd' || s.mon==='uhd') && G.v<=8) continue;
+      if(gpu==='iGPU' && s.gmodo!=='igpu' && (s.mon==='qhd' || s.mon==='uhd')) continue;   // QHD/4K pede placa de verdade (só usa integrado se ele escolheu)
       // regra do Bruno: plataforma PCIe 3.0 (Ryzen 5 5500, placas A520/B450) -> evitar placa de vídeo x8 (perde desempenho) e placa grande demais
       if(pcie3 && G.i>=175) continue;
       const lanePen = (pcie3 && (G.x8 || G.inc)) ? .92 : 1;
@@ -797,9 +799,11 @@ function cardSem(k, nome, norte, why, tag){
    <div class="pbox nobox"><div class="pi"><div class="pp">R$ 0,00</div><div class="ps">${tag}</div></div></div></div>`;
 }
 function result(){
-  const s = st, b = setup(s), aq = s.vis!=='perf';
+  let b = setup(st), sub = null;
+  if(!b){ for(let o = st.orc + 250; o <= st.orc + 6000; o += 250){ const t = setup(Object.assign({}, st, {orc:o})); if(t){ b = t; sub = {de:st.orc, para:o}; break; } } }
+  const s = sub ? Object.assign({}, st, {orc: sub.para}) : st, aq = s.vis!=='perf';
   fire('PCIdeal_Resultado', {orc:s.orc, jogo:s.jogo, mon:s.mon, plat:s.plat});
-  const chips = `<div class="chips">${[R(s.orc)+' · '+['PC', st.itens.mon&&'monitor', st.itens.kb&&'teclado', st.itens.mouse&&'mouse', st.itens.head&&'headset'].filter(Boolean).join(' + '), st.gmodo==='igpu'?'vídeo integrado':st.gmodo==='dgpu'?'com placa de vídeo':'', s.pag==='cartao'?'cartão':s.pag==='misto'?`${100-s.parc}% PIX + ${s.parc}% cartão`:'PIX', {fps:'FPS/BR',aaa:'AAA',mix:'de tudo',work:'jogo + trabalho'}[s.jogo], ({fhd:'Full HD',qhd:'QHD',uhd:'4K',auto:'monitor: Brunão indica'}[s.mon]||'') + (s.mhz&&s.mhz!=='auto'?' '+{60:'60/75Hz',144:'144Hz+',200:'200Hz+'}[s.mhz]:'') + (st.itens.mon&&s.mpan&&s.mpan!=='auto'?' '+s.mpan:''), {auto:'plataforma: Brunão decide',am4:'AM4',am5:'AM5'}[s.plat], {perf:'performance',equil:'equilíbrio',estetica:'estética'}[s.vis], s.net==='wifi'?'Wi-Fi':'cabo'].filter(Boolean).map(x=>`<span class="chip">${x}</span>`).join('')}<button class="lnk" id="pciRedo" style="font-size:12px;margin-left:6px">refazer ↺</button></div>`;
+  const chips = `<div class="chips">${[R(st.orc)+' · '+['PC', st.itens.mon&&'monitor', st.itens.kb&&'teclado', st.itens.mouse&&'mouse', st.itens.head&&'headset'].filter(Boolean).join(' + '), st.gmodo==='igpu'?'vídeo integrado':st.gmodo==='dgpu'?'com placa de vídeo':'', s.pag==='cartao'?'cartão':s.pag==='misto'?`${100-s.parc}% PIX + ${s.parc}% cartão`:'PIX', {fps:'FPS/BR',aaa:'AAA',mix:'de tudo',work:'jogo + trabalho'}[s.jogo], ({fhd:'Full HD',qhd:'QHD',uhd:'4K',auto:'monitor: Brunão indica'}[s.mon]||'') + (s.mhz&&s.mhz!=='auto'?' '+{60:'60/75Hz',144:'144Hz+',200:'200Hz+'}[s.mhz]:'') + (st.itens.mon&&s.mpan&&s.mpan!=='auto'?' '+s.mpan:''), {auto:'plataforma: Brunão decide',am4:'AM4',am5:'AM5'}[s.plat], {perf:'performance',equil:'equilíbrio',estetica:'estética'}[s.vis], s.net==='wifi'?'Wi-Fi':'cabo'].filter(Boolean).map(x=>`<span class="chip">${x}</span>`).join('')}<button class="lnk" id="pciRedo" style="font-size:12px;margin-left:6px">refazer ↺</button></div>`;
   if(!b){
     let minimo = 0;
     for(let o = s.orc + 250; o <= s.orc + 4000; o += 250){ if(setup(Object.assign({}, s, {orc:o}))){ minimo = o; break; } }
@@ -809,6 +813,16 @@ function result(){
   }
   const C = CPU[b.cpu], G = b.apu ? {i:C.ig, v:0, w:500} : GPU[b.gpu];
   const VI = C.apu || 'Radeon básica';
+  let acima = '';
+  if(sub){
+    const mot = [];
+    if((b.res==='uhd'||b.res==='qhd') && !b.apu) mot.push(`pra ${b.res==='uhd'?'4K':'QHD'} a placa de vídeo precisa ter <b>12GB ou 16GB</b> (8GB eu não indico)`);
+    if(st.itens && (st.itens.mon||st.itens.kb||st.itens.mouse||st.itens.head)) mot.push(`o monitor${st.itens.kb||st.itens.mouse||st.itens.head?' e os periféricos':''} entram na mesma conta`);
+    if(s.plat==='am5' || b.pl==='AM5') mot.push('no AM5 a memória DDR5 ainda está cara');
+    if(s.vis==='estetica') mot.push('o visual caprichado (water cooler e gabinete) custa um pouco mais');
+    if(s.pag!=='pix') mot.push('guardei a margem do parcelado');
+    acima = `<div class="acima"><b>⚠ Com ${R(sub.de)} essa proposta não fecha.</b><span>Pra entregar o que você pediu${mot.length?', porque '+mot.join(', '):''}, o PC certo fica em <b>${R(b.geral)}</b> (uns ${R(b.geral - sub.de)} a mais). Montei ele abaixo: é esse o caminho que eu indicaria. Se o valor não der, volta e muda uma escolha (ex.: Full HD, tirar um periférico ou vídeo integrado).</span></div>`;
+  }
   const GN = b.apu ? 'vídeo integrado ' + VI : b.gpu;
   const FUT = b.fut;
   const sm = b.res;
@@ -943,11 +957,11 @@ function result(){
   app.innerHTML = head(false) + chips +
    `<div class="hero"><div class="sub">${b.accTot?'Seu setup completo':'Seu PC Ideal'}</div><div class="tot">${R(b.geral)}</div>
      <div class="bar"><i style="width:${pct.toFixed(1)}%"></i></div>
-     <div class="sub">${sobra>=0?`${R(sobra)} abaixo do seu orçamento de ${R(s.orc)}`:`${R(-sobra)} acima do seu orçamento de ${R(s.orc)} (explico no Raio-X)`}${s.pag!=='pix'?' · margem pro parcelado':''}</div>
+     <div class="sub">${sub?`${R(b.geral - sub.de)} acima do seu orçamento de ${R(sub.de)} · veja o aviso abaixo`:sobra>=0?`${R(sobra)} abaixo do seu orçamento de ${R(s.orc)}`:`${R(-sobra)} acima do seu orçamento de ${R(s.orc)} (explico no Raio-X)`}${s.pag!=='pix'?' · margem pro parcelado':''}</div>
      <div class="mapa">${mapa}</div>
      <div class="sv"><button class="btn" id="pciPdf">📄 Salvar em PDF</button><button class="btn" id="pciLink">🔗 Copiar link do meu PC</button><button class="btn" data-inicio="1">↺ Montar outro PC</button><span class="old">fica salvo neste navegador também</span></div>
      <div class="pdate">Montado em ${new Date().toLocaleDateString('pt-BR')} · grapetec.com.br</div></div>
-   ${ytId(VIDEO_URL) ? `<div class="mpv"><iframe src="https://www.youtube-nocookie.com/embed/${ytId(VIDEO_URL)}?rel=0" title="Como usar o seu mapa" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>` : ''}<div class="mapa2${ytId(VIDEO_URL)?' comvideo':''}">
+   ${acima}${ytId(VIDEO_URL) ? `<div class="mpv"><iframe src="https://www.youtube-nocookie.com/embed/${ytId(VIDEO_URL)}?rel=0" title="Como usar o seu mapa" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>` : ''}<div class="mapa2${ytId(VIDEO_URL)?' comvideo':''}">
      <svg class="mp-ill" viewBox="0 0 120 90" aria-hidden="true"><rect x="8" y="14" width="34" height="62" rx="4" fill="none" stroke="currentColor" stroke-width="3"/><path d="M42 14l36 10v62l-36-10zM78 24l34-10v62l-34 10" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M20 34c6 8 14 4 18 12s16 10 26 4 18 2 26-6" fill="none" stroke="#c77dff" stroke-width="3" stroke-dasharray="5 5" stroke-linecap="round"/><circle cx="92" cy="44" r="7" fill="#c77dff"/><path d="M92 51v10" stroke="#c77dff" stroke-width="3" stroke-linecap="round"/></svg>
      <div class="mp-t"><b>Isso aqui é o seu MAPA, não um carrinho de compras.</b>
        <span>As ofertas abaixo são as que passaram no meu canal. Oferta acaba rápido, e algumas provavelmente já expiraram. Mas pelo histórico, <b>a chance de você pegar essas peças nesses preços é grande</b>: elas sempre voltam.</span>

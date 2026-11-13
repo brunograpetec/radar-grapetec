@@ -48,3 +48,7 @@ Regras que o Bruno passou e que o algoritmo segue. Anotar aqui cada regra nova (
 ## Vídeo integrado (detalhe)
 - Ao escolher "Vídeo integrado", aparecem: tipo (integrado forte = série G / processador forte com vídeo básico, pra comprar placa logo / Brunão decide) e orçamento da placa de vídeo DEPOIS (nada, até 2, 3, 4,5 ou 6,5 mil). A placa futura NÃO entra no total; aparece como "Upgrade planejado" e a fonte já é escolhida pra ela. (13/11/2026)
 - Processador sempre antes da memória (nunca rebaixa processador por 32GB); 32GB entra quando o orçamento permite (~R$ 7,5 mil+ no PC). Processador casado com a placa futura (sem 9800X3D pra placa de entrada); o que sobrar vira caixa pra placa. Placa-mãe razoável (B650/B850 de entrada). (13/11/2026)
+
+## Quando o orçamento não fecha
+- Nunca mostrar "não fechou": monta o PC no mínimo que fecha a proposta (subindo de R$ 250 em R$ 250) e mostra um aviso explicando por que passou (ex.: 4K/QHD pede placa de 12/16GB, monitor e periféricos na mesma conta, DDR5 cara) e o quanto a mais. (13/11/2026)
+- No modo "Deixa o Brunão decidir", QHD/4K não usa vídeo integrado (só se ele escolheu vídeo integrado). (13/11/2026)

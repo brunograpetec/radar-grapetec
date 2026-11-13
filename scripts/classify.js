@@ -20,7 +20,7 @@ const R=[
 ['Cadeira',/^\s*cadeira/i,[[/tgc12/,'Cadeira ThunderX3 TGC12'],[/infantil|massage|capa |almofada|rodinha|rod[ií]zio|tapete|banqueta|poltrona/,'__x'],[/gamer|racer/,'Cadeira gamer (mais barata)'],[/escrit[oó]rio|ergon[oô]mica|presidente|diretor|mesh|office/,'Cadeira de escritório (mais barata)']]]];
 function extra(t,T,price,p,out){for(const [cat,re,M] of R){if(!re.test(t))continue;if(ACC.test(T)&&cat!=='Teclado'&&cat!=='Mouse')break;if(/\b(kit|combo)\b/.test(T))break;
   if(cat==='TV'){if(!/projetor|antena|controle remoto|soundbar|tv stick|tv box|suporte/.test(T))out.push([p.id,p.d,'Smart TV',price,st(p.txt),t.slice(0,140).replace(/\|/g,'/')]);break}
-  for(const [r,k] of M)if(r.test(T)){if(k==='__x')break;out.push([p.id,p.d,k,price,st(p.txt),t.slice(0,80).replace(/\|/g,'/')]);break}break}}
+  for(const [r,k] of M)if(r.test(T)){if(k==='__x')break;out.push([p.id,p.d,k,price,st(p.txt),t.slice(0,160).replace(/\|/g,'/')]);break}break}}
 const _a=process.argv.slice(2),_dt=_a.filter(x=>/^\d{4}-\d\d-\d\d$/.test(x)),d0=_dt[0],d1=_dt[1],_fs=_a.filter(x=>!/^\d{4}-\d\d-\d\d$/.test(x)),inF=_fs[0],more=_fs.slice(1);
 const J={messages:[]};const seen=new Set();for(const f of [inF,...more]){for(const m of JSON.parse(fs.readFileSync(f,'utf8')).messages){if(seen.has(m.id))continue;seen.add(m.id);J.messages.push(m)}}
 const flat=x=>typeof x==='string'?x:Array.isArray(x)?x.map(flat).join(''):(x&&x.text)||'';
@@ -29,7 +29,7 @@ for(const m of J.messages){if(m.type!=='message')continue;const d=m.date.slice(0
  const txt=flat(m.text);const es=txt.match(/cupom\s+([A-Z0-9]{4,})\s+esgotad/i)||txt.match(/\b([A-Z0-9]{5,})\b[^\n]{0,20}esgotad/i);if(es)ES.push([m.id,m.date,es[1].toUpperCase()]);const _cs=(txt.split('💰')[1]||''),_ci=_cs.search(/cupom/i),cu=_ci<0?null:_cs.slice(_ci+5,_ci+90).match(/(?:^|[^A-Za-z0-9])((?=[A-Z0-9]*[A-Z])[A-Z0-9]{4,})(?![A-Za-z0-9])/);CU.push([m.id,m.date.slice(11,16),cu?cu[1].toUpperCase():'']);const p={id:+m.id,d,txt};const _mi=txt.search(/💰\s*R\$/u);const i=_mi>=0?_mi:txt.indexOf('💰',txt.trimStart().startsWith('💰')?txt.indexOf('💰')+2:0);if(i<0)continue;
  const t=txt.slice(0,i).replace(/[^\p{L}\p{N}\s\-\/\.,+]/gu,' ').replace(/\s+/g,' ').trim();
  const pm=txt.slice(i).match(/R\$\s?([\d\.]+(?:,\d{1,2})?)/);if(!pm)continue;const price=+pm[1].replace(/\./g,'').replace(',','.');if(!price)continue;
- for(const k of __keys(t))hw.push([p.id,d,k,price,st(txt),t.slice(0,80).replace(/\|/g,'/')]);
+ for(const k of __keys(t))hw.push([p.id,d,k,price,st(txt),t.slice(0,160).replace(/\|/g,'/')]);
  extra(t,t.toLowerCase(),price,p,ex)}
 const csv=r=>r.map(v=>{v=String(v);return /[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v}).join(',');
 const H='post_id,data,produto,preco,loja,titulo\n';

@@ -9,6 +9,8 @@ SODIMM=re.compile(r'impact ddr|hyperx impact|notebook|so-?dimm',re.I)
 def cat(k):
     for p,c in [('Ryzen','Processadores'),('RTX','Placas de vídeo'),('RX ','Placas de vídeo'),('Placa-mãe','Placas-mãe'),('Memória','Memória RAM'),('SSD','SSD'),('Fonte','Fontes'),('Gabinete','Gabinetes'),('Water','Coolers'),('Air','Coolers'),('Monitor','Monitores'),('Cadeira','Cadeiras'),('Mousepad','Setup e acessórios'),('Mouse','Mouses'),('Teclado','Teclados'),('Headset','Headsets e fones'),('Fone','Headsets e fones'),('Controle','Controles'),('Notebook','Notebooks'),('PlayStation','Consoles'),('Nintendo','Consoles'),('Smart TV','TVs'),('Celular','Celulares, tablets e relógios'),('Tablet','Celulares, tablets e relógios'),('Smartwatch','Celulares, tablets e relógios'),('Microfone','Setup e acessórios'),('Mousepad','Setup e acessórios')]:
         if k.startswith(p): return c
+import sys as _s0;_s0.path.insert(0,os.path.dirname(os.path.abspath(__file__)))
+import atributos as AT
 rows=[];dropped=collections.Counter()
 for r in R:
     k=RENAME.get(r['produto'],r['produto'])
@@ -21,6 +23,8 @@ for r in R:
     if (k.startswith('SSD') or k.startswith('Memória')) and MULTI.search(t): dropped['multi']+=1; continue
     if k.startswith('Memória') and SODIMM.search(t): dropped['sodimm']+=1; continue
     if r['data']<os.environ.get('D0','2026-10-01'): continue
+    k=AT.refina(k,t)
+    if k.endswith('outras configs'): continue
     rows.append(dict(id=int(r['post_id']),d=r['data'],k=k,p=float(r['preco']),s=r['loja'],t=t,c=cat(k)))
 import sys as _s;_s.path.insert(0,os.path.dirname(os.path.abspath(__file__)))
 import atributos as AT

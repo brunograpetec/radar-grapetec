@@ -25,10 +25,12 @@ _MK = sorted(MARCA, key=len, reverse=True)
 
 def marca(t):
     t = t.lower()
+    best = None
     for m in _MK:
-        if re.search(r'(^|[^a-z])' + re.escape(m) + r'($|[^a-z])', t):
-            return MARCA[m]
-    return None
+        r = re.search(r'(^|[^a-z])' + re.escape(m) + r'($|[^a-z])', t)
+        if r and (best is None or r.start() < best[0]):
+            best = (r.start(), m)
+    return MARCA[best[1]] if best else None
 
 
 NOISE = re.compile(r'^(\d+(hz|gb|tb|mb|mhz|w|ms|mm|p|cm|v|pol|x|k|th|nd|rd|st)|ddr\d|pcie\d?|gen\d|m2|nvme|am\d|matx|atx|usb\d*|hdmi\d*|dp\d*|wifi\d*|rgb|4k|2k|8k|1080p|1440p|2160p|80plus|x3d|rev\d+|v\d|pci|sata\d*|cl\d+|hdr\d+|fhd|qhd|uhd|ips|va|tn|oled|e\d|ax\d+|bt\d|ac\d+|r\d|\d+w\d+|\d+x\d+gb|\d+x\d+|dci-?p3|\d+r|pc\d+|c\d\d|ps\d|ntsc|srgb|\d+mt|\d+gbps|\d+mbs|gddr\d+|\d+bits?|x\d|g\d+x?|a\d{3}|b\d{3}|x\d{3}|lga\d+|\d+pin|\d+v|\d{3,4}w)$')
@@ -38,7 +40,7 @@ def _codigo(t, m):
     for x in re.findall(r'[a-z0-9][a-z0-9\-]*[a-z0-9]', t.lower()):
         y = x.replace('-', '')
         if len(y) >= 3 and len(re.findall(r'\d', y)) >= 2 and re.search(r'[a-z]', y) and not NOISE.match(y) and y != (m or '').lower().replace(' ', ''):
-            return x.upper()
+            return re.sub(r'^(FHD|QHD|UHD)(?=\d)','',x.upper())
     return None
 
 
@@ -68,7 +70,10 @@ def modelo(produto, titulo):
         if not mk or not c or not s: return None
         m = 'M' if re.search(c.lower() + r'm', t) else ''
         extra = ' Plus' if s == 'TUF Gaming' and re.search(r'\bplus\b', t) else ''
-        return f'Placa-mãe {mk} {s} {c}{m}{extra}'
+        v = re.search(c.lower() + r'm?(?:-([a-z]{1,2})\b| ([abekp])\b)', t)
+        suf = ('-' + (v.group(1) or v.group(2)).upper()) if v and (v.group(1) or v.group(2)) not in ('ii',) else ''
+        wifi = ' WiFi' if re.search(r'wi-?fi|wifi', t) else ''
+        return f'Placa-mãe {mk} {s} {c}{m}{suf}{extra}{wifi}'
     if not grupo: return None
     mk = marca(t)
     if not mk: return None
@@ -202,3 +207,50 @@ def attrs(cat, produto, titulos):
             A['Painel'] = re.match(r'smart tv .+ · ?(?:4k|full hd|hd)? ?(.*)$', produto, re.I).group(1) or None
             A['Marca'] = re.match(r'Smart TV (.+?) \d+"', produto).group(1)
     return {k: v for k, v in A.items() if v}
+
+
+def _cpu(t):
+    m = re.search(r'ryzen\s?([3579])\s?-?\s?(\d{4})\s?([a-z]{0,2})\b', t)
+    if m: return f'Ryzen {m.group(1)} {m.group(2)}{m.group(3).upper()}'
+    m = re.search(r'\b(?:core\s?)?i([3579])[\s-]?(\d{4,5})([a-z]{0,2})\b', t)
+    if m: return f'i{m.group(1)}-{m.group(2)}{m.group(3).upper()}'
+    m = re.search(r'core\s?(?:ultra\s?)?([3579])\s?(\d{3})([a-z]{0,2})\b', t)
+    if m: return f'Core {m.group(1)} {m.group(2)}{m.group(3).upper()}'
+    m = re.search(r'\b(n\d{3})\b', t)
+    if m: return 'Intel ' + m.group(1).upper()
+    m = re.search(r'\b(?:core\s?)?i([3579])\b', t)
+    if m: return f'i{m.group(1)}'
+    m = re.search(r'\br([3579])\b|ryzen\s?([3579])', t)
+    if m: return f'Ryzen {m.group(1) or m.group(2)}'
+    return None
+
+
+def refina(produto, titulo):
+    """Separa variantes que têm preço muito diferente (config de notebook, armazenamento, edição especial...)."""
+    t = titulo.lower()
+    p = produto
+    if p.startswith('Notebook'):
+        g = re.search(r'rtx\s?(\d{4})', t)
+        c = _cpu(t)
+        if not c and not g: return p + ' · outras configs'
+        return p + ' · ' + ' + '.join(x for x in (c, ('RTX ' + g.group(1)) if g else None) if x)
+    if p.startswith(('Celular', 'Smartphone')):
+        st = re.search(r'\b(64|128|256|512)\s?gb', t)
+        five = ' 5G' if re.search(r'\b5g\b', t) else ''
+        return p + f' ·{five} {st.group(1)}GB' if st else p
+    if p == 'Controle DualSense (PS5)':
+        if re.search(r'edi[cç][aã]o (limitada|especial)|limited|gran turismo|blackpink|astro|god of war|30th|death stranding|fortnite|marvel|spider', t): return p + ' · Edição limitada'
+        if re.search(r'branco|white|preto|black|midnight', t) and not re.search(r'camu|purple|roxo|red|vermelh|azul|blue|green|verde|pink|rosa|cinza|gray|grey|cobalt|sterling|chroma|hyperpop|remix|rhythm', t): return p + ' · Padrão (branco/preto)'
+        return p + ' · Cores especiais'
+    if p.startswith('Controle Xbox'):
+        if re.search(r'edi[cç][aã]o|ed\.|limitad|especial|25 anos|x25|gears|forza|halo', t): return p + ' · Edição especial'
+        return p + ' · Padrão'
+    if p.startswith('Microfone Fifine SuperFrame'):
+        return p + (' SFM1 (com braço)' if 'sfm1' in t else ' SFM2' if 'sfm2' in t else '')
+    if p.startswith('Mouse HyperX Pulsefire Haste'):
+        return 'Mouse HyperX Pulsefire Haste 2' + (' sem fio' if re.search(r'sem fio|wireless|bluetooth', t) else ' com fio')
+    if p == 'Gabinete Mancer CV450':
+        return p + (' (9 fans)' if re.search(r'9 fans|9 coolers|9 ventoinhas', t) else '')
+    if p == 'PlayStation 5 Slim':
+        return p + (' Digital' if 'digital' in t else ' com leitor (disco)' if re.search(r'disk|disco|m[ií]dia f[ií]sica|leitor', t) else '')
+    return p

@@ -7,7 +7,7 @@ COMBO=re.compile(r'\+\s*(processador|placa|water|mem|ssd|cooler|fonte)|\bkit\b.*
 MULTI=re.compile(r'(\d{3})\s?gb\s+(\d{3}\s?gb|1\s?tb|2\s?tb)|1\s?tb\s+2\s?tb|2\s?tb\s+4\s?tb|\b(\d{1,2})\s?gb\s+(\d{1,2})\s?gb\b',re.I)
 SODIMM=re.compile(r'impact ddr|hyperx impact|notebook|so-?dimm',re.I)
 def cat(k):
-    for p,c in [('Ryzen','Processadores'),('RTX','Placas de vídeo'),('RX ','Placas de vídeo'),('Placa-mãe','Placas-mãe'),('Memória','Memória RAM'),('SSD','SSD'),('Fonte','Fontes'),('Gabinete','Gabinetes'),('Water','Coolers'),('Air','Coolers'),('Monitor','Monitores'),('Cadeira','Setup e acessórios'),('Mousepad','Setup e acessórios'),('Mouse','Mouses'),('Teclado','Teclados'),('Headset','Headsets e fones'),('Fone','Headsets e fones'),('Controle','Controles'),('Notebook','Notebooks'),('PlayStation','Consoles'),('Nintendo','Consoles'),('Smart TV','TVs'),('Celular','Celulares, tablets e relógios'),('Tablet','Celulares, tablets e relógios'),('Smartwatch','Celulares, tablets e relógios'),('Microfone','Setup e acessórios'),('Mousepad','Setup e acessórios')]:
+    for p,c in [('Ryzen','Processadores'),('RTX','Placas de vídeo'),('RX ','Placas de vídeo'),('Placa-mãe','Placas-mãe'),('Memória','Memória RAM'),('SSD','SSD'),('Fonte','Fontes'),('Gabinete','Gabinetes'),('Water','Coolers'),('Air','Coolers'),('Monitor','Monitores'),('Cadeira','Cadeiras'),('Mousepad','Setup e acessórios'),('Mouse','Mouses'),('Teclado','Teclados'),('Headset','Headsets e fones'),('Fone','Headsets e fones'),('Controle','Controles'),('Notebook','Notebooks'),('PlayStation','Consoles'),('Nintendo','Consoles'),('Smart TV','TVs'),('Celular','Celulares, tablets e relógios'),('Tablet','Celulares, tablets e relógios'),('Smartwatch','Celulares, tablets e relógios'),('Microfone','Setup e acessórios'),('Mousepad','Setup e acessórios')]:
         if k.startswith(p): return c
 rows=[];dropped=collections.Counter()
 for r in R:
@@ -22,13 +22,33 @@ for r in R:
     if k.startswith('Memória') and SODIMM.search(t): dropped['sodimm']+=1; continue
     if r['data']<os.environ.get('D0','2026-10-01'): continue
     rows.append(dict(id=int(r['post_id']),d=r['data'],k=k,p=float(r['preco']),s=r['loja'],t=t,c=cat(k)))
+import sys as _s;_s.path.insert(0,os.path.dirname(os.path.abspath(__file__)))
+import atributos as AT
+_mods=set()
+_nomes=[re.sub(r'[^a-z0-9]','',k.lower()) for k in {r['k'] for r in rows} if 'mais bar' not in k]
+def _dup(m):
+    cod=re.sub(r'[^a-z0-9]','',m.split(' ',2)[-1].split(' ')[0].lower()) if ' ' in m else ''
+    _bm={re.sub(r'[^a-z0-9]','',v.lower()) for v in AT.MARCA.values()}|{'cooler','water','placa','mae','monitor','fonte','memoria','ssd','gaming','plus','pro'}
+    toks=[t_ for t_ in (re.sub(r'[^a-z0-9]','',w.lower()) for w in m.split()[1:]) if t_ not in _bm and not re.fullmatch(r'\d+(gb|tb|w|mhz)?|ddr\d|[abx]\d{3}m?',t_)]
+    pre=re.sub(r'[^a-z0-9]','',m.split()[0].lower())
+    mesmos=[n for n in _nomes if n.startswith(pre)]
+    for tk in toks:
+        if len(tk)>=4 and any(tk[:L] in n for n in mesmos for L in range(len(tk),5,-1) if re.search(r'\d',tk[:L]) and re.search(r'[a-z]',tk[:L])): return True
+        if len(tk)>=4 and any(tk in n for n in mesmos): return True
+        for al in re.findall(r'[a-z]{5,}',tk):
+            if any(al in n for n in mesmos): return True
+    return False
+for r in list(rows):
+    _m=AT.modelo(r['k'],r['t'])
+    if _m and _m!=r['k'] and not _dup(_m):
+        rows.append(dict(r,k=_m,c=cat(_m)));_mods.add(_m)
 by=collections.defaultdict(list)
 for r in rows: by[r['k']].append(r)
 outl=[];clean=[]
 for k,l in by.items():
     m=S.median(x['p'] for x in l)
     for x in l:
-        if x['p']<0.55*m: outl.append((k,x,m))
+        if x['p']<0.55*m or (k in _mods and x['p']>1.8*m): outl.append((k,x,m))
         else: clean.append(x)
 # daily min
 daily=collections.defaultdict(dict)
@@ -51,8 +71,8 @@ for k,v in keep.items():
     summ.append(dict(produto=k,categoria=cat(k),dias_com_oferta=len(v),posts=sum(x['n'] for x in v.values()),
         mediana_out=round(S.median(oct_),2) if oct_ else None,mediana_nov=round(S.median(nov),2) if nov else None,
         var_out_nov=round((S.median(nov)/S.median(oct_)-1)*100,1) if oct_ and nov else None,
-        menor=lo['p'],menor_data=lo['d'],menor_loja=lo['s'],maior=hi['p'],maior_data=hi['d'],ultimo=last['p'],ultimo_data=last['d'],ultimo_loja=last['s']))
-CO=['Placas de vídeo','Processadores','Placas-mãe','Memória RAM','SSD','Fontes','Gabinetes','Coolers','Monitores','Mouses','Teclados','Headsets e fones','Controles','Setup e acessórios','Notebooks','Consoles','TVs','Celulares, tablets e relógios']
+        attrs=AT.attrs(cat(k),k,[x['t'] for x in by[k]]),menor=lo['p'],menor_data=lo['d'],menor_loja=lo['s'],maior=hi['p'],maior_data=hi['d'],ultimo=last['p'],ultimo_data=last['d'],ultimo_loja=last['s']))
+CO=['Placas de vídeo','Processadores','Placas-mãe','Memória RAM','SSD','Fontes','Gabinetes','Coolers','Monitores','Mouses','Teclados','Headsets e fones','Controles','Setup e acessórios','Cadeiras','Notebooks','Consoles','TVs','Celulares, tablets e relógios']
 summ.sort(key=lambda s:(CO.index(s['categoria']),s['produto']))
 OUT=os.environ.get('OUT','/mnt/user-data/outputs/base_precos_grape_tec')
 import os; os.makedirs(OUT,exist_ok=True)

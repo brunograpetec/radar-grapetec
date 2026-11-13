@@ -27,8 +27,8 @@ for s in summ:
     name=k.replace(' (mais barata)','').replace(' (mais barato)','')
     P.append(dict(id=slug(name),n=name,c=s['categoria'],cat_bucket=k.endswith('(mais barata)') or k.endswith('(mais barato)'),
         s=sr,mo=s['mediana_out'],mn=s['mediana_nov'],v=s['var_out_nov'],lo=s['menor'],lod=s['menor_data'],los=s['menor_loja'],
-        u=ult,ud=s['ultimo_data'],ul=s['ultimo_loja'],posts=s['posts'],dias=s['dias_com_oferta'],alvo=alvo,selo=selo,f=k in FEAT))
-CATS=['Placas de vídeo','Processadores','Placas-mãe','Memória RAM','SSD','Fontes','Gabinetes','Coolers','Monitores','Mouses','Teclados','Headsets e fones','Controles','Setup e acessórios','Notebooks','Consoles','TVs','Celulares, tablets e relógios']
+        a=s.get('attrs') or {},u=ult,ud=s['ultimo_data'],ul=s['ultimo_loja'],posts=s['posts'],dias=s['dias_com_oferta'],alvo=alvo,selo=selo,f=k in FEAT))
+CATS=['Placas de vídeo','Processadores','Placas-mãe','Memória RAM','SSD','Fontes','Gabinetes','Coolers','Monitores','Mouses','Teclados','Headsets e fones','Controles','Setup e acessórios','Cadeiras','Notebooks','Consoles','TVs','Celulares, tablets e relógios']
 therm=[]
 for c in CATS:
     vs=[p['v'] for p in P if p['c']==c and p['v'] is not None]

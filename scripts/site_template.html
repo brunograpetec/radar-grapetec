@@ -224,6 +224,7 @@ MESES.forEach(function(m,j){if(j===0)return;var xb=m.a-.5,pv=MESES[j-1];if(r[0]<
 #gt1111 .tvr>span{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);font-weight:700;min-width:86px}
 #gt1111 .tchip{padding:6px 11px;border-radius:999px;border:1px solid var(--bd);font-size:13px;color:var(--mut);background:transparent}
 #gt1111 .tchip:hover{color:var(--ink)}
+#gt1111 .tchip.tclr{align-self:flex-start;border-style:dashed}
 #gt1111 .tchip.on{background:var(--ac);color:var(--onac);border-color:var(--ac);font-weight:600}
 @media(max-width:640px){#gt1111 .tvr{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}#gt1111 .tvr>span{min-width:auto}#gt1111 .tchip{flex:0 0 auto}}
 #gt1111 .bfbar{margin:4px 0 22px}
@@ -333,7 +334,7 @@ MESES.forEach(function(m,j){if(j===0)return;var xb=m.a-.5,pv=MESES[j-1];if(r[0]<
 </div></section>
 
 <section><div class="wrap">
- <div class="sh"><div><div class="k">05 · CHECKLIST DA VIRADA</div><h2>Deixa tudo pronto antes da meia-noite</h2><p>Marca o que já fez. Fica salvo no seu celular.</p></div></div>
+ <div class="sh"><div><div class="k">05 · CHECKLIST DA BLACK</div><h2>Deixa tudo pronto antes da Black</h2><p>Marca o que já fez. Fica salvo no seu celular.</p></div></div>
  <div class="check" id="gtCheck"></div>
  <div class="prog"><i id="gtProg"></i></div>
 </div></section>
@@ -409,10 +410,17 @@ D.T.forEach(function(t){var c=cls(t.v),w=Math.min(50,Math.abs(t.v||0)*5)+'%';
 /* ---------- chips / cards ---------- */
 var cur={cat:'Destaques',q:'',lim:12,tv:{}};
  function tvp(p){var m=p.n.match(/^Smart TV (.+?) (\d+)" (\S+) · ?(4K|Full HD|HD)? ?(.*)$/);return m?{mk:m[1],sz:m[2]+'"',res:m[4]||'',pan:m[5]||''}:null}
- function tvBar(){var el=$('#gtTvf');if(!el)return;if(cur.cat!=='TVs'||cur.q){el.innerHTML='';el.style.display='none';return}el.style.display='';var tv=D.P.filter(function(p){return p.c==='TVs'}).map(tvp).filter(Boolean);
-  var G=[['sz','Tamanho'],['res','Resolução'],['pan','Painel'],['mk','Marca']];el.innerHTML=G.map(function(g){var vals=[];tv.forEach(function(x){if(x[g[0]]&&vals.indexOf(x[g[0]])<0)vals.push(x[g[0]])});vals.sort(function(a,b){return g[0]==='sz'?parseInt(a)-parseInt(b):g[0]==='res'?['HD','Full HD','4K'].indexOf(a)-['HD','Full HD','4K'].indexOf(b):a.localeCompare(b)});
-   return '<div class="tvr"><span>'+g[1]+'</span><button class="tchip'+(!cur.tv[g[0]]?' on':'')+'" data-g="'+g[0]+'" data-v="">Todos</button>'+vals.map(function(v){return '<button class="tchip'+(cur.tv[g[0]]===v?' on':'')+'" data-g="'+g[0]+'" data-v="'+v.replace(/"/g,'&quot;')+'">'+v+'</button>'}).join('')+'</div>'}).join('');
-  $$('.tchip',el).forEach(function(b){b.onclick=function(){cur.tv[b.dataset.g]=b.dataset.v;cur.lim=12;render();ev('tv_filtro')}})}
+ var FORD={'Placas-mãe':['Plataforma','Chipset','Memória','Tamanho','Wi-Fi','Marca'],'Memória RAM':['Tipo','Capacidade','Frequência','Formato','RGB','Marca'],'Monitores':['Tamanho','Resolução','Taxa','Painel','Formato','Marca'],'SSD':['Capacidade','Interface','Dissipador','Marca'],'Fontes':['Potência','Certificação','Modular','Marca'],'Placas de vídeo':['GPU','Geração','VRAM'],'Processadores':['Plataforma','Linha','Tipo'],'Coolers':['Tipo','Radiador','Marca'],'Gabinetes':['Tamanho','Lateral','Marca'],'Cadeiras':['Tipo','Marca'],'TVs':['Tamanho','Resolução','Painel','Marca']};
+ var VORD={'Resolução':['HD','Full HD','QHD','4K'],'Taxa':['Até 100Hz','144–180Hz','200–240Hz','280Hz+'],'Potência':['Até 550W','600–650W','700–750W','800–850W','1000W+'],'Certificação':['White','Bronze','Gold','Platinum'],'Plataforma':['AM4','AM5','Intel'],'Interface':['NVMe','NVMe Gen3','NVMe Gen4','NVMe Gen5'],'Formato':['1 pente','Kit 2 pentes','Normal (16:9)','Ultrawide']};
+ function vsort(k){return function(a,b){var o=VORD[k];if(o&&o.indexOf(a)>=0&&o.indexOf(b)>=0)return o.indexOf(a)-o.indexOf(b);var x=parseFloat(a),y=parseFloat(b);if(!isNaN(x)&&!isNaN(y)){var ua=/TB/.test(a)?1000:1,ub=/TB/.test(b)?1000:1;return x*ua-y*ub}return a.localeCompare(b)}}
+ function tags(p){var o=FORD[p.c];if(!o||!p.a)return '';return o.filter(function(k){return k!=='Marca'&&p.a[k]&&['Normal (16:9)','Sem Wi-Fi','Sem RGB','Sem dissipador','Não modular','1 pente'].indexOf(p.a[k])<0}).map(function(k){return p.a[k]}).join(' · ')}
+ function tvBar(){var el=$('#gtTvf');if(!el)return;var keys=FORD[cur.cat];if(!keys||cur.q){el.innerHTML='';el.style.display='none';return}
+  var ps=D.P.filter(function(p){return p.c===cur.cat&&p.a});
+  var rows=keys.map(function(k){var vals=[];ps.forEach(function(p){var v=p.a[k];if(v&&vals.indexOf(v)<0)vals.push(v)});vals.sort(vsort(k));return [k,vals]}).filter(function(r){return r[1].length>=2});
+  if(!rows.length){el.innerHTML='';el.style.display='none';return}el.style.display='';
+  el.innerHTML=rows.map(function(r){var k=r[0];return '<div class="tvr"><span>'+k+'</span><button class="tchip'+(!cur.tv[k]?' on':'')+'" data-g="'+k+'" data-v="">Todos</button>'+r[1].map(function(v){return '<button class="tchip'+(cur.tv[k]===v?' on':'')+'" data-g="'+k+'" data-v="'+v.replace(/"/g,'&quot;')+'">'+v+'</button>'}).join('')+'</div>'}).join('')+(Object.keys(cur.tv).some(function(k){return cur.tv[k]})?'<button class="tchip tclr" data-clr="1">✕ Limpar filtros</button>':'');
+  $$('.tchip[data-g]',el).forEach(function(b){b.onclick=function(){cur.tv[b.dataset.g]=b.dataset.v;cur.lim=12;render();ev('filtro')}});
+  $$('.tchip[data-clr]',el).forEach(function(b){b.onclick=function(){cur.tv={};cur.lim=12;render()}})}
 var chipsEl=$('#gtChips');
 ['Destaques','Todos'].concat(CATS).forEach(function(c){var n=c==='Todos'?D.P.length:c==='Destaques'?D.P.filter(function(p){return p.f}).length:D.P.filter(function(p){return p.c===c}).length;
  var b=document.createElement('button');b.className='chip';b.dataset.c=c;b.innerHTML=c+'<em>'+n+'</em>';b.onclick=function(){setCat(c)};chipsEl.appendChild(b)});
@@ -420,11 +428,11 @@ function setCat(c){cur.cat=c;cur.lim=12;cur.tv={};$$('.chip').forEach(function(x
 function norm(s){return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'')}
 $('#gtQ').addEventListener('input',function(e){cur.q=norm(e.target.value.trim());cur.lim=12;if(cur.q){$$('.chip').forEach(function(x){x.classList.toggle('on',x.dataset.c==='Todos')});cur.cat='Todos'}render()});
 $('#gtMore').onclick=function(){cur.lim+=12;render()};
-function list(){return D.P.filter(function(p){if(cur.q)return norm(p.n+' '+p.c).indexOf(cur.q)>=0||norm(p.n).replace(/\s/g,'').indexOf(cur.q.replace(/\s/g,''))>=0;if(cur.cat==='Destaques')return p.f;if(cur.cat==='Todos')return true;if(p.c!==cur.cat)return false;if(cur.cat==='TVs'){var x=tvp(p);if(!x)return !Object.keys(cur.tv).some(function(k){return cur.tv[k]});for(var k in cur.tv){if(cur.tv[k]&&x[k]!==cur.tv[k])return false}}return true}).sort(function(a,b){if(cur.cat!=='TVs'||cur.q)return 0;var x=tvp(a),y=tvp(b);return (x&&y)?(parseInt(x.sz)-parseInt(y.sz))||(a.u-b.u):0})}
+function list(){return D.P.filter(function(p){if(cur.q)return norm(p.n+' '+p.c).indexOf(cur.q)>=0||norm(p.n).replace(/\s/g,'').indexOf(cur.q.replace(/\s/g,''))>=0;if(cur.cat==='Destaques')return p.f;if(cur.cat==='Todos')return true;if(p.c!==cur.cat)return false;for(var k in cur.tv){if(cur.tv[k]&&(!p.a||p.a[k]!==cur.tv[k]))return false}return true}).sort(function(a,b){if(cur.cat!=='TVs'||cur.q)return 0;var x=tvp(a),y=tvp(b);return (x&&y)?(parseInt(x.sz)-parseInt(y.sz))||(a.u-b.u):0})}
 function render(){tvBar();var L=list(),el=$('#gtCards');el.innerHTML='';
  if(!L.length){el.innerHTML='<div class="empty">Nada com esse nome no radar. Tenta outro termo ou pergunta na live 😉</div>'}
  L.slice(0,cur.lim).forEach(function(p,i){var b=document.createElement('button');b.className='card';b.style.animationDelay=(i%12)*35+'ms';
-  b.innerHTML='<div class="cat">'+p.c+(p.cat_bucket?' · mais barato do dia':'')+'</div><h4>'+(function(){var x=p.c==='TVs'&&tvp(p);return x?'TV '+x.mk+' '+x.sz+' '+p.n.split(' · ')[0].split(' ').pop()+'<small class="tvtag">'+[x.res,x.pan].filter(Boolean).join(' · ')+'</small>':p.n})()+'</h4><div class="px"><b class="mono">'+brl(p.u)+'</b><span>último · '+iso2(p.ud)+'</span></div><svg class="spark" viewBox="0 0 260 58" preserveAspectRatio="none" data-id="'+p.id+'"></svg><div class="foot"><span>menor <b class="mono" style="color:var(--ink)">'+brl(p.lo)+'</b></span><span class="selo '+p.selo+'">'+SEL[p.selo]+'</span></div>';
+  b.innerHTML='<div class="cat">'+p.c+(p.cat_bucket?' · mais barato do dia':'')+'</div><h4>'+(function(){var x=p.c==='TVs'&&tvp(p);return x?'TV '+x.mk+' '+x.sz+' '+p.n.split(' · ')[0].split(' ').pop()+'<small class="tvtag">'+[x.res,x.pan].filter(Boolean).join(' · ')+'</small>':(tags(p)?p.n.replace(/\s*\([^)]*\)$/,'')+'<small class="tvtag">'+tags(p)+'</small>':p.n)})()+'</h4><div class="px"><b class="mono">'+brl(p.u)+'</b><span>último · '+iso2(p.ud)+'</span></div><svg class="spark" viewBox="0 0 260 58" preserveAspectRatio="none" data-id="'+p.id+'"></svg><div class="foot"><span>menor <b class="mono" style="color:var(--ink)">'+brl(p.lo)+'</b></span><span class="selo '+p.selo+'">'+SEL[p.selo]+'</span></div>';
   b.onclick=function(){openP(p.id)};el.appendChild(b);watch($('svg',b))});
  $('#gtMore').style.display=L.length>cur.lim?'block':'none'}
 function drawSpark(svg){var p=byId[svg.dataset.id];if(!p)return;var s=p.s,W=260,H=58,lo=Infinity,hi=-Infinity;s.forEach(function(x){lo=Math.min(lo,x[1]);hi=Math.max(hi,x[1])});var sp=(hi-lo)||hi*.05;
@@ -438,12 +446,12 @@ var ach=$('#gtAch');
 D.A.forEach(function(a){var off=Math.round((1-a.p/a.ref)*100);var lo=a.tag.indexOf('Menor')===0;
  var d=document.createElement('div');d.className='ac';d.innerHTML='<div class="tag'+(lo?' lo':'')+'">'+(lo?'◆ ':'⚡ ')+a.tag.toUpperCase()+'</div><div class="off mono">-'+off+'%</div><h5>'+a.n+'</h5><div class="p mono">'+brl(a.p)+'</div><div class="r">'+iso2(a.d)+' · '+a.l+' · normal <s>'+brl(a.ref,0)+'</s></div>'+(a.post?'<a href="https://t.me/grape_tec/'+a.post+'" target="_blank" rel="noopener" data-ev="Post_achado">Ver o post original →</a>':'');ach.appendChild(d)});
 /* ---------- checklist ---------- */
-var CK=[['Entra no grupo e no canal','O cupom chega primeiro pra quem já está dentro.'],['Deixa o carrinho montado','Coloca as peças no carrinho antes das 23h50.'],['Login feito em todas as lojas','Amazon, KaBuM, Mercado Livre, Shopee e AliExpress.'],['Pix e cartão salvos','Cadastra antes. Na virada cada segundo conta.'],['Confere o vendedor','No marketplace o cupom pode não valer pra todo vendedor.'],['Tem seu preço-alvo anotado','Usa o radar: só compra se bater o alvo.']];
-var saved=[];try{saved=JSON.parse(localStorage.getItem('gt1111ck')||'[]')}catch(e){}
+var CK=[['Anota seu preço-alvo','Abre a curva da peça no radar. Só compra se bater o alvo.'],['Desconfia do "de/por"','Preço riscado inflado é clássico da Black. Compara com o histórico daqui.'],['Entra no grupo e no canal','O cupom chega primeiro pra quem já está dentro.'],['Carrinho montado e login feito','Amazon, KaBuM, Mercado Livre, Shopee e AliExpress, antes da meia-noite de 26/11.'],['Confere vendedor e frete','No marketplace o cupom pode não valer pra todo vendedor. Frete caro come o desconto.'],['Pix e cartão salvos','Cadastra antes. Na virada cada segundo conta.']];
+var saved=[];try{saved=JSON.parse(localStorage.getItem('gtbfck')||'[]')}catch(e){}
 var ckEl=$('#gtCheck');
 function prog(){var n=$$('.ck.on').length;$('#gtProg').style.width=(n/CK.length*100)+'%'}
 CK.forEach(function(c,i){var b=document.createElement('button');b.className='ck'+(saved.indexOf(i)>=0?' on':'');b.innerHTML='<div class="bx"></div><div><b>'+c[0]+'</b><span>'+c[1]+'</span></div>';
- b.onclick=function(){b.classList.toggle('on');var s=$$('.ck').map(function(x,j){return x.classList.contains('on')?j:-1}).filter(function(j){return j>=0});try{localStorage.setItem('gt1111ck',JSON.stringify(s))}catch(e){}prog()};ckEl.appendChild(b)});
+ b.onclick=function(){b.classList.toggle('on');var s=$$('.ck').map(function(x,j){return x.classList.contains('on')?j:-1}).filter(function(j){return j>=0});try{localStorage.setItem('gtbfck',JSON.stringify(s))}catch(e){}prog()};ckEl.appendChild(b)});
 prog();
 /* ---------- modal + big chart ---------- */
 var mod=$('#gtMod'),panel=$('#gtPanel'),state=null;
@@ -509,9 +517,9 @@ document.addEventListener('fullscreenchange',function(){if(!document.fullscreenE
 
 /* ---------- achados do dia (Black) ---------- */
 (function(){var DD=D.dias||{};(function(){var el=$('#gtBfTabs'),ks=Object.keys(DD).sort(),hj=new Date(Date.now()-3*36e5).toISOString().slice(0,10);el.innerHTML=ks.map(function(k){var lab=k===hj?'HOJE':(k<hj&&ks.indexOf(k)===ks.length-2)?'ONTEM':['DOM','SEG','TER','QUA','QUI','SEX','SÁB'][new Date(k+'T12:00:00-03:00').getDay()];return '<button data-d="'+k+'"><small>'+lab+'</small>'+k.slice(8,10)+'/'+k.slice(5,7)+'</button>'}).join('')})();var tabs=$$('#gtBfTabs button'),grid=$('#gtBfGrid'),stats=$('#gtBfStats'),bar=$('#gtBfBar'),chips=$('#gtBfChips'),q=$('#gtBfQ'),more=$('#gtBfMore');if(!grid)return;
- var CO=['Placas de vídeo','Processadores','Placas-mãe','Memória RAM','SSD','Fontes','Gabinetes','Coolers','Monitores','Mouses','Teclados','Headsets e fones','Controles','Setup e acessórios','Notebooks','Consoles','TVs','Celulares, tablets e relógios'];
+ var CO=['Placas de vídeo','Processadores','Placas-mãe','Memória RAM','SSD','Fontes','Gabinetes','Coolers','Monitores','Mouses','Teclados','Headsets e fones','Controles','Setup e acessórios','Cadeiras','Notebooks','Consoles','TVs','Celulares, tablets e relógios'];
  function lojaCor(l){var c={'Mercado Livre':['#FFE600','#2D3277'],'Amazon':['#00A8E1','#fff'],'KaBuM':['#FF6500','#fff'],'Shopee':['#EE4D2D','#fff'],'Terabyte':['#F28C00','#111'],'AliExpress':['#E62E04','#fff'],'Pichau':['#E2231A','#fff'],'Magalu':['#0086FF','#fff'],'Casas Bahia':['#0033C6','#fff'],'Americanas':['#E60014','#fff'],'Nuuvem':['#7B2CBF','#fff'],'Samsung':['#1428A0','#fff']}[l]||['#3a3344','#fff'];return 'background:'+c[0]+';color:'+c[1]+'!important'}
- var IC={'Placas de vídeo':'🎮','Processadores':'🧠','Placas-mãe':'🧩','Memória RAM':'⚡','SSD':'💾','Fontes':'🔌','Gabinetes':'🗄️','Coolers':'❄️','Monitores':'🖥️','Mouses':'🖱️','Teclados':'⌨️','Headsets e fones':'🎧','Controles':'🕹️','Setup e acessórios':'🪑','Notebooks':'💻','Consoles':'🎮','TVs':'📺','Celulares, tablets e relógios':'📱'};
+ var IC={'Placas de vídeo':'🎮','Processadores':'🧠','Placas-mãe':'🧩','Memória RAM':'⚡','SSD':'💾','Fontes':'🔌','Gabinetes':'🗄️','Coolers':'❄️','Monitores':'🖥️','Mouses':'🖱️','Teclados':'⌨️','Headsets e fones':'🎧','Controles':'🕹️','Setup e acessórios':'🎙️','Cadeiras':'🪑','Notebooks':'💻','Consoles':'🎮','TVs':'📺','Celulares, tablets e relógios':'📱'};
  var st={day:null,cat:'Todas',q:'',esg:false,lim:12};
  tabs.forEach(function(b){var d=DD[b.dataset.d];if(d&&d.items&&d.items.length)st.day=b.dataset.d});if(!st.day&&tabs.length)st.day=tabs[tabs.length-1].dataset.d;
  function wait(day){return '<div class="bfwait" style="grid-column:1/-1"><b>'+(tabs.length&&day===tabs[tabs.length-1].dataset.d?'Ainda sem achados hoje 🔥':'Sem achados nesse dia')+'</b><p>'+'Assim que uma oferta cair abaixo da média, ela aparece aqui. A lista se atualiza sozinha a cada 5 minutos.'+'</p><div class="ctas" style="justify-content:center"><a class="cta wa" href="https://grapetec.com.br/whatsapp" target="_blank" rel="noopener" data-ev="WhatsApp_bf">WhatsApp</a><a class="cta tg" href="https://t.me/grape_tec" target="_blank" rel="noopener" data-ev="Telegram_bf">Telegram</a></div></div>'}

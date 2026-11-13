@@ -51,7 +51,7 @@ def mobo(t):
 import sys as _sys;_sys.path.insert(0,_os.path.dirname(_os.path.abspath(__file__)))
 import modelos as _M
 _virt=[]
-for r in allp:
+for r in ([] if _os.environ.get('MODELOS_NA_BASE','1')=='1' else allp):
     if r['fora_da_curva']=='sim': continue
     if r['produto'].startswith('Placa-mãe'):
         mk=mobo(r['titulo'])

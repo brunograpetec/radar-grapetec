@@ -131,5 +131,13 @@ for (cat, nome), L in rows.items():
 
 for c in out:
     out[c].sort(key=lambda x: x['med'])
-json.dump(dict(gen=fim, d30=D30, ts=int(dt.datetime.now().timestamp()), parts=out), open(dest, 'w'), ensure_ascii=False, separators=(',', ':'))
+extra = {}
+_fc = os.environ.get('FRASES_CONSULTORIAS', 'dados/frases_consultorias.json')
+if os.path.exists(_fc):
+    _d = json.load(open(_fc)); _d.pop('_leia', None)
+    extra['frases'] = {k: v for k, v in _d.items() if isinstance(v, list)}
+_ct = os.environ.get('CONSULTORIAS', 'dados/consultorias.json')
+if os.path.exists(_ct):
+    extra['consultorias'] = json.load(open(_ct)).get('contagem', {})
+json.dump(dict(gen=fim, d30=D30, ts=int(dt.datetime.now().timestamp()), parts=out, **extra), open(dest, 'w'), ensure_ascii=False, separators=(',', ':'))
 print('pcideal:', {c: len(v) for c, v in out.items()})

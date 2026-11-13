@@ -2,6 +2,8 @@
 Uso: python3 scripts/buildpci.py pcideal_data.json saida.html [preview.html]"""
 import base64, json, sys
 t = open('scripts/pcideal_template.html').read()
+_fr = json.load(open('scripts/frases.json')); _fr.pop('_leia', None)
+t = t.replace('/*FRASES*/{}', json.dumps(_fr, ensure_ascii=False))
 d = open(sys.argv[1]).read()
 style = t.split('<style>', 1)[1].split('</style>', 1)[0]
 markup = t.split('<div id="pci">', 1)[1].split('<script>', 1)[0].rsplit('</div>', 1)[0]

@@ -510,6 +510,17 @@ function monta(s){
 
 /* ---------- Texto no estilo da consultoria (com variação) ---------- */
 const pick = a => a[Math.floor(Math.random()*a.length)];
+const FR = /*FRASES*/{};
+const usadas = {};
+// sorteia uma frase do banco (as minhas + as aprendidas das consultorias), sem repetir a última
+function T(key, V){
+  const pool = (FR[key]||[]).concat((DATA.frases||{})[key]||[]);
+  if(!pool.length) return '';
+  let f = pick(pool);
+  if(pool.length>1 && f===usadas[key]) f = pick(pool.filter(x=>x!==usadas[key]));
+  usadas[key] = f;
+  return f.replace(/\{(\w+)\}/g, (m,k) => V && V[k]!==undefined ? V[k] : m);
+}
 const dia = d => d ? d.slice(8,10)+'/'+d.slice(5,7) : '';
 const WA = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.4L3 21l2.1-5.6A8.4 8.4 0 1 1 21 11.5z"/><path d="M9 9.5c.3 1.8 2.6 4.3 4.6 4.8l1.2-1.1 1.7.8"/></svg>';
 const TG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 3.5 2.8 10.7c-.9.4-.9 1.6.1 1.9l4.7 1.5 1.8 5.6c.3.8 1.3 1 1.9.4l2.6-2.5 4.7 3.5c.7.5 1.7.1 1.9-.7L23 4.9c.2-1-.7-1.8-1.5-1.4z"/><path d="m7.6 14.1 9.9-6.6-7.4 8.2"/></svg>';
@@ -578,42 +589,35 @@ function result(){
 
   /* ----- Raio-X: muda conforme as respostas e os preços ----- */
   const raio = [];
-  raio.push(pick({
-    fps:[`Fala! Seu foco é <b>competitivo</b>, então pensei em FPS alto e estável, que é o que ganha partida.`, `Fala! Pra <b>FPS e Battle Royale</b> o processador pesa muito mais do que a galera imagina, e foi aí que eu mirei.`, `Fala! Jogo competitivo pede <b>frame alto e sem engasgo</b>. Montei o seu em cima disso.`],
-    aaa:[`Fala! Pra <b>mundo aberto e lançamento</b>, quem carrega o PC é a placa de vídeo, então foi pra ela que eu puxei o dinheiro.`, `Fala! Seu negócio é <b>jogo bonito, AAA</b>. Aqui a placa de vídeo manda, e o resto da máquina tem que acompanhar sem sobrar.`, `Fala! Pra rodar <b>GTA, Cyberpunk e o que vier</b>, eu priorizei a placa de vídeo e montei o resto em volta dela.`],
-    mix:[`Fala! Como você joga <b>de tudo</b>, equilibrei processador e placa de vídeo: nenhum dos dois segura o outro.`, `Fala! Pra quem joga <b>um pouco de tudo</b>, o segredo é equilíbrio, e foi isso que eu busquei.`],
-    work:[`Fala! Como o PC vai <b>trabalhar e jogar</b>, eu pesei mais núcleos e memória, sem deixar o jogo de lado.`, `Fala! PC de <b>trabalho + jogo</b> precisa de núcleo e memória sobrando. Montei pensando nisso.`]
-  }[s.jogo]));
-  raio.push(pick([`O coração da máquina ficou no <b>${b.cpu} + ${GN}</b>, rodando em ${resTxt}.`, `A dupla que manda aqui é <b>${b.cpu} + ${GN}</b>, pensando em ${resTxt}.`, `O mapa é <b>${b.cpu} + ${GN}</b>. Pra ${resTxt}, é um conjunto muito bem casado.`]));
+  raio.push(T('abre_'+(s.jogo||'mix')));
+  raio.push(T('dupla', {cpu:b.cpu, gpu:GN, res:resTxt}));
   if(b.accTot > 0){
     const oq = [A.mon&&'monitor', A.kb&&'teclado', A.mouse&&'mouse', A.head&&'headset'].filter(Boolean);
     const oqs = oq.length>1 ? oq.slice(0,-1).join(', ')+' e '+oq[oq.length-1] : oq[0];
-    raio.push(pick([`Dos seus ${R(s.orc)}, separei <b>${R(b.accTot)}</b> pro ${oqs}, e o resto foi pro PC.`, `Como ${oq.length>1?(A.mon?'o monitor e os periféricos':'os periféricos'):'o '+oqs} ${oq.length>1?'entram':'entra'} na conta, ${oq.length>1?'levaram':'levou'} <b>${R(b.accTot)}</b>. O PC foi montado com o que sobrou, sem desequilibrar.`]));
+    raio.push(T('acc', {orc:R(s.orc), acc:R(b.accTot), oq:oqs}));
   }
   if(b.apu) raio.push(pick([`Sendo direto: com esse valor pra tudo, não cabe placa de vídeo sem matar o resto. Fui de <b>${b.cpu}</b>, que tem vídeo integrado: roda CS2, Valorant, Fortnite e LoL no gráfico baixo, em Full HD. A plataforma e a fonte já ficam prontas pra você <b>colocar a placa de vídeo depois</b>.`, `Aqui a jogada é começar sem placa de vídeo: o <b>${b.cpu}</b> tem vídeo integrado e segura os competitivos no baixo. Quando juntar mais um pouco, a placa de vídeo entra e o resto do PC já está pronto pra ela.`]));
   // plataforma: compara de verdade com a outra
   let alt = null;
   if(s.plat==='auto'){ alt = monta(Object.assign({}, s, {orc:b.pcOrc, pag:'pix', mon:b.res, plat: b.pl==='AM4'?'am5':'am4'})); }
   if(b.pl==='AM4'){
-    let t = s.plat==='am4' ? 'Fiquei no <b>AM4</b>, como você pediu.' : pick(['Escolhi <b>AM4</b>.', 'Fui de <b>AM4</b>, e não foi por acaso.', 'Aqui eu fico no <b>AM4</b>.']);
+    let t = s.plat==='am4' ? 'Fiquei no <b>AM4</b>, como você pediu.' : T('am4');
     const r16 = pickRam(5,16), r16b = pickRam(4,16);
     if(r16 && r16b) t += ` Hoje 16GB de DDR5 custam uns <b>${R(r16.preco)}</b> contra <b>${R(r16b.preco)}</b> em DDR4, e essa diferença vira placa de vídeo.`;
     if(alt) t += ` Se fosse AM5 com esse dinheiro, daria <b>${alt.cpu} + ${alt.apu?'vídeo integrado':alt.gpu}</b>: ${alt.gpu===b.gpu?'a mesma placa, gastando mais':'placa de vídeo mais fraca'}.`;
     raio.push(t);
   } else {
-    let t = s.plat==='am5' ? 'Fomos de <b>AM5</b>, como você pediu: plataforma nova, que recebe processadores futuros sem trocar a placa-mãe.' : pick(['Aqui já compensa ir de <b>AM5</b>: plataforma nova, e quando quiser subir de processador é só trocar ele.', 'Com esse orçamento eu já vou de <b>AM5</b>. Você paga mais na memória DDR5, mas ganha uma plataforma com futuro.']);
+    let t = s.plat==='am5' ? 'Fomos de <b>AM5</b>, como você pediu: plataforma nova, que recebe processadores futuros sem trocar a placa-mãe.' : T('am5');
     if(alt) t += ` No AM4 sairia <b>${alt.cpu} + ${alt.apu?'vídeo integrado':alt.gpu}</b>, ${alt.tot < b.tot ? R(b.tot-alt.tot)+' mais barato' : 'quase o mesmo preço'}, mas sem caminho de upgrade.`;
     raio.push(t);
   }
-  raio.push({perf:pick(['Você pediu <b>performance acima de tudo</b>: não gastei um real a mais com visual.', '<b>Performance acima de tudo</b>: nada de gastar com visual, o dinheiro foi pra onde dá FPS.']),
-    equil:pick(['Você pediu <b>equilíbrio</b>: desempenho primeiro, mas com um gabinete aquário bonito.', '<b>Equilíbrio</b>: o PC fica bonito sem roubar dinheiro do processador e da placa.']),
-    estetica:pick(['Você disse que <b>estética importa muito</b>: entrou water cooler 360mm e gabinete caprichado, mesmo tirando um pouco da performance.', 'Como o <b>visual pesa pra você</b>, coloquei water cooler 360mm e um gabinete à altura. Custou um degrau de placa de vídeo, mas o PC fica lindo.'])}[s.vis]);
+  raio.push(T({perf:'vis_perf', equil:'vis_equil', estetica:'vis_est'}[s.vis]||'vis_perf'));
   // a melhor oportunidade da lista
   const itens = [['o processador',b.cI],...(b.apu?[]:[['a placa de vídeo',b.gI]]),['a placa-mãe',b.mobo.it],['o SSD',b.ss.it],['a fonte',b.ps.it],...(b.co.it?[['o '+(b.co.wc?'water cooler':'cooler'),b.co.it]]:[]),['o gabinete',b.ca.it],...(A.mon?[['o monitor',A.mon.it]]:[])];
   const opp = itens.map(x=>[x[0],x[1],x[1].med-x[1].p]).sort((a,c)=>c[2]-a[2])[0];
-  if(opp && opp[2] > 40) raio.push(pick([`A melhor oportunidade da lista é ${opp[0]}: a oferta tá <b>${R(opp[2])} abaixo</b> do normal do mês.`, `Fica de olho n${opp[0].slice(0,1)} ${opp[0].slice(2)}: tá <b>${R(opp[2])} abaixo</b> do que costuma custar. Se ainda estiver valendo, garante.`]));
+  if(opp && opp[2] > 40) raio.push(T('opp', {item:opp[0], valor:R(opp[2])}));
   if(s.pag==='cartao') raio.push(`Como vai ser no cartão, deixei uma margem: fechou em <b>${R(b.geral)}</b> com preço de oferta, e o resto é pra absorver o parcelamento.`);
-  if(s.pag==='misto') raio.push(`Como <b>${s.parc}% vai no cartão</b> (uns ${R(s.orc*s.parc/100)}), reservei ~${R(s.orc*s.parc/100*.08)} pra diferença do parcelamento. ${pick(['Dica: compra à vista as peças com desconto maior no PIX e parcela as que têm o mesmo preço nos dois.', 'Dica: placa de vídeo costuma ter o maior desconto no PIX, então ela é a primeira candidata ao pagamento à vista.'])}`);
+  if(s.pag==='misto') raio.push(`Como <b>${s.parc}% vai no cartão</b> (uns ${R(s.orc*s.parc/100)}), reservei ~${R(s.orc*s.parc/100*.08)} pra diferença do parcelamento. ${T('dica_misto')}`);
   if(s.mhz==='60' && !st.itens.mon && s.jogo!=='aaa') raio.push('Um conselho: com monitor 60Hz você não enxerga o FPS que esse PC entrega. Assim que der, um Full HD 144Hz muda o jogo.');
   if(sm==='uhd' && G.i<200) raio.push('Sendo sincero: 4K pede muita placa de vídeo. Vai rodar, mas com upscaling (DLSS/FSR) e gráficos ajustados.');
   if(sobra > 1500 && s.pag==='pix') raio.push(`Sobrou <b>${R(sobra)}</b>: não tem placa acima dessa nas ofertas do mês, então eu guardaria pro monitor ou periféricos.`);
@@ -642,17 +646,16 @@ function result(){
   const nCa = b.co.wc ? `Gabinete mid tower que aceite <b>radiador 360mm no topo</b>${aq?', estilo aquário':''}.` : (aq ? `Gabinete aquário com fans, sem tirar dinheiro do desempenho.` : `Gabinete com boa ventilação. Não precisa gastar aqui.`);
 
   const W = {
-    cpu: C.x3d ? pick(['3D V-Cache é cache extra que vira FPS, principalmente no competitivo.', 'O X3D é o que dá aquele frame mínimo alto, sem engasgo.']) :
-         C.c>=8 ? pick(['8 núcleos envelhecem melhor: jogo novo usa cada vez mais.', 'Com 8 núcleos ele aguenta jogo, Discord, navegador e live aberta junto.']) :
-         pick(['Segura essa placa de vídeo sem gargalo, e o que sobrou foi pro FPS.', 'Pra esse orçamento é o ponto certo: mais que isso tiraria da placa de vídeo.']),
-    gpu: pick([`É a peça que mais pesa no FPS${sm==='qhd'||sm==='uhd'?' em '+resTxt:''}.`, 'Junto com o processador, é onde o dinheiro faz diferença de verdade.']) + (G.v>=16?` ${G.v}GB de VRAM dão longevidade.`:''),
-    mobo: pick([`Fecha a plataforma ${b.pl} sem pagar por recurso que você não vai usar.`, `Boa de VRM pra esse processador e sem frescura.`]),
-    ram: b.ram===32 ? '32GB dão conforto pra multitarefa, edição e jogo pesado.' : pick(['16GB em dual channel é o certo pra essa máquina.', 'Dois pentes rendem mais que um: o processador agradece.']),
-    ssd: pick(['Windows e jogos carregando rápido, sem pagar por velocidade que jogo não usa.', 'Pra jogo, um NVMe de 3.000 MB/s carrega igual um de 7.000. A diferença fica no bolso.']),
-    psu: pick(['Fonte protege o resto do PC. Aqui não se economiza em marca ruim.', 'Fonte boa é seguro do PC inteiro.']),
-    co: b.co.box ? 'Dinheiro economizado aqui vira placa de vídeo lá na frente.' : b.co.wc ? pick(['Refrigera com folga e fecha o visual da montagem.', 'Temperatura baixa e um PC bonito por dentro.']) : pick(['Resolve com folga sem tirar dinheiro do desempenho.', 'Simples, silencioso e dá conta do recado.']),
-    ca: aq ? pick(['Bonito, com vidro, e cabe tudo com folga.', 'Vitrine pro hardware sem estourar o orçamento.']) : pick(['Ventilação boa e preço baixo. Gabinete não dá FPS.', 'Cabe tudo, ventila bem, e o dinheiro ficou nas peças que importam.']),
+    cpu: T(C.x3d ? 'why_cpu_x3d' : C.c>=8 ? 'why_cpu_8' : 'why_cpu_6'),
+    gpu: T('why_gpu') + (G.v>=16?` ${G.v}GB de VRAM dão longevidade.`:''),
+    mobo: T('why_mobo', {pl:b.pl}),
+    ram: T(b.ram===32 ? 'why_ram32' : 'why_ram16'),
+    ssd: T('why_ssd'),
+    psu: T('why_psu'),
+    co: b.co.box ? 'Dinheiro economizado aqui vira placa de vídeo lá na frente.' : T(b.co.wc ? 'why_co_wc' : 'why_co_air'),
+    ca: T(aq ? 'why_ca_aq' : 'why_ca_simples'),
   };
+
   const ramNome = b.rr.qtd===2 ? `2x ${b.rr.it.n.replace('Memória ','')}` : b.rr.it.n.replace('Memória ','');
   const parts = [
     card('Processador', b.cpu, b.cI.p, b.cI, nCpu, W.cpu, '', '', [`${C.c} núcleos / ${C.c*2} threads`, b.pl, C.x3d?'3D V-Cache':'', C.apu?'vídeo integrado '+C.apu:''], meter('Força em jogos', C.g/150) + meter('Trabalho pesado', C.c*(C.pl==='AM5'?1.15:1)/14)),
@@ -667,8 +670,8 @@ function result(){
   const accCards = [];
   if(A.mon){ const m = A.mon.it.a; accCards.push(card('Monitor', A.mon.it.n.replace('Monitor ',''), A.mon.preco, A.mon.it,
      `Monitor <b>${m['Resolução']}${m.Taxa?' '+m.Taxa:''}</b>${m.Tamanho?', '+m.Tamanho:''}${m.Painel?', painel '+m.Painel:''}. Faixa normal desse modelo: <b>${faixa(A.mon.fx[0], A.mon.fx[1])}</b>.${A.mon.relax==='painel'?` <b>Não passou nenhum ${s.mpan} com essa resolução no último mês</b>, então fui no melhor que apareceu.`:A.mon.relax==='taxa'?' <b>Não passou nenhum com essa taxa no último mês</b>, então fui no melhor que apareceu.':''}`,
-     A.mon.res==='fhd' ? pick(['Full HD com taxa alta é o casamento certo com esse PC: você enxerga os frames que ele entrega.', 'Pra jogo, taxa de atualização muda mais a experiência do que resolução.']) : A.mon.res==='qhd' ? pick(['QHD dá nitidez sem pedir uma placa de 10 mil.', 'Em 27", o QHD é o ponto ideal de nitidez.']) : 'Nitidez máxima. Lembre que em 4K a placa de vídeo trabalha muito mais.')); }
-  const perTxt = pick(['Periférico é fácil de trocar depois, então não tirei dinheiro do PC pra isso.', 'Bom e barato: resolve agora, e se quiser algo melhor depois, troca sem mexer no PC.']);
+     A.mon.res==='fhd' ? T('why_mon_fhd') : A.mon.res==='qhd' ? T('why_mon_qhd') : 'Nitidez máxima. Lembre que em 4K a placa de vídeo trabalha muito mais.')); }
+  const perTxt = T('why_per');
   if(A.mouse) accCards.push(card('Mouse', A.mouse.it.n.replace('Mouse ',''), A.mouse.preco, A.mouse.it, `Mouse com sensor bom e leve, faixa <b>${faixa(A.mouse.fx[0], A.mouse.fx[1])}</b>.`, perTxt));
   if(A.kb) accCards.push(card('Teclado', A.kb.it.n.replace('Teclado ',''), A.kb.preco, A.kb.it, `Teclado mecânico de entrada, faixa <b>${faixa(A.kb.fx[0], A.kb.fx[1])}</b>. Com fio: não precisa pagar por wireless.`, perTxt));
   if(A.head) accCards.push(card('Headset', A.head.it.n.replace(/^(Headset|Fone) /,''), A.head.preco, A.head.it, `Headset confortável com microfone, faixa <b>${faixa(A.head.fx[0], A.head.fx[1])}</b>.`, perTxt));

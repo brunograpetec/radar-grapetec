@@ -1,0 +1,176 @@
+{
+  "_leia": "Banco de frases do PC Ideal. Cada chave é um ponto do texto; o site sorteia uma frase por vez. {chaves} são trocadas pelos valores reais. As frases aprendidas das consultorias ficam em dados/frases_consultorias.json (mesmo formato) e são somadas a estas.",
+  "abre_fps": [
+    "Fala! Seu foco é <b>competitivo</b>, então pensei em FPS alto e estável, que é o que ganha partida.",
+    "Fala! Pra <b>FPS e Battle Royale</b> o processador pesa muito mais do que a galera imagina, e foi aí que eu mirei.",
+    "Fala! Jogo competitivo pede <b>frame alto e sem engasgo</b>. Montei o seu em cima disso.",
+    "Fala! No competitivo, <b>frame mínimo alto</b> vale mais que gráfico bonito. A máquina foi pensada pra isso.",
+    "Fala, guerreiro! Quem joga <b>CS2, Valorant e Warzone</b> quer resposta rápida na tela. Foi essa a missão aqui.",
+    "Fala! Pra <b>FPS</b> eu nunca economizo no processador: é ele que segura os frames lá em cima.",
+    "Fala! Seu PC é pra <b>ganhar partida</b>. Então o dinheiro foi pra onde dá FPS de verdade.",
+    "Fala! Battle Royale tem muita coisa acontecendo na tela ao mesmo tempo, e quem sofre é o processador. Por isso ele ganhou atenção especial aqui."
+  ],
+  "abre_aaa": [
+    "Fala! Pra <b>mundo aberto e lançamento</b>, quem carrega o PC é a placa de vídeo, então foi pra ela que eu puxei o dinheiro.",
+    "Fala! Seu negócio é <b>jogo bonito, AAA</b>. Aqui a placa de vídeo manda, e o resto da máquina tem que acompanhar sem sobrar.",
+    "Fala! Pra rodar <b>GTA, Cyberpunk e o que vier</b>, eu priorizei a placa de vídeo e montei o resto em volta dela.",
+    "Fala! <b>Modo campanha</b> é pra jogar com gráfico no talo, então a placa de vídeo levou a maior fatia.",
+    "Fala! Jogo de história é pra apreciar. Montei pensando em <b>qualidade gráfica</b> e numa placa que aguente os próximos lançamentos.",
+    "Fala! Pra quem curte <b>mundo aberto</b>, o segredo é placa de vídeo forte com memória de vídeo sobrando. Foi o caminho que eu segui.",
+    "Fala! Seu PC é pra <b>imersão</b>: placa de vídeo primeiro, e o resto na medida certa pra não segurar ela."
+  ],
+  "abre_mix": [
+    "Fala! Como você joga <b>de tudo</b>, equilibrei processador e placa de vídeo: nenhum dos dois segura o outro.",
+    "Fala! Pra quem joga <b>um pouco de tudo</b>, o segredo é equilíbrio, e foi isso que eu busquei.",
+    "Fala! Competitivo hoje, campanha amanhã: montei uma máquina <b>equilibrada</b>, sem ponto fraco.",
+    "Fala! Gamer de tudo um pouco precisa de um PC <b>redondo</b>. Nada de gastar tudo numa peça só.",
+    "Fala! Aqui o foco foi o <b>melhor custo-benefício</b>: processador e placa de vídeo andando juntos.",
+    "Fala! Seu PC vai rodar de tudo, então pensei no <b>conjunto</b>, e não numa peça isolada.",
+    "Fala! Pra jogar de tudo sem dor de cabeça, eu montei uma máquina <b>equilibrada e sem gargalo</b>."
+  ],
+  "dupla": [
+    "O coração da máquina ficou no <b>{cpu} + {gpu}</b>, rodando em {res}.",
+    "A dupla que manda aqui é <b>{cpu} + {gpu}</b>, pensando em {res}.",
+    "O mapa é <b>{cpu} + {gpu}</b>. Pra {res}, é um conjunto muito bem casado.",
+    "O conjunto principal é <b>{cpu} + {gpu}</b>. Em {res}, essa dupla trabalha redondinha.",
+    "Quem puxa o desempenho aqui é a dupla <b>{cpu} + {gpu}</b>, pensando em {res}.",
+    "A base de tudo é <b>{cpu} + {gpu}</b>. Pra {res}, eu não mexeria nesse casamento.",
+    "Se você guardar uma coisa desta consultoria, guarda isso: <b>{cpu} + {gpu}</b>. Pra {res}, é o alvo."
+  ],
+  "acc": [
+    "Dos seus {orc}, separei <b>{acc}</b> pro {oq}, e o resto foi pro PC.",
+    "Do total, <b>{acc}</b> ficou pro {oq}. O PC foi montado com o que sobrou, sem desequilibrar.",
+    "Tirei <b>{acc}</b> do orçamento pro {oq}. O resto foi todo pro computador.",
+    "Primeiro reservei <b>{acc}</b> pro {oq}. Com o que sobrou, montei o PC mais forte possível."
+  ],
+  "am4": [
+    "Escolhi <b>AM4</b>.",
+    "Fui de <b>AM4</b>, e não foi por acaso.",
+    "Aqui eu fico no <b>AM4</b>.",
+    "Minha escolha foi <b>AM4</b>, com consciência.",
+    "Nesse orçamento, <b>AM4</b> é a jogada certa."
+  ],
+  "am5": [
+    "Aqui já compensa ir de <b>AM5</b>: plataforma nova, e quando quiser subir de processador é só trocar ele.",
+    "Com esse orçamento eu já vou de <b>AM5</b>. Você paga mais na memória DDR5, mas ganha uma plataforma com futuro.",
+    "Fui de <b>AM5</b>: é a plataforma que vai receber os próximos processadores da AMD.",
+    "Esse dinheiro já permite <b>AM5</b> sem sacrificar a placa de vídeo, então eu não penso duas vezes."
+  ],
+  "vis_perf": [
+    "Você pediu <b>performance acima de tudo</b>: não gastei um real a mais com visual.",
+    "<b>Performance acima de tudo</b>: nada de gastar com visual, o dinheiro foi pra onde dá FPS.",
+    "Como visual não é prioridade pra você, cada real foi pra <b>desempenho</b>.",
+    "Nada de RGB caro aqui: o dinheiro da estética virou <b>frame</b>."
+  ],
+  "vis_equil": [
+    "Você pediu <b>equilíbrio</b>: desempenho primeiro, mas com um gabinete aquário bonito.",
+    "<b>Equilíbrio</b>: o PC fica bonito sem roubar dinheiro do processador e da placa.",
+    "Coloquei um <b>gabinete aquário</b>, que deixa o PC bonito, sem tirar o desempenho do lugar.",
+    "Um pouco de visual, sem exagero: o desempenho continua sendo a prioridade."
+  ],
+  "vis_est": [
+    "Você disse que <b>estética importa muito</b>: entrou water cooler 360mm e gabinete caprichado, mesmo tirando um pouco da performance.",
+    "Como o <b>visual pesa pra você</b>, coloquei water cooler 360mm e um gabinete à altura. Custou um degrau de placa de vídeo, mas o PC fica lindo.",
+    "PC bonito também é PC bom: <b>water cooler 360mm</b> e gabinete de vitrine, como você pediu.",
+    "Você vai olhar pra esse PC todo dia, então caprichei no <b>visual</b>. Abri mão de um pouquinho de FPS por isso."
+  ],
+  "opp": [
+    "A melhor oportunidade da lista é {item}: a oferta tá <b>{valor} abaixo</b> do normal do mês.",
+    "Olho vivo: {item} tá <b>{valor} abaixo</b> do que costuma custar. Se ainda estiver valendo, garante.",
+    "O achado dessa montagem é {item}, <b>{valor} abaixo</b> do preço normal. Essa eu não deixaria passar.",
+    "Se for comprar uma coisa hoje, que seja {item}: está <b>{valor} abaixo</b> da média do mês."
+  ],
+  "dica_misto": [
+    "Dica: compra à vista as peças com desconto maior no PIX e parcela as que têm o mesmo preço nos dois.",
+    "Dica: placa de vídeo costuma ter o maior desconto no PIX, então ela é a primeira candidata ao pagamento à vista.",
+    "Dica: deixa no cartão as peças que a loja parcela sem juros pelo mesmo preço, e usa o PIX onde o desconto é maior."
+  ],
+  "why_cpu_x3d": [
+    "3D V-Cache é cache extra que vira FPS, principalmente no competitivo.",
+    "O X3D é o que dá aquele frame mínimo alto, sem engasgo.",
+    "O cache 3D faz diferença justamente nos jogos que você mais joga.",
+    "Processador X3D é o rei dos jogos: menos engasgo, frame mais estável."
+  ],
+  "why_cpu_8": [
+    "8 núcleos envelhecem melhor: jogo novo usa cada vez mais.",
+    "Com 8 núcleos ele aguenta jogo, Discord, navegador e live aberta junto.",
+    "8 núcleos e 16 threads: folga pra hoje e pros próximos anos.",
+    "Processador de 8 núcleos é o que eu indico pra quem não quer trocar tão cedo."
+  ],
+  "why_cpu_6": [
+    "Segura essa placa de vídeo sem gargalo, e o que sobrou foi pro FPS.",
+    "Pra esse orçamento é o ponto certo: mais que isso tiraria da placa de vídeo.",
+    "6 núcleos dão conta do recado em jogo, e a economia virou desempenho gráfico.",
+    "Não precisa de mais que isso pra essa placa: é o processador na medida."
+  ],
+  "why_gpu": [
+    "É a peça que mais pesa no FPS.",
+    "Junto com o processador, é onde o dinheiro faz diferença de verdade.",
+    "É aqui que mora o desempenho gráfico da máquina.",
+    "Placa de vídeo é a peça que você mais sente no jogo. Por isso ela levou a maior fatia."
+  ],
+  "why_mobo": [
+    "Fecha a plataforma {pl} sem pagar por recurso que você não vai usar.",
+    "Boa de VRM pra esse processador e sem frescura.",
+    "Placa-mãe não dá FPS: escolhi uma confiável e sem gastar a mais.",
+    "Tem tudo que esse PC precisa, e o dinheiro que sobrou foi pras peças que importam."
+  ],
+  "why_ram16": [
+    "16GB em dual channel é o certo pra essa máquina.",
+    "Dois pentes rendem mais que um: o processador agradece.",
+    "16GB dão conta de jogo e Discord aberto sem sufoco.",
+    "Memória sempre em par: dual channel faz diferença de verdade no FPS."
+  ],
+  "why_ram32": [
+    "32GB dão conforto pra multitarefa, edição e jogo pesado.",
+    "Com 32GB você não pensa em memória tão cedo.",
+    "Jogo novo pede cada vez mais memória: 32GB deixam a máquina tranquila."
+  ],
+  "why_ssd": [
+    "Windows e jogos carregando rápido, sem pagar por velocidade que jogo não usa.",
+    "Pra jogo, um NVMe de 3.000 MB/s carrega igual um de 7.000. A diferença fica no bolso.",
+    "1TB dá espaço pro Windows e uma boa biblioteca de jogos.",
+    "SSD NVMe deixa tudo rápido. Mais que isso, pra jogo, é dinheiro que não volta."
+  ],
+  "why_psu": [
+    "Fonte protege o resto do PC. Aqui não se economiza em marca ruim.",
+    "Fonte boa é seguro do PC inteiro.",
+    "A fonte é a peça mais esquecida e a que mais dá problema quando é ruim. Essa é confiável.",
+    "Energia estável e certificação: é o mínimo que eu aceito numa montagem."
+  ],
+  "why_co_wc": [
+    "Refrigera com folga e fecha o visual da montagem.",
+    "Temperatura baixa e um PC bonito por dentro.",
+    "360mm sobra pra esse processador e deixa a montagem linda."
+  ],
+  "why_co_air": [
+    "Resolve com folga sem tirar dinheiro do desempenho.",
+    "Simples, silencioso e dá conta do recado.",
+    "Air cooler bom resolve: não precisa de water cooler pra esse processador."
+  ],
+  "why_ca_aq": [
+    "Bonito, com vidro, e cabe tudo com folga.",
+    "Vitrine pro hardware sem estourar o orçamento.",
+    "Gabinete aquário deixa o setup com cara de PC gamer de verdade."
+  ],
+  "why_ca_simples": [
+    "Ventilação boa e preço baixo. Gabinete não dá FPS.",
+    "Cabe tudo, ventila bem, e o dinheiro ficou nas peças que importam.",
+    "Gabinete é a última peça onde eu gastaria dinheiro. Esse resolve."
+  ],
+  "why_per": [
+    "Periférico é fácil de trocar depois, então não tirei dinheiro do PC pra isso.",
+    "Bom e barato: resolve agora, e se quiser algo melhor depois, troca sem mexer no PC.",
+    "Começa com esse e, quando sobrar um dinheiro, você melhora sem mexer no computador."
+  ],
+  "why_mon_fhd": [
+    "Full HD com taxa alta é o casamento certo com esse PC: você enxerga os frames que ele entrega.",
+    "Pra jogo, taxa de atualização muda mais a experiência do que resolução.",
+    "Monitor de 144Hz pra cima é a maior diferença que um gamer sente ao sair dos 60Hz."
+  ],
+  "why_mon_qhd": [
+    "QHD dá nitidez sem pedir uma placa de 10 mil.",
+    "Em 27\", o QHD é o ponto ideal de nitidez.",
+    "QHD é o upgrade de imagem que mais vale a pena hoje."
+  ]
+}

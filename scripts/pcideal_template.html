@@ -509,6 +509,8 @@ function monta(s){
     for(const gpu of (C.apu ? ['iGPU'] : Object.keys(GPU))){
       const gI = gpu==='iGPU' ? {p:0, n:'iGPU'} : (P.gpu||[]).find(x=>x.n===gpu); if(!gI) continue;
       const G = gpu==='iGPU' ? {i:C.ig, v:0, w:500} : GPU[gpu];
+      // regra do Bruno: QHD/4K pede placa com MAIS de 8GB (9060 XT 16GB, 9070 GRE, 5070, 9070, 9070 XT pra cima)
+      if((s.mon==='qhd' || s.mon==='uhd') && G.v<=8) continue;
       for(const ram of [16,32]){
         const rr = pickRam(C.pl==='AM4'?4:5, ram); if(!rr) continue;
         for(const sk of ['500','1t','1t4','2t']){
@@ -604,7 +606,7 @@ function result(){
   if(!b){
     let minimo = 0;
     for(let o = s.orc + 250; o <= s.orc + 4000; o += 250){ if(setup(Object.assign({}, s, {orc:o}))){ minimo = o; break; } }
-    app.innerHTML = head(false) + chips + `<div class="raio"><h3>Não fechou</h3>${minimo?`<p>Com essas escolhas, hoje o mínimo pra fechar tudo é uns <b>${R(minimo)}</b>.</p>`:''}<p>Com esse orçamento e essas escolhas eu não consegui fechar um PC completo com as ofertas do último mês. Tenta subir um degrau no orçamento, tirar algum item (monitor ou periférico) da conta, trocar pra AM4 ou escolher performance em vez de estética.</p></div>`;
+    app.innerHTML = head(false) + chips + `<div class="raio"><h3>Não fechou</h3>${minimo?`<p>Com essas escolhas, hoje o mínimo pra fechar tudo é uns <b>${R(minimo)}</b>.</p>`:''}${(s.mon==='qhd'||s.mon==='uhd'||s.mres==='qhd'||s.mres==='uhd')?`<p>Pra ${(s.mres||s.mon)==='uhd'?'4K':'QHD'} eu não monto com placa de vídeo de 8GB: precisa de <b>12GB ou 16GB</b> (RX 9060 XT 16GB, RX 9070, RTX 5070 pra cima). Por isso o valor sobe. Se for jogar em Full HD, dá pra fechar com menos.</p>`:''}<p>Com esse orçamento e essas escolhas eu não consegui fechar um PC completo com as ofertas do último mês. Tenta subir um degrau no orçamento, tirar algum item (monitor ou periférico) da conta, trocar pra AM4 ou escolher performance em vez de estética.</p></div>`;
     document.getElementById('pciRedo').onclick = refaz;
     return;
   }
@@ -717,7 +719,7 @@ function result(){
   if(A.mouse) accCards.push(card('Mouse', A.mouse.it.n.replace('Mouse ',''), A.mouse.preco, A.mouse.it, `Mouse com sensor bom e leve, faixa <b>${faixa(A.mouse.fx[0], A.mouse.fx[1])}</b>.`, perTxt));
   if(A.kb) accCards.push(card('Teclado', A.kb.it.n.replace('Teclado ',''), A.kb.preco, A.kb.it, `Teclado mecânico de entrada, faixa <b>${faixa(A.kb.fx[0], A.kb.fx[1])}</b>. Com fio: não precisa pagar por wireless.`, perTxt));
   if(A.head) accCards.push(card('Headset', A.head.it.n.replace(/^(Headset|Fone) /,''), A.head.preco, A.head.it, `Headset confortável com microfone, faixa <b>${faixa(A.head.fx[0], A.head.fx[1])}</b>.`, perTxt));
-  const linhas = [['Processador',b.cpu,b.cI.p,b.cI],['Placa de vídeo',GN,b.gI.p,b.apu?null:b.gI],['Placa-mãe',b.mobo.it.n.replace('Placa-mãe ',''),b.mobo.preco,b.mobo.it],['Memória',b.ram+'GB '+ramT,b.rr.preco,b.rr.it],['SSD',b.ss.it.n.replace('SSD ',''),b.ss.preco,b.ss.it],['Fonte',b.ps.it.n.replace('Fonte ',''),b.ps.preco,b.ps.it],['Refrigeração',b.co.box?'cooler box':b.co.it.n,b.co.preco,b.co.it],['Gabinete',b.ca.it.n.replace('Gabinete ',''),b.ca.preco,b.ca.it]];
+  const linhas = [['Processador',b.cpu,b.cI.p,b.cI],['Placa de vídeo',GN,b.gI.p,b.apu?null:b.gI],['Placa-mãe',b.mobo.it.n.replace('Placa-mãe ',''),b.mobo.preco,b.mobo.it],['Memória','2x'+(b.ram/2)+'GB '+ramT,b.rr.preco,b.rr.it],['SSD',b.ss.it.n.replace('SSD ',''),b.ss.preco,b.ss.it],['Fonte',b.ps.it.n.replace('Fonte ',''),b.ps.preco,b.ps.it],['Refrigeração',b.co.box?'cooler box':b.co.it.n,b.co.preco,b.co.it],['Gabinete',b.ca.it.n.replace('Gabinete ',''),b.ca.preco,b.ca.it]];
   const linhasAcc = [A.mon&&['Monitor',A.mon.it.n.replace('Monitor ',''),A.mon.preco,A.mon.it],A.kb&&['Teclado',A.kb.it.n.replace('Teclado ',''),A.kb.preco,A.kb.it],A.mouse&&['Mouse',A.mouse.it.n.replace('Mouse ',''),A.mouse.preco,A.mouse.it],A.head&&['Headset',A.head.it.n.replace(/^(Headset|Fone) /,''),A.head.preco,A.head.it]].filter(Boolean);
   const lnk = l => l[3] && l[3].post ? `<a class="tl" href="https://t.me/grape_tec/${l[3].post}" target="_blank" rel="noopener" data-ev="post_resumo">${esc(l[1])} ↗</a>` : `<span class="old">${esc(l[1])}</span>`;
   const pct = Math.min(100, b.geral/s.orc*100);

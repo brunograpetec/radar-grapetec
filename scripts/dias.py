@@ -1,5 +1,7 @@
 import os as _os;OUT=_os.environ.get('OUT','/mnt/user-data/outputs/base_precos_grape_tec')
 IMG={};URL={};CURL={}
+import json as _jf
+FOTOS=_jf.load(open(_os.environ['FOTOS'])) if _os.environ.get('FOTOS') and _os.path.exists(_os.environ['FOTOS']) else {}
 def _resg(t):
     tl=t.lower();i=tl.find('resgat')
     if i<0: i=tl.find('pegue o cupom')
@@ -92,6 +94,7 @@ def build(day):
         it=dict(k=k,id=slug(k.replace(' (mais barata)','').replace(' (mais barato)','')),n=k.replace(' (mais barata)','').replace(' (mais barato)',''),t=r['titulo'][:70],bucket=k.endswith(')') and 'mais bar' in k,
                 p=price,med=round(med,2),lo=lo,drop=round(drop,1),rec=price<lo,loja=r['loja'],h=c.get('hora',''),cup=c.get('cupom',''),post=int(pid),cat=r['categoria'])
         if pid in IMG: it['img']=IMG[pid]
+        if FOTOS.get(pid,[''])[0]: it['img']=FOTOS[pid][0]
         if pid in URL: it['url']=URL[pid]
         if pid in CURL and CURL[pid]!=it.get('url'): it['cupurl']=CURL[pid]
         if it['cup'] and it['cup'] in esg and esg[it['cup']][:10]==day and esg[it['cup']][11:16]>=it['h']: it['esg']=esg[it['cup']][11:16]

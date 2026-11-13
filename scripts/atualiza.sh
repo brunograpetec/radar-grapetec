@@ -9,6 +9,8 @@ python3 ../scripts/clean_extra.py
 mkdir -p base; export OUT=base POSTS=../dados/posts
 python3 ../scripts/base.py
 python3 ../scripts/comentarios.py ../site_data.json ../dados/comentarios.json || true
+python3 ../scripts/fotos.py ../site_data.json ../dados/fotos.json || true
+export FOTOS=../dados/fotos.json
 export MARCAS=../dados/comentarios.json
 python3 ../scripts/dias.py
 eval "$(python3 - <<'P'

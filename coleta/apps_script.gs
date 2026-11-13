@@ -27,7 +27,7 @@ function doPost(e) {
 function doGet() { return ContentService.createTextOutput('PC Ideal coleta ativa'); }
 
 function folha_(nome) {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const ss = SpreadsheetApp.getActiveSpreadsheet() || SpreadsheetApp.openById('1pJWvDphha-2CEyZhiN9rZH20jZW_B3mBGoAK6-yV-A8');
   let sh = ss.getSheetByName(nome);
   if (!sh) { sh = ss.insertSheet(nome); sh.appendRow(ABAS[nome]); sh.setFrozenRows(1); }
   return sh;

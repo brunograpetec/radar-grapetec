@@ -115,6 +115,7 @@
   #pci .sec{break-after:avoid}
   #pci a.me span:after{content:" · jobrufe.kpages.online/montageminteligente";font-weight:600}
 }
+#pci .cs{font-size:12.5px;color:var(--okt);margin-top:-4px}#pci .cs b{color:var(--okt)}
 #pci .parts{display:grid;gap:12px;margin-bottom:16px}
 #pci .part{background:var(--s1);border:1px solid var(--bd);border-radius:16px;padding:16px;display:grid;grid-template-columns:1fr 210px;gap:16px;align-items:start}
 #pci .pl{display:grid;gap:8px;min-width:0}
@@ -394,15 +395,32 @@ function pickCooler(wc, premium){
   const cls = L.map(x=>x.med).sort((a,b)=>a-b);
   return {it, preco:it.p, fx:[cls[0], cls[cls.length-1]], wc};
 }
-function pickCase(aq, wc, premium){
-  let L;
-  if(premium) L = by('case', x => /Lian Li|Wideload/.test(x.n));
-  else if(wc) L = by('case', x => /CV700L|Wideload/.test(x.n));
-  else if(aq) L = by('case', x => /CV450 \(9 fans\)|CV700L/.test(x.n));
-  else L = by('case', x => /CV450$|G-Storm|Mancer CV450|Acegeek/.test(x.n) && !/9 fans/.test(x.n));
-  const it = premium ? L.sort((a,b)=>b.p-a.p)[0] : cheapest(L);
+/* ficha de compatibilidade dos gabinetes (conservadora quando não sei o número exato) */
+const CASE_SPEC = [
+  [/Lian Li Vector V100/,      {tam:'Mid Tower', mobo:['E-ATX','ATX','mATX','ITX'], rad:360, ar:165, gpu:400, tier:4}],
+  [/Wideload Pro/,             {tam:'Mid Tower', mobo:['ATX','mATX','ITX'], rad:360, ar:165, gpu:380, tier:4}],
+  [/CV700L/,                   {tam:'Mid Tower', mobo:['ATX','mATX','ITX'], rad:360, ar:160, gpu:330, tier:3}],
+  [/Kalkan Asgard/,            {tam:'Mid Tower', mobo:['ATX','mATX','ITX'], rad:240, ar:160, gpu:330, tier:3}],
+  [/CV450 \(9 fans\)/,         {tam:'Mini Tower', mobo:['mATX','ITX'], rad:240, ar:155, gpu:300, tier:2}],
+  [/Mancer CV450/,             {tam:'Mini Tower', mobo:['mATX','ITX'], rad:240, ar:155, gpu:300, tier:1}],
+  [/G-Storm Sentinel/,         {tam:'Mid Tower', mobo:['ATX','mATX','ITX'], rad:240, ar:155, gpu:300, tier:1}],
+  [/Acegeek/,                  {tam:'Mid Tower', mobo:['ATX','mATX','ITX'], rad:240, ar:155, gpu:300, tier:1}],
+];
+const caseSpec = n => (CASE_SPEC.find(c => c[0].test(n))||[])[1] || null;
+const moboTam = it => /E-?ATX/i.test(it.t||'') ? 'E-ATX' : (it.a.Tamanho || 'mATX');
+// processadores que esquentam: pedem water cooler 360 (air cooler de torre simples não é o ideal)
+const QUENTE = /5800X3D|7800X3D|9800X3D|9700X|9900X|7900|5800XT|9950X3D/;
+function caseTier(orc){ return orc>=12000 ? 4 : orc>=7000 ? 3 : orc>=5500 ? 2 : 1; }
+function pickCase(aq, wc, premium, need){
+  // need: {mobo:'mATX', rad:360|0, gpuMm, tier}
+  const ok = x => { const c = caseSpec(x.n); if(!c) return false;
+    return c.mobo.includes(need.mobo) && (!need.rad || c.rad>=need.rad) && c.gpu>=need.gpuMm && c.tier>=need.tier && c.ar>=155; };
+  let L = by('case', ok);
+  if(aq && !premium){ const A = L.filter(x => /CV450 \(9 fans\)|CV700L|Wideload|Asgard|Lian Li/.test(x.n)); if(A.length) L = A; }
+  if(premium){ const T = L.filter(x => /Lian Li|Wideload/.test(x.n)); if(T.length) L = T; }
+  const it = premium ? L.slice().sort((a,b)=>b.p-a.p)[0] : cheapest(L);
   if(!it) return null;
-  return {it, preco:it.p, fx:[it.p25, it.p75]};
+  return {it, preco:it.p, fx:[it.p25, it.p75], spec:caseSpec(it.n)};
 }
 
 const MON_OK = /AOC|LG|Acer|Gigabyte|Philips|Samsung|ASUS|MSI/;
@@ -493,12 +511,14 @@ function monta(s){
           const gold = (s.orc>=5500 && !C.apu) || G.w>=750;
           const w = (C.pl==='AM5' || s.orc>=8000) ? Math.max(G.w, 850) : G.w;
           const ps = pickPsu(w, gold); if(!ps) continue;
-          const wc = est || C.x3d && s.orc>=8000 || s.orc>=10000 || /9700X|9900X|7900/.test(cpu);
+          const wc = est || QUENTE.test(cpu) || s.orc>=10000;
           const co = ((C.apu || (/^Ryzen 5 (5500|5600|7600)$/.test(cpu) && s.orc<5000)) && !wc && !aq) ? {box:1, preco:0, wc:false, it:null} : pickCooler(wc, top || (est && s.orc>=8000)); if(!co) continue;
-          const ca = pickCase(aq, co.wc, (top && aq) || (est && s.orc>=6000)); if(!ca) continue;
+          const ca = pickCase(aq, co.wc, (top && aq) || (est && s.orc>=6000), {mobo:moboTam(mobo.it), rad:co.wc?360:0, gpuMm: G.i>=175 ? 330 : G.i>=135 ? 290 : 250, tier:caseTier(s.orc)}); if(!ca) continue;
           const tot = cI.p + gI.p + mobo.preco + rr.preco + ss.preco + ps.preco + co.preco + ca.preco;
-          if(tot > teto) continue;
-          const sc = score(cpu, gpu, s, ram, sk);
+          // gabinete decente é obrigatório acima de 7 mil: se só ele estoura, passo até R$ 250 e explico
+          const folga = s.orc>=7000 ? 250 : 0;
+          if(tot > teto + folga) continue;
+          const sc = score(cpu, gpu, s, ram, sk) - (tot > teto ? 100 : 0);
           if(!best || sc > best.sc + .01 || (Math.abs(sc-best.sc)<=.01 && tot < best.tot))
             best = {sc, tot, cpu, gpu, cI, gI, mobo, rr, ss, ps, co, ca, ram, pl:C.pl, teto, apu:!!C.apu};
         }
@@ -550,7 +570,8 @@ function ficha(specs){ return specs && specs.length ? `<div class="fc">${specs.f
 function meter(label, v){ return `<div class="mt"><span>${label}</span><div><i style="width:${Math.round(Math.min(1,v)*100)}%"></i></div></div>`; }
 function card(k, nome, preco, it, norte, why, sub, extra, specs, mtr){
   if(!specs){ specs = Object.entries(it.a||{}).filter(([a,v]) => typeof v==='string' && !/Marca|Formato|Linha/.test(a)).map(([a,v]) => v); }
-  return `<div class="part"><div class="pl"><div class="k">${k}</div><div class="n">${esc(nome)}</div>${ficha(specs)}
+  const nc = (DATA.consultorias||{})[it.n] || 0;
+  return `<div class="part"><div class="pl"><div class="k">${k}</div><div class="n">${esc(nome)}</div>${nc>=3?`<div class="cs">✔ Indicado em <b>${nc} consultorias</b> do Brunão</div>`:''}${ficha(specs)}
    <div class="norte"><b>Norte:</b> ${norte}</div><div class="why">${why}</div>${mtr||''}${extra?`<div class="xtra">${extra}</div>`:''}
    ${termo(it)}</div>${pbox(it, preco, sub)}</div>`;
 }
@@ -620,6 +641,7 @@ function result(){
   if(s.pag==='misto') raio.push(`Como <b>${s.parc}% vai no cartão</b> (uns ${R(s.orc*s.parc/100)}), reservei ~${R(s.orc*s.parc/100*.08)} pra diferença do parcelamento. ${T('dica_misto')}`);
   if(s.mhz==='60' && !st.itens.mon && s.jogo!=='aaa') raio.push('Um conselho: com monitor 60Hz você não enxerga o FPS que esse PC entrega. Assim que der, um Full HD 144Hz muda o jogo.');
   if(sm==='uhd' && G.i<200) raio.push('Sendo sincero: 4K pede muita placa de vídeo. Vai rodar, mas com upscaling (DLSS/FSR) e gráficos ajustados.');
+  if(b.tot > b.pcOrc + 1) raio.push(`<b>Passei ${R(b.tot - b.pcOrc)} do orçamento</b>, e foi de propósito: num PC desse nível eu não monto com gabinete baratinho. Precisa caber tudo direito (placa-mãe, ${b.co.wc?'radiador de 360mm, ':''}placa de vídeo) e ventilar bem.`);
   if(sobra > 1500 && s.pag==='pix') raio.push(`Sobrou <b>${R(sobra)}</b>: não tem placa acima dessa nas ofertas do mês, então eu guardaria pro monitor ou periféricos.`);
 
   /* ----- norte e porquê de cada peça ----- */
@@ -643,7 +665,8 @@ function result(){
     `Fonte <b>${G.w}W ${b.ps.it.a['Certificação']}</b> de marca boa, faixa ${faixa(b.ps.fx[0], b.ps.fx[1])}. ${G.w<=650?'650W já atende esse conjunto, não precisa gastar mais.':'Na medida pra essa placa.'}`;
   const nCo = b.co.box ? `O <b>${b.cpu}</b> na versão box já vem com cooler na caixa, e ele dá conta. <b>Confere se a oferta é box</b> (com cooler); se for tray/OEM, um air cooler de ~R$ 100–140 resolve.` : b.co.wc ? `Water cooler <b>360mm</b>, faixa ${faixa(b.co.fx[0], b.co.fx[1])}. Radiador na parte de cima do gabinete.` :
     `Air cooler de torre, faixa ${faixa(b.co.fx[0], b.co.fx[1])}. ${C.x3d?'':'Esse processador é tranquilo de refrigerar.'}`;
-  const nCa = b.co.wc ? `Gabinete mid tower que aceite <b>radiador 360mm no topo</b>${aq?', estilo aquário':''}.` : (aq ? `Gabinete aquário com fans, sem tirar dinheiro do desempenho.` : `Gabinete com boa ventilação. Não precisa gastar aqui.`);
+  const cs = b.ca.spec || {};
+  const nCa = `${cs.tam||'Gabinete'} que aceita placa-mãe <b>${(cs.mobo||[]).filter(x=>x!=='ITX').join('/')}</b>, radiador até <b>${cs.rad||240}mm</b> e placa de vídeo de até <b>${cs.gpu||300}mm</b>. ${b.co.wc ? 'O water cooler de 360mm vai no topo.' : aq ? 'Estilo aquário, sem tirar dinheiro do desempenho.' : 'Ventila bem e não precisa gastar mais aqui.'}`;
 
   const W = {
     cpu: T(C.x3d ? 'why_cpu_x3d' : C.c>=8 ? 'why_cpu_8' : 'why_cpu_6'),
@@ -665,7 +688,17 @@ function result(){
     card('SSD', b.ss.it.n.replace('SSD ',''), b.ss.preco, b.ss.it, nSsd, W.ssd),
     card('Fonte', b.ps.it.n.replace('Fonte ',''), b.ps.preco, b.ps.it, nPsu, W.psu),
     b.co.box ? cardSem('Refrigeração', 'Cooler box (vem com o processador)', nCo, W.co, 'já incluso') : card('Refrigeração', b.co.it.n, b.co.preco, b.co.it, nCo, W.co),
-    card('Gabinete', b.ca.it.n.replace('Gabinete ',''), b.ca.preco, b.ca.it, nCa, W.ca),
+    card('Gabinete', b.ca.it.n.replace('Gabinete ',''), b.ca.preco, b.ca.it, nCa, W.ca, '', '', [cs.tam, 'radiador até '+cs.rad+'mm', 'GPU até '+cs.gpu+'mm', 'cooler até '+cs.ar+'mm']),
+  ];
+  const mt = moboTam(b.mobo.it), wPsu = wN;
+  const compat = [
+    `Processador ${b.pl} na placa-mãe ${b.mobo.it.a.Chipset} (${b.pl})${b.pl==='AM4' && /5800X3D|5500X3D|5600XT|5800XT/.test(b.cpu) ? ', confere se a BIOS está atualizada (as lojas costumam mandar atualizada)' : ''}`,
+    `Memória ${ramT}: é o tipo que essa placa-mãe usa, ${b.ram/2}GB em cada um dos dois pentes`,
+    `Placa-mãe ${mt} cabe no gabinete ${cs.tam||''} (aceita ${(cs.mobo||[]).filter(x=>x!=='ITX').join('/')})`,
+    b.co.box ? `Cooler box encaixa direto no processador` : b.co.wc ? `Water cooler 360mm cabe no gabinete (radiador até ${cs.rad}mm)` : `Air cooler cabe no gabinete (até ${cs.ar}mm de altura)`,
+    b.apu ? `Sem placa de vídeo agora: quando comprar, o gabinete aceita até ${cs.gpu}mm` : `Placa de vídeo ${b.gpu} cabe no gabinete (até ${cs.gpu}mm)`,
+    `Fonte de ${wPsu}W pra um conjunto que pede ${G.w}W${wPsu>G.w?': sobra margem pra upgrade':''}`,
+    `SSD NVMe M.2 vai direto no slot da placa-mãe, sem cabo`,
   ];
   const accCards = [];
   if(A.mon){ const m = A.mon.it.a; accCards.push(card('Monitor', A.mon.it.n.replace('Monitor ',''), A.mon.preco, A.mon.it,
@@ -685,7 +718,7 @@ function result(){
   app.innerHTML = head(false) + chips +
    `<div class="hero"><div class="sub">${b.accTot?'Seu setup completo':'Seu PC Ideal'}</div><div class="tot">${R(b.geral)}</div>
      <div class="bar"><i style="width:${pct.toFixed(1)}%"></i></div>
-     <div class="sub">${sobra>=0?`${R(sobra)} abaixo do seu orçamento de ${R(s.orc)}`:''}${s.pag!=='pix'?' · margem pro parcelado':''}</div>
+     <div class="sub">${sobra>=0?`${R(sobra)} abaixo do seu orçamento de ${R(s.orc)}`:`${R(-sobra)} acima do seu orçamento de ${R(s.orc)} (explico no Raio-X)`}${s.pag!=='pix'?' · margem pro parcelado':''}</div>
      <div class="mapa">${mapa}</div>
      <div class="sv"><button class="btn" id="pciPdf">📄 Salvar em PDF</button><button class="btn" id="pciLink">🔗 Copiar link do meu PC</button><span class="old">fica salvo neste navegador também</span></div>
      <div class="pdate">Montado em ${new Date().toLocaleDateString('pt-BR')} · grapetec.com.br</div></div>
@@ -694,6 +727,7 @@ function result(){
    ${accCards.length?`<div class="sec">3. ${A.mon?(accCards.length>1?'Monitor e periféricos':'Monitor'):'Periféricos'}</div><div class="parts">${accCards.join('')}</div>`:''}
    <div class="raio"><h3>${accCards.length?4:3}. Resumo financeiro</h3><table>${linhas.map(l=>`<tr><td>${l[0]} <span class="old">·</span> ${lnk(l)}</td><td>${R2(l[2])}</td></tr>`).join('')}${linhasAcc.length?`<tr class="st"><td>Subtotal PC</td><td>${R2(b.tot)}</td></tr>`+linhasAcc.map(l=>`<tr><td>${l[0]} <span class="old">·</span> ${lnk(l)}</td><td>${R2(l[2])}</td></tr>`).join(''):''}<tr class="t"><td>Total</td><td>${R2(b.geral)}</td></tr></table>
      <p class="foot" style="margin-top:10px">Preços das ofertas que passaram no canal nos últimos 30 dias. Oferta acaba: <b>use o norte de cada peça</b> e acompanhe o canal, não compre correndo uma alternativa mais cara.</p></div>
+   <div class="raio"><h3>Compatibilidade conferida</h3><ul class="ck">${compat.map(x=>`<li>${x}</li>`).join('')}</ul></div>
    <div class="raio"><h3>${accCards.length?5:4}. O que eu não faria agora</h3><ul class="ck no">
      <li>Cortar processador ou placa de vídeo pra pagar estética ou periférico</li>
      <li>Comprar memória em um pente só: são sempre dois</li>

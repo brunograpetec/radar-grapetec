@@ -72,6 +72,8 @@ for r in csv.DictReader(open(os.path.join(OUT, 'todos_os_posts_classificados.csv
         continue
     if 'mais bar' in r['produto']:
         continue
+    if re.search(r'usad[oa]|seminov|recondicion|vitrine|open ?box', r['titulo'], re.I):
+        continue
     pid = r['link_post'].rstrip('/').split('/')[-1]
     rows[(CATS[r['categoria']], r['produto'])].append((r['data'], float(r['preco'].replace(',', '.')), r['loja'], pid, r['titulo']))
 

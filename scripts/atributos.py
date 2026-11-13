@@ -60,44 +60,74 @@ def chipset(t):
     return m.group(1).upper() if m else None
 
 
+_STOP = set('gamer gaming de da do para com sem fio preto preta branco branca cinza rgb argb led tela pol polegadas ergonomica ergonômica escritorio escritório reclinavel reclinável giratoria giratória presidente cadeira monitor fonte memoria memória ssd water cooler teclado mecanico mecânico magnetico magnético switch nvme m2 m.2 pcie gen3 gen4 ddr4 ddr5 kit novo nova original lacrado full hd quad hd ultra uhd fhd qhd ips va oled hz e o a com, -'.split())
+
+
+def _palavras(t, mk):
+    """Primeiras palavras do nome do modelo depois da marca."""
+    i = t.find(mk.lower()) if mk else -1
+    rest = t[i + len(mk):] if i >= 0 else t
+    out = []
+    for w in re.findall(r"[a-z0-9][a-z0-9\-\.]*", rest):
+        if w in _STOP or re.fullmatch(r'\d+(gb|tb|w|mhz|hz|mm|cm|kg|v)?', w): 
+            if out: break
+            continue
+        out.append(w)
+        if len(out) == 2: break
+    return ' '.join(x.upper() if re.search(r'\d', x) else x.capitalize() for x in out) or None
+
+
 def modelo(produto, titulo):
     """Nome do modelo pra um post de produto-grupo ('mais barata/o'), ou None."""
-    grupo = 'mais bar' in produto
+    grupo = 'mais bar' in produto or produto in ('Teclado magnético',)
     t = titulo.lower()
     if produto.startswith('Placa-mãe'):
         mk = marca(t); c = chipset(t)
+        if not mk or not c: return None
         s = next((n for k, n in _SER_MB if k in t), None)
-        if not mk or not c or not s: return None
         m = 'M' if re.search(c.lower() + r'm', t) else ''
         extra = ' Plus' if s == 'TUF Gaming' and re.search(r'\bplus\b', t) else ''
         v = re.search(c.lower() + r'm?(?:-([a-z]{1,2})\b| ([abekp])\b)', t)
         suf = ('-' + (v.group(1) or v.group(2)).upper()) if v and (v.group(1) or v.group(2)) not in ('ii',) else ''
         wifi = ' WiFi' if re.search(r'wi-?fi|wifi', t) else ''
-        return f'Placa-mãe {mk} {s} {c}{m}{suf}{extra}{wifi}'
+        return f'Placa-mãe {mk} {s + " " if s else ""}{c}{m}{suf}{extra}{wifi}'
     if not grupo: return None
     mk = marca(t)
     if not mk: return None
     if produto.startswith('Memória'):
         g = re.search(r'(ddr[45])', t); cap = re.search(r'\b(8|16|32|64)\s?gb\b', t)
+        if not g or not cap: return None
         s = next((n for k, n in _SER_RAM if re.search(r'\b' + k + r'\b', t)), None)
-        if not g or not cap or not s: return None
-        f = re.search(r'\b(2666|3000|3200|3600|4800|5200|5600|6000|6400|6800|7200)\b', t)
-        return f'Memória {mk} {s} {g.group(1).upper()} {cap.group(1)}GB' + (f' {f.group(1)}MHz' if f else '')
-    cod = _codigo(t, mk)
-    if not cod: return None
-    if produto.startswith('Monitor'):
-        return f'Monitor {mk} {cod}'
+        f = re.search(r'\b(2666|3000|3200|3600|4800|5200|5600|6000|6400|6800|7200)(?:\s?mhz|mt/?s)?\b', t)
+        rgb = ' RGB' if 'rgb' in t else ''
+        return f'Memória {mk} {s + " " if s else ""}{g.group(1).upper()} {cap.group(1)}GB' + (f' {f.group(1)}MHz' if f else '') + rgb
     if produto.startswith('SSD'):
         cap = re.search(r'\b(\d+)\s?(gb|tb)\b', produto.lower())
+        cod = _codigo(t, mk)
+        if not cod:
+            m2 = re.search(r'\b(?=[a-z]*\d)(?=\d*[a-z])[a-z0-9]{2,8}\b', t[t.find(mk.lower()) + len(mk):] if mk.lower() in t else t)
+            cod = m2.group(0).upper() if m2 and not NOISE.match(m2.group(0)) else _palavras(t, mk)
+        if not cod: return None
         return f'SSD {mk} {cod}' + (f' {cap.group(1)}{cap.group(2).upper()}' if cap else '')
+    cod0 = _codigo(t, mk)
+    cod = cod0 or _palavras(t, mk)
+    if not cod: return None
+    if produto.startswith('Monitor'):
+        if not cod0:
+            sz = re.search(r'\b(2[1-9]|3[0-4])(?:[\.,]\d)?\s?(?:"|”|pol|polegadas|\'\'| ,)', t)
+            if not sz: return None
+            cod += f' {sz.group(1)}"'
+        return f'Monitor {mk} {cod}'
     if produto.startswith('Fonte'):
         w = re.search(r'(\d{3,4})\s?w', t)
-        return f'Fonte {mk} {cod}' + (f' {w.group(1)}W' if w else '')
+        return f'Fonte {mk} {cod}' + (f' {w.group(1)}W' if w and w.group(1) not in cod else '')
     if produto.startswith('Water cooler'):
         mm = re.search(r'(\d{3})\s?mm', produto)
-        return f'Water cooler {mk} {cod}' + (f' {mm.group(1)}' if mm else '')
+        return f'Water cooler {mk} {cod}' + (f' {mm.group(1)}mm' if mm and mm.group(1) not in cod else '')
     if produto.startswith('Cadeira'):
         return f'Cadeira {mk} {cod}'
+    if produto.startswith('Teclado'):
+        return f'Teclado {mk} {cod}'
     return None
 
 
@@ -240,7 +270,9 @@ def refina(produto, titulo):
         return p + f' ·{five} {st.group(1)}GB' if st else p
     if p == 'Controle DualSense (PS5)':
         if re.search(r'edi[cç][aã]o (limitada|especial)|limited|gran turismo|blackpink|astro|god of war|30th|death stranding|fortnite|marvel|spider', t): return p + ' · Edição limitada'
-        if re.search(r'branco|white|preto|black|midnight', t) and not re.search(r'camu|purple|roxo|red|vermelh|azul|blue|green|verde|pink|rosa|cinza|gray|grey|cobalt|sterling|chroma|hyperpop|remix|rhythm', t): return p + ' · Padrão (branco/preto)'
+        if not re.search(r'camu|purple|roxo|red|vermelh|azul|blue|green|verde|pink|rosa|cinza|gray|grey|cobalt|sterling|chroma|hyperpop|remix|rhythm', t):
+            if re.search(r'preto|black|midnight', t): return p + ' · Preto (Midnight Black)'
+            if re.search(r'branco|white', t): return p + ' · Branco'
         return p + ' · Cores especiais'
     if p.startswith('Controle Xbox'):
         if re.search(r'edi[cç][aã]o|ed\.|limitad|especial|25 anos|x25|gears|forza|halo', t): return p + ' · Edição especial'
@@ -251,6 +283,8 @@ def refina(produto, titulo):
         return 'Mouse HyperX Pulsefire Haste 2' + (' sem fio' if re.search(r'sem fio|wireless|bluetooth', t) else ' com fio')
     if p == 'Gabinete Mancer CV450':
         return p + (' (9 fans)' if re.search(r'9 fans|9 coolers|9 ventoinhas', t) else '')
+    if p == 'Mouse Redragon King Pro':
+        return p + (' 4K' if re.search(r'\b4k\b|4000hz', t) else ' 1K')
     if p == 'PlayStation 5 Slim':
         return p + (' Digital' if 'digital' in t else ' com leitor (disco)' if re.search(r'disk|disco|m[ií]dia f[ií]sica|leitor', t) else '')
     return p

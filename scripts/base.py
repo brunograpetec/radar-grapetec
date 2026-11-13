@@ -46,6 +46,7 @@ for r in list(rows):
     _m=AT.modelo(r['k'],r['t'])
     if _m and _m!=r['k'] and not _dup(_m):
         rows.append(dict(r,k=_m,c=cat(_m)));_mods.add(_m)
+rows=[r for r in rows if 'mais bar' not in r['k'] and r['k']!='Teclado magnético']
 by=collections.defaultdict(list)
 for r in rows: by[r['k']].append(r)
 outl=[];clean=[]

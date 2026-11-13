@@ -41,3 +41,6 @@ Regras que o Bruno passou e que o algoritmo segue. Anotar aqui cada regra nova (
 ## Banco de placas de vídeo
 - Tabela própria no código (GPU = {...}): linhas PCIe (x8/x16), memória, consumo, fonte e desempenho relativo 1080p (RX 7600 = 100). RX 9050 abaixo da RX 7600; specs da 9050 ainda não confirmadas. TechPowerUp bloqueia leitura automática, então a tabela é mantida à mão. (13/11/2026)
 - Desempenho relativo das GPUs agora vem da GPU Benchmarks Hierarchy do Tom's Hardware (1080p e 1440p Ultra, nov/2026); QHD usa a coluna 1440p. Atualizar quando sair placa nova. (13/11/2026)
+
+## 4K e memória
+- PC pra 4K: tentar 32GB (2x16GB). Se não couber sem tirar da placa de vídeo, fica 16GB (2x8GB) e explica: a placa de 16GB de VRAM é a primeira memória que o jogo usa; depois, quando a RAM baratear, vende os 2x8 e coloca 2x16. (13/11/2026)

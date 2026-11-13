@@ -220,7 +220,7 @@
 #pci .rdi svg{width:34px;height:34px}
 #pci a.rd em{display:block;font-style:normal;color:var(--act);font-size:14px;margin-top:8px;font-weight:600}
 #pci img.logo{width:42px;height:42px;border-radius:12px;object-fit:contain;background:none}
-@media (max-width:640px){#pci .part{grid-template-columns:1fr}#pci .pbox{display:grid;grid-template-columns:120px 1fr}#pci .ph{aspect-ratio:auto;min-height:120px}#pci a.me{grid-template-columns:76px 1fr;gap:12px}#pci a.me .foto{width:76px;height:76px}#pci .ch{grid-template-columns:1fr}#pci .sl{font-size:10px;left:6px;top:6px}}
+@media (max-width:640px){#pci .part{grid-template-columns:1fr}#pci .pbox{display:grid;grid-template-columns:112px 1fr;align-items:start}#pci .ph{aspect-ratio:1/1;width:112px;height:112px;margin:10px 0 10px 10px;border-radius:10px;background:#fff}#pci .ph img{object-fit:contain}#pci .ph .sl{top:auto;bottom:4px;left:4px;right:4px;text-align:center;font-size:9.5px;padding:2px 4px}#pci .pbox .pi{padding:10px 12px 12px 14px}#pci a.me{grid-template-columns:76px 1fr;gap:12px}#pci a.me .foto{width:76px;height:76px}#pci .ch{grid-template-columns:1fr}#pci .sl{font-size:10px;left:6px;top:6px}}
 @media (max-width:380px){#pci .chr{grid-template-columns:1fr}}
 #pci .btn{all:unset;cursor:pointer;font-size:13px;border:1px solid var(--bd);border-radius:999px;padding:5px 12px;color:var(--ink)}
 #pci .btn:hover{border-color:var(--ac);color:var(--act)}
@@ -603,7 +603,7 @@ function score(cpu, gpu, s, ram, ssd){
   if(c.c>=8) sc += 3;                       // 8 núcleos envelhecem melhor
   if(s.jogo==='fps' && c.x3d) sc += 6;      // cache 3D no competitivo
   if(s.jogo==='work') sc = .55*sc + .45*(c.c*10*(c.pl==='AM5'?1.15:1));
-  if(ram===32) sc += s.jogo==='work' ? 10 : 2.5;
+  if(ram===32) sc += s.jogo==='work' ? 10 : (s.mon==='uhd' ? 4.5 : 2.5);   // 4K: o ideal é 2x16GB (sem tirar da placa de vídeo)
   if(ssd==='1t'||ssd==='1t4') sc += 4; if(ssd==='2t') sc += 5.5; if(ssd==='1t4') sc += .5;
   if(s.plat==='auto' && c.pl==='AM5') sc *= 1.02;  // empate técnico → AM5 leva pela vida útil
   // equilíbrio: processador não pode segurar demais a placa
@@ -785,6 +785,7 @@ function result(){
   if(s.pag==='cartao') raio.push(`Como vai ser no cartão, deixei uma margem: fechou em <b>${R(b.geral)}</b> com preço de oferta, e o resto é pra absorver o parcelamento.`);
   if(s.pag==='misto') raio.push(`Como <b>${s.parc}% vai no cartão</b> (uns ${R(s.orc*s.parc/100)}), reservei ~${R(s.orc*s.parc/100*.08)} pra diferença do parcelamento. ${T('dica_misto')}`);
   if(s.mhz==='60' && !st.itens.mon && s.jogo!=='aaa') raio.push('Um conselho: com monitor 60Hz você não enxerga o FPS que esse PC entrega. Assim que der, um Full HD 144Hz muda o jogo.');
+  if(sm==='uhd' && b.ram===16 && !b.apu) raio.push(`Pra 4K o ideal é <b>32GB (2x16GB)</b>, mas não coube sem tirar da placa de vídeo. Preferi assim: sua placa já tem <b>${G.v}GB de memória de vídeo</b>, e é nela que o jogo busca primeiro. Os 16GB de RAM dão conta no padrão custo-benefício. Lá na frente, quando a memória baratear, você vende os 2x8GB e coloca 2x16GB.`);
   if(sm==='uhd' && G.i<200) raio.push('Sendo sincero: 4K pede muita placa de vídeo. Vai rodar, mas com upscaling (DLSS/FSR) e gráficos ajustados.');
   if(b.tot > b.pcOrc + 1) raio.push(`<b>Passei ${R(b.tot - b.pcOrc)} do orçamento</b>, e foi de propósito: num PC desse nível eu não monto com gabinete baratinho. Precisa caber tudo direito (placa-mãe, ${b.co.wc?'radiador de 360mm, ':''}placa de vídeo) e ventilar bem.`);
   if(b.apu && sobra > 300) raio.push(`Sobrou <b>${R(sobra)}</b>. Guarda esse dinheiro: ele já é o começo da sua placa de vídeo.`);

@@ -84,11 +84,11 @@
 </style>
 </head>
 <body style="margin:0;background:#0a0a0c">
-<div id="pci"><div class="orb"></div><div class="wrap" id="app"></div></div>
+<div id="pci"><div class="orb"></div><div class="wrap" id="pciApp"></div></div>
 <script>
-const DATA = /*DATA*/null;
+const DATA = window.__PCIDATA || /*DATA*/null;
 (function(){
-const P = DATA.parts, app = document.getElementById('app');
+const P = DATA.parts, app = document.getElementById('pciApp');
 const R = v => 'R$ ' + Math.round(v).toLocaleString('pt-BR');
 const R2 = v => 'R$ ' + v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
 const r50 = v => Math.round(v/50)*50;
@@ -169,11 +169,11 @@ function render(){
    `<div class="prog">${Q.map((_,i)=>`<i class="${i<=step?'on':''}"></i>`).join('')}</div>
     <div class="q"><h2>${q.t}</h2><p class="h">${q.h}</p>
      <div class="opts ${q.big?'big':''}">${q.o.map(o=>`<button class="opt ${cur===o[0]?'sel':''}" data-v="${o[0]}"><b>${o[1]}</b>${o[2]?`<span>${o[2]}</span>`:''}</button>`).join('')}</div>
-     <div class="nav">${step?'<button class="lnk" id="back">← voltar</button>':'<span></span>'}<span class="old">${step+1} de ${Q.length}</span></div></div>`;
+     <div class="nav">${step?'<button class="lnk" id="pciBack">← voltar</button>':'<span></span>'}<span class="old">${step+1} de ${Q.length}</span></div></div>`;
   app.querySelectorAll('.opt').forEach(b => b.onclick = () => {
-    const v = b.dataset.v; st[q.k] = isNaN(+v) ? v : +v; step++; render(); scrollTo({top: app.offsetTop - 10, behavior:'smooth'});
+    const v = b.dataset.v; st[q.k] = isNaN(+v) ? v : +v; step++; render(); {const y = app.getBoundingClientRect().top + scrollY - 80; if(scrollY > y) scrollTo({top:y, behavior:'smooth'});}
   });
-  const bk = document.getElementById('back'); if(bk) bk.onclick = () => { step--; render(); };
+  const bk = document.getElementById('pciBack'); if(bk) bk.onclick = () => { step--; render(); };
 }
 function head(full){
   return `<header><div class="logo">G</div><div class="brand"><b>Grape Tec · PC Ideal</b><span>preços dos meus posts dos últimos 30 dias</span></div></header>` +
@@ -328,10 +328,10 @@ function card(k, nome, preco, it, norte, why, extra){
 function result(){
   const s = st, b = monta(s);
   fire('PCIdeal_Resultado', {orc:s.orc, jogo:s.jogo, mon:s.mon, plat:s.plat});
-  const chips = `<div class="chips">${[R(s.orc), s.pag==='cartao'?'cartão':'PIX', {fps:'FPS/BR',aaa:'AAA',mix:'de tudo',work:'jogo + trabalho'}[s.jogo], {fhd60:'Full HD 60Hz',fhd:'Full HD 144Hz+',qhd:'QHD',uhd:'4K'}[s.mon], {auto:'plataforma: Brunão decide',am4:'AM4',am5:'AM5'}[s.plat], s.vis==='aquario'?'aquário':'discreto', s.net==='wifi'?'Wi-Fi':'cabo'].map(x=>`<span class="chip">${x}</span>`).join('')}<button class="lnk" id="redo" style="font-size:12px;margin-left:6px">refazer ↺</button></div>`;
+  const chips = `<div class="chips">${[R(s.orc), s.pag==='cartao'?'cartão':'PIX', {fps:'FPS/BR',aaa:'AAA',mix:'de tudo',work:'jogo + trabalho'}[s.jogo], {fhd60:'Full HD 60Hz',fhd:'Full HD 144Hz+',qhd:'QHD',uhd:'4K'}[s.mon], {auto:'plataforma: Brunão decide',am4:'AM4',am5:'AM5'}[s.plat], s.vis==='aquario'?'aquário':'discreto', s.net==='wifi'?'Wi-Fi':'cabo'].map(x=>`<span class="chip">${x}</span>`).join('')}<button class="lnk" id="pciRedo" style="font-size:12px;margin-left:6px">refazer ↺</button></div>`;
   if(!b){
     app.innerHTML = head(false) + chips + `<div class="raio"><h3>Não fechou</h3><p>Com esse orçamento e essas escolhas eu não consegui fechar um PC completo com as ofertas do último mês. Tenta subir um degrau no orçamento, trocar pra AM4 ou ir de visual discreto.</p></div>`;
-    document.getElementById('redo').onclick = () => { st={}; step=0; render(); };
+    document.getElementById('pciRedo').onclick = () => { st={}; step=0; render(); };
     return;
   }
   const C = CPU[b.cpu], G = GPU[b.gpu];
@@ -406,13 +406,13 @@ function result(){
      <p style="margin-top:10px;color:#ddd8e6;font-size:14.5px">${futuro}</p></div>
    <div class="raio"><h3>Quer que eu revise pessoalmente?</h3>
      <p>Esse é o mapa automático. Na consultoria eu olho seu caso, suas peças atuais (upgrade) e te entrego a configuração certinha <b>em até 24h</b>.</p>
-     <div class="cta"><a class="main" href="https://jobrufe.kpages.online/montageminteligente" target="_blank" rel="noopener" id="ctaC"><b>ME AJUDA, BRUNÃO</b><span>Consultoria Montagem Inteligente</span></a>
+     <div class="cta"><a class="main" href="https://jobrufe.kpages.online/montageminteligente" target="_blank" rel="noopener" id="pciCta"><b>ME AJUDA, BRUNÃO</b><span>Consultoria Montagem Inteligente</span></a>
      <a href="https://grapetec.com.br/ofertas" target="_blank" rel="noopener"><b>Canais de ofertas</b><span>WhatsApp e Telegram</span></a>
      <a href="https://grapetec.com.br/radar" target="_blank" rel="noopener"><b>Radar de preços</b><span>histórico de cada peça</span></a></div></div>
    <p class="foot">Atualizado com os posts até ${dia(DATA.gen)} · Compre pelos links: você me ajuda sem pagar nada a mais.</p>`;
-  document.getElementById('redo').onclick = () => { st={}; step=0; render(); };
+  document.getElementById('pciRedo').onclick = () => { st={}; step=0; render(); };
   app.querySelectorAll('a[data-ev]').forEach(a => a.onclick = () => fire('PCIdeal_Loja', {p:a.dataset.ev}));
-  const c = document.getElementById('ctaC'); if(c) c.onclick = () => fire('PCIdeal_Consultoria');
+  const c = document.getElementById('pciCta'); if(c) c.onclick = () => fire('PCIdeal_Consultoria');
 }
 fire('PCIdeal_Visita');
 render();

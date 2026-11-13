@@ -26,3 +26,11 @@ Regras que o Bruno passou e que o algoritmo segue. Anotar aqui cada regra nova (
 ## Ofertas e entrega
 - Preferir ofertas recentes (mais chance de ainda estar valendo): oferta com mais de 2 dias "pesa" ~1% a mais por dia na escolha; cada peça mostra "postado hoje / ontem / há X dias". (13/11/2026)
 - Deixar explícito, antes do Raio-X e no PDF: o resultado é um MAPA, não carrinho; ofertas podem ter expirado, mas pelo histórico voltam; entrar no canal de ofertas e montar igual. Vídeo do Bruno explicando entra em cima quando ele gravar (VIDEO_URL). (13/11/2026)
+
+## PCIe 3.0 e placa de vídeo
+- Plataforma PCIe 3.0 (Ryzen 5 5500, placas A520/B450): preferir placa de vídeo x16 (RX 9060 XT 8GB/16GB). Placas x8 (RTX 5050, RTX 5060, RTX 5060 Ti, RX 7600) perdem desempenho em PCIe 3.0 → penalidade de ~8% na escolha. Placas grandes (RX 9070 / RTX 5070 pra cima) não entram com PCIe 3.0. (13/11/2026)
+  - Obs.: a RX 7600 é PCIe 4.0 x8 (não x16), por isso entra na lista das x8.
+
+## Placa de vídeo x vídeo integrado
+- Opção no passo 1: "Deixa o Brunão decidir" / "Com placa de vídeo" (mais desempenho já; em orçamento curto cai no AM4, menos upgrade) / "Vídeo integrado" (AM5 com APU, placa depois). (13/11/2026)
+- Build com vídeo integrado: 16GB (não 32GB); o que sobrar, guardar pra placa de vídeo. (13/11/2026)

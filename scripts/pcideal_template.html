@@ -88,6 +88,7 @@
 #pci a.me b u{text-decoration:none;background:linear-gradient(transparent 82%,rgba(123,44,191,.75) 82%,rgba(123,44,191,.75) 94%,transparent 94%)}
 #pci a.me span svg.cal{width:34px;height:34px;float:left;margin:0 10px 0 0;color:#2a0f40}
 #pci a.me .foto{border:4px solid rgba(255,255,255,.85);box-shadow:0 0 0 3px rgba(199,125,255,.6),0 10px 30px rgba(40,0,80,.45)}
+#pci a.tl{color:var(--mut);font-size:13px;text-decoration:none;border-bottom:1px dotted var(--dim)}#pci a.tl:hover{color:var(--act);border-color:var(--act)}
 #pci .parts{display:grid;gap:12px;margin-bottom:16px}
 #pci .part{background:var(--s1);border:1px solid var(--bd);border-radius:16px;padding:16px;display:grid;grid-template-columns:1fr 210px;gap:16px;align-items:start}
 #pci .pl{display:grid;gap:8px;min-width:0}
@@ -645,8 +646,9 @@ function result(){
   if(A.mouse) accCards.push(card('Mouse', A.mouse.it.n.replace('Mouse ',''), A.mouse.preco, A.mouse.it, `Mouse com sensor bom e leve, faixa <b>${faixa(A.mouse.fx[0], A.mouse.fx[1])}</b>.`, perTxt));
   if(A.kb) accCards.push(card('Teclado', A.kb.it.n.replace('Teclado ',''), A.kb.preco, A.kb.it, `Teclado mecânico de entrada, faixa <b>${faixa(A.kb.fx[0], A.kb.fx[1])}</b>. Com fio: não precisa pagar por wireless.`, perTxt));
   if(A.head) accCards.push(card('Headset', A.head.it.n.replace(/^(Headset|Fone) /,''), A.head.preco, A.head.it, `Headset confortável com microfone, faixa <b>${faixa(A.head.fx[0], A.head.fx[1])}</b>.`, perTxt));
-  const linhas = [['Processador',b.cpu,b.cI.p],['Placa de vídeo',GN,b.gI.p],['Placa-mãe',b.mobo.it.n.replace('Placa-mãe ',''),b.mobo.preco],['Memória',b.ram+'GB '+ramT,b.rr.preco],['SSD',b.ss.it.n.replace('SSD ',''),b.ss.preco],['Fonte',b.ps.it.n.replace('Fonte ',''),b.ps.preco],['Refrigeração',b.co.box?'cooler box':b.co.it.n,b.co.preco],['Gabinete',b.ca.it.n.replace('Gabinete ',''),b.ca.preco]];
-  const linhasAcc = [A.mon&&['Monitor',A.mon.it.n.replace('Monitor ',''),A.mon.preco],A.kb&&['Teclado',A.kb.it.n.replace('Teclado ',''),A.kb.preco],A.mouse&&['Mouse',A.mouse.it.n.replace('Mouse ',''),A.mouse.preco],A.head&&['Headset',A.head.it.n.replace(/^(Headset|Fone) /,''),A.head.preco]].filter(Boolean);
+  const linhas = [['Processador',b.cpu,b.cI.p,b.cI],['Placa de vídeo',GN,b.gI.p,b.apu?null:b.gI],['Placa-mãe',b.mobo.it.n.replace('Placa-mãe ',''),b.mobo.preco,b.mobo.it],['Memória',b.ram+'GB '+ramT,b.rr.preco,b.rr.it],['SSD',b.ss.it.n.replace('SSD ',''),b.ss.preco,b.ss.it],['Fonte',b.ps.it.n.replace('Fonte ',''),b.ps.preco,b.ps.it],['Refrigeração',b.co.box?'cooler box':b.co.it.n,b.co.preco,b.co.it],['Gabinete',b.ca.it.n.replace('Gabinete ',''),b.ca.preco,b.ca.it]];
+  const linhasAcc = [A.mon&&['Monitor',A.mon.it.n.replace('Monitor ',''),A.mon.preco,A.mon.it],A.kb&&['Teclado',A.kb.it.n.replace('Teclado ',''),A.kb.preco,A.kb.it],A.mouse&&['Mouse',A.mouse.it.n.replace('Mouse ',''),A.mouse.preco,A.mouse.it],A.head&&['Headset',A.head.it.n.replace(/^(Headset|Fone) /,''),A.head.preco,A.head.it]].filter(Boolean);
+  const lnk = l => l[3] && l[3].post ? `<a class="tl" href="https://t.me/grape_tec/${l[3].post}" target="_blank" rel="noopener" data-ev="post_resumo">${esc(l[1])} ↗</a>` : `<span class="old">${esc(l[1])}</span>`;
   const pct = Math.min(100, b.geral/s.orc*100);
   const futuro = b.pl==='AM5' ? `Daqui a 1 ou 2 anos o primeiro upgrade é a <b>placa de vídeo</b>. Processador, placa-mãe, memória e fonte já foram escolhidos pra você não precisar reconstruir o PC.` :
     (b.cpu==='Ryzen 7 5800X3D' ? `Você já está no topo do AM4. O próximo passo, lá na frente, é a <b>placa de vídeo</b>.` : `No AM4 o teto é o <b>Ryzen 7 5800X3D</b>. Se um dia quiser mais, primeiro troca a placa de vídeo, depois o processador, sem mexer no resto.`);
@@ -659,7 +661,7 @@ function result(){
    <div class="raio"><h3>1. O Raio-X</h3>${raio.map(p=>`<p>${p}</p>`).join('')}</div>
    <div class="sec">2. A Máquina</div><div class="parts">${parts.join('')}</div>
    ${accCards.length?`<div class="sec">3. ${A.mon?(accCards.length>1?'Monitor e periféricos':'Monitor'):'Periféricos'}</div><div class="parts">${accCards.join('')}</div>`:''}
-   <div class="raio"><h3>${accCards.length?4:3}. Resumo financeiro</h3><table>${linhas.map(l=>`<tr><td>${l[0]} <span class="old">· ${esc(l[1])}</span></td><td>${R2(l[2])}</td></tr>`).join('')}${linhasAcc.length?`<tr class="st"><td>Subtotal PC</td><td>${R2(b.tot)}</td></tr>`+linhasAcc.map(l=>`<tr><td>${l[0]} <span class="old">· ${esc(l[1])}</span></td><td>${R2(l[2])}</td></tr>`).join(''):''}<tr class="t"><td>Total</td><td>${R2(b.geral)}</td></tr></table>
+   <div class="raio"><h3>${accCards.length?4:3}. Resumo financeiro</h3><table>${linhas.map(l=>`<tr><td>${l[0]} <span class="old">·</span> ${lnk(l)}</td><td>${R2(l[2])}</td></tr>`).join('')}${linhasAcc.length?`<tr class="st"><td>Subtotal PC</td><td>${R2(b.tot)}</td></tr>`+linhasAcc.map(l=>`<tr><td>${l[0]} <span class="old">·</span> ${lnk(l)}</td><td>${R2(l[2])}</td></tr>`).join(''):''}<tr class="t"><td>Total</td><td>${R2(b.geral)}</td></tr></table>
      <p class="foot" style="margin-top:10px">Preços das ofertas que passaram no canal nos últimos 30 dias. Oferta acaba: <b>use o norte de cada peça</b> e acompanhe o canal, não compre correndo uma alternativa mais cara.</p></div>
    <div class="raio"><h3>${accCards.length?5:4}. O que eu não faria agora</h3><ul class="ck no">
      <li>Cortar processador ou placa de vídeo pra pagar estética ou periférico</li>

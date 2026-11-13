@@ -94,3 +94,9 @@ Regras que o Bruno passou e que o algoritmo segue. Anotar aqui cada regra nova (
 - 6 núcleos AM4 com placa forte (≥ 9070 GRE): gargalo → 5800X3D (ou no mínimo 5700X).
 - Quando o problema é gargalo, a avaliação não sugere outro PC inteiro (o próprio alerta diz o que trocar) e nunca sugere placa de vídeo mais fraca que a escolhida.
 - No modo manual, o botão de voltar é "Deixa o Brunão montar" com a foto do Bruno.
+
+## 13/11/2026 — preço fora da curva (datas duplas)
+- Preço de data dupla (2/2, 3/3 … 11/11, 12/12) ou que saiu só em 1–2 dias, bem abaixo do normal (>6% abaixo da faixa normal), NÃO vira meta. Muito difícil sair de novo.
+- Meta realista = o menor preço que já saiu em pelo menos 3 dias diferentes no mês (fora das datas duplas), nunca acima do começo da faixa normal (p25). Assim continua ajudando a montar barato, sem ser irreal.
+- O preço fora da curva aparece como aviso curto: "🔥 já saiu a R$ 2.140 em 11/11 (data dupla) · realista: R$ 2.440" (na escolha da peça e no card) e um parágrafo no Raio-X/avaliação.
+- Ex.: RTX 5060 saiu a R$ 2.140 no 11/11; meta virou R$ 2.440.

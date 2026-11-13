@@ -121,11 +121,25 @@ for (cat, nome), L in rows.items():
     best = min(rec, key=lambda x: (x[1], x[0]))
     # entre posts com o mesmo preço mínimo, pega o mais novo
     best = max([x for x in rec if x[1] <= best[1] * 1.01], key=lambda x: x[0])
+    # regra do Bruno: preço fora da curva (data dupla tipo 11/11, ou que saiu só 1-2 dias) não vira meta.
+    # A meta vira o menor preço que já saiu em pelo menos 3 dias diferentes (fora das datas duplas).
+    fc = None
+    dup = lambda dd: dd[5:7] == dd[8:10]
+    dias = lambda v: len({x[0] for x in L if x[1] <= v * 1.03 and not dup(x[0])})
+    if best[1] < 0.94 * q(0.25) and (dias(best[1]) < 3 or dup(best[0])):
+        pr = next((x[1] for x in sorted(L, key=lambda x: x[1]) if not dup(x[0]) and dias(x[1]) >= 3), None)
+        pr = min(pr or 9e9, q(0.25))          # nunca acima da faixa normal: a ferramenta continua ajudando a montar barato
+        cand = [x for x in L if not dup(x[0]) and x[1] >= pr * 0.995]
+        if cand and pr > best[1] * 1.03:
+            alt = min(cand, key=lambda x: (round(x[1] / pr, 2), x[0][::-1] and -int(x[0].replace('-', ''))))
+            fc = dict(p=round(best[1], 2), d=best[0], post=int(best[3]), dup=dup(best[0]))
+            best = alt
     d, t = TXT.get(best[3], ('', ''))
     u = link(t)
     it = dict(n=nome, med=round(med), p25=round(q(0.25)), p75=round(q(0.75)), lo=round(ps[0]), np=len(L),
               p=round(best[1], 2), d=best[0], loja=best[2] or loja_de(u), post=int(best[3]), url=u, cup=cupom(t),
               t=best[4][:110], a=ATTR.get(nome, {}), img=FOTO.get(str(best[3]), ''))
+    if fc: it['fc'] = fc
     if cat == 'ram':
         m = re.search(r'DDR(\d) (?:(\d)x)?(\d+)GB (\d+)MHz', nome)
         it['a'] = dict(ddr=int(m.group(1)), mods=int(m.group(2) or 1), cap=int(m.group(3)), mhz=int(m.group(4)))

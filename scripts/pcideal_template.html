@@ -184,6 +184,9 @@
 #pci .mmah{display:flex;gap:12px;align-items:center;margin-bottom:10px}#pci .mmah img{width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid var(--ac)}#pci .mmah h3{margin:0}#pci .mmah span{font-size:12.5px;color:var(--mut)}
 #pci .vd{margin:10px 0 0;padding:8px 12px;border-radius:10px;font-size:14px}#pci .vd.ok{background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.25)}#pci .vd.no{background:rgba(255,159,107,.08);border:1px solid rgba(255,159,107,.3)}
 @media (max-width:560px){#pci .mmbar>div small{display:none}#pci .btn.mmav{padding:5px 12px 5px 5px;font-size:13px}#pci .btn.mmav img{width:34px;height:34px}#pci .btn.mmav small{display:none}#pci .mmbar b{white-space:nowrap;font-size:18px}}
+#pci .fcx{font-size:11.5px;line-height:1.35;color:#ffb37a;background:rgba(255,159,107,.08);border:1px dashed rgba(255,159,107,.35);border-radius:8px;padding:5px 7px;margin:6px 0 2px}
+#pci .fcx b{color:inherit}#pci .mon small.fco{color:#ffb37a}
+#pci.claro .fcx,#pci.claro .mon small.fco{color:#b4530f}
 #pci .tema{all:unset;cursor:pointer;margin-left:auto;font-size:12.5px;border:1px solid var(--bd);border-radius:999px;padding:5px 11px;color:var(--mut);background:var(--s1)}
 #pci .tema:hover{border-color:var(--ac);color:var(--ink)}
 /* tema claro */
@@ -811,6 +814,14 @@ const dia = d => d ? d.slice(8,10)+'/'+d.slice(5,7) : '';
 const WA = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.4L3 21l2.1-5.6A8.4 8.4 0 1 1 21 11.5z"/><path d="M9 9.5c.3 1.8 2.6 4.3 4.6 4.8l1.2-1.1 1.7.8"/></svg>';
 const TG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 3.5 2.8 10.7c-.9.4-.9 1.6.1 1.9l4.7 1.5 1.8 5.6c.3.8 1.3 1 1.9.4l2.6-2.5 4.7 3.5c.7.5 1.7.1 1.9-.7L23 4.9c.2-1-.7-1.8-1.5-1.4z"/><path d="m7.6 14.1 9.9-6.6-7.4 8.2"/></svg>';
 const RADAR = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5.5" opacity=".6"/><circle cx="12" cy="12" r="2" opacity=".4"/><path d="M12 12 18.4 5.6"/><circle cx="16" cy="9" r="1.2" fill="currentColor"/></svg>';
+// preço fora da curva (data dupla / pontual): mostra, mas a meta é o preço que se repete
+const fcTxt = it => it && it.fc ? `🔥 já saiu a <b>${R(it.fc.p)}</b> em ${dia(it.fc.d)}${it.fc.dup?' (data dupla)':''}` : '';
+function fcRaio(L){
+  const f = L.filter(x => x[1] && x[1].fc);
+  if(!f.length) return '';
+  const ex = f.sort((a,c) => (c[1].p - c[1].fc.p) - (a[1].p - a[1].fc.p))[0];
+  return `Um aviso sobre preço: ${f.length>1?'algumas peças já saíram':'uma peça já saiu'} bem mais barata${f.length>1?'s':''} em promoção relâmpago ou data dupla, tipo ${ex[0]} a <b>${R(ex[1].fc.p)}</b> no dia ${dia(ex[1].fc.d)}. Esse preço é muito difícil de voltar, então eu não montei em cima dele: usei o preço que <b>se repete no canal</b>, que é o que você tem chance real de pegar. Se aparecer aquele de novo, melhor ainda.`;
+}
 function selo(it){
   if(it.p <= it.lo*1.01 && it.np>=4) return ['hot','menor preço do mês'];
   if(it.p < it.p25) return ['ok','abaixo do normal'];
@@ -821,7 +832,7 @@ function pbox(it, preco, sub){
   const sl = selo(it);
   return `<div class="pbox">
     <a class="ph" href="https://t.me/grape_tec/${it.post}" target="_blank" rel="noopener" data-ev="post">${it.img?`<img src="${esc(it.img)}" alt="" loading="lazy" onerror="this.remove()">`:''}<span class="sl ${sl[0]}">${sl[1]}</span></a>
-    <div class="pi"><div class="pp">${R2(preco)}</div><div class="ps">${sub||(esc(it.loja||'')+' · '+dia(it.d))}</div><div class="age ${idade(it)<=2?'new':''}">${idade(it)===0?'postado hoje':idade(it)===1?'postado ontem':'postado há '+idade(it)+' dias'}</div>
+    <div class="pi"><div class="pp">${R2(preco)}</div><div class="ps">${sub||(esc(it.loja||'')+' · '+dia(it.d))}</div><div class="age ${idade(it)<=2?'new':''}">${idade(it)===0?'postado hoje':idade(it)===1?'postado ontem':'postado há '+idade(it)+' dias'}</div>${it.fc?`<div class="fcx">${fcTxt(it)}, mas foi pontual. Meta realista: <b>${R(it.p)}</b>${preco > it.p*1.5 ? " cada" : ""}</div>`:''}
     ${it.cup?`<button class="cupb" data-c="${esc(it.cup)}" data-u="${esc(it.url||'')}" title="Copia o cupom e abre a loja">🎟️ ${esc(it.cup)}</button>`:''}
     ${it.url?`<a class="btn buy" href="${esc(it.url)}" target="_blank" rel="noopener sponsored" data-ev="loja">${esc(it.loja||'Loja')} ↗</a>`:''}
     <a class="vp" href="https://t.me/grape_tec/${it.post}" target="_blank" rel="noopener" data-ev="post">ver o post</a></div></div>`;
@@ -927,6 +938,7 @@ function result(){
   const itens = [['o processador',b.cI],...(b.apu?[]:[['a placa de vídeo',b.gI]]),['a placa-mãe',b.mobo.it],['o SSD',b.ss.it],['a fonte',b.ps.it],...(b.co.it?[['o '+(b.co.wc?'water cooler':'cooler'),b.co.it]]:[]),['o gabinete',b.ca.it],...(A.mon?[['o monitor',A.mon.it]]:[])];
   const opp = itens.map(x=>[x[0],x[1],x[1].med-x[1].p]).sort((a,c)=>c[2]-a[2])[0];
   if(opp && opp[2] > 40) raio.push(T('opp', {item:opp[0], valor:R(opp[2])}));
+  { const fr = fcRaio(itens); if(fr) raio.push(fr); }
   if(s.pag==='cartao') raio.push(`Como vai ser no cartão, deixei uma margem: fechou em <b>${R(b.geral)}</b> com preço de oferta, e o resto é pra absorver o parcelamento.`);
   if(s.pag==='misto') raio.push(`Como <b>${s.parc}% vai no cartão</b> (uns ${R(s.orc*s.parc/100)}), reservei ~${R(s.orc*s.parc/100*.08)} pra diferença do parcelamento. ${T('dica_misto')}`);
   if(s.mhz==='60' && !st.itens.mon && s.jogo!=='aaa') raio.push('Um conselho: com monitor 60Hz você não enxerga o FPS que esse PC entrega. Assim que der, um Full HD 144Hz muda o jogo.');
@@ -1282,7 +1294,7 @@ function montar(){
         if(sec==='ca' && incomp.length && m.incomp!==sec){ const co = (P.cooler||[]).find(x=>x.n===m.co), mob = (P.mobo||[]).find(x=>x.n===m.mobo), g = GPU[m.gpu];
           h += `<p class="old" style="margin:-6px 0 8px">✔ Só gabinetes que cabem ${[mob&&'placa-mãe '+moboTam(mob), co&&radMm(co)&&'water cooler '+radMm(co)+'mm', g&&g.i>=175&&'a '+m.gpu].filter(Boolean).join(', ')}.</p>`; }
         const vis = m.mais===sec ? opts : opts.slice(0, 8);
-        h += `<div class="mml">${vis.map(o => { const bl = mmBloq(sec, o); return `<button class="mo ${m[sec]===o.id?'on':''} ${bl?'bl':''}" data-s="${sec}" data-id="${esc(o.id)}" ${bl?'disabled':''}><span class="mon">${esc(o.nome)}<small>${bl?'⚠ '+bl:o.sub}</small></span><span class="mop">${o.preco?R2(o.preco):'R$ 0'}${o.it?`<small>${esc(o.it.loja||'')} · ${idade(o.it)===0?'hoje':idade(o.it)===1?'ontem':'há '+idade(o.it)+' dias'}</small>`:''}</span></button>`; }).join('') || '<p class="old">Nada passou no canal com esse filtro no último mês.</p>'}</div>`;
+        h += `<div class="mml">${vis.map(o => { const bl = mmBloq(sec, o); return `<button class="mo ${m[sec]===o.id?'on':''} ${bl?'bl':''}" data-s="${sec}" data-id="${esc(o.id)}" ${bl?'disabled':''}><span class="mon">${esc(o.nome)}<small>${bl?'⚠ '+bl:o.sub}</small>${!bl && o.it && o.it.fc ? `<small class="fco">${fcTxt(o.it)} · realista: ${R(o.preco/(o.qtd||1))}${o.qtd===2?' cada':''}</small>` : ''}</span><span class="mop">${o.preco?R2(o.preco):'R$ 0'}${o.it?`<small>${esc(o.it.loja||'')} · ${idade(o.it)===0?'hoje':idade(o.it)===1?'ontem':'há '+idade(o.it)+' dias'}</small>`:''}</span></button>`; }).join('') || '<p class="old">Nada passou no canal com esse filtro no último mês.</p>'}</div>`;
         if(opts.length > 8 && m.mais!==sec) h += `<button class="lnk mmmais" data-s="${sec}">ver mais ${opts.length-8} opções ▾</button>`;
         if(incomp.length && m.incomp!==sec) h += `<button class="lnk mminc" data-s="${sec}" style="margin-left:14px">ver ${incomp.length} que não ${incomp.length>1?'são compatíveis':'é compatível'} ▾</button>`;
       } else if(!tem) h += `<p class="old">Escolhe a peça anterior primeiro.</p>`;
@@ -1298,6 +1310,7 @@ function montar(){
       <div class="sv"><button class="btn" id="pciPdf">📄 Salvar em PDF</button><button class="btn" id="pciLink">🔗 Copiar link do meu PC</button></div><div class="pdate">Montado em ${new Date().toLocaleDateString('pt-BR')} · grapetec.com.br</div></div>`;
     h += mapaHTML(true);
     h += `<div class="raio"><div class="mmah"><img src="${FOTO_BRUNO}" alt="Brunão"><div><h3>A avaliação do Brunão</h3><span>Com base nas regras que eu uso nas minhas consultorias</span></div></div>${av.alerta.length?`<ul class="ck no">${av.alerta.map(x=>`<li>${x}</li>`).join('')}</ul>`:''}${av.ok.length?`<ul class="ck" style="margin-top:8px">${av.ok.map(x=>`<li>${x}</li>`).join('')}</ul>`:''}${av.dica.length?`<ul class="ck dica" style="margin-top:8px">${av.dica.map(x=>`<li>${x}</li>`).join('')}</ul>`:''}
+      ${(() => { const fr = fcRaio(MM_SECS.slice(1).map(([k,n]) => [({cpu:'o processador',mobo:'a placa-mãe',ram:'a memória',ssd:'o SSD',gpu:'a placa de vídeo',psu:'a fonte',co:'o cooler',ca:'o gabinete'})[k], av.sel[k] && av.sel[k].it])); return fr ? `<p style="margin-top:10px">${fr}</p>` : ''; })()}
       ${mmCompara(av, m)}
       <p class="foot" style="margin-top:10px">Esses são os melhores preços que passaram no meu canal no último mês, depois de uma leitura minuciosa de todas as ofertas. É esse o alvo: entra nos canais e vai pegando cada peça quando ela bater esse preço.</p></div>`;
     h += `<div class="parts">${MM_SECS.slice(1).map(([k, nome]) => { const o = S[k]; if(!o || !o.it) return cardSem(nome, o ? o.nome : '-', o ? o.sub : '', k==='gpu' ? (CPU[m.cpu]&&CPU[m.cpu].apu ? `O ${CPU[m.cpu].apu} roda os competitivos leves (CS2, Valorant, LoL) no gráfico baixo. A placa de vídeo entra depois, sem trocar nada.` : 'Esse vídeo é só pra ligar a tela e usar o PC. Pra jogar, a placa de vídeo precisa vir logo.') : 'O cooler que vem na caixa segura esse processador sem overclock. Confere se a oferta é a versão box (com cooler).', o && o.id==='box' ? 'já incluso' : 'vem no processador');

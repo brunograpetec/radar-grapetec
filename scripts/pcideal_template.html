@@ -746,7 +746,7 @@ function result(){
    <p class="foot">Atualizado com os posts até ${dia(DATA.gen)} · Compre pelos links: você me ajuda sem pagar nada a mais.</p>`;
   document.getElementById('pciRedo').onclick = refaz;
   salva();
-  const pdf = document.getElementById('pciPdf'); if(pdf) pdf.onclick = () => { fire('PCIdeal_PDF'); window.print(); };
+  const pdf = document.getElementById('pciPdf'); if(pdf) pdf.onclick = () => { fire('PCIdeal_PDF'); window.dispatchEvent(new Event('beforeprint')); setTimeout(() => window.print(), 50); };
   const cl = document.getElementById('pciLink'); if(cl) cl.onclick = () => { const u = location.href; try { navigator.clipboard.writeText(u); } catch(_){} cl.innerHTML = '✓ link copiado'; fire('PCIdeal_Link'); setTimeout(()=>{ cl.innerHTML = '🔗 Copiar link do meu PC'; }, 2500); };
   app.querySelectorAll('a[data-ev]').forEach(a => a.addEventListener('click', () => fire('PCIdeal_'+a.dataset.ev)));
   app.querySelectorAll('.cupb').forEach(bt => bt.onclick = () => {
@@ -757,6 +757,14 @@ function result(){
   });
   const c = document.getElementById('pciCta'); if(c) c.onclick = () => fire('PCIdeal_Consultoria');
 }
+/* ---------- PDF: tira o "esticar até a borda" do WordPress antes de imprimir ---------- */
+(function(){
+  const root = document.getElementById('pci'); let antes = null;
+  const tira = () => { if(!root || antes!==null) return; antes = root.getAttribute('style')||''; root.setAttribute('style','margin:0!important;width:100%!important;max-width:100%!important;left:0!important'); };
+  const volta = () => { if(!root || antes===null) return; root.setAttribute('style', antes); antes = null; window.dispatchEvent(new Event('resize')); };
+  window.addEventListener('beforeprint', tira); window.addEventListener('afterprint', volta);
+  if(window.matchMedia){ const mq = matchMedia('print'); const f = e => e.matches ? tira() : volta(); mq.addEventListener ? mq.addEventListener('change', f) : mq.addListener(f); }
+})();
 /* ---------- salvar / restaurar o projeto ---------- */
 const CHAVES = ['itens','orc','pag','parc','jogo','mres','mhz','mpan','mon','plat','vis','net'];
 function codifica(){ const o = {}; CHAVES.forEach(k => { if(st[k]!==undefined) o[k] = st[k]; }); return btoa(unescape(encodeURIComponent(JSON.stringify(o)))).replace(/=+$/,''); }

@@ -296,22 +296,24 @@ const CPU = {
  'Ryzen 5 8600G':    {pl:'AM5', g:85,  c:6, apu:'Radeon 760M', ig:40, d:'6 núcleos com o vídeo integrado mais forte da linha (Radeon 760M)'},
  'Ryzen 7 8700G':    {pl:'AM5', g:92,  c:8, apu:'Radeon 780M', ig:50, d:'8 núcleos com Radeon 780M integrada, a melhor APU que existe'},
 };
-/* banco de placas de vídeo (specs públicas: linhas PCIe, memória, consumo). i = desempenho relativo em jogo 1080p (RX 7600 = 100) */
+/* banco de placas de vídeo (specs públicas: linhas PCIe, memória, consumo).
+   i = desempenho relativo 1080p Ultra, q = 1440p Ultra, com RX 7600 em 1080p = 100.
+   Fonte do desempenho: GPU Benchmarks Hierarchy do Tom's Hardware (nov/2026). RX 9050 é estimativa (não está na tabela). */
 const GPU = {
- 'RX 9050':          {i:90,  v:8,  w:650, pcie:'', ln:0, mem:'GDDR6 128-bit', tdp:0, inc:1},   // specs ainda não confirmadas
- 'RX 7600':          {i:100, v:8,  w:650, pcie:'PCIe 4.0', ln:8,  mem:'GDDR6 128-bit', tdp:165},
- 'RTX 5050':         {i:98,  v:8,  w:550, pcie:'PCIe 5.0', ln:8,  mem:'GDDR6 128-bit', tdp:130},
- 'RTX 5060':         {i:122, v:8,  w:550, pcie:'PCIe 5.0', ln:8,  mem:'GDDR7 128-bit', tdp:145},
- 'RX 9060 XT 8GB':   {i:132, v:8,  w:650, pcie:'PCIe 5.0', ln:16, mem:'GDDR6 128-bit', tdp:160},
- 'RTX 5060 Ti 8GB':  {i:138, v:8,  w:650, pcie:'PCIe 5.0', ln:8,  mem:'GDDR7 128-bit', tdp:180},
- 'RX 9060 XT 16GB':  {i:136, v:16, w:650, pcie:'PCIe 5.0', ln:16, mem:'GDDR6 128-bit', tdp:160},
- 'RTX 5060 Ti 16GB': {i:142, v:16, w:650, pcie:'PCIe 5.0', ln:8,  mem:'GDDR7 128-bit', tdp:180},
- 'RX 9070 GRE':      {i:170, v:12, w:750, pcie:'PCIe 5.0', ln:16, mem:'GDDR6 192-bit', tdp:220},
- 'RTX 5070':         {i:182, v:12, w:750, pcie:'PCIe 5.0', ln:16, mem:'GDDR7 192-bit', tdp:250},
- 'RX 9070':          {i:196, v:16, w:750, pcie:'PCIe 5.0', ln:16, mem:'GDDR6 256-bit', tdp:220},
- 'RX 9070 XT':       {i:220, v:16, w:850, pcie:'PCIe 5.0', ln:16, mem:'GDDR6 256-bit', tdp:304},
- 'RTX 5070 Ti':      {i:230, v:16, w:850, pcie:'PCIe 5.0', ln:16, mem:'GDDR7 256-bit', tdp:300},
- 'RTX 5080':         {i:265, v:16, w:850, pcie:'PCIe 5.0', ln:16, mem:'GDDR7 256-bit', tdp:360},
+ 'RX 9050':          {i:90, q:71,  v:8,  w:650, pcie:'', ln:0, mem:'GDDR6 128-bit', tdp:0, inc:1},   // specs ainda não confirmadas
+ 'RX 7600':          {i:100, q:79, v:8,  w:650, pcie:'PCIe 4.0', ln:8,  mem:'GDDR6 128-bit', tdp:165},
+ 'RTX 5050':         {i:99, q:79,  v:8,  w:550, pcie:'PCIe 5.0', ln:8,  mem:'GDDR6 128-bit', tdp:130},
+ 'RTX 5060':         {i:127, q:104, v:8,  w:550, pcie:'PCIe 5.0', ln:8,  mem:'GDDR7 128-bit', tdp:145},
+ 'RX 9060 XT 8GB':   {i:133, q:109, v:8,  w:650, pcie:'PCIe 5.0', ln:16, mem:'GDDR6 128-bit', tdp:160},
+ 'RTX 5060 Ti 8GB':  {i:144, q:120, v:8,  w:650, pcie:'PCIe 5.0', ln:8,  mem:'GDDR7 128-bit', tdp:180},
+ 'RX 9060 XT 16GB':  {i:141, q:117, v:16, w:650, pcie:'PCIe 5.0', ln:16, mem:'GDDR6 128-bit', tdp:160},
+ 'RTX 5060 Ti 16GB': {i:150, q:128, v:16, w:650, pcie:'PCIe 5.0', ln:8,  mem:'GDDR7 128-bit', tdp:180},
+ 'RX 9070 GRE':      {i:173, q:151, v:12, w:750, pcie:'PCIe 5.0', ln:16, mem:'GDDR6 192-bit', tdp:220},
+ 'RTX 5070':         {i:190, q:168, v:12, w:750, pcie:'PCIe 5.0', ln:16, mem:'GDDR7 192-bit', tdp:250},
+ 'RX 9070':          {i:201, q:181, v:16, w:750, pcie:'PCIe 5.0', ln:16, mem:'GDDR6 256-bit', tdp:220},
+ 'RX 9070 XT':       {i:224, q:203, v:16, w:850, pcie:'PCIe 5.0', ln:16, mem:'GDDR6 256-bit', tdp:304},
+ 'RTX 5070 Ti':      {i:222, q:203, v:16, w:850, pcie:'PCIe 5.0', ln:16, mem:'GDDR7 256-bit', tdp:300},
+ 'RTX 5080':         {i:239, q:224, v:16, w:850, pcie:'PCIe 5.0', ln:16, mem:'GDDR7 256-bit', tdp:360},
 };
 Object.values(GPU).forEach(g => { g.x8 = g.ln===8 ? 1 : 0; });
 const MARCA_OK = /ASUS|MSI|Gigabyte|ASRock|Maxsun/;
@@ -593,7 +595,7 @@ function setup(s){
 function score(cpu, gpu, s, ram, ssd){
   const c = CPU[cpu], g = gpu==='iGPU' ? {i:c.ig, v:0, w:500} : GPU[gpu];
   let gi = g.i;
-  if(s.mon==='qhd'){ gi *= .72; if(g.v<=8) gi *= .86; }
+  if(s.mon==='qhd'){ gi = (g.q || g.i*.8) * .9; }
   if(s.mon==='uhd'){ gi *= .46; if(g.v<=8) gi *= .7; else if(g.v<=12) gi *= .9; }
   let mult = {fps:1.25, aaa:1.9, mix:1.55, work:1.6}[s.jogo];
   if(s.mon==='qhd') mult *= 1.3; if(s.mon==='uhd') mult *= 1.75; if(s.mon==='fhd60' || s.hz60) mult *= 1.4;
@@ -796,6 +798,7 @@ function result(){
   let xGpu = '';
   if(up) xGpu += `<b>Quer esticar?</b> A ${up.n} custa ${R(up.it.p - b.gI.p)} a mais e entrega uns ${Math.round((up.g.i/G.i-1)*100)}% a mais. `;
   if(dn) xGpu += `<b>Por que não a ${dn.n}?</b> Economiza ${R(b.gI.p - dn.it.p)}, mas perde uns ${Math.round((1-dn.g.i/G.i)*100)}% de desempenho.`;
+  if(xGpu) xGpu += ` <span class="old">(desempenho médio em 1080p Ultra, tabela do Tom's Hardware)</span>`;
   const chip = b.mobo.it.a.Chipset;
   const nMobo = `Chipset <b>${chip}</b> (${b.pl}, ${ramT})${b.wifi?', <b>com Wi-Fi</b>':''}. Faixa ${chip}: <b>${faixa(b.mobo.fx[0], b.mobo.fx[1])}</b>.${s.net!=='wifi'?' No cabo, não precisa pagar por Wi-Fi.':(b.wifi?'':' <b>Sem Wi-Fi na placa</b>: a versão com Wi-Fi não coube sem abrir mão de outra peça. Usa um <b>adaptador Wi-Fi USB</b> (dongle, uns R$ 40–80) e pronto.')}`;
   const nRam = `Memória <b>2x${b.ram/2} = ${b.ram}GB ${ramT}</b>${ramT==='DDR4'?' 3200MHz':' 5600–6000MHz'}, sempre em dois pentes (dual channel).${b.rr.fx?` Cada pente na faixa <b>${faixa(b.rr.fx[0], b.rr.fx[1])}</b>.`:''}`;

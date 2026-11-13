@@ -3,10 +3,12 @@ import json,csv,re,unicodedata,statistics as S,datetime as dt
 summ=json.load(open('summ.json'))
 rows=list(csv.DictReader(open(OUT+'/menor_preco_por_dia.csv',encoding='utf-8-sig'),delimiter=';'))
 SC={'KaBuM':'K','Amazon':'A','Shopee':'S','Mercado Livre':'M','AliExpress':'X','Pichau':'P','Terabyte':'T','Magalu':'G','?':'?'}
-D0=dt.date(2026,10,1)
+import os as _o0
+D0=dt.date.fromisoformat(_o0.environ.get('D0','2026-10-01'));MA=_o0.environ.get('MA','2026-10-01');MB=_o0.environ.get('MB','2026-11-01')
 ser={}
 for r in rows:
     i=(dt.date.fromisoformat(r['data'])-D0).days
+    if i<0: continue
     ser.setdefault(r['produto'],[]).append([i,float(r['menor_preco'].replace(',','.')),SC.get(r['loja'],'?'),int(r['link_post'].rsplit('/',1)[1])])
 def slug(s): return re.sub(r'[^a-z0-9]+','-',unicodedata.normalize('NFKD',s).encode('ascii','ignore').decode().lower()).strip('-')
 def nice(v): 
@@ -18,7 +20,7 @@ for s in summ:
     k=s['produto']; sr=sorted(ser[k]); prices=[p for _,p,_,_ in sr]
     q=sorted(prices); p25=q[max(0,int(len(q)*0.25)-1)]
     alvo=nice(p25); ult=s['ultimo']; ref=s['mediana_nov'] or s['mediana_out']
-    if s['ultimo_data']<'2026-11-01': selo='alvo'
+    if s['ultimo_data']<MB: selo='alvo'
     elif ult<=alvo*1.01: selo='compra'
     elif ult>=ref*1.03 or (s['var_out_nov'] or 0)>3: selo='espera'
     else: selo='alvo'
@@ -50,7 +52,7 @@ UPD=os.environ.get('UPD','10/11/2026 às 15h26');ATE=os.environ.get('ATE','10/11
 OFERTAS=len(set(r['link_post'] for r in allp if r['fora_da_curva']!='sim'))
 _lastd=max(r['data'] for r in rows)
 import time as _t
-data=dict(ts=int(_t.time()),gen=_lastd,upd=UPD,ate=ATE,d0='2026-10-01',days=(dt.date.fromisoformat(_lastd)-D0).days+1,total_posts=int(os.environ.get('TOTAL','18523')),ofertas=OFERTAS,P=P,T=therm,A=ach,
+data=dict(ts=int(_t.time()),gen=_lastd,upd=UPD,ate=ATE,d0=D0.isoformat(),mA=MA,mB=MB,days=(dt.date.fromisoformat(_lastd)-D0).days+1,total_posts=int(os.environ.get('TOTAL','18523')),ofertas=OFERTAS,P=P,T=therm,A=ach,
           stores={v:k for k,v in SC.items()})
 import os as _o
 if _o.path.exists('dias.json'): data['dias']=json.load(open('dias.json'))
@@ -63,12 +65,13 @@ if _o.path.exists('modelos_series.json'):
         sr=sorted([[(dt.date.fromisoformat(dd)-D0).days,p,SC.get(l,'?'),post] for dd,(p,l,post) in v['d'].items()])
         if len(sr)<3: continue
         pr=[x[1] for x in sr]; q=sorted(pr); alvo=nice(q[max(0,int(len(q)*0.25)-1)])
-        o=[x[1] for x in sr if x[0]<31]; nv=[x[1] for x in sr if x[0]>=31]
+        _ia=(dt.date.fromisoformat(MA)-D0).days;_ib=(dt.date.fromisoformat(MB)-D0).days
+        o=[x[1] for x in sr if _ia<=x[0]<_ib]; nv=[x[1] for x in sr if x[0]>=_ib]
         mo=round(S.median(o),2) if o else None; mn=round(S.median(nv),2) if nv else None
         var=round((mn/mo-1)*100,1) if mo and mn else None
         lo=min(sr,key=lambda x:x[1]); last=sr[-1]
         ud=(D0+dt.timedelta(last[0])).isoformat(); ref=mn or mo
-        selo='alvo' if ud<'2026-11-01' else 'compra' if last[1]<=alvo*1.01 else 'espera' if (last[1]>=ref*1.03 or (var or 0)>3) else 'alvo'
+        selo='alvo' if ud<MB else 'compra' if last[1]<=alvo*1.01 else 'espera' if (last[1]>=ref*1.03 or (var or 0)>3) else 'alvo'
         inv={c:n for n,c in SC.items()}
         PM.append(dict(id=v['id'],n=k,c=v['c'],cat_bucket=False,s=sr,mo=mo,mn=mn,v=var,lo=lo[1],lod=(D0+dt.timedelta(lo[0])).isoformat(),los=inv.get(lo[2],'?'),
             u=last[1],ud=ud,ul=inv.get(last[2],'?'),posts=len(sr),dias=len(sr),alvo=alvo,selo=selo,f=False))

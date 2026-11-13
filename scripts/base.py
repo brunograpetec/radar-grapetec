@@ -1,3 +1,4 @@
+import os
 import csv,re,json,statistics as S,collections,datetime as dt
 R=list(csv.DictReader(open('posts_raw2.csv',encoding='utf-8')))+list(csv.DictReader(open('posts_extra_clean.csv',encoding='utf-8')))
 RENAME={'Monitor AOC 25G64 (FHD 25")':'Monitor TCL 25G64 (FHD 25" Mini LED)'}
@@ -19,6 +20,7 @@ for r in R:
     if COMBO.search(t): dropped['combo']+=1; continue
     if (k.startswith('SSD') or k.startswith('Memória')) and MULTI.search(t): dropped['multi']+=1; continue
     if k.startswith('Memória') and SODIMM.search(t): dropped['sodimm']+=1; continue
+    if r['data']<os.environ.get('D0','2026-10-01'): continue
     rows.append(dict(id=int(r['post_id']),d=r['data'],k=k,p=float(r['preco']),s=r['loja'],t=t,c=cat(k)))
 by=collections.defaultdict(list)
 for r in rows: by[r['k']].append(r)
@@ -39,10 +41,11 @@ for x in clean:
 keep={k:v for k,v in daily.items() if len(v)>=6}
 import os
 _last=max(d for v in daily.values() for d in v)
-DAYS=[(dt.date(2026,10,1)+dt.timedelta(i)).isoformat() for i in range((dt.date.fromisoformat(_last)-dt.date(2026,10,1)).days+1)]
+_D0=dt.date.fromisoformat(os.environ.get('D0','2026-10-01'));MA=os.environ.get('MA','2026-10-01');MB=os.environ.get('MB','2026-11-01')
+DAYS=[(_D0+dt.timedelta(i)).isoformat() for i in range((dt.date.fromisoformat(_last)-_D0).days+1)]
 summ=[]
 for k,v in keep.items():
-    oct_=[v[d]['p'] for d in v if d<'2026-11-01']; nov=[v[d]['p'] for d in v if d>='2026-11-01']
+    oct_=[v[d]['p'] for d in v if MA<=d<MB]; nov=[v[d]['p'] for d in v if d>=MB]
     lo=min(v.values(),key=lambda x:(x['p'],x['d'])); hi=max(v.values(),key=lambda x:(x['p'],x['d']))
     last=v[max(v)]
     summ.append(dict(produto=k,categoria=cat(k),dias_com_oferta=len(v),posts=sum(x['n'] for x in v.values()),
@@ -67,7 +70,7 @@ with open(f'{OUT}/todos_os_posts_classificados.csv','w',newline='',encoding='utf
     for x in sorted(rows,key=lambda x:(x['d'],x['id'])):
         if x['k'] not in keep: continue
         w.writerow([x['d'],x['c'],x['k'],str(x['p']).replace('.',','),x['s'],x['t'],f"https://t.me/grape_tec/{x['id']}",'sim' if (x['k'],x['id']) in ol else ''])
-json.dump({'periodo':['2026-10-01',DAYS[-1]],'fonte':'t.me/grape_tec','produtos':[dict(s_,serie=[{'data':d,'preco':keep[s_['produto']][d]['p'],'loja':keep[s_['produto']][d]['s'],'post':keep[s_['produto']][d]['id']} for d in sorted(keep[s_['produto']])]) for s_ in summ]},open(f'{OUT}/base_precos.json','w',encoding='utf-8'),ensure_ascii=False)
+json.dump({'periodo':[DAYS[0],DAYS[-1]],'fonte':'t.me/grape_tec','produtos':[dict(s_,serie=[{'data':d,'preco':keep[s_['produto']][d]['p'],'loja':keep[s_['produto']][d]['s'],'post':keep[s_['produto']][d]['id']} for d in sorted(keep[s_['produto']])]) for s_ in summ]},open(f'{OUT}/base_precos.json','w',encoding='utf-8'),ensure_ascii=False)
 json.dump(summ,open('summ.json','w'),ensure_ascii=False); json.dump({k:{d:[v[d]['p'],v[d]['s']] for d in v} for k,v in keep.items()},open('keep.json','w'),ensure_ascii=False)
 print(len(rows),'posts válidos',dropped,'| produtos:',len(summ),'| fora da curva:',len(outl))
 for k,x,m in sorted(outl,key=lambda o:o[1]['d']):

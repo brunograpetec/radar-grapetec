@@ -117,7 +117,9 @@ def build(day):
     L=sorted(L,key=lambda x:(-x['rec'],-x['drop']))
     n=_NOFERTAS.get(day,0)
     return dict(items=L[:90],total=len(best),ofertas=n)
-D={'2026-11-10':build('2026-11-10'),'2026-11-11':build('2026-11-11')}
+import datetime as _dtt
+_hoje=(_dtt.datetime.utcnow()-_dtt.timedelta(hours=3)).date()
+D={(_hoje-_dtt.timedelta(days=1)).isoformat():build((_hoje-_dtt.timedelta(days=1)).isoformat()),_hoje.isoformat():build(_hoje.isoformat())}
 json.dump(D,open('dias.json','w'),ensure_ascii=False)
 # série diária dos modelos que aparecem nos Achados (pra ter "Ver curva")
 _usados={x['k'] for v in D.values() for x in v['items'] if x['k'] in _vd}

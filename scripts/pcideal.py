@@ -65,7 +65,8 @@ def preco(t):
 
 rows = collections.defaultdict(list)   # (cat, modelo) -> [(data, preco, loja, post, titulo)]
 CATS = {'Processadores': 'cpu', 'Placas de vídeo': 'gpu', 'Placas-mãe': 'mobo', 'SSD': 'ssd',
-        'Fontes': 'psu', 'Gabinetes': 'case', 'Coolers': 'cooler'}
+        'Fontes': 'psu', 'Gabinetes': 'case', 'Coolers': 'cooler',
+        'Monitores': 'mon', 'Mouses': 'mouse', 'Teclados': 'kb', 'Headsets e fones': 'head'}
 for r in csv.DictReader(open(os.path.join(OUT, 'todos_os_posts_classificados.csv'), encoding='utf-8-sig'), delimiter=';'):
     if r['data'] < D30 or r['fora_da_curva'] == 'sim' or r['categoria'] not in CATS:
         continue

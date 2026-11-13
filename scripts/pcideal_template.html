@@ -50,6 +50,31 @@
 #pci .raio h3,#pci .sec{font-size:13px;text-transform:uppercase;letter-spacing:.12em;color:var(--ac);margin-bottom:8px;font-weight:600}
 #pci .raio p{color:#ddd8e6;margin-bottom:8px;font-size:15px}
 #pci .raio p:last-child{margin-bottom:0}
+#pci .itl{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--dim);margin:2px 0 8px}
+#pci .its{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+#pci .it{all:unset;cursor:pointer;display:flex;align-items:center;gap:8px;border:1px solid var(--bd);background:var(--s2);border-radius:12px;padding:10px 14px;font-weight:600;font-size:15px;transition:.15s}
+#pci .it i{font-style:normal;width:20px;height:20px;border-radius:6px;display:grid;place-items:center;font-size:12px;border:1px solid var(--bd);color:var(--mut)}
+#pci .it.on{border-color:var(--ac);background:rgba(199,125,255,.12)}
+#pci .it.on i{background:var(--ac);border-color:var(--ac);color:var(--onac)}
+#pci .it small{font-weight:400;font-size:11.5px;color:var(--mut)}
+#pci .it.lock{cursor:default;opacity:.9}
+#pci .it:not(.lock):hover{border-color:var(--ac)}
+#pci .nobox{display:grid;place-items:center;min-height:120px;text-align:center}
+#pci tr.st td{color:var(--mut);font-size:13px;border-bottom:1px solid var(--bd)}
+#pci .mx{margin-top:16px;background:var(--s2);border:1px solid var(--bd);border-radius:14px;padding:16px}
+#pci .mxt{font-weight:600;margin-bottom:12px}
+#pci input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:8px;border-radius:8px;background:linear-gradient(90deg,var(--ac) 0,var(--ac) var(--v,30%),rgba(255,255,255,.12) var(--v,30%));outline:none;margin:6px 0}
+#pci input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:#fff;border:4px solid var(--ac);cursor:grab;box-shadow:0 2px 10px rgba(0,0,0,.5)}
+#pci input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:#fff;border:4px solid var(--ac);cursor:grab}
+#pci .mxi{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;margin-top:14px}
+#pci .mxi small{display:block;font-size:11px;letter-spacing:.1em;color:var(--dim)}
+#pci .mxi b{font-family:var(--mono);font-size:22px}
+#pci .mxi span{display:block;font-family:var(--mono);font-size:13px;color:var(--mut)}
+#pci .mxi>div:first-child b{color:var(--okt)}#pci .mxi>div:last-child b{color:var(--act)}
+#pci .mxm{text-align:center;font-size:13px;color:var(--mut)}
+#pci .mxm b{color:var(--ink);font-size:13px;font-family:inherit}
+#pci .opt.go{margin-top:14px;text-align:center;background:var(--ac);color:var(--onac);border-color:var(--ac);width:100%}
+@media (max-width:520px){#pci .mxi{grid-template-columns:1fr 1fr}#pci .mxm{grid-column:1/-1;grid-row:2}}
 #pci .parts{display:grid;gap:12px;margin-bottom:16px}
 #pci .part{background:var(--s1);border:1px solid var(--bd);border-radius:16px;padding:16px;display:grid;grid-template-columns:1fr 210px;gap:16px;align-items:start}
 #pci .pl{display:grid;gap:8px;min-width:0}
@@ -158,6 +183,9 @@ const CPU = {
  'Ryzen 7 9800X3D':  {pl:'AM5', g:150, c:8, x3d:1, d:'o processador de jogo mais forte que existe hoje'},
  'Ryzen 9 7900':     {pl:'AM5', g:110, c:12, d:'12 núcleos: pra quem edita, renderiza e joga'},
  'Ryzen 9 9900X':    {pl:'AM5', g:118, c:12, d:'12 núcleos Zen 5: muito forte em edição e 3D'},
+ 'Ryzen 5 8500G':    {pl:'AM5', g:78,  c:6, apu:'Radeon 740M', ig:28, d:'6 núcleos com vídeo integrado (Radeon 740M): dá pra jogar sem placa de vídeo enquanto ela não chega'},
+ 'Ryzen 5 8600G':    {pl:'AM5', g:85,  c:6, apu:'Radeon 760M', ig:40, d:'6 núcleos com o vídeo integrado mais forte da linha (Radeon 760M)'},
+ 'Ryzen 7 8700G':    {pl:'AM5', g:92,  c:8, apu:'Radeon 780M', ig:50, d:'8 núcleos com Radeon 780M integrada, a melhor APU que existe'},
 };
 const GPU = {
  'RX 7600':          {i:100, v:8,  w:650},
@@ -181,17 +209,18 @@ const WC_OK = /MSI|Thermalright|Arctic|DeepCool|Redragon|Lian Li|Corsair|NZXT/;
 
 /* ---------- Perguntas (só botão) ---------- */
 const Q = [
- {k:'orc', t:'Quanto você quer investir no PC?', h:'Só o computador (monitor e periféricos ficam de fora).', o:[
+ {k:'orc', t:'Quanto você quer investir?', h:'Marca o que entra na conta. O valor vale pra tudo que estiver marcado.', itens:1, o:[
    [4000,'R$ 4 mil','PC de entrada'],[5000,'R$ 5 mil',''],[6000,'R$ 6 mil',''],[7000,'R$ 7 mil','o mais pedido'],
    [8000,'R$ 8 mil',''],[10000,'R$ 10 mil',''],[12000,'R$ 12 mil',''],[15000,'R$ 15 mil',''],[20000,'R$ 20 mil','topo']]},
  {k:'pag', t:'Como você vai pagar?', h:'As ofertas do canal geralmente são à vista. No cartão eu deixo uma margem.', big:1, o:[
-   ['pix','PIX / à vista','uso o orçamento quase todo'],['cartao','Cartão parcelado','guardo ~8% de margem pro parcelamento']]},
- {k:'jogo', t:'O que você mais vai jogar?', h:'Isso muda onde eu coloco o dinheiro: processador ou placa de vídeo.', big:1, o:[
-   ['fps','FPS / Battle Royale','CS2, Valorant, Fortnite, Warzone, Arena Breakout'],
-   ['aaa','Mundo aberto / AAA','GTA, Cyberpunk, RDR2, God of War, lançamentos'],
-   ['mix','Um pouco de tudo','competitivo e história'],
-   ['work','Jogo + trabalho','edição de vídeo, 3D, streaming']]},
- {k:'mon', t:'E o monitor?', h:'A resolução decide quanta placa de vídeo você precisa.', big:1, o:[
+   ['pix','PIX / à vista','uso o orçamento quase todo'],['cartao','Cartão parcelado','guardo ~8% de margem pro parcelamento'],['misto','Parte à vista, parte parcelado','você escolhe quanto vai em cada um']]},
+ {k:'jogo', t:'Que tipo de gamer você é?', h:'Isso muda onde eu coloco o dinheiro: processador ou placa de vídeo.', big:1, o:[
+   ['mix','Jogo de tudo um pouco','Competitivo e modo história. Eu equilibro o PC no melhor custo-benefício.'],
+   ['fps','FPS / Battle Royale','CS2, Valorant, Fortnite, Warzone. Ênfase num processador mais parrudo, sem deixar de lado a placa de vídeo.'],
+   ['aaa','Modo campanha / mundo aberto','GTA, Cyberpunk, RDR2, lançamentos. Tudo pra ter a melhor placa de vídeo que cabe no orçamento.']]},
+ {k:'mon', t:'E o monitor?', h:'A resolução decide quanta placa de vídeo você precisa.', big:1,
+   alt:{t:'Qual monitor você quer?', h:'Ele entra no orçamento. A resolução decide quanta placa de vídeo você precisa.', o:[
+   ['auto','Me indica você','escolho pelo seu orçamento'],['fhd','Full HD 144Hz+','o padrão gamer'],['qhd','QHD (2K)','1440p, mais nitidez'],['uhd','4K','2160p, pede muita placa']]}, o:[
    ['fhd60','Full HD 60/75Hz','ou TV'],['fhd','Full HD 144Hz+','o padrão gamer'],['qhd','QHD (2K)','1440p'],['uhd','4K','2160p']]},
  {k:'plat', t:'AM4 ou AM5?', h:'AM4 é mais barato hoje (memória DDR4). AM5 é a plataforma nova, que recebe processadores futuros.', big:1, o:[
    ['auto','Deixa o Brunão decidir','escolho pelo seu orçamento'],['am4','AM4','mais desempenho por real agora'],['am5','AM5','penso em fazer upgrade depois']]},
@@ -202,21 +231,45 @@ const Q = [
  {k:'net', t:'Internet no PC vai ser…', h:'Se for no cabo, não pago a mais por Wi-Fi na placa-mãe.', big:1, o:[
    ['cabo','No cabo',''],['wifi','Wi-Fi','placa-mãe com Wi-Fi']]},
 ];
-let st = {}, step = 0;
+let st = {itens:{}, parc:30}, step = 0;
+const parcPct = s => s.pag==='cartao' ? 100 : s.pag==='misto' ? (s.parc||0) : 0;
+const fator = s => 1 - .08*parcPct(s)/100;   // ~8% a mais em média no que for parcelado
+const ITENS = [['pc','PC','obrigatório'],['mon','Monitor',''],['kb','Teclado',''],['mouse','Mouse',''],['head','Headset','']];
 
 function render(){
   if(step >= Q.length) return result();
-  const q = Q[step];
+  let q = Q[step];
+  if(q.alt && st.itens.mon) q = Object.assign({}, q, q.alt);
   const cur = st[q.k];
+  const itens = q.itens ? `<div class="itl">O que entra no orçamento?</div><div class="its">${ITENS.map(i=>`<button class="it ${i[0]==='pc'||st.itens[i[0]]?'on':''} ${i[0]==='pc'?'lock':''}" data-i="${i[0]}"><i>${i[0]==='pc'||st.itens[i[0]]?'✓':'+'}</i>${i[1]}${i[2]?`<small>${i[2]}</small>`:''}</button>`).join('')}</div><div class="itl">Quanto, no total?</div>` : '';
   app.innerHTML = head(step===0) +
    `<div class="prog">${Q.map((_,i)=>`<i class="${i<=step?'on':''}"></i>`).join('')}</div>
     <div class="q"><h2>${q.t}</h2><p class="h">${q.h}</p>
-     <div class="opts ${q.big?'big':''}">${q.o.map(o=>`<button class="opt ${cur===o[0]?'sel':''}" data-v="${o[0]}"><b>${o[1]}</b>${o[2]?`<span>${o[2]}</span>`:''}</button>`).join('')}</div>
+     ${itens}<div class="opts ${q.big?'big':''}">${q.o.map(o=>`<button class="opt ${cur===o[0]?'sel':''}" data-v="${o[0]}"><b>${o[1]}</b>${o[2]?`<span>${o[2]}</span>`:''}</button>`).join('')}</div>
+     ${q.k==='pag' && st.pag==='misto' ? misto() : ''}
      <div class="nav">${step?'<button class="lnk" id="pciBack">← voltar</button>':'<span></span>'}<span class="old">${step+1} de ${Q.length}</span></div></div>`;
   app.querySelectorAll('.opt').forEach(b => b.onclick = () => {
-    const v = b.dataset.v; st[q.k] = isNaN(+v) ? v : +v; step++; render(); {const y = app.getBoundingClientRect().top + scrollY - 80; if(scrollY > y) scrollTo({top:y, behavior:'smooth'});}
+    const v = b.dataset.v; st[q.k] = isNaN(+v) ? v : +v;
+    if(q.k==='pag' && v==='misto'){ render(); const r = document.getElementById('pciParc'); if(r) r.focus(); return; }
+    step++; render(); {const y = app.getBoundingClientRect().top + scrollY - 80; if(scrollY > y) scrollTo({top:y, behavior:'smooth'});}
   });
   const bk = document.getElementById('pciBack'); if(bk) bk.onclick = () => { step--; render(); };
+  const rg = document.getElementById('pciParc');
+  if(rg){ const upd = () => { st.parc = +rg.value; const o = document.getElementById('pciMx'); o.outerHTML = mistoInfo(); rg.style.setProperty('--v', rg.value+'%'); };
+    rg.oninput = upd; rg.style.setProperty('--v', rg.value+'%');
+    document.getElementById('pciGo').onclick = () => { step++; render(); }; }
+  app.querySelectorAll('.it').forEach(b => b.onclick = () => { const k = b.dataset.i; if(k==='pc') return; st.itens[k] = !st.itens[k]; render(); });
+}
+function mistoInfo(){
+  const o = st.orc||0, pc = st.parc, vista = o*(100-pc)/100, cart = o*pc/100, extra = cart*.08;
+  return `<div class="mxi" id="pciMx"><div><small>À VISTA</small><b>${100-pc}%</b>${o?`<span>${R(vista)}</span>`:''}</div>
+    <div class="mxm">${o?`no parcelado o preço sobe uns <b>${R(extra)}</b>, então o PC é montado pra <b>${R(o-extra)}</b> em preço de oferta`:`no parcelado o preço sobe ~8% sobre a parte do cartão`}</div>
+    <div style="text-align:right"><small>PARCELADO</small><b>${pc}%</b>${o?`<span>${R(cart)}</span>`:''}</div></div>`;
+}
+function misto(){
+  return `<div class="mx"><div class="mxt">Arrasta a bolinha: quanto vai no cartão?</div>
+    <input type="range" id="pciParc" min="5" max="95" step="5" value="${st.parc}" aria-label="Porcentagem parcelada">
+    ${mistoInfo()}<button class="opt go" id="pciGo"><b>Continuar →</b></button></div>`;
 }
 function head(full){
   return `<header><img class="logo" src="${LOGO}" alt="Grape Tec"><div class="brand"><b>Grape Tec · PC Ideal</b><span>preços dos meus posts dos últimos 30 dias</span></div></header>` +
@@ -290,14 +343,49 @@ function pickCase(aq, wc, premium){
   if(premium) L = by('case', x => /Lian Li|Wideload/.test(x.n));
   else if(wc) L = by('case', x => /CV700L|Wideload/.test(x.n));
   else if(aq) L = by('case', x => /CV450 \(9 fans\)|CV700L/.test(x.n));
-  else L = by('case', x => /CV450$|G-Storm|Mancer CV450/.test(x.n) && !/9 fans/.test(x.n));
+  else L = by('case', x => /CV450$|G-Storm|Mancer CV450|Acegeek/.test(x.n) && !/9 fans/.test(x.n));
   const it = premium ? L.sort((a,b)=>b.p-a.p)[0] : cheapest(L);
   if(!it) return null;
   return {it, preco:it.p, fx:[it.p25, it.p75]};
 }
 
+const MON_OK = /AOC|LG|Acer|Gigabyte|Philips|Samsung|ASUS|MSI/;
+function pickMon(res, plus){
+  const RN = {fhd:'Full HD', qhd:'QHD', uhd:'4K'}[res];
+  let L = by('mon', x => x.a['Resolução']===RN && /Normal/.test(x.a.Formato||'') && MON_OK.test(x.n) && !/Office/.test(x.n) && x.a.Painel!=='OLED' && x.np>=3 && (res==='uhd' || /144|200|280/.test(x.a.Taxa||'')));
+  if(plus){ const T = L.filter(x => res==='fhd' ? (x.a.Tamanho==='27"' && /200|280/.test(x.a.Taxa||'')) : res==='qhd' ? /200|280/.test(x.a.Taxa||'') : true); if(T.length) L = T; }
+  const it = cheapest(L); if(!it) return null;
+  return {it, preco:it.p, fx:[it.p25, it.p75], res};
+}
+function pickPer(cat, plus){
+  const RX = {mouse: plus ? /G305|King Pro/ : /G203|K1NG|King Pro|GM510/, kb: /Dark Avenger|Fizz/, head: plus ? /Zeus Pro|G335/ : /Zeus Lite|Cragblade/}[cat];
+  let L = by(cat, x => RX.test(x.n) && x.np>=3);
+  if(!L.length) L = by(cat, x => RX.test(x.n));
+  let it = cheapest(L);
+  if(cat==='kb'){ const da = L.find(x=>/Dark Avenger/.test(x.n)); if(da && da.p <= it.p + 50) it = da; }
+  if(!it) return null;
+  return {it, preco:it.p, fx:[it.p25, it.p75]};
+}
+function setup(s){
+  const it = st.itens || {};
+  const res = s.mon==='auto' ? (s.orc>=10000 ? 'qhd' : 'fhd') : s.mon;
+  for(const plus of (s.orc>=10000 ? [true,false] : [false])){
+    const acc = {};
+    let ok = true, soma = 0;
+    if(it.mon){ acc.mon = pickMon(res, plus); if(!acc.mon) ok = false; }
+    for(const k of ['kb','mouse','head']) if(it[k]){ acc[k] = pickPer(k, plus); if(!acc[k]) ok = false; }
+    if(!ok) continue;
+    for(const k in acc) soma += acc[k].preco;
+    const teto = s.orc * fator(s);
+    const pcOrc = teto - soma;
+    const b = monta(Object.assign({}, s, {orc: pcOrc, pag:'pix', mon: it.mon ? res : s.mon}));
+    if(b){ b.acc = acc; b.accTot = soma; b.res = it.mon ? res : s.mon; b.pcOrc = pcOrc; b.geral = b.tot + soma; return b; }
+  }
+  return null;
+}
+
 function score(cpu, gpu, s, ram, ssd){
-  const c = CPU[cpu], g = GPU[gpu];
+  const c = CPU[cpu], g = gpu==='iGPU' ? {i:c.ig, v:0, w:500} : GPU[gpu];
   let gi = g.i;
   if(s.mon==='qhd'){ gi *= .72; if(g.v<=8) gi *= .86; }
   if(s.mon==='uhd'){ gi *= .46; if(g.v<=8) gi *= .7; else if(g.v<=12) gi *= .9; }
@@ -311,12 +399,12 @@ function score(cpu, gpu, s, ram, ssd){
   if(ssd==='1t'||ssd==='1t4') sc += 4; if(ssd==='2t') sc += 5.5; if(ssd==='1t4') sc += .5;
   if(s.plat==='auto' && c.pl==='AM5') sc *= 1.02;  // empate técnico → AM5 leva pela vida útil
   // equilíbrio: processador não pode segurar demais a placa
-  if(c.g < .3*g.i + 40) sc -= 40;
+  if(gpu!=='iGPU' && c.g < .3*g.i + 40) sc -= 40;
   return sc;
 }
 
 function monta(s){
-  const teto = s.orc * (s.pag==='cartao' ? .92 : 1);
+  const teto = s.orc * fator(s);
   const plats = s.plat==='am4' ? ['AM4'] : s.plat==='am5' ? ['AM5'] : ['AM4','AM5'];
   const ctx = {orc:s.orc};
   const aq = s.vis!=='perf', est = s.vis==='estetica';
@@ -326,9 +414,9 @@ function monta(s){
     if(!cI || !plats.includes(C.pl)) continue;
     if(s.jogo!=='work' && C.c>=12) continue;
     const mobo = pickMobo(C.pl, s, cpu, ctx); if(!mobo) continue;
-    for(const gpu in GPU){
-      const gI = (P.gpu||[]).find(x=>x.n===gpu); if(!gI) continue;
-      const G = GPU[gpu];
+    for(const gpu of (C.apu ? ['iGPU'] : Object.keys(GPU))){
+      const gI = gpu==='iGPU' ? {p:0, n:'iGPU'} : (P.gpu||[]).find(x=>x.n===gpu); if(!gI) continue;
+      const G = gpu==='iGPU' ? {i:C.ig, v:0, w:500} : GPU[gpu];
       for(const ram of [16,32]){
         const rr = pickRam(C.pl==='AM4'?4:5, ram); if(!rr) continue;
         for(const sk of ['500','1t','1t4','2t']){
@@ -337,17 +425,17 @@ function monta(s){
           if(sk==='2t' && s.orc<10000 && s.jogo!=='work') continue;
           const ss = pickSsd(sk); if(!ss) continue;
           const top = s.orc>=12000;
-          const gold = s.orc>=5500 || G.w>=750;
+          const gold = (s.orc>=5500 && !C.apu) || G.w>=750;
           const w = (C.pl==='AM5' || s.orc>=8000) ? Math.max(G.w, 850) : G.w;
           const ps = pickPsu(w, gold); if(!ps) continue;
           const wc = est || C.x3d && s.orc>=8000 || s.orc>=10000 || /9700X|9900X|7900/.test(cpu);
-          const co = pickCooler(wc, top || (est && s.orc>=8000)); if(!co) continue;
+          const co = ((C.apu || (/^Ryzen 5 (5500|5600|7600)$/.test(cpu) && s.orc<5000)) && !wc && !aq) ? {box:1, preco:0, wc:false, it:null} : pickCooler(wc, top || (est && s.orc>=8000)); if(!co) continue;
           const ca = pickCase(aq, co.wc, (top && aq) || (est && s.orc>=6000)); if(!ca) continue;
           const tot = cI.p + gI.p + mobo.preco + rr.preco + ss.preco + ps.preco + co.preco + ca.preco;
           if(tot > teto) continue;
           const sc = score(cpu, gpu, s, ram, sk);
           if(!best || sc > best.sc + .01 || (Math.abs(sc-best.sc)<=.01 && tot < best.tot))
-            best = {sc, tot, cpu, gpu, cI, gI, mobo, rr, ss, ps, co, ca, ram, pl:C.pl, teto};
+            best = {sc, tot, cpu, gpu, cI, gI, mobo, rr, ss, ps, co, ca, ram, pl:C.pl, teto, apu:!!C.apu};
         }
       }
     }
@@ -389,20 +477,30 @@ const gpuNear = (name, dir) => {
   return null;
 };
 
+function cardSem(k, nome, norte, why, tag){
+  return `<div class="part"><div class="pl"><div class="k">${k}</div><div class="n">${esc(nome)}</div>
+   <div class="norte"><b>Norte:</b> ${norte}</div><div class="why">${why}</div></div>
+   <div class="pbox nobox"><div class="pi"><div class="pp">R$ 0,00</div><div class="ps">${tag}</div></div></div></div>`;
+}
 function result(){
-  const s = st, b = monta(s), aq = s.vis!=='perf';
+  const s = st, b = setup(s), aq = s.vis!=='perf';
   fire('PCIdeal_Resultado', {orc:s.orc, jogo:s.jogo, mon:s.mon, plat:s.plat});
-  const chips = `<div class="chips">${[R(s.orc), s.pag==='cartao'?'cartão':'PIX', {fps:'FPS/BR',aaa:'AAA',mix:'de tudo',work:'jogo + trabalho'}[s.jogo], {fhd60:'Full HD 60Hz',fhd:'Full HD 144Hz+',qhd:'QHD',uhd:'4K'}[s.mon], {auto:'plataforma: Brunão decide',am4:'AM4',am5:'AM5'}[s.plat], {perf:'performance',equil:'equilíbrio',estetica:'estética'}[s.vis], s.net==='wifi'?'Wi-Fi':'cabo'].map(x=>`<span class="chip">${x}</span>`).join('')}<button class="lnk" id="pciRedo" style="font-size:12px;margin-left:6px">refazer ↺</button></div>`;
+  const chips = `<div class="chips">${[R(s.orc)+' · '+['PC', st.itens.mon&&'monitor', st.itens.kb&&'teclado', st.itens.mouse&&'mouse', st.itens.head&&'headset'].filter(Boolean).join(' + '), s.pag==='cartao'?'cartão':s.pag==='misto'?`${100-s.parc}% PIX + ${s.parc}% cartão`:'PIX', {fps:'FPS/BR',aaa:'AAA',mix:'de tudo',work:'jogo + trabalho'}[s.jogo], {fhd60:'Full HD 60Hz',fhd:'Full HD 144Hz+',qhd:'QHD',uhd:'4K',auto:'monitor: Brunão indica'}[s.mon], {auto:'plataforma: Brunão decide',am4:'AM4',am5:'AM5'}[s.plat], {perf:'performance',equil:'equilíbrio',estetica:'estética'}[s.vis], s.net==='wifi'?'Wi-Fi':'cabo'].map(x=>`<span class="chip">${x}</span>`).join('')}<button class="lnk" id="pciRedo" style="font-size:12px;margin-left:6px">refazer ↺</button></div>`;
   if(!b){
-    app.innerHTML = head(false) + chips + `<div class="raio"><h3>Não fechou</h3><p>Com esse orçamento e essas escolhas eu não consegui fechar um PC completo com as ofertas do último mês. Tenta subir um degrau no orçamento, trocar pra AM4 ou escolher performance em vez de estética.</p></div>`;
-    document.getElementById('pciRedo').onclick = () => { st={}; step=0; render(); };
+    let minimo = 0;
+    for(let o = s.orc + 250; o <= s.orc + 4000; o += 250){ if(setup(Object.assign({}, s, {orc:o}))){ minimo = o; break; } }
+    app.innerHTML = head(false) + chips + `<div class="raio"><h3>Não fechou</h3>${minimo?`<p>Com essas escolhas, hoje o mínimo pra fechar tudo é uns <b>${R(minimo)}</b>.</p>`:''}<p>Com esse orçamento e essas escolhas eu não consegui fechar um PC completo com as ofertas do último mês. Tenta subir um degrau no orçamento, tirar algum item (monitor ou periférico) da conta, trocar pra AM4 ou escolher performance em vez de estética.</p></div>`;
+    document.getElementById('pciRedo').onclick = () => { st={itens:{}, parc:30}; step=0; render(); };
     return;
   }
-  const C = CPU[b.cpu], G = GPU[b.gpu];
-  const sobra = s.orc - b.tot;
+  const C = CPU[b.cpu], G = b.apu ? {i:C.ig, v:0, w:500} : GPU[b.gpu];
+  const GN = b.apu ? 'vídeo integrado ' + C.apu : b.gpu;
+  const sm = b.res;
+  const sobra = s.orc - b.geral;
+  const A = b.acc || {};
   const ramT = b.pl==='AM4'?'DDR4':'DDR5';
-  const mapa = `${b.cpu} + ${b.gpu} + ${b.ram}GB ${ramT} + SSD ${b.ss.kind==='500'?'500GB':b.ss.kind==='2t'?'2TB':'1TB'} + fonte ${b.ps.it.n.match(/(\d{3,4})W/)?.[1]||b.ps.w}W`;
-  const resTxt = {fhd60:'Full HD', fhd:'Full HD de alta taxa', qhd:'QHD', uhd:'4K'}[s.mon];
+  const mapa = `${b.cpu} + ${GN} + ${b.ram}GB ${ramT} + SSD ${b.ss.kind==='500'?'500GB':b.ss.kind==='2t'?'2TB':'1TB'} + fonte ${b.ps.it.n.match(/(\d{3,4})W/)?.[1]||b.ps.w}W` + (A.mon ? ` + monitor ${{fhd:'Full HD',qhd:'QHD',uhd:'4K'}[A.mon.res]}` : '') + (A.kb||A.mouse||A.head ? ' + periféricos' : '');
+  const resTxt = {fhd60:'Full HD', fhd:'Full HD de alta taxa', qhd:'QHD', uhd:'4K'}[sm];
 
   /* ----- Raio-X: muda conforme as respostas e os preços ----- */
   const raio = [];
@@ -412,38 +510,45 @@ function result(){
     mix:[`Fala! Como você joga <b>de tudo</b>, equilibrei processador e placa de vídeo: nenhum dos dois segura o outro.`, `Fala! Pra quem joga <b>um pouco de tudo</b>, o segredo é equilíbrio, e foi isso que eu busquei.`],
     work:[`Fala! Como o PC vai <b>trabalhar e jogar</b>, eu pesei mais núcleos e memória, sem deixar o jogo de lado.`, `Fala! PC de <b>trabalho + jogo</b> precisa de núcleo e memória sobrando. Montei pensando nisso.`]
   }[s.jogo]));
-  raio.push(pick([`O coração da máquina ficou no <b>${b.cpu} + ${b.gpu}</b>, rodando em ${resTxt}.`, `A dupla que manda aqui é <b>${b.cpu} + ${b.gpu}</b>, pensando em ${resTxt}.`, `O mapa é <b>${b.cpu} + ${b.gpu}</b>. Pra ${resTxt}, é um conjunto muito bem casado.`]));
+  raio.push(pick([`O coração da máquina ficou no <b>${b.cpu} + ${GN}</b>, rodando em ${resTxt}.`, `A dupla que manda aqui é <b>${b.cpu} + ${GN}</b>, pensando em ${resTxt}.`, `O mapa é <b>${b.cpu} + ${GN}</b>. Pra ${resTxt}, é um conjunto muito bem casado.`]));
+  if(b.accTot > 0){
+    const oq = [A.mon&&'monitor', A.kb&&'teclado', A.mouse&&'mouse', A.head&&'headset'].filter(Boolean);
+    const oqs = oq.length>1 ? oq.slice(0,-1).join(', ')+' e '+oq[oq.length-1] : oq[0];
+    raio.push(pick([`Dos seus ${R(s.orc)}, separei <b>${R(b.accTot)}</b> pro ${oqs}, e o resto foi pro PC.`, `Como ${oq.length>1?(A.mon?'o monitor e os periféricos':'os periféricos'):'o '+oqs} ${oq.length>1?'entram':'entra'} na conta, ${oq.length>1?'levaram':'levou'} <b>${R(b.accTot)}</b>. O PC foi montado com o que sobrou, sem desequilibrar.`]));
+  }
+  if(b.apu) raio.push(pick([`Sendo direto: com esse valor pra tudo, não cabe placa de vídeo sem matar o resto. Fui de <b>${b.cpu}</b>, que tem vídeo integrado: roda CS2, Valorant, Fortnite e LoL no gráfico baixo, em Full HD. A plataforma e a fonte já ficam prontas pra você <b>colocar a placa de vídeo depois</b>.`, `Aqui a jogada é começar sem placa de vídeo: o <b>${b.cpu}</b> tem vídeo integrado e segura os competitivos no baixo. Quando juntar mais um pouco, a placa de vídeo entra e o resto do PC já está pronto pra ela.`]));
   // plataforma: compara de verdade com a outra
   let alt = null;
-  if(s.plat==='auto'){ alt = monta(Object.assign({}, s, {plat: b.pl==='AM4'?'am5':'am4'})); }
+  if(s.plat==='auto'){ alt = monta(Object.assign({}, s, {orc:b.pcOrc, pag:'pix', mon:b.res, plat: b.pl==='AM4'?'am5':'am4'})); }
   if(b.pl==='AM4'){
     let t = s.plat==='am4' ? 'Fiquei no <b>AM4</b>, como você pediu.' : pick(['Escolhi <b>AM4</b>.', 'Fui de <b>AM4</b>, e não foi por acaso.', 'Aqui eu fico no <b>AM4</b>.']);
     const r16 = pickRam(5,16), r16b = pickRam(4,16);
     if(r16 && r16b) t += ` Hoje 16GB de DDR5 custam uns <b>${R(r16.preco)}</b> contra <b>${R(r16b.preco)}</b> em DDR4, e essa diferença vira placa de vídeo.`;
-    if(alt) t += ` Se fosse AM5 com esse dinheiro, daria <b>${alt.cpu} + ${alt.gpu}</b>: ${alt.gpu===b.gpu?'a mesma placa, gastando mais':'placa de vídeo mais fraca'}.`;
+    if(alt) t += ` Se fosse AM5 com esse dinheiro, daria <b>${alt.cpu} + ${alt.apu?'vídeo integrado':alt.gpu}</b>: ${alt.gpu===b.gpu?'a mesma placa, gastando mais':'placa de vídeo mais fraca'}.`;
     raio.push(t);
   } else {
     let t = s.plat==='am5' ? 'Fomos de <b>AM5</b>, como você pediu: plataforma nova, que recebe processadores futuros sem trocar a placa-mãe.' : pick(['Aqui já compensa ir de <b>AM5</b>: plataforma nova, e quando quiser subir de processador é só trocar ele.', 'Com esse orçamento eu já vou de <b>AM5</b>. Você paga mais na memória DDR5, mas ganha uma plataforma com futuro.']);
-    if(alt) t += ` No AM4 sairia <b>${alt.cpu} + ${alt.gpu}</b>, ${alt.tot < b.tot ? R(b.tot-alt.tot)+' mais barato' : 'quase o mesmo preço'}, mas sem caminho de upgrade.`;
+    if(alt) t += ` No AM4 sairia <b>${alt.cpu} + ${alt.apu?'vídeo integrado':alt.gpu}</b>, ${alt.tot < b.tot ? R(b.tot-alt.tot)+' mais barato' : 'quase o mesmo preço'}, mas sem caminho de upgrade.`;
     raio.push(t);
   }
-  raio.push({perf:pick(['Você pediu <b>performance acima de tudo</b>: não gastei um real a mais com visual.', '<b>Performance acima de tudo</b>: cooler de torre e gabinete simples, e o dinheiro foi pra onde dá FPS.']),
+  raio.push({perf:pick(['Você pediu <b>performance acima de tudo</b>: não gastei um real a mais com visual.', '<b>Performance acima de tudo</b>: nada de gastar com visual, o dinheiro foi pra onde dá FPS.']),
     equil:pick(['Você pediu <b>equilíbrio</b>: desempenho primeiro, mas com um gabinete aquário bonito.', '<b>Equilíbrio</b>: o PC fica bonito sem roubar dinheiro do processador e da placa.']),
     estetica:pick(['Você disse que <b>estética importa muito</b>: entrou water cooler 360mm e gabinete caprichado, mesmo tirando um pouco da performance.', 'Como o <b>visual pesa pra você</b>, coloquei water cooler 360mm e um gabinete à altura. Custou um degrau de placa de vídeo, mas o PC fica lindo.'])}[s.vis]);
   // a melhor oportunidade da lista
-  const itens = [['o processador',b.cI],['a placa de vídeo',b.gI],['a placa-mãe',b.mobo.it],['o SSD',b.ss.it],['a fonte',b.ps.it],['o '+(b.co.wc?'water cooler':'cooler'),b.co.it],['o gabinete',b.ca.it]];
+  const itens = [['o processador',b.cI],...(b.apu?[]:[['a placa de vídeo',b.gI]]),['a placa-mãe',b.mobo.it],['o SSD',b.ss.it],['a fonte',b.ps.it],...(b.co.it?[['o '+(b.co.wc?'water cooler':'cooler'),b.co.it]]:[]),['o gabinete',b.ca.it],...(A.mon?[['o monitor',A.mon.it]]:[])];
   const opp = itens.map(x=>[x[0],x[1],x[1].med-x[1].p]).sort((a,c)=>c[2]-a[2])[0];
   if(opp && opp[2] > 40) raio.push(pick([`A melhor oportunidade da lista é ${opp[0]}: a oferta tá <b>${R(opp[2])} abaixo</b> do normal do mês.`, `Fica de olho n${opp[0].slice(0,1)} ${opp[0].slice(2)}: tá <b>${R(opp[2])} abaixo</b> do que costuma custar. Se ainda estiver valendo, garante.`]));
-  if(s.pag==='cartao') raio.push(`Como vai ser no cartão, deixei uma margem: fechou em <b>${R(b.tot)}</b> com preço de oferta, e o resto é pra absorver o parcelamento.`);
-  if(s.mon==='fhd60' && s.jogo!=='aaa') raio.push('Um conselho: com monitor 60Hz você não enxerga o FPS que esse PC entrega. Assim que der, um Full HD 144Hz muda o jogo.');
-  if(s.mon==='uhd' && G.i<200) raio.push('Sendo sincero: 4K pede muita placa de vídeo. Vai rodar, mas com upscaling (DLSS/FSR) e gráficos ajustados.');
-  if(sobra > 1500 && s.pag!=='cartao') raio.push(`Sobrou <b>${R(sobra)}</b>: não tem placa acima dessa nas ofertas do mês, então eu guardaria pro monitor ou periféricos.`);
+  if(s.pag==='cartao') raio.push(`Como vai ser no cartão, deixei uma margem: fechou em <b>${R(b.geral)}</b> com preço de oferta, e o resto é pra absorver o parcelamento.`);
+  if(s.pag==='misto') raio.push(`Como <b>${s.parc}% vai no cartão</b> (uns ${R(s.orc*s.parc/100)}), reservei ~${R(s.orc*s.parc/100*.08)} pra diferença do parcelamento. ${pick(['Dica: compra à vista as peças com desconto maior no PIX e parcela as que têm o mesmo preço nos dois.', 'Dica: placa de vídeo costuma ter o maior desconto no PIX, então ela é a primeira candidata ao pagamento à vista.'])}`);
+  if(sm==='fhd60' && s.jogo!=='aaa') raio.push('Um conselho: com monitor 60Hz você não enxerga o FPS que esse PC entrega. Assim que der, um Full HD 144Hz muda o jogo.');
+  if(sm==='uhd' && G.i<200) raio.push('Sendo sincero: 4K pede muita placa de vídeo. Vai rodar, mas com upscaling (DLSS/FSR) e gráficos ajustados.');
+  if(sobra > 1500 && s.pag==='pix') raio.push(`Sobrou <b>${R(sobra)}</b>: não tem placa acima dessa nas ofertas do mês, então eu guardaria pro monitor ou periféricos.`);
 
   /* ----- norte e porquê de cada peça ----- */
   const nCpu = `${b.cpu}, ${C.d}. Normal no mês: <b>${faixa(b.cI.p25, b.cI.p75)}</b>. Abaixo de ${R(r50(b.cI.p25))} é compra.`;
-  const gpus = (P.gpu||[]).find(x=>x.n===b.gpu);
-  const nGpu = `O alvo é a <b>${b.gpu}</b>, não a marca. Qualquer ${b.gpu} na faixa <b>${faixa(gpus.p25, gpus.p75)}</b> serve; não precisa ser triple fan.`;
-  const up = gpuNear(b.gpu, 1), dn = gpuNear(b.gpu, -1);
+  const gpus = (P.gpu||[]).find(x=>x.n===b.gpu) || {p25:0,p75:0};
+  const nGpu = b.apu ? `Sem placa de vídeo por enquanto: o <b>${C.apu}</b> do processador faz o papel. Quando for comprar a placa, mira numa <b>RTX 5060 / RX 9060 XT</b> pra cima.` : `O alvo é a <b>${b.gpu}</b>, não a marca. Qualquer ${b.gpu} na faixa <b>${faixa(gpus.p25, gpus.p75)}</b> serve; não precisa ser triple fan.`;
+  const up = b.apu ? null : gpuNear(b.gpu, 1), dn = b.apu ? null : gpuNear(b.gpu, -1);
   let xGpu = '';
   if(up) xGpu += `<b>Quer esticar?</b> A ${up.n} custa ${R(up.it.p - b.gI.p)} a mais e entrega uns ${Math.round((up.g.i/G.i-1)*100)}% a mais. `;
   if(dn) xGpu += `<b>Por que não a ${dn.n}?</b> Economiza ${R(b.gI.p - dn.it.p)}, mas perde uns ${Math.round((1-dn.g.i/G.i)*100)}% de desempenho.`;
@@ -458,7 +563,7 @@ function result(){
   const wN = +(b.ps.it.n.match(/(\d{3,4})W/)||b.ps.it.a['Potência'].match(/(\d+)W$/))[1];
   const nPsu = wN>=850 && G.w<850 ? `Fonte <b>750–850W Gold</b>, faixa ${faixa(b.ps.fx[0], b.ps.fx[1])}. Ela não é pra placa de hoje: <b>prepara pra upgrades</b> de GPU sem trocar a fonte.` :
     `Fonte <b>${G.w}W ${b.ps.it.a['Certificação']}</b> de marca boa, faixa ${faixa(b.ps.fx[0], b.ps.fx[1])}. ${G.w<=650?'650W já atende esse conjunto, não precisa gastar mais.':'Na medida pra essa placa.'}`;
-  const nCo = b.co.wc ? `Water cooler <b>360mm</b>, faixa ${faixa(b.co.fx[0], b.co.fx[1])}. Radiador na parte de cima do gabinete.` :
+  const nCo = b.co.box ? `O <b>${b.cpu}</b> na versão box já vem com cooler na caixa, e ele dá conta. <b>Confere se a oferta é box</b> (com cooler); se for tray/OEM, um air cooler de ~R$ 100–140 resolve.` : b.co.wc ? `Water cooler <b>360mm</b>, faixa ${faixa(b.co.fx[0], b.co.fx[1])}. Radiador na parte de cima do gabinete.` :
     `Air cooler de torre, faixa ${faixa(b.co.fx[0], b.co.fx[1])}. ${C.x3d?'':'Esse processador é tranquilo de refrigerar.'}`;
   const nCa = b.co.wc ? `Gabinete mid tower que aceite <b>radiador 360mm no topo</b>${aq?', estilo aquário':''}.` : (aq ? `Gabinete aquário com fans, sem tirar dinheiro do desempenho.` : `Gabinete com boa ventilação. Não precisa gastar aqui.`);
 
@@ -466,40 +571,50 @@ function result(){
     cpu: C.x3d ? pick(['3D V-Cache é cache extra que vira FPS, principalmente no competitivo.', 'O X3D é o que dá aquele frame mínimo alto, sem engasgo.']) :
          C.c>=8 ? pick(['8 núcleos envelhecem melhor: jogo novo usa cada vez mais.', 'Com 8 núcleos ele aguenta jogo, Discord, navegador e live aberta junto.']) :
          pick(['Segura essa placa de vídeo sem gargalo, e o que sobrou foi pro FPS.', 'Pra esse orçamento é o ponto certo: mais que isso tiraria da placa de vídeo.']),
-    gpu: pick([`É a peça que mais pesa no FPS${s.mon==='qhd'||s.mon==='uhd'?' em '+resTxt:''}.`, 'Junto com o processador, é onde o dinheiro faz diferença de verdade.']) + (G.v>=16?` ${G.v}GB de VRAM dão longevidade.`:''),
+    gpu: pick([`É a peça que mais pesa no FPS${sm==='qhd'||sm==='uhd'?' em '+resTxt:''}.`, 'Junto com o processador, é onde o dinheiro faz diferença de verdade.']) + (G.v>=16?` ${G.v}GB de VRAM dão longevidade.`:''),
     mobo: pick([`Fecha a plataforma ${b.pl} sem pagar por recurso que você não vai usar.`, `Boa de VRM pra esse processador e sem frescura.`]),
     ram: b.ram===32 ? '32GB dão conforto pra multitarefa, edição e jogo pesado.' : pick(['16GB em dual channel é o certo pra essa máquina.', 'Dois pentes rendem mais que um: o processador agradece.']),
     ssd: pick(['Windows e jogos carregando rápido, sem pagar por velocidade que jogo não usa.', 'Pra jogo, um NVMe de 3.000 MB/s carrega igual um de 7.000. A diferença fica no bolso.']),
     psu: pick(['Fonte protege o resto do PC. Aqui não se economiza em marca ruim.', 'Fonte boa é seguro do PC inteiro.']),
-    co: b.co.wc ? pick(['Refrigera com folga e fecha o visual da montagem.', 'Temperatura baixa e um PC bonito por dentro.']) : pick(['Resolve com folga sem tirar dinheiro do desempenho.', 'Simples, silencioso e dá conta do recado.']),
+    co: b.co.box ? 'Dinheiro economizado aqui vira placa de vídeo lá na frente.' : b.co.wc ? pick(['Refrigera com folga e fecha o visual da montagem.', 'Temperatura baixa e um PC bonito por dentro.']) : pick(['Resolve com folga sem tirar dinheiro do desempenho.', 'Simples, silencioso e dá conta do recado.']),
     ca: aq ? pick(['Bonito, com vidro, e cabe tudo com folga.', 'Vitrine pro hardware sem estourar o orçamento.']) : pick(['Ventilação boa e preço baixo. Gabinete não dá FPS.', 'Cabe tudo, ventila bem, e o dinheiro ficou nas peças que importam.']),
   };
   const ramNome = b.rr.qtd===2 ? `2x ${b.rr.it.n.replace('Memória ','')}` : b.rr.it.n.replace('Memória ','');
   const parts = [
     card('Processador', b.cpu, b.cI.p, b.cI, nCpu, W.cpu),
-    card('Placa de vídeo', (b.gI.t || b.gpu).replace(/^Placa\s+(de\s+)?v[ií]deo\s*/i,'').replace(/^Placa gráfica\s*/i,''), b.gI.p, b.gI, nGpu, W.gpu, '', xGpu),
+    b.apu ? cardSem('Placa de vídeo', 'Vídeo integrado ' + C.apu, nGpu, 'Começa jogando com o vídeo do processador e coloca a placa depois, sem trocar nada.', 'vem no processador') : card('Placa de vídeo', (b.gI.t || b.gpu).replace(/^Placa\s+(de\s+)?v[ií]deo\s*/i,'').replace(/^Placa gráfica\s*/i,''), b.gI.p, b.gI, nGpu, W.gpu, '', xGpu),
     card('Placa-mãe', b.mobo.it.n.replace('Placa-mãe ',''), b.mobo.preco, b.mobo.it, nMobo, W.mobo),
     card('Memória', ramNome, b.rr.preco, b.rr.it, nRam, W.ram, b.rr.qtd===2 ? `2 × ${R2(b.rr.it.p)} · ${esc(b.rr.it.loja)}` : ''),
     card('SSD', b.ss.it.n.replace('SSD ',''), b.ss.preco, b.ss.it, nSsd, W.ssd),
     card('Fonte', b.ps.it.n.replace('Fonte ',''), b.ps.preco, b.ps.it, nPsu, W.psu),
-    card('Refrigeração', b.co.it.n, b.co.preco, b.co.it, nCo, W.co),
+    b.co.box ? cardSem('Refrigeração', 'Cooler box (vem com o processador)', nCo, W.co, 'já incluso') : card('Refrigeração', b.co.it.n, b.co.preco, b.co.it, nCo, W.co),
     card('Gabinete', b.ca.it.n.replace('Gabinete ',''), b.ca.preco, b.ca.it, nCa, W.ca),
   ];
-  const linhas = [['Processador',b.cpu,b.cI.p],['Placa de vídeo',b.gpu,b.gI.p],['Placa-mãe',b.mobo.it.n.replace('Placa-mãe ',''),b.mobo.preco],['Memória',b.ram+'GB '+ramT,b.rr.preco],['SSD',b.ss.it.n.replace('SSD ',''),b.ss.preco],['Fonte',b.ps.it.n.replace('Fonte ',''),b.ps.preco],['Refrigeração',b.co.it.n,b.co.preco],['Gabinete',b.ca.it.n.replace('Gabinete ',''),b.ca.preco]];
-  const pct = Math.min(100, b.tot/s.orc*100);
+  const accCards = [];
+  if(A.mon){ const m = A.mon.it.a; accCards.push(card('Monitor', A.mon.it.n.replace('Monitor ',''), A.mon.preco, A.mon.it,
+     `Monitor <b>${m['Resolução']}${m.Taxa?' '+m.Taxa:''}</b>${m.Tamanho?', '+m.Tamanho:''}${m.Painel?', painel '+m.Painel:''}. Faixa normal desse modelo: <b>${faixa(A.mon.fx[0], A.mon.fx[1])}</b>.`,
+     A.mon.res==='fhd' ? pick(['Full HD com taxa alta é o casamento certo com esse PC: você enxerga os frames que ele entrega.', 'Pra jogo, taxa de atualização muda mais a experiência do que resolução.']) : A.mon.res==='qhd' ? pick(['QHD dá nitidez sem pedir uma placa de 10 mil.', 'Em 27", o QHD é o ponto ideal de nitidez.']) : 'Nitidez máxima. Lembre que em 4K a placa de vídeo trabalha muito mais.')); }
+  const perTxt = pick(['Periférico é fácil de trocar depois, então não tirei dinheiro do PC pra isso.', 'Bom e barato: resolve agora, e se quiser algo melhor depois, troca sem mexer no PC.']);
+  if(A.mouse) accCards.push(card('Mouse', A.mouse.it.n.replace('Mouse ',''), A.mouse.preco, A.mouse.it, `Mouse com sensor bom e leve, faixa <b>${faixa(A.mouse.fx[0], A.mouse.fx[1])}</b>.`, perTxt));
+  if(A.kb) accCards.push(card('Teclado', A.kb.it.n.replace('Teclado ',''), A.kb.preco, A.kb.it, `Teclado mecânico de entrada, faixa <b>${faixa(A.kb.fx[0], A.kb.fx[1])}</b>. Com fio: não precisa pagar por wireless.`, perTxt));
+  if(A.head) accCards.push(card('Headset', A.head.it.n.replace(/^(Headset|Fone) /,''), A.head.preco, A.head.it, `Headset confortável com microfone, faixa <b>${faixa(A.head.fx[0], A.head.fx[1])}</b>.`, perTxt));
+  const linhas = [['Processador',b.cpu,b.cI.p],['Placa de vídeo',GN,b.gI.p],['Placa-mãe',b.mobo.it.n.replace('Placa-mãe ',''),b.mobo.preco],['Memória',b.ram+'GB '+ramT,b.rr.preco],['SSD',b.ss.it.n.replace('SSD ',''),b.ss.preco],['Fonte',b.ps.it.n.replace('Fonte ',''),b.ps.preco],['Refrigeração',b.co.box?'cooler box':b.co.it.n,b.co.preco],['Gabinete',b.ca.it.n.replace('Gabinete ',''),b.ca.preco]];
+  const linhasAcc = [A.mon&&['Monitor',A.mon.it.n.replace('Monitor ',''),A.mon.preco],A.kb&&['Teclado',A.kb.it.n.replace('Teclado ',''),A.kb.preco],A.mouse&&['Mouse',A.mouse.it.n.replace('Mouse ',''),A.mouse.preco],A.head&&['Headset',A.head.it.n.replace(/^(Headset|Fone) /,''),A.head.preco]].filter(Boolean);
+  const pct = Math.min(100, b.geral/s.orc*100);
   const futuro = b.pl==='AM5' ? `Daqui a 1 ou 2 anos o primeiro upgrade é a <b>placa de vídeo</b>. Processador, placa-mãe, memória e fonte já foram escolhidos pra você não precisar reconstruir o PC.` :
     (b.cpu==='Ryzen 7 5800X3D' ? `Você já está no topo do AM4. O próximo passo, lá na frente, é a <b>placa de vídeo</b>.` : `No AM4 o teto é o <b>Ryzen 7 5800X3D</b>. Se um dia quiser mais, primeiro troca a placa de vídeo, depois o processador, sem mexer no resto.`);
 
   app.innerHTML = head(false) + chips +
-   `<div class="hero"><div class="sub">Seu PC Ideal</div><div class="tot">${R(b.tot)}</div>
+   `<div class="hero"><div class="sub">${b.accTot?'Seu setup completo':'Seu PC Ideal'}</div><div class="tot">${R(b.geral)}</div>
      <div class="bar"><i style="width:${pct.toFixed(1)}%"></i></div>
-     <div class="sub">${sobra>=0?`${R(sobra)} abaixo do seu orçamento de ${R(s.orc)}`:''}${s.pag==='cartao'?' · margem pro cartão':''}</div>
+     <div class="sub">${sobra>=0?`${R(sobra)} abaixo do seu orçamento de ${R(s.orc)}`:''}${s.pag!=='pix'?' · margem pro parcelado':''}</div>
      <div class="mapa">${mapa}</div></div>
    <div class="raio"><h3>1. O Raio-X</h3>${raio.map(p=>`<p>${p}</p>`).join('')}</div>
    <div class="sec">2. A Máquina</div><div class="parts">${parts.join('')}</div>
-   <div class="raio"><h3>3. Resumo financeiro</h3><table>${linhas.map(l=>`<tr><td>${l[0]} <span class="old">· ${esc(l[1])}</span></td><td>${R2(l[2])}</td></tr>`).join('')}<tr class="t"><td>Total</td><td>${R2(b.tot)}</td></tr></table>
+   ${accCards.length?`<div class="sec">3. ${A.mon?(accCards.length>1?'Monitor e periféricos':'Monitor'):'Periféricos'}</div><div class="parts">${accCards.join('')}</div>`:''}
+   <div class="raio"><h3>${accCards.length?4:3}. Resumo financeiro</h3><table>${linhas.map(l=>`<tr><td>${l[0]} <span class="old">· ${esc(l[1])}</span></td><td>${R2(l[2])}</td></tr>`).join('')}${linhasAcc.length?`<tr class="st"><td>Subtotal PC</td><td>${R2(b.tot)}</td></tr>`+linhasAcc.map(l=>`<tr><td>${l[0]} <span class="old">· ${esc(l[1])}</span></td><td>${R2(l[2])}</td></tr>`).join(''):''}<tr class="t"><td>Total</td><td>${R2(b.geral)}</td></tr></table>
      <p class="foot" style="margin-top:10px">Preços das ofertas que passaram no canal nos últimos 30 dias. Oferta acaba: <b>use o norte de cada peça</b> e acompanhe o canal, não compre correndo uma alternativa mais cara.</p></div>
-   <div class="raio"><h3>4. O que eu não faria agora</h3><ul class="ck no">
+   <div class="raio"><h3>${accCards.length?5:4}. O que eu não faria agora</h3><ul class="ck no">
      <li>Cortar processador ou placa de vídeo pra pagar estética ou periférico</li>
      <li>Comprar memória em um pente só: são sempre dois</li>
      ${b.pl==='AM4'?'<li>Pagar DDR5 caro agora sem orçamento pra isso</li>':'<li>Voltar pro AM4 tendo orçamento pra AM5</li>'}
@@ -515,7 +630,7 @@ function result(){
      <a class="rd" href="https://grapetec.com.br/radar" target="_blank" rel="noopener" data-ev="radar"><div class="rdi">${RADAR}</div><div><h4>Radar de preços</h4><p>Veja a curva de preço de cada peça e saiba se a oferta é boa mesmo.</p><em>Abrir o Radar →</em></div></a>
    </div>
    <p class="foot">Atualizado com os posts até ${dia(DATA.gen)} · Compre pelos links: você me ajuda sem pagar nada a mais.</p>`;
-  document.getElementById('pciRedo').onclick = () => { st={}; step=0; render(); };
+  document.getElementById('pciRedo').onclick = () => { st={itens:{}, parc:30}; step=0; render(); };
   app.querySelectorAll('a[data-ev]').forEach(a => a.addEventListener('click', () => fire('PCIdeal_'+a.dataset.ev)));
   app.querySelectorAll('.cupb').forEach(bt => bt.onclick = () => {
     const c = bt.dataset.c, u = bt.dataset.u;

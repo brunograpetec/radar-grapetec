@@ -154,8 +154,10 @@ const Q = [
    ['fhd60','Full HD 60/75Hz','ou TV'],['fhd','Full HD 144Hz+','o padrão gamer'],['qhd','QHD (2K)','1440p'],['uhd','4K','2160p']]},
  {k:'plat', t:'AM4 ou AM5?', h:'AM4 é mais barato hoje (memória DDR4). AM5 é a plataforma nova, que recebe processadores futuros.', big:1, o:[
    ['auto','Deixa o Brunão decidir','escolho pelo seu orçamento'],['am4','AM4','mais desempenho por real agora'],['am5','AM5','penso em fazer upgrade depois']]},
- {k:'vis', t:'Como você quer o visual?', h:'Estética custa pouco, mas custa.', big:1, o:[
-   ['simples','Discreto','air cooler e gabinete simples'],['aquario','Aquário com RGB','vidro, fans e water cooler 360mm']]},
+ {k:'vis', t:'O que pesa mais pra você: performance ou estética?', h:'Visual custa dinheiro. Me diz onde você quer que ele vá.', big:1, o:[
+   ['perf','Performance acima de tudo','não ligo pra aparência, quero FPS'],
+   ['equil','Equilíbrio','quero desempenho, mas um PC bonito também'],
+   ['estetica','Estética importa muito','quero um PC lindo, mesmo abrindo mão de um pouco de performance']]},
  {k:'net', t:'Internet no PC vai ser…', h:'Se for no cabo, não pago a mais por Wi-Fi na placa-mãe.', big:1, o:[
    ['cabo','No cabo',''],['wifi','Wi-Fi','placa-mãe com Wi-Fi']]},
 ];
@@ -276,7 +278,7 @@ function monta(s){
   const teto = s.orc * (s.pag==='cartao' ? .92 : 1);
   const plats = s.plat==='am4' ? ['AM4'] : s.plat==='am5' ? ['AM5'] : ['AM4','AM5'];
   const ctx = {orc:s.orc};
-  const aq = s.vis==='aquario';
+  const aq = s.vis!=='perf', est = s.vis==='estetica';
   let best = null;
   for(const cpu in CPU){
     const C = CPU[cpu], cI = (P.cpu||[]).find(x=>x.n===cpu);
@@ -297,9 +299,9 @@ function monta(s){
           const gold = s.orc>=5500 || G.w>=750;
           const w = (C.pl==='AM5' || s.orc>=8000) ? Math.max(G.w, 850) : G.w;
           const ps = pickPsu(w, gold); if(!ps) continue;
-          const wc = aq || C.x3d && s.orc>=8000 || s.orc>=10000 || /9700X|9900X|7900/.test(cpu);
-          const co = pickCooler(wc, top); if(!co) continue;
-          const ca = pickCase(aq, co.wc, top && aq); if(!ca) continue;
+          const wc = est || C.x3d && s.orc>=8000 || s.orc>=10000 || /9700X|9900X|7900/.test(cpu);
+          const co = pickCooler(wc, top || (est && s.orc>=8000)); if(!co) continue;
+          const ca = pickCase(aq, co.wc, (top && aq) || (est && s.orc>=6000)); if(!ca) continue;
           const tot = cI.p + gI.p + mobo.preco + rr.preco + ss.preco + ps.preco + co.preco + ca.preco;
           if(tot > teto) continue;
           const sc = score(cpu, gpu, s, ram, sk);
@@ -326,11 +328,11 @@ function card(k, nome, preco, it, norte, why, extra){
 }
 
 function result(){
-  const s = st, b = monta(s);
+  const s = st, b = monta(s), aq = s.vis!=='perf';
   fire('PCIdeal_Resultado', {orc:s.orc, jogo:s.jogo, mon:s.mon, plat:s.plat});
-  const chips = `<div class="chips">${[R(s.orc), s.pag==='cartao'?'cartão':'PIX', {fps:'FPS/BR',aaa:'AAA',mix:'de tudo',work:'jogo + trabalho'}[s.jogo], {fhd60:'Full HD 60Hz',fhd:'Full HD 144Hz+',qhd:'QHD',uhd:'4K'}[s.mon], {auto:'plataforma: Brunão decide',am4:'AM4',am5:'AM5'}[s.plat], s.vis==='aquario'?'aquário':'discreto', s.net==='wifi'?'Wi-Fi':'cabo'].map(x=>`<span class="chip">${x}</span>`).join('')}<button class="lnk" id="pciRedo" style="font-size:12px;margin-left:6px">refazer ↺</button></div>`;
+  const chips = `<div class="chips">${[R(s.orc), s.pag==='cartao'?'cartão':'PIX', {fps:'FPS/BR',aaa:'AAA',mix:'de tudo',work:'jogo + trabalho'}[s.jogo], {fhd60:'Full HD 60Hz',fhd:'Full HD 144Hz+',qhd:'QHD',uhd:'4K'}[s.mon], {auto:'plataforma: Brunão decide',am4:'AM4',am5:'AM5'}[s.plat], {perf:'performance',equil:'equilíbrio',estetica:'estética'}[s.vis], s.net==='wifi'?'Wi-Fi':'cabo'].map(x=>`<span class="chip">${x}</span>`).join('')}<button class="lnk" id="pciRedo" style="font-size:12px;margin-left:6px">refazer ↺</button></div>`;
   if(!b){
-    app.innerHTML = head(false) + chips + `<div class="raio"><h3>Não fechou</h3><p>Com esse orçamento e essas escolhas eu não consegui fechar um PC completo com as ofertas do último mês. Tenta subir um degrau no orçamento, trocar pra AM4 ou ir de visual discreto.</p></div>`;
+    app.innerHTML = head(false) + chips + `<div class="raio"><h3>Não fechou</h3><p>Com esse orçamento e essas escolhas eu não consegui fechar um PC completo com as ofertas do último mês. Tenta subir um degrau no orçamento, trocar pra AM4 ou escolher performance em vez de estética.</p></div>`;
     document.getElementById('pciRedo').onclick = () => { st={}; step=0; render(); };
     return;
   }
@@ -346,6 +348,9 @@ function result(){
     'Escolhi <b>AM4</b>: hoje a memória DDR5 está muito cara, e com esse orçamento a diferença vai direto pra placa de vídeo. É desempenho por real.');
   else raio.push(s.plat==='am5' ? 'Fomos de <b>AM5</b>, como você pediu: plataforma nova, que recebe processadores futuros sem trocar a placa-mãe.' :
     'Aqui já compensa ir de <b>AM5</b>: plataforma nova, DDR5, e quando quiser subir de processador é só trocar ele.');
+  raio.push({perf:'Você pediu <b>performance acima de tudo</b>, então não gastei um real a mais com visual: o dinheiro foi pra processador e placa de vídeo.',
+    equil:'Você pediu <b>equilíbrio</b>: o desempenho vem primeiro, mas o PC fica bonito, com gabinete aquário.',
+    estetica:'Você disse que <b>estética importa muito</b>: entrou water cooler 360mm e gabinete aquário caprichado, mesmo tirando um pouco da performance.'}[s.vis]);
   if(s.pag==='cartao') raio.push(`Como vai ser no cartão, deixei uma margem: o PC fechou em <b>${R(b.tot)}</b> com preço de oferta, e o resto do orçamento é pra absorver a diferença do parcelamento.`);
   if(s.mon==='fhd60' && s.jogo!=='aaa') raio.push('Um conselho: com monitor 60Hz você não enxerga o FPS que esse PC entrega. Assim que der, um Full HD 144Hz muda o jogo.');
   if(s.mon==='uhd' && G.i<200) raio.push('Sendo sincero: 4K pede muita placa de vídeo. Esse PC roda, mas em 4K você vai precisar baixar gráficos ou usar upscaling (DLSS/FSR).');
@@ -370,8 +375,8 @@ function result(){
     `Fonte <b>${G.w}W ${b.ps.it.a['Certificação']}</b> de marca boa, faixa ${faixa(b.ps.fx[0], b.ps.fx[1])}. ${G.w<=650?'650W já atende esse conjunto, não precisa gastar mais.':'Na medida pra essa placa.'}`;
   const nCo = b.co.wc ? `Water cooler <b>360mm</b>, faixa ${faixa(b.co.fx[0], b.co.fx[1])}. Radiador na parte de cima do gabinete.` :
     `Air cooler simples de torre, faixa ${faixa(b.co.fx[0], b.co.fx[1])}. ${C.x3d?'':'Esse processador é tranquilo de refrigerar.'}`;
-  const nCa = b.co.wc ? `Gabinete mid tower que aceite <b>radiador 360mm no topo</b>${aqT()}.` : (s.vis==='aquario' ? `Gabinete aquário com fans, sem tirar dinheiro do desempenho.` : `Gabinete com boa ventilação (frente em tela). Não precisa gastar aqui.`);
-  function aqT(){ return s.vis==='aquario' ? ', estilo aquário' : ''; }
+  const nCa = b.co.wc ? `Gabinete mid tower que aceite <b>radiador 360mm no topo</b>${aqT()}.` : (aq ? `Gabinete aquário com fans, sem tirar dinheiro do desempenho.` : `Gabinete com boa ventilação (frente em tela). Não precisa gastar aqui.`);
+  function aqT(){ return aq ? ', estilo aquário' : ''; }
 
   const ramNome = b.rr.qtd===2 ? `2x ${b.rr.it.n.replace('Memória ','')}` : b.rr.it.n.replace('Memória ','');
   const parts = [

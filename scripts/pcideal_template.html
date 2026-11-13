@@ -534,6 +534,8 @@ function pickMobo(pl, s, cpu, ctx, wifi){
   } else {
     chip = (ctx.orc>=10000 || s.plat==='am5') ? /B850|B650/ : /B650|B850/;
     tier = ctx.orc>=10000 ? /B850|TUF/ : null;
+    // processador forte (8 núcleos ou X3D) não vai em placa de entrada (VRM simples)
+    if(CPU[cpu].c>=8 || CPU[cpu].x3d){ const forte = L.filter(x => !/B650M-H|Gigabyte B650M$|HDV/.test(x.n)); if(forte.length) L = forte; }
   }
   L = L.filter(x => chip.test(x.a.Chipset||x.n));
   if(tier){ const T = L.filter(x=>tier.test(x.n)); if(T.length) L = T; }
@@ -583,7 +585,7 @@ const CASE_SPEC = [
 const caseSpec = n => (CASE_SPEC.find(c => c[0].test(n))||[])[1] || null;
 const moboTam = it => /E-?ATX/i.test(it.t||'') ? 'E-ATX' : (it.a.Tamanho || 'mATX');
 // processadores que esquentam: pedem water cooler 360 (air cooler de torre simples não é o ideal)
-const QUENTE = /5800X3D|7800X3D|9800X3D|9700X|9900X|7900|5800XT|9950X3D/;
+const QUENTE = /X3D|9900X|7900|5800XT/;   // 3D V-Cache e 12 núcleos: water cooler 360. O 9700X é frio (air cooler resolve).
 function caseTier(orc){ return orc>=12000 ? 4 : orc>=7000 ? 3 : orc>=5500 ? 2 : 1; }
 function pickCase(aq, wc, premium, need){
   // need: {mobo:'mATX', rad:360|0, gpuMm, tier}
@@ -644,7 +646,8 @@ function score(cpu, gpu, s, ram, ssd){
     // processador vem antes da memória: CPU pesa muito mais que os 32GB
     // processador casado com a placa que vem depois (não adianta 9800X3D pra uma placa de entrada)
     const f = futGpu(s), need = f ? .3*f.g.i + 52 : 115;
-    const base = itipo(s)==='cpu' ? Math.min(c.g, need+12)*2 + .03*c.g + (c.c>=8?4:0) + (s.jogo==='fps'&&c.x3d?6:0) : c.ig*2 + c.g*.6;
+    let base = itipo(s)==='cpu' ? Math.min(c.g, need+12)*2 + .03*c.g + (c.c>=8?4:0) + (s.jogo==='fps'&&c.x3d?6:0) : c.ig*2 + c.g*.6;
+    if(itipo(s)==='cpu' && s.jogo!=='fps'){ if(c.x3d) base -= 10; if(cpu==='Ryzen 7 9700X') base += 6; else if(cpu==='Ryzen 7 7700') base += 3; if(c.c<8) base -= 6; }
     return base + (ram===32?(s.orc>=7500?6:3):0) + (ssd==='1t'||ssd==='1t4'?4:ssd==='2t'?5.5:0);
   }
   let gi = g.i;
@@ -652,9 +655,11 @@ function score(cpu, gpu, s, ram, ssd){
   if(s.mon==='uhd'){ gi *= .46; if(g.v<=8) gi *= .7; else if(g.v<=12) gi *= .9; }
   let mult = {fps:1.25, aaa:1.9, mix:1.55, work:1.6}[s.jogo];
   if(s.mon==='qhd') mult *= 1.3; if(s.mon==='uhd') mult *= 1.75; if(s.mon==='fhd60' || s.hz60) mult *= 1.4;
-  let sc = Math.min(gi, c.g*mult) + .12*Math.max(gi, c.g*mult);
+  const cg = (s.jogo==='mix' && c.pl==='AM5' && c.x3d) ? Math.min(c.g, 115) : c.g;   // casual não aproveita o 3D V-Cache
+  let sc = Math.min(gi, cg*mult) + .12*Math.max(gi, cg*mult);
   if(c.c>=8) sc += 3;                       // 8 núcleos envelhecem melhor
   if(s.jogo==='fps' && c.x3d) sc += 6;      // cache 3D no competitivo
+  if(s.jogo==='mix' && c.pl==='AM5'){ if(c.x3d) sc -= 8; if(cpu==='Ryzen 7 9700X') sc += 4; else if(cpu==='Ryzen 7 7700') sc += 2; }   // casual no AM5: octa-core sem 3D V-Cache
   if(s.jogo==='work') sc = .55*sc + .45*(c.c*10*(c.pl==='AM5'?1.15:1));
   if(ram===32) sc += s.jogo==='work' ? 10 : (s.mon==='uhd' ? 4.5 : 2.5);   // 4K: o ideal é 2x16GB (sem tirar da placa de vídeo)
   if(ssd==='1t'||ssd==='1t4') sc += 4; if(ssd==='2t') sc += 5.5; if(ssd==='1t4') sc += .5;
@@ -722,7 +727,7 @@ function monta(s){
           const ps = pickPsu(w, gold); if(!ps) continue;
           const wc = est || QUENTE.test(cpu) || s.orc>=10000;
           const co = ((C.apu || (/^Ryzen 5 (5500|5600|7600)$/.test(cpu) && s.orc<5000)) && !wc && !aq) ? {box:1, preco:0, wc:false, it:null} : pickCooler(wc, top || (est && s.orc>=8000)); if(!co) continue;
-          const ca = pickCase(aq, co.wc, (top && aq) || (est && s.orc>=6000), {mobo:moboTam(mobo.it), rad:co.wc?360:0, gpuMm: G.i>=175 ? 330 : G.i>=135 ? 290 : 250, tier:caseTier(s.orc)}); if(!ca) continue;
+          const ca = pickCase(aq, co.wc, (top && aq) || (est && s.orc>=6000), {mobo:moboTam(mobo.it), rad:co.wc?360:0, gpuMm: Math.max(G.i, fut?fut.g.i:0)>=175 ? 330 : Math.max(G.i, fut?fut.g.i:0)>=135 ? 290 : 250, tier: Math.max(caseTier(s.orc), fut ? (fut.g.i>=170 ? 3 : 2) : 0, (CPU[cpu].x3d || CPU[cpu].c>=8) && s.orc>=5000 ? 2 : 0)}); if(!ca) continue;
           const tot = cI.p + gI.p + mobo.preco + rr.preco + ss.preco + ps.preco + co.preco + ca.preco;
           // gabinete decente é obrigatório acima de 7 mil: se só ele estoura, passo até R$ 250 e explico
           const folga = s.orc>=7000 ? 250 : 0;

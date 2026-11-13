@@ -52,3 +52,9 @@ Regras que o Bruno passou e que o algoritmo segue. Anotar aqui cada regra nova (
 ## Quando o orçamento não fecha
 - Nunca mostrar "não fechou": monta o PC no mínimo que fecha a proposta (subindo de R$ 250 em R$ 250) e mostra um aviso explicando por que passou (ex.: 4K/QHD pede placa de 12/16GB, monitor e periféricos na mesma conta, DDR5 cara) e o quanto a mais. (13/11/2026)
 - No modo "Deixa o Brunão decidir", QHD/4K não usa vídeo integrado (só se ele escolheu vídeo integrado). (13/11/2026)
+
+## Perfil casual no AM5 e equilíbrio placa-mãe x processador
+- "Jogo de tudo um pouco" (casual) no AM5: octa-core SEM 3D V-Cache. Preferência 9700X (mais frio), depois 7700. X3D só pra FPS/competitivo. (13/11/2026)
+- Processador forte (8 núcleos ou X3D) não vai em placa-mãe de entrada com VRM simples (B650M-H, B650M H, HDV). Placa simples + octa-core é combinação de AM4/economia. (13/11/2026)
+- 3D V-Cache vai com water cooler 360 e gabinete maduro; 9700X é frio e aceita AK400. (13/11/2026)
+- Vídeo integrado com placa de vídeo futura: gabinete e fonte escolhidos pensando na placa que vem (gabinete mid tower decente que caiba a placa grande). (13/11/2026)

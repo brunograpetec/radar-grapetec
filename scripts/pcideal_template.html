@@ -312,7 +312,7 @@ const Q = [
    ['equil','Equilíbrio','quero desempenho, mas um PC bonito também'],
    ['estetica','Estética importa muito','quero um PC lindo, mesmo abrindo mão de um pouco de performance']]},
  {k:'net', t:'Internet no PC vai ser…', h:'Se for no cabo, não pago a mais por Wi-Fi na placa-mãe.', big:1, o:[
-   ['cabo','No cabo',''],['wifi','Wi-Fi','placa-mãe com Wi-Fi']]},
+   ['cabo','No cabo','o dinheiro do Wi-Fi vai pro desempenho'],['wifi','Wi-Fi','eu tento uma placa-mãe com Wi-Fi. Se não couber sem perder a placa-mãe certa ou a placa de vídeo, vai sem Wi-Fi e você usa um adaptador USB (dongle), que é barato e resolve']]},
 ];
 let st = {itens:{}, parc:30}, step = 0;
 const parcPct = s => s.pag==='cartao' ? 100 : s.pag==='misto' ? (s.parc||0) : 0;
@@ -409,8 +409,7 @@ function pickRam(ddr, total){
   if(k) return {it:k, preco:k.p, qtd:1, fx: fx && [fx[0]*2, fx[1]*2]};
   return null;
 }
-function pickMobo(pl, s, cpu, ctx){
-  const wifi = s.net==='wifi';
+function pickMobo(pl, s, cpu, ctx, wifi){
   let L = by('mobo', x => x.a.Plataforma===pl && MARCA_OK.test(x.a.Marca||x.n) && x.np>=4 && (!wifi || x.a['Wi-Fi']==='Com Wi-Fi'));
   let chip, tier;
   if(pl==='AM4'){
@@ -555,9 +554,14 @@ function monta(s){
     const C = CPU[cpu], cI = (P.cpu||[]).find(x=>x.n===cpu);
     if(!cI || !plats.includes(C.pl)) continue;
     if(s.jogo!=='work' && C.c>=12) continue;
-    const mobo = pickMobo(C.pl, s, cpu, ctx); if(!mobo) continue;
     if(s.gmodo==='dgpu' && C.apu) continue;
     if(s.gmodo==='igpu' && !C.apu) continue;
+    // Wi-Fi é preferência, não obrigação: tento a placa com Wi-Fi (mesmo chipset); se não couber sem sacrificar o resto, vai sem e ele usa um adaptador USB
+    const mobos = [];
+    if(s.net==='wifi'){ const mw = pickMobo(C.pl, s, cpu, ctx, true); if(mw) mobos.push(mw); }
+    { const mn = pickMobo(C.pl, s, cpu, ctx, false); if(mn && !mobos.some(m=>m.it.n===mn.it.n)) mobos.push(mn); }
+    for(const mobo of mobos){
+    const temWifi = mobo.it.a['Wi-Fi']==='Com Wi-Fi';
     const pcie3 = /^Ryzen 5 5500$/.test(cpu) || /A520|B450/.test(mobo.it.a.Chipset||'');
     for(const gpu of (C.apu ? ['iGPU'] : Object.keys(GPU))){
       const gI = gpu==='iGPU' ? {p:0, n:'iGPU'} : (P.gpu||[]).find(x=>x.n===gpu); if(!gI) continue;
@@ -586,11 +590,12 @@ function monta(s){
           // gabinete decente é obrigatório acima de 7 mil: se só ele estoura, passo até R$ 250 e explico
           const folga = s.orc>=7000 ? 250 : 0;
           if(tot > teto + folga) continue;
-          const sc = score(cpu, gpu, s, ram, sk) * lanePen - (tot > teto ? 100 : 0);
+          const sc = score(cpu, gpu, s, ram, sk) * lanePen - (tot > teto ? 100 : 0) + (s.net==='wifi' && temWifi ? 3 : 0);
           if(!best || sc > best.sc + .01 || (Math.abs(sc-best.sc)<=.01 && tot < best.tot))
-            best = {sc, tot, cpu, gpu, cI, gI, mobo, rr, ss, ps, co, ca, ram, pl:C.pl, teto, apu:!!C.apu};
+            best = {sc, tot, cpu, gpu, cI, gI, mobo, rr, ss, ps, co, ca, ram, pl:C.pl, teto, apu:!!C.apu, wifi:temWifi};
         }
       }
+    }
     }
   }
   return best;
@@ -687,6 +692,7 @@ function result(){
   }
   if(b.apu) raio.push(pick([`Sendo direto: com esse valor pra tudo, não cabe placa de vídeo sem matar o resto. Fui de <b>${b.cpu}</b>, que tem vídeo integrado: roda CS2, Valorant, Fortnite e LoL no gráfico baixo, em Full HD. A plataforma e a fonte já ficam prontas pra você <b>colocar a placa de vídeo depois</b>.`, `Aqui a jogada é começar sem placa de vídeo: o <b>${b.cpu}</b> tem vídeo integrado e segura os competitivos no baixo. Quando juntar mais um pouco, a placa de vídeo entra e o resto do PC já está pronto pra ela.`]));
   if(b.cpu==='Ryzen 5 5500' && !b.apu && (G.x8 || /9060 XT/.test(b.gpu))) raio.push(G.x8 ? `O Ryzen 5 5500 trabalha em PCIe 3.0. Essa placa usa só 8 linhas (x8), então perde um pouco de desempenho nele. Coube no orçamento, mas se der, prefira uma <b>RX 9060 XT</b>, que é x16.` : `O Ryzen 5 5500 trabalha em PCIe 3.0, então escolhi uma placa <b>x16</b>: ela não perde desempenho nessa plataforma, diferente das x8 (RTX 5050/5060, RX 7600).`);
+  if(s.net==='wifi' && !b.wifi) raio.push(`Sobre o Wi-Fi: tentei uma placa-mãe com Wi-Fi, mas dentro desse orçamento ia ter que tirar dinheiro de peça mais importante (placa-mãe certa ou placa de vídeo). Não vale. Vai sem, e um <b>adaptador Wi-Fi USB</b> de uns R$ 40–80 resolve.`);
   // plataforma: compara de verdade com a outra
   let alt = null;
   if(s.plat==='auto'){ alt = monta(Object.assign({}, s, {orc:b.pcOrc, pag:'pix', mon:b.res, plat: b.pl==='AM4'?'am5':'am4'})); }
@@ -723,7 +729,7 @@ function result(){
   if(up) xGpu += `<b>Quer esticar?</b> A ${up.n} custa ${R(up.it.p - b.gI.p)} a mais e entrega uns ${Math.round((up.g.i/G.i-1)*100)}% a mais. `;
   if(dn) xGpu += `<b>Por que não a ${dn.n}?</b> Economiza ${R(b.gI.p - dn.it.p)}, mas perde uns ${Math.round((1-dn.g.i/G.i)*100)}% de desempenho.`;
   const chip = b.mobo.it.a.Chipset;
-  const nMobo = `Chipset <b>${chip}</b> (${b.pl}, ${ramT})${s.net==='wifi'?', <b>com Wi-Fi</b>':''}. Faixa ${chip}: <b>${faixa(b.mobo.fx[0], b.mobo.fx[1])}</b>.${s.net!=='wifi'?' No cabo, não precisa pagar por Wi-Fi.':''}`;
+  const nMobo = `Chipset <b>${chip}</b> (${b.pl}, ${ramT})${b.wifi?', <b>com Wi-Fi</b>':''}. Faixa ${chip}: <b>${faixa(b.mobo.fx[0], b.mobo.fx[1])}</b>.${s.net!=='wifi'?' No cabo, não precisa pagar por Wi-Fi.':(b.wifi?'':' <b>Sem Wi-Fi na placa</b>: a versão com Wi-Fi não coube sem abrir mão de outra peça. Usa um <b>adaptador Wi-Fi USB</b> (dongle, uns R$ 40–80) e pronto.')}`;
   const nRam = `Memória <b>2x${b.ram/2} = ${b.ram}GB ${ramT}</b>${ramT==='DDR4'?' 3200MHz':' 5600–6000MHz'}, sempre em dois pentes (dual channel).${b.rr.fx?` Cada pente na faixa <b>${faixa(b.rr.fx[0], b.rr.fx[1])}</b>.`:''}`;
   const ssK = b.ss.kind;
   const nSsd = ssK==='500' ? `SSD <b>500GB NVMe</b> pra começar, faixa <b>${faixa(b.ss.fx[0], b.ss.fx[1])}</b>. Depois, com calma, você coloca mais um.` :

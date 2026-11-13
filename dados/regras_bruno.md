@@ -34,3 +34,6 @@ Regras que o Bruno passou e que o algoritmo segue. Anotar aqui cada regra nova (
 ## Placa de vídeo x vídeo integrado
 - Opção no passo 1: "Deixa o Brunão decidir" / "Com placa de vídeo" (mais desempenho já; em orçamento curto cai no AM4, menos upgrade) / "Vídeo integrado" (AM5 com APU, placa depois). (13/11/2026)
 - Build com vídeo integrado: 16GB (não 32GB); o que sobrar, guardar pra placa de vídeo. (13/11/2026)
+
+## Wi-Fi
+- Wi-Fi é preferência, não obrigação: tenta placa-mãe com Wi-Fi do mesmo chipset (ex.: B550 com o 5700X, nunca rebaixa pra A520 por causa do Wi-Fi). Se não couber sem abrir mão de placa-mãe boa ou placa de vídeo, vai sem Wi-Fi e indica adaptador Wi-Fi USB (dongle). Explicar na pergunta e no resultado. (13/11/2026)

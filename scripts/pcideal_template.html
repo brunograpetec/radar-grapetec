@@ -172,6 +172,47 @@
 #pci.claro input[type=range]{background:linear-gradient(90deg,var(--ac) 0,var(--ac) var(--v,30%),rgba(0,0,0,.12) var(--v,30%))}
 #pci.claro .ph{background:#fff}
 #pci.claro .tmb .pt{border-color:#fff}
+#pci .opt .sh,#pci .mais,#pci .barra{display:none}
+#pci .det{display:grid;gap:8px}
+@media (max-width:640px){
+  #pci .wrap{padding:18px 14px 90px}
+  #pci .brand span{display:none}
+  #pci .tema{font-size:0;padding:6px 9px}
+  #pci .tema:first-letter{font-size:16px}
+  #pci header{margin-bottom:14px}
+  #pci h1{font-size:30px}
+  #pci .lead{font-size:14.5px}
+  #pci .q{padding:16px;border-radius:16px}
+  #pci .q h2{font-size:18.5px}
+  #pci .q p.h{font-size:13px;margin-bottom:12px}
+  #pci .opts,#pci .opts.big{grid-template-columns:1fr;gap:8px}
+  #pci .opts:not(.big){grid-template-columns:repeat(3,1fr)}
+  #pci .opt{display:grid;grid-template-columns:auto 1fr;column-gap:12px;align-items:center;padding:11px 12px}
+  #pci .opt .ill{grid-row:1 / span 2;height:34px;margin:0}
+  #pci .opt .ill svg{height:34px}
+  #pci .opt .ill .bri{width:34px;height:34px}
+  #pci .opt b{font-size:15px}
+  #pci .opt span{margin-top:1px}
+  #pci .opt .lg{display:none}
+  #pci .opt .sh{display:block}
+  #pci .opts:not(.big) .opt{grid-template-columns:1fr;text-align:center;padding:10px 6px}
+  #pci .opts:not(.big) .opt .ill{grid-row:auto;height:26px;margin:0 auto 4px}#pci .opts:not(.big) .opt .ill svg{height:26px;margin:0 auto}
+  #pci .its{gap:6px}
+  #pci .it{padding:8px 10px;font-size:14px}
+  #pci .it small{display:none}
+  #pci .gmx{font-size:12.5px}
+  #pci .mais{display:block;all:unset;cursor:pointer;font-size:13px;color:var(--act);padding:2px 0}
+  #pci .part:not(.aberto) .det{display:none}
+  #pci .part .n{font-size:16px}
+  #pci .norte{font-size:13.5px}
+  #pci .why{font-size:13.5px}
+  #pci .raio{padding:16px}
+  #pci .raio p{font-size:14.5px}
+  #pci .hero .tot{font-size:34px}
+  #pci .barra{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:50;gap:8px;align-items:center;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:var(--s1);border-top:1px solid var(--bd);box-shadow:0 -8px 24px rgba(0,0,0,.35)}
+  #pci .barra div{flex:1}#pci .barra small{display:block;font-size:11px;color:var(--mut)}#pci .barra b{font-family:var(--mono);font-size:19px}
+}
+@media print{#pci .barra,#pci .mais{display:none!important}#pci .det{display:grid!important}}
 #pci .parts{display:grid;gap:12px;margin-bottom:16px}
 #pci .part{background:var(--s1);border:1px solid var(--bd);border-radius:16px;padding:16px;display:grid;grid-template-columns:1fr 210px;gap:16px;align-items:start}
 #pci .pl{display:grid;gap:8px;min-width:0}
@@ -365,21 +406,21 @@ const Q = [
  {k:'pag', t:'Como você vai pagar?', h:'As ofertas do canal geralmente são à vista. No cartão eu deixo uma margem.', big:1, o:[
    ['pix','PIX / à vista','uso o orçamento quase todo'],['cartao','Cartão parcelado','guardo ~8% de margem pro parcelamento'],['misto','Parte à vista, parte parcelado','você escolhe quanto vai em cada um']]},
  {k:'jogo', t:'Que tipo de gamer você é?', h:'Isso muda onde eu coloco o dinheiro: processador ou placa de vídeo.', big:1, o:[
-   ['mix','Jogo de tudo um pouco','Competitivo e modo história. Eu equilibro o PC no melhor custo-benefício.'],
-   ['fps','FPS / Battle Royale','CS2, Valorant, Fortnite, Warzone. Ênfase num processador mais parrudo, sem deixar de lado a placa de vídeo.'],
-   ['aaa','Modo campanha / mundo aberto','GTA, Cyberpunk, RDR2, lançamentos. Tudo pra ter a melhor placa de vídeo que cabe no orçamento.']]},
+   ['mix','Jogo de tudo um pouco','Competitivo e modo história. Eu equilibro o PC no melhor custo-benefício.','competitivo e história, equilibrado'],
+   ['fps','FPS / Battle Royale','CS2, Valorant, Fortnite, Warzone. Ênfase num processador mais parrudo, sem deixar de lado a placa de vídeo.','processador mais parrudo'],
+   ['aaa','Modo campanha / mundo aberto','GTA, Cyberpunk, RDR2, lançamentos. Tudo pra ter a melhor placa de vídeo que cabe no orçamento.','a melhor placa de vídeo possível']]},
  {k:'mon', t:'E o monitor?', h:'A resolução decide quanta placa de vídeo você precisa.', big:1,
    alt:{t:'Qual monitor você quer?', h:'Ele entra no orçamento. A resolução decide quanta placa de vídeo você precisa.', o:[
    ['auto','Me indica você','escolho pelo seu orçamento'],['fhd','Full HD 144Hz+','o padrão gamer'],['qhd','QHD (2K)','1440p, mais nitidez'],['uhd','4K','2160p, pede muita placa']]}, o:[
    ['fhd60','Full HD 60/75Hz','ou TV'],['fhd','Full HD 144Hz+','o padrão gamer'],['qhd','QHD (2K)','1440p'],['uhd','4K','2160p']]},
  {k:'plat', t:'AM4 ou AM5?', h:'AM4 é mais barato hoje (memória DDR4). AM5 é a plataforma nova, que recebe processadores futuros.', big:1, o:[
-   ['auto','Deixa o Brunão decidir','comparo AM4 e AM5 com os preços de hoje e fico com o que der mais desempenho pelo seu dinheiro'],['am4','AM4','mais desempenho por real agora'],['am5','AM5','penso em fazer upgrade depois']]},
+   ['auto','Deixa o Brunão decidir','comparo AM4 e AM5 com os preços de hoje e fico com o que der mais desempenho pelo seu dinheiro','o que der mais desempenho hoje'],['am4','AM4','mais desempenho por real agora'],['am5','AM5','penso em fazer upgrade depois']]},
  {k:'vis', t:'O que pesa mais pra você: performance ou estética?', h:'Visual custa dinheiro. Me diz onde você quer que ele vá.', big:1, o:[
    ['perf','Performance acima de tudo','não ligo pra aparência, quero FPS'],
    ['equil','Equilíbrio','quero desempenho, mas um PC bonito também'],
-   ['estetica','Estética importa muito','quero um PC lindo, mesmo abrindo mão de um pouco de performance']]},
+   ['estetica','Estética importa muito','quero um PC lindo, mesmo abrindo mão de um pouco de performance','PC lindo, mesmo perdendo um pouco']]},
  {k:'net', t:'Internet no PC vai ser…', h:'Se for no cabo, não pago a mais por Wi-Fi na placa-mãe.', big:1, o:[
-   ['cabo','No cabo','o dinheiro do Wi-Fi vai pro desempenho'],['wifi','Wi-Fi','eu tento uma placa-mãe com Wi-Fi. Se não couber sem perder a placa-mãe certa ou a placa de vídeo, vai sem Wi-Fi e você usa um adaptador USB (dongle), que é barato e resolve']]},
+   ['cabo','No cabo','o dinheiro do Wi-Fi vai pro desempenho'],['wifi','Wi-Fi','eu tento uma placa-mãe com Wi-Fi. Se não couber sem perder a placa-mãe certa ou a placa de vídeo, vai sem Wi-Fi e você usa um adaptador USB (dongle), que é barato e resolve','tento placa com Wi-Fi; se não couber, adaptador USB']]},
 ];
 let st = {itens:{}, parc:30}, step = 0;
 const parcPct = s => s.pag==='cartao' ? 100 : s.pag==='misto' ? (s.parc||0) : 0;
@@ -398,7 +439,7 @@ function render(){
   app.innerHTML = head(step===0) +
    `<div class="prog">${Q.map((_,i)=>`<i class="${i<=step?'on':''}"></i>`).join('')}</div>
     <div class="q"><h2>${q.t}</h2><p class="h">${q.h}</p>
-     ${itens}${q.k==='mon' ? monPanel() : `<div class="opts ${q.big?'big':''}">${q.o.map(o=>`<button class="opt ${cur===o[0]?'sel':''}" data-v="${o[0]}">${illDe(q.k,o[0])?`<div class="ill">${illDe(q.k,o[0])}</div>`:''}<b>${o[1]}</b>${o[2]?`<span>${o[2]}</span>`:''}</button>`).join('')}</div>`}
+     ${itens}${q.k==='mon' ? monPanel() : `<div class="opts ${q.big?'big':''}">${q.o.map(o=>`<button class="opt ${cur===o[0]?'sel':''}" data-v="${o[0]}">${illDe(q.k,o[0])?`<div class="ill">${illDe(q.k,o[0])}</div>`:''}<b>${o[1]}</b>${o[2]?`<span class="${o[3]?'lg':''}">${o[2]}</span>`:''}${o[3]?`<span class="sh">${o[3]}</span>`:''}</button>`).join('')}</div>`}
      ${q.k==='pag' && st.pag==='misto' ? misto() : ''}
      <div class="nav">${step?'<button class="lnk" id="pciBack">← voltar</button>':'<span></span>'}<span class="old">${step+1} de ${Q.length}</span></div></div>`;
   app.querySelectorAll('.opt').forEach(b => b.onclick = () => {
@@ -454,7 +495,7 @@ function mostraSalvos(){
   const pr = app.querySelector('.prog'); if(pr) pr.parentNode.insertBefore(bx, pr);
 }
 function head(full){
-  return `<header><img class="logo" src="${LOGO}" alt="Grape Tec"><div class="brand"><b>Grape Tec · PC Ideal</b><span>preços dos meus posts dos últimos 30 dias</span></div><button class="tema" id="pciTema" title="Mudar tema">${document.getElementById('pci').classList.contains('claro')?'🌙 Escuro':'☀️ Claro'}</button></header>` +
+  return `<header><img class="logo" src="${LOGO}" alt="Grape Tec"><div class="brand"><b>Grape Tec · PC Ideal</b><span>preços dos meus posts dos últimos 30 dias</span></div><button class="tema" id="pciTema" title="Mudar tema" aria-label="Mudar tema">${document.getElementById('pci').classList.contains('claro')?'🌙 Escuro':'☀️ Claro'}</button></header>` +
    (full ? `<h1>Monte seu <em>PC Ideal</em></h1><p class="lead">Responde 7 perguntas, só clicando. Eu monto o PC completo com as 8 peças, do jeito que faço nas minhas consultorias, usando os preços reais que passaram no canal no último mês.</p>` : '');
 }
 
@@ -715,8 +756,8 @@ function card(k, nome, preco, it, norte, why, sub, extra, specs, mtr){
   if(!specs){ specs = Object.entries(it.a||{}).filter(([a,v]) => typeof v==='string' && !/Marca|Formato|Linha/.test(a)).map(([a,v]) => v); }
   const nc = (DATA.consultorias||{})[it.n] || 0;
   return `<div class="part"><div class="pl"><div class="k">${k}</div><div class="n">${esc(nome)}</div>${nc>=3?`<div class="cs">✔ Indicado em <b>${nc} consultorias</b> do Brunão</div>`:''}${ficha(specs)}
-   <div class="norte"><b>Norte:</b> ${norte}</div><div class="why">${why}</div>${mtr||''}${extra?`<div class="xtra">${extra}</div>`:''}
-   ${termo(it)}</div>${pbox(it, preco, sub)}</div>`;
+   <div class="norte"><b>Norte:</b> ${norte}</div><div class="why">${why}</div><button class="mais" type="button">mais detalhes ▾</button><div class="det">${mtr||''}${extra?`<div class="xtra">${extra}</div>`:''}
+   ${termo(it)}</div></div>${pbox(it, preco, sub)}</div>`;
 }
 const gpuNear = (name, dir) => {
   const L = Object.keys(GPU).map(n => ({n, g:GPU[n], it:(P.gpu||[]).find(x=>x.n===n)})).filter(x=>x.it).sort((a,b)=>a.g.i-b.g.i || a.it.p-b.it.p);
@@ -901,6 +942,9 @@ function result(){
    <p class="foot">Atualizado com os posts até ${dia(DATA.gen)} · Compre pelos links: você me ajuda sem pagar nada a mais.</p>`;
   document.getElementById('pciRedo').onclick = refaz;
   bindTema();
+  app.querySelectorAll('.mais').forEach(bt => bt.onclick = () => { const pt = bt.closest('.part'); pt.classList.toggle('aberto'); bt.textContent = pt.classList.contains('aberto') ? 'menos detalhes ▴' : 'mais detalhes ▾'; });
+  app.insertAdjacentHTML('beforeend', `<div class="barra"><div><small>${b.accTot?'Setup completo':'Seu PC'}</small><b>${R(b.geral)}</b></div><button class="btn" id="pciPdf2">📄 PDF</button><button class="btn" data-inicio="1">↺ Novo</button></div>`);
+  const p2 = document.getElementById('pciPdf2'); if(p2) p2.onclick = () => document.getElementById('pciPdf').click();
   app.querySelectorAll('[data-inicio]').forEach(b => b.onclick = () => { refaz(); scrollTo({top: app.getBoundingClientRect().top + scrollY - 80, behavior:'smooth'}); });
   salva({mapa:`${b.cpu} + ${GN}`, total:Math.round(b.geral), orc:s.orc});
   const pc = {cpu:b.cpu, gpu:b.apu?'vídeo integrado':b.gpu, placa_mae:b.mobo.it.n, memoria:b.ram+'GB '+ramT, ssd:b.ss.it.n, fonte:b.ps.it.n,

@@ -58,3 +58,4 @@ Regras que o Bruno passou e que o algoritmo segue. Anotar aqui cada regra nova (
 - Processador forte (8 núcleos ou X3D) não vai em placa-mãe de entrada com VRM simples (B650M-H, B650M H, HDV). Placa simples + octa-core é combinação de AM4/economia. (13/11/2026)
 - 3D V-Cache vai com water cooler 360 e gabinete maduro; 9700X é frio e aceita AK400. (13/11/2026)
 - Vídeo integrado com placa de vídeo futura: gabinete e fonte escolhidos pensando na placa que vem (gabinete mid tower decente que caiba a placa grande). (13/11/2026)
+- Vídeo integrado + "Deixa o Brunão decidir" → sempre série G (quem não manja quer jogar pelo menos um pouco desde o primeiro dia). Pro casual, o ponto certo é o 8600G (6 núcleos, força perto de um 7600, Radeon 760M). (13/11/2026)

@@ -437,7 +437,7 @@ function render(){
   const cur = st[q.k];
   const itens = q.itens ? `<div class="itl">O que entra no orçamento?</div><div class="its">${ITENS.map(i=>`<button class="it ${i[0]==='pc'||st.itens[i[0]]?'on':''} ${i[0]==='pc'?'lock':''}" data-i="${i[0]}"><i>${i[0]==='pc'||st.itens[i[0]]?'✓':'+'}</i><span class="iic">${ITIC[i[0]]}</span>${i[1]}${i[2]?`<small>${i[2]}</small>`:''}</button>`).join('')}</div><div class="itl">Placa de vídeo</div><div class="its">${[['auto','Deixa o Brunão decidir','monto o melhor pro seu valor'],['dgpu','Com placa de vídeo','mais desempenho já, roda os pesados'],['igpu','Vídeo integrado','começa no AM5 e coloca a placa depois']].map(o=>`<button class="it gm ${(st.gmodo||'auto')===o[0]?'on':''}" data-g="${o[0]}"><i>${(st.gmodo||'auto')===o[0]?'✓':''}</i><span class="iic g">${o[0]==='auto'?`<img class="bri s" src="${FOTO_BRUNO}" alt="">`:ILL[o[0]]}</span>${o[1]}<small>${o[2]}</small></button>`).join('')}</div>
      ${st.gmodo==='dgpu'?`<p class="gmx">Com placa de vídeo você joga os jogos pesados desde o primeiro dia. Em orçamento curto ela entra num AM4, que tem menos caminho de upgrade lá na frente.</p>`:st.gmodo==='igpu'?`<p class="gmx">Com vídeo integrado o PC já nasce no AM5, a plataforma nova, e você coloca a placa de vídeo depois sem trocar nada. Até lá, roda os competitivos leves (CS2, Valorant, LoL) no gráfico baixo. Jogo pesado, só depois da placa.</p>`:''}
-     ${st.gmodo==='igpu' ? `<div class="itl">Que tipo de vídeo integrado?</div><div class="its">${[['auto','Deixa o Brunão decidir',''],['apu','Integrado forte','série G: joga leve já'],['cpu','Processador forte','vídeo básico, placa logo depois']].map(o=>`<button class="it gx ${(st.itipo||'auto')===o[0]?'on':''}" data-k="itipo" data-v="${o[0]}"><i>${(st.itipo||'auto')===o[0]?'✓':''}</i>${o[1]}${o[2]?`<small>${o[2]}</small>`:''}</button>`).join('')}</div>
+     ${st.gmodo==='igpu' ? `<div class="itl">Que tipo de vídeo integrado?</div><div class="its">${[['auto','Deixa o Brunão decidir',''],['apu','Integrado forte','série G: já joga leve'],['cpu','Processador forte','vídeo básico, placa logo depois']].map(o=>`<button class="it gx ${(st.itipo||'auto')===o[0]?'on':''}" data-k="itipo" data-v="${o[0]}"><i>${(st.itipo||'auto')===o[0]?'✓':''}</i>${o[1]}${o[2]?`<small>${o[2]}</small>`:''}</button>`).join('')}</div>
        <div class="itl">Quanto você pensa em gastar na placa de vídeo depois? <span style="text-transform:none;letter-spacing:0">(não entra no total de agora)</span></div><div class="its">${[['0','Nada, fico no integrado'],['2000','até R$ 2 mil'],['3000','até R$ 3 mil'],['4500','até R$ 4,5 mil'],['6500','até R$ 6,5 mil']].map(o=>`<button class="it gx ${String(st.gfut||0)===o[0]?'on':''}" data-k="gfut" data-v="${o[0]}"><i>${String(st.gfut||0)===o[0]?'✓':''}</i>${o[1]}</button>`).join('')}</div>` : ''}
      <div class="itl">Quanto, no total?</div>` : '';
   app.innerHTML = head(step===0) +
@@ -646,7 +646,7 @@ function score(cpu, gpu, s, ram, ssd){
     // processador vem antes da memória: CPU pesa muito mais que os 32GB
     // processador casado com a placa que vem depois (não adianta 9800X3D pra uma placa de entrada)
     const f = futGpu(s), need = f ? .3*f.g.i + 52 : 115;
-    let base = itipo(s)==='cpu' ? Math.min(c.g, need+12)*2 + .03*c.g + (c.c>=8?4:0) + (s.jogo==='fps'&&c.x3d?6:0) : c.ig*2 + c.g*.6;
+    let base = itipo(s)==='cpu' ? Math.min(c.g, need+12)*2 + .03*c.g + (c.c>=8?4:0) + (s.jogo==='fps'&&c.x3d?6:0) : Math.min(c.ig,40)*2 + c.g*.6 + (cpu==='Ryzen 5 8600G' ? 3 : 0);   // 8600G é o ponto certo pro casual
     if(itipo(s)==='cpu' && s.jogo!=='fps'){ if(c.x3d) base -= 10; if(cpu==='Ryzen 7 9700X') base += 6; else if(cpu==='Ryzen 7 7700') base += 3; if(c.c<8) base -= 6; }
     return base + (ram===32?(s.orc>=7500?6:3):0) + (ssd==='1t'||ssd==='1t4'?4:ssd==='2t'?5.5:0);
   }
@@ -672,7 +672,8 @@ function score(cpu, gpu, s, ram, ssd){
   return sc;
 }
 
-function itipo(s){ const t = s.itipo || 'auto'; return t!=='auto' ? t : ((+s.gfut||0) > 0 ? 'cpu' : 'apu'); }
+// regra do Bruno: se ele deixou eu decidir, vai de série G (ele quer pelo menos jogar um pouco desde o primeiro dia)
+function itipo(s){ const t = s.itipo || 'auto'; return t!=='auto' ? t : 'apu'; }
 // placa de vídeo pro upgrade (fora do orçamento): a mais forte que cabe no valor que ele separou
 function futGpu(s){
   const gf = +s.gfut || 0; if(!gf) return null;
@@ -851,6 +852,8 @@ function result(){
     if(C.apu) raio.push(`Fui de <b>${b.cpu}</b>, que tem o vídeo integrado <b>${C.apu}</b>: roda CS2, Valorant, Fortnite e LoL no gráfico baixo, em Full HD. A plataforma AM5 e a fonte já ficam prontas pra placa de vídeo.`);
     else raio.push(`Fui de <b>${b.cpu}</b>: processador forte agora, com um vídeo básico só pra ligar a tela. Jogar de verdade, só com a placa, então esse é um PC pra quem vai comprar a placa de vídeo <b>logo na sequência</b>.`);
     if(FUT) raio.push(`Pro upgrade, com até ${R(+s.gfut)} a indicação hoje é a <b>${FUT.n}</b> (uns ${R(FUT.it.p)}). Ela não entra no total de agora, e a fonte já foi escolhida pra aguentar ela.`);
+    else if(+s.gfut > 0){ const mn = Object.keys(GPU).map(n=>({n,g:GPU[n],it:(P.gpu||[]).find(x=>x.n===n)})).filter(x=>x.it && !((b.res==='qhd'||b.res==='uhd') && x.g.v<=8)).sort((a,c)=>a.it.p-c.it.p)[0];
+      raio.push(`Com até ${R(+s.gfut)} não tem placa de vídeo que eu indique pra ${b.res==='uhd'?'4K':b.res==='qhd'?'QHD':'esse PC'}${(b.res==='uhd'||b.res==='qhd')?' (precisa de 12GB ou 16GB)':''}. ${mn?`A de entrada certa hoje é a <b>${mn.n}</b>, uns ${R(mn.it.p)}: é por aí que você tem que mirar.`:''}`); }
     else raio.push(`Você escolheu ficar no integrado por enquanto. Quando quiser a placa de vídeo, a plataforma já está pronta: é só encaixar.`);
   } else if(b.apu) raio.push(pick([`Sendo direto: com esse valor pra tudo, não cabe placa de vídeo sem matar o resto. Fui de <b>${b.cpu}</b>, que tem vídeo integrado: roda CS2, Valorant, Fortnite e LoL no gráfico baixo, em Full HD. A plataforma e a fonte já ficam prontas pra você <b>colocar a placa de vídeo depois</b>.`, `Aqui a jogada é começar sem placa de vídeo: o <b>${b.cpu}</b> tem vídeo integrado e segura os competitivos no baixo. Quando juntar mais um pouco, a placa de vídeo entra e o resto do PC já está pronto pra ela.`]));
   if(b.cpu==='Ryzen 5 5500' && !b.apu && (G.x8 || /9060 XT/.test(b.gpu))) raio.push(G.x8 ? `O Ryzen 5 5500 trabalha em PCIe 3.0. Essa placa usa só 8 linhas (x8), então perde um pouco de desempenho nele. Coube no orçamento, mas se der, prefira uma <b>RX 9060 XT</b>, que é x16.` : `O Ryzen 5 5500 trabalha em PCIe 3.0, então escolhi uma placa <b>x16</b>: ela não perde desempenho nessa plataforma, diferente das x8 (RTX 5050/5060, RX 7600).`);

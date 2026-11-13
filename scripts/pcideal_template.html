@@ -223,7 +223,7 @@ const Q = [
    ['auto','Me indica você','escolho pelo seu orçamento'],['fhd','Full HD 144Hz+','o padrão gamer'],['qhd','QHD (2K)','1440p, mais nitidez'],['uhd','4K','2160p, pede muita placa']]}, o:[
    ['fhd60','Full HD 60/75Hz','ou TV'],['fhd','Full HD 144Hz+','o padrão gamer'],['qhd','QHD (2K)','1440p'],['uhd','4K','2160p']]},
  {k:'plat', t:'AM4 ou AM5?', h:'AM4 é mais barato hoje (memória DDR4). AM5 é a plataforma nova, que recebe processadores futuros.', big:1, o:[
-   ['auto','Deixa o Brunão decidir','escolho pelo seu orçamento'],['am4','AM4','mais desempenho por real agora'],['am5','AM5','penso em fazer upgrade depois']]},
+   ['auto','Deixa o Brunão decidir','comparo AM4 e AM5 com os preços de hoje e fico com o que der mais desempenho pelo seu dinheiro'],['am4','AM4','mais desempenho por real agora'],['am5','AM5','penso em fazer upgrade depois']]},
  {k:'vis', t:'O que pesa mais pra você: performance ou estética?', h:'Visual custa dinheiro. Me diz onde você quer que ele vá.', big:1, o:[
    ['perf','Performance acima de tudo','não ligo pra aparência, quero FPS'],
    ['equil','Equilíbrio','quero desempenho, mas um PC bonito também'],
@@ -240,12 +240,13 @@ function render(){
   if(step >= Q.length) return result();
   let q = Q[step];
   if(q.alt && st.itens.mon) q = Object.assign({}, q, q.alt);
+  if(q.k==='mon') q = Object.assign({}, q, st.itens.mon ? {t:'Qual monitor você quer comprar?', h:'Ele entra no orçamento. Escolhe o que quiser, ou deixa comigo.'} : {t:'Qual monitor você tem aí em casa?', h:'É pra essa tela que eu vou montar a máquina. A resolução decide quanta placa de vídeo você precisa.'});
   const cur = st[q.k];
   const itens = q.itens ? `<div class="itl">O que entra no orçamento?</div><div class="its">${ITENS.map(i=>`<button class="it ${i[0]==='pc'||st.itens[i[0]]?'on':''} ${i[0]==='pc'?'lock':''}" data-i="${i[0]}"><i>${i[0]==='pc'||st.itens[i[0]]?'✓':'+'}</i>${i[1]}${i[2]?`<small>${i[2]}</small>`:''}</button>`).join('')}</div><div class="itl">Quanto, no total?</div>` : '';
   app.innerHTML = head(step===0) +
    `<div class="prog">${Q.map((_,i)=>`<i class="${i<=step?'on':''}"></i>`).join('')}</div>
     <div class="q"><h2>${q.t}</h2><p class="h">${q.h}</p>
-     ${itens}<div class="opts ${q.big?'big':''}">${q.o.map(o=>`<button class="opt ${cur===o[0]?'sel':''}" data-v="${o[0]}"><b>${o[1]}</b>${o[2]?`<span>${o[2]}</span>`:''}</button>`).join('')}</div>
+     ${itens}${q.k==='mon' ? monPanel() : `<div class="opts ${q.big?'big':''}">${q.o.map(o=>`<button class="opt ${cur===o[0]?'sel':''}" data-v="${o[0]}"><b>${o[1]}</b>${o[2]?`<span>${o[2]}</span>`:''}</button>`).join('')}</div>`}
      ${q.k==='pag' && st.pag==='misto' ? misto() : ''}
      <div class="nav">${step?'<button class="lnk" id="pciBack">← voltar</button>':'<span></span>'}<span class="old">${step+1} de ${Q.length}</span></div></div>`;
   app.querySelectorAll('.opt').forEach(b => b.onclick = () => {
@@ -254,11 +255,26 @@ function render(){
     step++; render(); {const y = app.getBoundingClientRect().top + scrollY - 80; if(scrollY > y) scrollTo({top:y, behavior:'smooth'});}
   });
   const bk = document.getElementById('pciBack'); if(bk) bk.onclick = () => { step--; render(); };
+  app.querySelectorAll('.mf').forEach(b => b.onclick = () => { st[b.dataset.k] = b.dataset.v; render(); });
+  const mg = document.getElementById('pciMonGo');
+  if(mg) mg.onclick = () => { if(!st.mres) return; st.mon = st.mres; step++; render(); };
   const rg = document.getElementById('pciParc');
   if(rg){ const upd = () => { st.parc = +rg.value; const o = document.getElementById('pciMx'); o.outerHTML = mistoInfo(); rg.style.setProperty('--v', rg.value+'%'); };
     rg.oninput = upd; rg.style.setProperty('--v', rg.value+'%');
     document.getElementById('pciGo').onclick = () => { step++; render(); }; }
-  app.querySelectorAll('.it').forEach(b => b.onclick = () => { const k = b.dataset.i; if(k==='pc') return; st.itens[k] = !st.itens[k]; render(); });
+  app.querySelectorAll('.it[data-i]').forEach(b => b.onclick = () => { const k = b.dataset.i; if(k==='pc') return; st.itens[k] = !st.itens[k]; render(); });
+}
+function monPanel(){
+  const buy = !!st.itens.mon;
+  if(!st.mres && buy) st.mres = 'auto';
+  if(!st.mhz) st.mhz = buy ? 'auto' : '144';
+  if(!st.mpan) st.mpan = 'auto';
+  const row = (k, label, opts) => `<div class="itl">${label}</div><div class="its">${opts.map(o=>`<button class="it mf ${st[k]===o[0]?'on':''}" data-k="${k}" data-v="${o[0]}"><i>${st[k]===o[0]?'✓':''}</i>${o[1]}${o[2]?`<small>${o[2]}</small>`:''}</button>`).join('')}</div>`;
+  const BR = ['auto','Deixa o Brunão escolher',''];
+  let h = row('mres','Resolução', [['fhd','Full HD','1080p'],['qhd','Quad HD (2K)','1440p'],['uhd','4K','2160p'], ...(buy?[BR]:[])]);
+  h += row('mhz','Taxa de atualização', [['60','60/75Hz',buy?'':'ou TV'],['144','144/165/180Hz',''],['200','200Hz ou mais',''], ...(buy?[BR]:[])]);
+  if(buy) h += row('mpan','Painel', [['IPS','IPS','cores'],['VA','VA','contraste'],['OLED','OLED','topo'],['Mini LED','Mini LED',''], BR]);
+  return h + `<button class="opt go" id="pciMonGo" ${st.mres?'':'disabled style="opacity:.45;cursor:default"'}><b>${st.mres?'Continuar →':'Escolhe a resolução'}</b></button>`;
 }
 function mistoInfo(){
   const o = st.orc||0, pc = st.parc, vista = o*(100-pc)/100, cart = o*pc/100, extra = cart*.08;
@@ -350,12 +366,17 @@ function pickCase(aq, wc, premium){
 }
 
 const MON_OK = /AOC|LG|Acer|Gigabyte|Philips|Samsung|ASUS|MSI/;
-function pickMon(res, plus){
+function pickMon(res, plus, hz, pan){
   const RN = {fhd:'Full HD', qhd:'QHD', uhd:'4K'}[res];
-  let L = by('mon', x => x.a['Resolução']===RN && /Normal/.test(x.a.Formato||'') && MON_OK.test(x.n) && !/Office/.test(x.n) && x.a.Painel!=='OLED' && x.np>=3 && (res==='uhd' || /144|200|280/.test(x.a.Taxa||'')));
-  if(plus){ const T = L.filter(x => res==='fhd' ? (x.a.Tamanho==='27"' && /200|280/.test(x.a.Taxa||'')) : res==='qhd' ? /200|280/.test(x.a.Taxa||'') : true); if(T.length) L = T; }
+  const hzOk = x => { const t = x.a.Taxa||''; return hz==='60' ? (!t || /Até 100/.test(t)) : hz==='144' ? /144/.test(t) : hz==='200' ? /200|280/.test(t) : (res==='uhd' || /144|200|280/.test(t)); };
+  const base = x => x.a['Resolução']===RN && /Normal/.test(x.a.Formato||'') && MON_OK.test(x.n) && !/Office/.test(x.n) && x.np>=3;
+  const panOk = x => pan && pan!=='auto' ? x.a.Painel===pan : x.a.Painel!=='OLED';
+  let L = by('mon', x => base(x) && hzOk(x) && panOk(x)), relax = '';
+  if(!L.length && pan && pan!=='auto'){ L = by('mon', x => base(x) && hzOk(x) && x.a.Painel!=='OLED'); relax = 'painel'; }
+  if(!L.length){ L = by('mon', x => base(x) && x.a.Painel!=='OLED'); relax = 'taxa'; }
+  if(plus && (!hz || hz==='auto')){ const T = L.filter(x => res==='fhd' ? (x.a.Tamanho==='27"' && /200|280/.test(x.a.Taxa||'')) : res==='qhd' ? /200|280/.test(x.a.Taxa||'') : true); if(T.length) L = T; }
   const it = cheapest(L); if(!it) return null;
-  return {it, preco:it.p, fx:[it.p25, it.p75], res};
+  return {it, preco:it.p, fx:[it.p25, it.p75], res, relax};
 }
 function pickPer(cat, plus){
   const RX = {mouse: plus ? /G305|King Pro/ : /G203|K1NG|King Pro|GM510/, kb: /Dark Avenger|Fizz/, head: plus ? /Zeus Pro|G335/ : /Zeus Lite|Cragblade/}[cat];
@@ -372,13 +393,14 @@ function setup(s){
   for(const plus of (s.orc>=10000 ? [true,false] : [false])){
     const acc = {};
     let ok = true, soma = 0;
-    if(it.mon){ acc.mon = pickMon(res, plus); if(!acc.mon) ok = false; }
+    if(it.mon){ acc.mon = pickMon(res, plus, s.mhz, s.mpan); if(!acc.mon) ok = false; }
     for(const k of ['kb','mouse','head']) if(it[k]){ acc[k] = pickPer(k, plus); if(!acc[k]) ok = false; }
     if(!ok) continue;
     for(const k in acc) soma += acc[k].preco;
     const teto = s.orc * fator(s);
     const pcOrc = teto - soma;
-    const b = monta(Object.assign({}, s, {orc: pcOrc, pag:'pix', mon: it.mon ? res : s.mon}));
+    const hz60 = it.mon ? (acc.mon && /Até 100/.test(acc.mon.it.a.Taxa||'') || (res==='uhd' && !(acc.mon.it.a.Taxa))) : s.mhz==='60';
+    const b = monta(Object.assign({}, s, {orc: pcOrc, pag:'pix', mon: it.mon ? res : s.mon, hz60}));
     if(b){ b.acc = acc; b.accTot = soma; b.res = it.mon ? res : s.mon; b.pcOrc = pcOrc; b.geral = b.tot + soma; return b; }
   }
   return null;
@@ -390,7 +412,7 @@ function score(cpu, gpu, s, ram, ssd){
   if(s.mon==='qhd'){ gi *= .72; if(g.v<=8) gi *= .86; }
   if(s.mon==='uhd'){ gi *= .46; if(g.v<=8) gi *= .7; else if(g.v<=12) gi *= .9; }
   let mult = {fps:1.25, aaa:1.9, mix:1.55, work:1.6}[s.jogo];
-  if(s.mon==='qhd') mult *= 1.3; if(s.mon==='uhd') mult *= 1.75; if(s.mon==='fhd60') mult *= 1.4;
+  if(s.mon==='qhd') mult *= 1.3; if(s.mon==='uhd') mult *= 1.75; if(s.mon==='fhd60' || s.hz60) mult *= 1.4;
   let sc = Math.min(gi, c.g*mult) + .12*Math.max(gi, c.g*mult);
   if(c.c>=8) sc += 3;                       // 8 núcleos envelhecem melhor
   if(s.jogo==='fps' && c.x3d) sc += 6;      // cache 3D no competitivo
@@ -399,7 +421,10 @@ function score(cpu, gpu, s, ram, ssd){
   if(ssd==='1t'||ssd==='1t4') sc += 4; if(ssd==='2t') sc += 5.5; if(ssd==='1t4') sc += .5;
   if(s.plat==='auto' && c.pl==='AM5') sc *= 1.02;  // empate técnico → AM5 leva pela vida útil
   // equilíbrio: processador não pode segurar demais a placa
-  if(gpu!=='iGPU' && c.g < .3*g.i + 40) sc -= 40;
+  if(gpu!=='iGPU'){
+    const thr = .3*g.i*(s.mon==='qhd' ? .8 : s.mon==='uhd' ? .6 : 1) + 40;
+    if(c.g < thr) sc -= (thr - c.g)*3;
+  }
   return sc;
 }
 
@@ -485,7 +510,7 @@ function cardSem(k, nome, norte, why, tag){
 function result(){
   const s = st, b = setup(s), aq = s.vis!=='perf';
   fire('PCIdeal_Resultado', {orc:s.orc, jogo:s.jogo, mon:s.mon, plat:s.plat});
-  const chips = `<div class="chips">${[R(s.orc)+' · '+['PC', st.itens.mon&&'monitor', st.itens.kb&&'teclado', st.itens.mouse&&'mouse', st.itens.head&&'headset'].filter(Boolean).join(' + '), s.pag==='cartao'?'cartão':s.pag==='misto'?`${100-s.parc}% PIX + ${s.parc}% cartão`:'PIX', {fps:'FPS/BR',aaa:'AAA',mix:'de tudo',work:'jogo + trabalho'}[s.jogo], {fhd60:'Full HD 60Hz',fhd:'Full HD 144Hz+',qhd:'QHD',uhd:'4K',auto:'monitor: Brunão indica'}[s.mon], {auto:'plataforma: Brunão decide',am4:'AM4',am5:'AM5'}[s.plat], {perf:'performance',equil:'equilíbrio',estetica:'estética'}[s.vis], s.net==='wifi'?'Wi-Fi':'cabo'].map(x=>`<span class="chip">${x}</span>`).join('')}<button class="lnk" id="pciRedo" style="font-size:12px;margin-left:6px">refazer ↺</button></div>`;
+  const chips = `<div class="chips">${[R(s.orc)+' · '+['PC', st.itens.mon&&'monitor', st.itens.kb&&'teclado', st.itens.mouse&&'mouse', st.itens.head&&'headset'].filter(Boolean).join(' + '), s.pag==='cartao'?'cartão':s.pag==='misto'?`${100-s.parc}% PIX + ${s.parc}% cartão`:'PIX', {fps:'FPS/BR',aaa:'AAA',mix:'de tudo',work:'jogo + trabalho'}[s.jogo], ({fhd:'Full HD',qhd:'QHD',uhd:'4K',auto:'monitor: Brunão indica'}[s.mon]||'') + (s.mhz&&s.mhz!=='auto'?' '+{60:'60/75Hz',144:'144Hz+',200:'200Hz+'}[s.mhz]:'') + (st.itens.mon&&s.mpan&&s.mpan!=='auto'?' '+s.mpan:''), {auto:'plataforma: Brunão decide',am4:'AM4',am5:'AM5'}[s.plat], {perf:'performance',equil:'equilíbrio',estetica:'estética'}[s.vis], s.net==='wifi'?'Wi-Fi':'cabo'].map(x=>`<span class="chip">${x}</span>`).join('')}<button class="lnk" id="pciRedo" style="font-size:12px;margin-left:6px">refazer ↺</button></div>`;
   if(!b){
     let minimo = 0;
     for(let o = s.orc + 250; o <= s.orc + 4000; o += 250){ if(setup(Object.assign({}, s, {orc:o}))){ minimo = o; break; } }
@@ -540,7 +565,7 @@ function result(){
   if(opp && opp[2] > 40) raio.push(pick([`A melhor oportunidade da lista é ${opp[0]}: a oferta tá <b>${R(opp[2])} abaixo</b> do normal do mês.`, `Fica de olho n${opp[0].slice(0,1)} ${opp[0].slice(2)}: tá <b>${R(opp[2])} abaixo</b> do que costuma custar. Se ainda estiver valendo, garante.`]));
   if(s.pag==='cartao') raio.push(`Como vai ser no cartão, deixei uma margem: fechou em <b>${R(b.geral)}</b> com preço de oferta, e o resto é pra absorver o parcelamento.`);
   if(s.pag==='misto') raio.push(`Como <b>${s.parc}% vai no cartão</b> (uns ${R(s.orc*s.parc/100)}), reservei ~${R(s.orc*s.parc/100*.08)} pra diferença do parcelamento. ${pick(['Dica: compra à vista as peças com desconto maior no PIX e parcela as que têm o mesmo preço nos dois.', 'Dica: placa de vídeo costuma ter o maior desconto no PIX, então ela é a primeira candidata ao pagamento à vista.'])}`);
-  if(sm==='fhd60' && s.jogo!=='aaa') raio.push('Um conselho: com monitor 60Hz você não enxerga o FPS que esse PC entrega. Assim que der, um Full HD 144Hz muda o jogo.');
+  if(s.mhz==='60' && !st.itens.mon && s.jogo!=='aaa') raio.push('Um conselho: com monitor 60Hz você não enxerga o FPS que esse PC entrega. Assim que der, um Full HD 144Hz muda o jogo.');
   if(sm==='uhd' && G.i<200) raio.push('Sendo sincero: 4K pede muita placa de vídeo. Vai rodar, mas com upscaling (DLSS/FSR) e gráficos ajustados.');
   if(sobra > 1500 && s.pag==='pix') raio.push(`Sobrou <b>${R(sobra)}</b>: não tem placa acima dessa nas ofertas do mês, então eu guardaria pro monitor ou periféricos.`);
 
@@ -592,7 +617,7 @@ function result(){
   ];
   const accCards = [];
   if(A.mon){ const m = A.mon.it.a; accCards.push(card('Monitor', A.mon.it.n.replace('Monitor ',''), A.mon.preco, A.mon.it,
-     `Monitor <b>${m['Resolução']}${m.Taxa?' '+m.Taxa:''}</b>${m.Tamanho?', '+m.Tamanho:''}${m.Painel?', painel '+m.Painel:''}. Faixa normal desse modelo: <b>${faixa(A.mon.fx[0], A.mon.fx[1])}</b>.`,
+     `Monitor <b>${m['Resolução']}${m.Taxa?' '+m.Taxa:''}</b>${m.Tamanho?', '+m.Tamanho:''}${m.Painel?', painel '+m.Painel:''}. Faixa normal desse modelo: <b>${faixa(A.mon.fx[0], A.mon.fx[1])}</b>.${A.mon.relax==='painel'?` <b>Não passou nenhum ${s.mpan} com essa resolução no último mês</b>, então fui no melhor que apareceu.`:A.mon.relax==='taxa'?' <b>Não passou nenhum com essa taxa no último mês</b>, então fui no melhor que apareceu.':''}`,
      A.mon.res==='fhd' ? pick(['Full HD com taxa alta é o casamento certo com esse PC: você enxerga os frames que ele entrega.', 'Pra jogo, taxa de atualização muda mais a experiência do que resolução.']) : A.mon.res==='qhd' ? pick(['QHD dá nitidez sem pedir uma placa de 10 mil.', 'Em 27", o QHD é o ponto ideal de nitidez.']) : 'Nitidez máxima. Lembre que em 4K a placa de vídeo trabalha muito mais.')); }
   const perTxt = pick(['Periférico é fácil de trocar depois, então não tirei dinheiro do PC pra isso.', 'Bom e barato: resolve agora, e se quiser algo melhor depois, troca sem mexer no PC.']);
   if(A.mouse) accCards.push(card('Mouse', A.mouse.it.n.replace('Mouse ',''), A.mouse.preco, A.mouse.it, `Mouse com sensor bom e leve, faixa <b>${faixa(A.mouse.fx[0], A.mouse.fx[1])}</b>.`, perTxt));

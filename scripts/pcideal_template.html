@@ -202,6 +202,15 @@ const r50 = v => Math.round(v/50)*50;
 const faixa = (a,b) => { a=r50(a); b=r50(b); if(b<=a) b=a+50; return R(a)+'–'+b.toLocaleString('pt-BR'); };
 const esc = s => String(s||'').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const fire = (e,p) => { try { window.fbq && fbq('trackCustom', e, p||{}); } catch(_){} };
+/* coleta anônima pra planilha do Bruno (Google Sheets). Sem nome, e-mail ou telefone. Vazio = desligado. */
+const COLETA_URL = '';
+let VID = ''; try { VID = localStorage.getItem('pcideal_vid') || (Math.random().toString(36).slice(2,10)); localStorage.setItem('pcideal_vid', VID); } catch(_){ VID = Math.random().toString(36).slice(2,10); }
+function coleta(evento, extra){
+  if(!COLETA_URL) return;
+  const d = Object.assign({evento, vid:VID, quando:new Date().toISOString(), tela: innerWidth<700?'celular':'computador',
+    origem: (document.referrer||'').replace(/^https?:\/\//,'').split('/')[0] || 'direto'}, extra||{});
+  try { const body = JSON.stringify(d); if(!(navigator.sendBeacon && navigator.sendBeacon(COLETA_URL, body))) fetch(COLETA_URL, {method:'POST', body, mode:'no-cors', keepalive:true}); } catch(_){}
+}
 
 /* ---------- Tabelas do Brunão (desempenho relativo; GPU = por chip) ---------- */
 const CPU = {
@@ -746,16 +755,24 @@ function result(){
    <p class="foot">Atualizado com os posts até ${dia(DATA.gen)} · Compre pelos links: você me ajuda sem pagar nada a mais.</p>`;
   document.getElementById('pciRedo').onclick = refaz;
   salva();
-  const pdf = document.getElementById('pciPdf'); if(pdf) pdf.onclick = () => { fire('PCIdeal_PDF'); window.dispatchEvent(new Event('beforeprint')); setTimeout(() => window.print(), 50); };
+  const pc = {cpu:b.cpu, gpu:b.apu?'vídeo integrado':b.gpu, placa_mae:b.mobo.it.n, memoria:b.ram+'GB '+ramT, ssd:b.ss.it.n, fonte:b.ps.it.n,
+    cooler:b.co.box?'cooler box':b.co.it.n, gabinete:b.ca.it.n, monitor:A.mon?A.mon.it.n:'', perifericos:[A.kb&&'teclado',A.mouse&&'mouse',A.head&&'headset'].filter(Boolean).join('+'),
+    plataforma:b.pl, total_pc:Math.round(b.tot), total:Math.round(b.geral)};
+  const resp = {orcamento:s.orc, itens:['pc',...Object.keys(st.itens||{}).filter(k=>st.itens[k])].join('+'), pagamento:s.pag, parcelado:s.pag==='misto'?s.parc:(s.pag==='cartao'?100:0),
+    jogo:s.jogo, resolucao:s.mres||s.mon, hz:s.mhz||'', painel:s.mpan||'', plat_pedida:s.plat, visual:s.vis, internet:s.net};
+  window.__pciUltimo = Object.assign({}, resp, pc);
+  coleta('montou', window.__pciUltimo);
+  const pdf = document.getElementById('pciPdf'); if(pdf) pdf.onclick = () => { fire('PCIdeal_PDF'); coleta('pdf', {total: window.__pciUltimo && window.__pciUltimo.total}); window.dispatchEvent(new Event('beforeprint')); setTimeout(() => window.print(), 50); };
   const cl = document.getElementById('pciLink'); if(cl) cl.onclick = () => { const u = location.href; try { navigator.clipboard.writeText(u); } catch(_){} cl.innerHTML = '✓ link copiado'; fire('PCIdeal_Link'); setTimeout(()=>{ cl.innerHTML = '🔗 Copiar link do meu PC'; }, 2500); };
-  app.querySelectorAll('a[data-ev]').forEach(a => a.addEventListener('click', () => fire('PCIdeal_'+a.dataset.ev)));
+  app.querySelectorAll('a[data-ev]').forEach(a => a.addEventListener('click', () => { fire('PCIdeal_'+a.dataset.ev);
+    const part = a.closest('.part'); coleta('clique_'+a.dataset.ev, {peca: part ? part.querySelector('.n').innerText : (a.dataset.ev||''), loja: a.textContent.replace('↗','').trim(), total: window.__pciUltimo && window.__pciUltimo.total}); }));
   app.querySelectorAll('.cupb').forEach(bt => bt.onclick = () => {
     const c = bt.dataset.c, u = bt.dataset.u;
     try { navigator.clipboard.writeText(c); } catch(_){}
     bt.textContent = '✓ copiado'; setTimeout(()=>{ bt.textContent = '🎟️ '+c; }, 2500);
-    fire('PCIdeal_cupom'); if(u) window.open(u, '_blank', 'noopener');
+    fire('PCIdeal_cupom'); coleta('cupom', {cupom:c}); if(u) window.open(u, '_blank', 'noopener');
   });
-  const c = document.getElementById('pciCta'); if(c) c.onclick = () => fire('PCIdeal_Consultoria');
+  const c = document.getElementById('pciCta'); if(c) c.onclick = () => { fire('PCIdeal_Consultoria'); coleta('consultoria', {total: window.__pciUltimo && window.__pciUltimo.total}); };
 }
 /* ---------- PDF: tira o "esticar até a borda" do WordPress antes de imprimir ---------- */
 (function(){

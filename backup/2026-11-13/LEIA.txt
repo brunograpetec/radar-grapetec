@@ -1,0 +1,7 @@
+Versão do Radar salva em 13/11/2026 (grapetec.com.br/radar).
+
+- codigo_wordpress_radar.html: o código colado no WordPress
+- site_template.html: o visual do site
+- site_data.json: os dados do dia
+
+Para voltar o pipeline inteiro a este ponto: tag radar-v1-2026-11-13.

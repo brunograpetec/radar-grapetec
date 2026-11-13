@@ -24,13 +24,16 @@ jobs:
           fim=$(( $(date +%s) + 55*60 ))
           while [ $(date +%s) -lt $fim ]; do
             ini=$(date +%s)
-            git pull --rebase -q || true
+            git rebase --abort 2>/dev/null || true
+            git fetch -q origin main && git reset -q --hard origin/main
             if bash scripts/atualiza.sh; then
-              git add site_data.json dados/posts/ dados/comentarios.json dados/fotos.json 2>/dev/null; git add site_data.json dados/posts/
+              git add site_data.json dados/posts/ dados/comentarios.json dados/fotos.json 2>/dev/null || git add site_data.json dados/posts/
               if ! git diff --cached --quiet; then
                 git commit -qm "Atualização automática $(TZ=America/Sao_Paulo date '+%d/%m %H:%M')"
-                git pull --rebase -q -X ours || true
-                git push -q || echo "push falhou"
+                if ! git push -q; then
+                  echo "push recusado, refazendo em cima do mais novo"
+                  git fetch -q origin main && git rebase -q -X theirs origin/main && git push -q || { git rebase --abort 2>/dev/null; echo "push falhou"; }
+                fi
                 curl -s -m 20 https://purge.jsdelivr.net/gh/brunograpetec/radar-grapetec@main/site_data.json >/dev/null || true
               else
                 echo "sem novidade"

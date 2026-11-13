@@ -114,7 +114,7 @@ def build(day):
     L=[x for x in L if _bp[x['post']] is x]
     for x in L:
         if x['k'] in _vd: x['bucket']=True
-    L=sorted(L,key=lambda x:(-x['rec'],-x['drop']))
+    L=sorted(L,key=lambda x:(-x['drop'],-x['rec']))
     n=_NOFERTAS.get(day,0)
     return dict(items=L[:90],total=len(best),ofertas=n)
 import datetime as _dtt

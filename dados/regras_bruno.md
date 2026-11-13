@@ -85,3 +85,12 @@ Regras que o Bruno passou e que o algoritmo segue. Anotar aqui cada regra nova (
 - Botão final do "Eu sei montar" = "Pedir pro Brunão avaliar" com a foto do Bruno.
 - Cada peça avaliada ganha explicação completa (o que é, pra que serve, plataforma, frequência, PCIe, certificação, folga da fonte, encaixe no gabinete) + "Veredito" ✔/⚠ + medidores.
 - Regras extras na avaliação: 32GB em PC ≥ R$7,5k ou placa forte; 32GB em PC < R$4,5k tira dinheiro da placa; SSD Gen4 em plataforma PCIe 3.0 = paga à toa; placa 8GB ok pra Full HD, QHD/4K pede 16GB; processador com vídeo básico sem placa não joga (pra isso, série G/8600G).
+
+## 13/11/2026 — processadores AM4 x placa de vídeo (regra do Bruno)
+- Ryzen 7 5800X3D: topo do AM4, força de um octa-core AM5 (tipo o 7700). Segura QUALQUER placa de vídeo, nunca marca gargalo. Pra ir além, só AM5.
+- Octa-core AM5 (7700/9700X…) também nunca marca gargalo (régua de gargalo travada no nível do 7700/5800X3D).
+- 5700X (e octa AM4 sem 3D) com RTX 5070 Ti / 5080 / 5090: gargalo → recomendar o 5800X3D ("cospe muito mais FPS").
+- 5700X até a RX 9070 XT: roda bem, sem penalidade. Vira só uma dica: "se o foco for jogo de FPS, o 5800X3D cospe mais FPS".
+- 6 núcleos AM4 com placa forte (≥ 9070 GRE): gargalo → 5800X3D (ou no mínimo 5700X).
+- Quando o problema é gargalo, a avaliação não sugere outro PC inteiro (o próprio alerta diz o que trocar) e nunca sugere placa de vídeo mais fraca que a escolhida.
+- No modo manual, o botão de voltar é "Deixa o Brunão montar" com a foto do Bruno.

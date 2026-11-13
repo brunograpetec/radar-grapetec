@@ -157,6 +157,7 @@
 #pci .it.on .iic{color:var(--ink)}
 #pci header{position:relative}
 #pci .sei{all:unset;cursor:pointer;white-space:nowrap;margin-left:auto;font-size:12.5px;font-weight:600;border:1px solid var(--ac);border-radius:999px;padding:5px 11px;color:var(--ac);background:rgba(199,125,255,.10)}
+#pci .sei.bm{display:inline-flex;align-items:center;gap:6px;padding:3px 11px 3px 3px}#pci .sei.bm img{width:22px;height:22px;border-radius:50%;object-fit:cover}
 #pci .sei:hover{background:rgba(199,125,255,.2)}
 #pci .sei + .tema{margin-left:6px}
 #pci .mmtop{margin:8px 0 18px}#pci .mmh{font-size:26px;margin:0 0 6px}
@@ -302,6 +303,7 @@
 #pci tr.t td{font-weight:700;border:0;padding-top:10px;font-size:16px}
 #pci ul.ck{list-style:none;display:grid;gap:6px;font-size:14.5px}
 #pci ul.ck li::before{content:"✔ ";color:var(--ok)}
+#pci ul.ck.dica li::before{content:"💡 "}
 #pci ul.no li::before{content:"✖ ";color:#ff8a8a}
 #pci .cta{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:6px}
 #pci .cta a{text-decoration:none;color:var(--ink);background:var(--s2);border:1px solid var(--bd);border-radius:14px;padding:14px;display:block}
@@ -517,7 +519,7 @@ function misto(){
     <input type="range" id="pciParc" min="5" max="95" step="5" value="${st.parc}" aria-label="Porcentagem parcelada">
     ${mistoInfo()}<button class="opt go" id="pciGo"><b>Continuar →</b></button></div>`;
 }
-function bindTema(){ const sb = document.getElementById('pciSei'); if(sb){ if(st.modo==='manual'){ sb.innerHTML = '🧭 Montador guiado'; sb.onclick = () => refaz(); } else sb.onclick = () => { st.modo = 'manual'; fire('PCIdeal_EuSeiMontar'); render(); scrollTo({top: app.getBoundingClientRect().top + scrollY - 80, behavior:'smooth'}); }; }
+function bindTema(){ const sb = document.getElementById('pciSei'); if(sb){ if(st.modo==='manual'){ sb.innerHTML = `<img src="${FOTO_BRUNO}" alt="">Deixa o Brunão montar`; sb.classList.add('bm'); sb.onclick = () => refaz(); } else sb.onclick = () => { st.modo = 'manual'; fire('PCIdeal_EuSeiMontar'); render(); scrollTo({top: app.getBoundingClientRect().top + scrollY - 80, behavior:'smooth'}); }; }
   const t = document.getElementById('pciTema'); if(t) t.onclick = () => { const r = document.getElementById('pci'); r.classList.toggle('claro'); try { localStorage.setItem('pcideal_tema', r.classList.contains('claro')?'claro':'escuro'); } catch(_){} t.innerHTML = r.classList.contains('claro')?'🌙 Escuro':'☀️ Claro'; }; }
 try { if(localStorage.getItem('pcideal_tema')==='claro') document.getElementById('pci').classList.add('claro'); } catch(_){}
 function mostraSalvos(){
@@ -714,7 +716,7 @@ function score(cpu, gpu, s, ram, ssd){
   if(s.plat==='auto' && c.pl==='AM5') sc *= 1.02;  // empate técnico → AM5 leva pela vida útil
   // equilíbrio: processador não pode segurar demais a placa
   if(gpu!=='iGPU'){
-    const thr = .3*g.i*(s.mon==='qhd' ? .8 : s.mon==='uhd' ? .6 : 1) + 40;
+    const thr = Math.min(108, .3*g.i*(s.mon==='qhd' ? .8 : s.mon==='uhd' ? .6 : 1) + 40);   // 5800X3D / octa AM5 seguram qualquer placa (regra do Bruno)
     if(c.g < thr) sc -= (thr - c.g)*3;
   }
   return sc;
@@ -1126,13 +1128,19 @@ function mmAvalia(){
   const pick = (sec, id) => mmOpts(sec).find(o => o.id===id);
   const sel = {}; let tot = 0;
   for(const [k] of MM_SECS.slice(1)){ const o = m[k] ? pick(k, m[k]) : null; sel[k] = o; if(o) tot += o.preco; }
-  const g = m.gpu && m.gpu!=='iGPU' ? GPU[m.gpu] : null, ok = [], alerta = [];
+  const g = m.gpu && m.gpu!=='iGPU' ? GPU[m.gpu] : null, ok = [], alerta = [], dica = [];
   let nota = 10;
   if(C && g){
-    const thr = .3*g.i + 40;   // mesma régua do montador guiado (Full HD)
-    if(C.g < thr){ alerta.push(`O <b>${m.cpu}</b> vai segurar a <b>${m.gpu}</b> (gargalo). Um processador um degrau acima aproveita melhor essa placa.`); nota -= 2; }
+    // regra do Bruno: 5800X3D tem força de octa-core AM5 (7700) e segura qualquer placa; acima disso só indo pro AM5
+    const thr = Math.min(108, .3*g.i + 40);
+    if(m.cpu==='Ryzen 7 5800X3D') ok.push(`O <b>5800X3D</b> é o topo do AM4, com força de um octa-core AM5 (tipo o 7700): segura qualquer placa de vídeo, até a <b>${m.gpu}</b>. Pra ir além disso, só no AM5.`);
+    const topo = /5070 Ti|5080|5090/.test(m.gpu), am4oct = C.pl==='AM4' && !C.x3d && C.c >= 8;
+    if(C.pl==='AM4' && !C.x3d && topo){ alerta.push(`O <b>${m.cpu}</b> vai segurar a <b>${m.gpu}</b> (gargalo). Com uma placa desse nível no AM4, vai de <b>Ryzen 7 5800X3D</b>: ele cospe muito mais FPS e aproveita a placa.`); nota -= 2; }
+    else if(m.cpu==='Ryzen 7 5800X3D' || (am4oct && g.i >= 165)){}   // octa AM4 até a 9070 XT: roda bem, vira dica de FPS
+    else if(C.g < thr){ alerta.push(`O <b>${m.cpu}</b> vai segurar a <b>${m.gpu}</b> (gargalo). ${C.pl==='AM4' ? (g.i >= 165 ? 'Aqui eu iria de <b>Ryzen 7 5800X3D</b> (ou no mínimo um 5700X).' : 'Um 5700X já aproveita melhor essa placa.') : 'Um processador um degrau acima aproveita melhor essa placa.'}`); nota -= 2; }
     else if(C.g > .3*g.i + 85){ alerta.push(`Processador forte demais pra essa placa: dá pra economizar no processador e subir a placa de vídeo.`); nota -= 1; }
     else ok.push(`Processador e placa de vídeo equilibrados, sem gargalo.`);
+    if(am4oct && g.i >= 165 && !topo) dica.push(`O ${m.cpu} roda bem a ${m.gpu}. Mas se o foco for jogo de FPS (competitivo, muito FPS), ele começa a segurar: o <b>Ryzen 7 5800X3D</b> cospe bem mais FPS com essa placa.`);
     const pcie3 = m.cpu==='Ryzen 5 5500' || (sel.mobo && /A520|B450/.test(sel.mobo.it.a.Chipset||''));
     if(pcie3 && g.x8){ alerta.push(`Plataforma PCIe 3.0 com placa x8 (${m.gpu}): ela perde desempenho aqui. Prefira uma RX 9060 XT (x16).`); nota -= 1; }
   }
@@ -1155,7 +1163,7 @@ function mmAvalia(){
   if(tot > 2500 && MM_SECS.slice(1).every(([k]) => m[k])){
     meu = monta({orc: tot, pag:'pix', jogo:'mix', mon:'fhd', plat:'auto', vis:'perf', net: sel.mobo && sel.mobo.it.a['Wi-Fi']==='Com Wi-Fi' ? 'wifi' : 'cabo', gmodo: m.gpu==='iGPU' ? 'igpu' : 'auto'}); window.__pciMeu = meu && {cpu:meu.cpu, gpu:meu.gpu, tot:meu.tot};
   }
-  return {sel, tot, ok, alerta, nota: Math.max(0, Math.round(nota*2)/2), meu};
+  return {sel, tot, ok, alerta, dica, nota: Math.max(0, Math.round(nota*2)/2), meu};
 }
 
 // texto peça por peça do modo manual: o que é, pra que serve e o veredito do Brunão
@@ -1240,7 +1248,7 @@ function mmCompara(av, m){
   const igual = meu.cpu===m.cpu && (meu.gpu===m.gpu || (meu.apu && m.gpu==='iGPU'));
   if(ganhoG >= .05) return `<p style="margin-top:10px">Com esse mesmo dinheiro (${R(av.tot)}) eu iria de ${meuNome}: uns <b>${Math.round(ganhoG*100)}% a mais de FPS</b> na placa de vídeo, por ${R(meu.tot)}. ${ver}</p>`;
   if(ganhoG > -.03 && ganhoC > -.03 && av.tot - meu.tot >= 400) return `<p style="margin-top:10px">Dá pra ter o mesmo desempenho gastando menos: com ${meuNome} eu fecho por <b>${R(meu.tot)}</b> (${R(av.tot - meu.tot)} a menos). ${ver}</p>`;
-  if(av.alerta.length && !igual) return `<p style="margin-top:10px">Com esse mesmo dinheiro (${R(av.tot)}) eu montaria com ${meuNome}, já com os ajustes acima. ${ver}</p>`;
+  if(av.alerta.some(x => /gargalo|forte demais/.test(x))) return '';   // o próprio alerta já diz o que trocar
   if(av.alerta.length) return `<p style="margin-top:10px">Processador e placa de vídeo eu manteria iguais. Só ajustaria os pontos acima.</p>`;
   return `<p style="margin-top:10px"><b>Mandou bem:</b> com esse dinheiro, eu não montaria nada muito diferente disso.</p>`;
 }
@@ -1256,7 +1264,7 @@ function montar(){
   };
   if(!f.ramcap) f.ramcap = '16';
   const av = mmAvalia();
-  let h = head(false) + `<div class="mmtop"><h2 class="mmh">🛠 Eu sei montar</h2><p class="lead" style="font-size:15px">Escolhe peça por peça. Eu só mostro o que é compatível, com o melhor preço que passou no canal no último mês, e no final avalio o seu PC.</p><button class="lnk" id="pciVoltaGuiado">← voltar pro montador guiado</button></div>`;
+  let h = head(false) + `<div class="mmtop"><h2 class="mmh">🛠 Eu sei montar</h2><p class="lead" style="font-size:15px">Escolhe peça por peça. Eu só mostro o que é compatível, com o melhor preço que passou no canal no último mês, e no final avalio o seu PC.</p><button class="lnk" id="pciVoltaGuiado">← prefere que eu monte? Deixa o Brunão montar</button></div>`;
   h += `<div class="mmsec"><div class="mmt"><b>1. Plataforma</b></div><div class="its">${[['AM4','AM4 · DDR4','mais barato hoje'],['AM5','AM5 · DDR5','plataforma nova']].map(o=>`<button class="it mmpl ${m.pl===o[0]?'on':''}" data-v="${o[0]}"><i>${m.pl===o[0]?'✓':''}</i>${o[1]}<small>${o[2]}</small></button>`).join('')}</div></div>`;
   if(m.pl){
     MM_SECS.slice(1).forEach(([sec, nome], i) => {
@@ -1289,7 +1297,7 @@ function montar(){
       <div class="nota"><b>${String(av.nota).replace('.',',')}</b><span>nota do Brunão</span></div>
       <div class="sv"><button class="btn" id="pciPdf">📄 Salvar em PDF</button><button class="btn" id="pciLink">🔗 Copiar link do meu PC</button></div><div class="pdate">Montado em ${new Date().toLocaleDateString('pt-BR')} · grapetec.com.br</div></div>`;
     h += mapaHTML(true);
-    h += `<div class="raio"><div class="mmah"><img src="${FOTO_BRUNO}" alt="Brunão"><div><h3>A avaliação do Brunão</h3><span>Com base nas regras que eu uso nas minhas consultorias</span></div></div>${av.alerta.length?`<ul class="ck no">${av.alerta.map(x=>`<li>${x}</li>`).join('')}</ul>`:''}${av.ok.length?`<ul class="ck" style="margin-top:8px">${av.ok.map(x=>`<li>${x}</li>`).join('')}</ul>`:''}
+    h += `<div class="raio"><div class="mmah"><img src="${FOTO_BRUNO}" alt="Brunão"><div><h3>A avaliação do Brunão</h3><span>Com base nas regras que eu uso nas minhas consultorias</span></div></div>${av.alerta.length?`<ul class="ck no">${av.alerta.map(x=>`<li>${x}</li>`).join('')}</ul>`:''}${av.ok.length?`<ul class="ck" style="margin-top:8px">${av.ok.map(x=>`<li>${x}</li>`).join('')}</ul>`:''}${av.dica.length?`<ul class="ck dica" style="margin-top:8px">${av.dica.map(x=>`<li>${x}</li>`).join('')}</ul>`:''}
       ${mmCompara(av, m)}
       <p class="foot" style="margin-top:10px">Esses são os melhores preços que passaram no meu canal no último mês, depois de uma leitura minuciosa de todas as ofertas. É esse o alvo: entra nos canais e vai pegando cada peça quando ela bater esse preço.</p></div>`;
     h += `<div class="parts">${MM_SECS.slice(1).map(([k, nome]) => { const o = S[k]; if(!o || !o.it) return cardSem(nome, o ? o.nome : '-', o ? o.sub : '', k==='gpu' ? (CPU[m.cpu]&&CPU[m.cpu].apu ? `O ${CPU[m.cpu].apu} roda os competitivos leves (CS2, Valorant, LoL) no gráfico baixo. A placa de vídeo entra depois, sem trocar nada.` : 'Esse vídeo é só pra ligar a tela e usar o PC. Pra jogar, a placa de vídeo precisa vir logo.') : 'O cooler que vem na caixa segura esse processador sem overclock. Confere se a oferta é a versão box (com cooler).', o && o.id==='box' ? 'já incluso' : 'vem no processador');

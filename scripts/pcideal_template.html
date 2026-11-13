@@ -586,7 +586,7 @@ const CASE_SPEC = [
 const caseSpec = n => (CASE_SPEC.find(c => c[0].test(n))||[])[1] || null;
 const moboTam = it => /E-?ATX/i.test(it.t||'') ? 'E-ATX' : (it.a.Tamanho || 'mATX');
 // processadores que esquentam: pedem water cooler 360 (air cooler de torre simples não é o ideal)
-const QUENTE = /X3D|9900X|7900|5800XT/;   // 3D V-Cache e 12 núcleos: water cooler 360. O 9700X é frio (air cooler resolve).
+const QUENTE = /X3D|9900X|7900|7700X/;   // regra do Bruno: X3D, 12 núcleos e 7700X vão de water cooler 360. Air cooler (AK400) serve pros AM4 (menos X3D), 6 núcleos AM5 e os octa 9700X/7700.
 function caseTier(orc){ return orc>=12000 ? 4 : orc>=7000 ? 3 : orc>=5500 ? 2 : 1; }
 function pickCase(aq, wc, premium, need){
   // need: {mobo:'mATX', rad:360|0, gpuMm, tier}

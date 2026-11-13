@@ -331,7 +331,7 @@ const faixa = (a,b) => { a=r50(a); b=r50(b); if(b<=a) b=a+50; return R(a)+'–'+
 const esc = s => String(s||'').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const fire = (e,p) => { try { window.fbq && fbq('trackCustom', e, p||{}); } catch(_){} };
 /* coleta anônima pra planilha do Bruno (Google Sheets). Sem nome, e-mail ou telefone. Vazio = desligado. */
-const COLETA_URL = '';
+const COLETA_URL = 'https://script.google.com/macros/s/AKfycbz5JpM6e1tRkFtHW-cQFy1KxG3_7SsAuBcct2lST9d3qIMh1J3KAQ4usLlK1qM2RFCFBw/exec';
 /* vídeo do Bruno explicando o "mapa" (link do YouTube). Vazio = mostra só o texto. */
 const VIDEO_URL = '';
 const ytId = u => (u.match(/(?:youtu\.be\/|v=|shorts\/|embed\/)([\w-]{11})/)||[])[1] || '';

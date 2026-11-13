@@ -146,6 +146,32 @@
 #pci .opt.go.novo{margin:16px 0 0}
 @media print{#pci .opt.go.novo,#pci .salvos{display:none!important}}
 #pci .gmx{font-size:13.5px;color:#d9d3e3;background:var(--s2);border-left:3px solid var(--ac);border-radius:8px;padding:8px 12px;margin:-8px 0 16px}
+#pci .ill{height:46px;margin-bottom:8px;color:var(--ink)}
+#pci .ill svg{height:46px;width:auto;display:block}
+#pci .ill .bri,#pci .bri{width:46px;height:46px;border-radius:50%;object-fit:cover;border:2px solid var(--ac);display:block}
+#pci .opt:hover .ill svg{transform:translateY(-1px)}
+#pci .iic{display:inline-flex;width:20px;height:20px;color:var(--mut)}
+#pci .iic svg{width:20px;height:20px}
+#pci .iic.g{width:30px;height:22px}#pci .iic.g svg{width:30px;height:22px}
+#pci .bri.s{width:22px;height:22px;border-width:1.5px}
+#pci .it.on .iic{color:var(--ink)}
+#pci header{position:relative}
+#pci .tema{all:unset;cursor:pointer;margin-left:auto;font-size:12.5px;border:1px solid var(--bd);border-radius:999px;padding:5px 11px;color:var(--mut);background:var(--s1)}
+#pci .tema:hover{border-color:var(--ac);color:var(--ink)}
+/* tema claro */
+#pci.claro{--bg:#f7f6f9;--s1:#ffffff;--s2:#f3eff8;--bd:#e2dbea;--ink:#1a1320;--mut:#5d5568;--dim:#8a8295;--act:#6a1fb0;--okt:#178a55;--warnt:#9a5b00;--badt:#b42323}
+#pci.claro .orb{opacity:.12}
+#pci.claro .raio p,#pci.claro .mp-t>span,#pci.claro .mp-t ol,#pci.claro .gmx,#pci.claro .norte,#pci.claro .why,#pci.claro .xtra,#pci.claro .mxm{color:#2a2232}
+#pci.claro .fc span{color:#3d3547}
+#pci.claro .hero{background:linear-gradient(135deg,rgba(199,125,255,.22),#fff)}
+#pci.claro .mapa2{background:linear-gradient(135deg,rgba(199,125,255,.14),#fff)}
+#pci.claro .bar,#pci.claro .mt div,#pci.claro .tmb{background:rgba(0,0,0,.08)}
+#pci.claro .tm{background:#fff}
+#pci.claro .sv .btn{background:#fff}
+#pci.claro .sl{background:rgba(255,255,255,.92)}
+#pci.claro input[type=range]{background:linear-gradient(90deg,var(--ac) 0,var(--ac) var(--v,30%),rgba(0,0,0,.12) var(--v,30%))}
+#pci.claro .ph{background:#fff}
+#pci.claro .tmb .pt{border-color:#fff}
 #pci .parts{display:grid;gap:12px;margin-bottom:16px}
 #pci .part{background:var(--s1);border:1px solid var(--bd);border-radius:16px;padding:16px;display:grid;grid-template-columns:1fr 210px;gap:16px;align-items:start}
 #pci .pl{display:grid;gap:8px;min-width:0}
@@ -270,26 +296,65 @@ const CPU = {
  'Ryzen 5 8600G':    {pl:'AM5', g:85,  c:6, apu:'Radeon 760M', ig:40, d:'6 núcleos com o vídeo integrado mais forte da linha (Radeon 760M)'},
  'Ryzen 7 8700G':    {pl:'AM5', g:92,  c:8, apu:'Radeon 780M', ig:50, d:'8 núcleos com Radeon 780M integrada, a melhor APU que existe'},
 };
+/* banco de placas de vídeo (specs públicas: linhas PCIe, memória, consumo). i = desempenho relativo em jogo 1080p (RX 7600 = 100) */
 const GPU = {
- 'RX 7600':          {x8:1, i:100, v:8,  w:650},
- 'RX 9050':          {i:102, v:8,  w:650},
- 'RTX 5050':         {x8:1, i:100, v:8,  w:650},
- 'RTX 5060':         {x8:1, i:125, v:8,  w:650},
- 'RX 9060 XT 8GB':   {i:135, v:8,  w:650},
- 'RTX 5060 Ti 8GB':  {x8:1, i:145, v:8,  w:650},
- 'RX 9060 XT 16GB':  {i:140, v:16, w:650},
- 'RTX 5060 Ti 16GB': {x8:1, i:150, v:16, w:650},
- 'RX 9070 GRE':      {i:175, v:12, w:750},
- 'RTX 5070':         {i:185, v:12, w:750},
- 'RX 9070':          {i:200, v:16, w:750},
- 'RX 9070 XT':       {i:225, v:16, w:750},
- 'RTX 5070 Ti':      {i:235, v:16, w:850},
- 'RTX 5080':         {i:270, v:16, w:850},
+ 'RX 9050':          {i:90,  v:8,  w:650, pcie:'', ln:0, mem:'GDDR6 128-bit', tdp:0, inc:1},   // specs ainda não confirmadas
+ 'RX 7600':          {i:100, v:8,  w:650, pcie:'PCIe 4.0', ln:8,  mem:'GDDR6 128-bit', tdp:165},
+ 'RTX 5050':         {i:98,  v:8,  w:550, pcie:'PCIe 5.0', ln:8,  mem:'GDDR6 128-bit', tdp:130},
+ 'RTX 5060':         {i:122, v:8,  w:550, pcie:'PCIe 5.0', ln:8,  mem:'GDDR7 128-bit', tdp:145},
+ 'RX 9060 XT 8GB':   {i:132, v:8,  w:650, pcie:'PCIe 5.0', ln:16, mem:'GDDR6 128-bit', tdp:160},
+ 'RTX 5060 Ti 8GB':  {i:138, v:8,  w:650, pcie:'PCIe 5.0', ln:8,  mem:'GDDR7 128-bit', tdp:180},
+ 'RX 9060 XT 16GB':  {i:136, v:16, w:650, pcie:'PCIe 5.0', ln:16, mem:'GDDR6 128-bit', tdp:160},
+ 'RTX 5060 Ti 16GB': {i:142, v:16, w:650, pcie:'PCIe 5.0', ln:8,  mem:'GDDR7 128-bit', tdp:180},
+ 'RX 9070 GRE':      {i:170, v:12, w:750, pcie:'PCIe 5.0', ln:16, mem:'GDDR6 192-bit', tdp:220},
+ 'RTX 5070':         {i:182, v:12, w:750, pcie:'PCIe 5.0', ln:16, mem:'GDDR7 192-bit', tdp:250},
+ 'RX 9070':          {i:196, v:16, w:750, pcie:'PCIe 5.0', ln:16, mem:'GDDR6 256-bit', tdp:220},
+ 'RX 9070 XT':       {i:220, v:16, w:850, pcie:'PCIe 5.0', ln:16, mem:'GDDR6 256-bit', tdp:304},
+ 'RTX 5070 Ti':      {i:230, v:16, w:850, pcie:'PCIe 5.0', ln:16, mem:'GDDR7 256-bit', tdp:300},
+ 'RTX 5080':         {i:265, v:16, w:850, pcie:'PCIe 5.0', ln:16, mem:'GDDR7 256-bit', tdp:360},
 };
+Object.values(GPU).forEach(g => { g.x8 = g.ln===8 ? 1 : 0; });
 const MARCA_OK = /ASUS|MSI|Gigabyte|ASRock|Maxsun/;
 const FONTE_OK = /MSI|Cooler Master|XPG|Rise Mode|Redragon|Cougar|Corsair|Gigabyte|Pichau|Montech|Lian Li/;
 const WC_OK = /MSI|Thermalright|Arctic|DeepCool|Redragon|Lian Li|Corsair|NZXT/;
 
+
+/* ---------- ilustrações (desenhos próprios, sem marca nem capa de jogo) ---------- */
+const AC = '#c77dff', AC2 = '#7b2cbf';
+const sv = (w,h,b) => `<svg viewBox="0 0 ${w} ${h}" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${b}</svg>`;
+const bill = (x,y,r) => `<g transform="translate(${x} ${y}) rotate(${r})"><rect x="0" y="0" width="34" height="18" rx="3" fill="${AC}22"/><circle cx="17" cy="9" r="4.5" fill="${AC}55" stroke="${AC}"/><path d="M5 5v8M29 5v8" stroke-width="1.6"/></g>`;
+const cardI = (x,y,r) => `<g transform="translate(${x} ${y}) rotate(${r})"><rect x="0" y="0" width="36" height="23" rx="4" fill="${AC2}33"/><path d="M0 7h36" stroke-width="3.2" stroke="${AC}"/><rect x="5" y="12" width="7" height="6" rx="1.4" fill="#ffd27a" stroke="#c4810d" stroke-width="1.2"/><path d="M17 17h12" stroke-width="1.6"/></g>`;
+const ILL = {
+  'pag:pix': sv(64,44, bill(8,20,-12)+bill(18,13,-4)+bill(26,8,6)),
+  'pag:cartao': sv(64,44, cardI(8,14,-10)+cardI(22,8,6)),
+  'pag:misto': sv(64,44, bill(4,16,-8)+cardI(26,12,8)),
+  'jogo:mix': sv(64,44, `<path d="M18 12h28c7 0 11 6 12 14 1 7-3 11-7 9-3-1-6-6-9-6H22c-3 0-6 5-9 6-4 2-8-2-7-9 1-8 5-14 12-14z" fill="${AC}22"/><path d="M19 20v8M15 24h8"/><circle cx="43" cy="21" r="2" fill="${AC}" stroke="${AC}"/><circle cx="48" cy="26" r="2" fill="${AC}" stroke="${AC}"/>`),
+  'jogo:fps': sv(64,44, `<circle cx="32" cy="22" r="15" fill="${AC}14"/><circle cx="32" cy="22" r="7"/><path d="M32 2v10M32 32v10M12 22h10M42 22h10"/><circle cx="32" cy="22" r="1.8" fill="${AC}" stroke="${AC}"/>`),
+  'jogo:aaa': sv(64,44, `<path d="M4 38l16-20 9 11 8-9 23 18z" fill="${AC}22"/><path d="M16 23l4-5 4 5" stroke="${AC}"/><circle cx="48" cy="10" r="5" fill="#ffd27a55" stroke="#c4810d"/><path d="M26 38c4-5 10-6 14-12" stroke="${AC}" stroke-dasharray="3 4"/>`),
+  'vis:perf': sv(64,44, `<path d="M10 36a22 22 0 1 1 44 0" fill="${AC}14"/><path d="M14 36a18 18 0 0 1 36 0" stroke="${AC}" stroke-dasharray="2 5"/><path d="M32 36l12-14" stroke-width="3"/><circle cx="32" cy="36" r="3" fill="currentColor"/>`),
+  'vis:equil': sv(64,44, `<path d="M32 6v32M20 40h24M12 12h40"/><path d="M12 12l-7 14h14z" fill="${AC}33"/><path d="M52 12l-7 14h14z" fill="${AC}33"/><circle cx="32" cy="7" r="2.5" fill="currentColor"/>`),
+  'vis:estetica': `<svg viewBox="0 0 64 44" fill="none" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><defs><linearGradient id="pciRgb" x1="0" x2="1"><stop offset="0" stop-color="#ff4dd8"/><stop offset=".5" stop-color="#7b8cff"/><stop offset="1" stop-color="#4dffd2"/></linearGradient></defs><rect x="16" y="3" width="32" height="38" rx="3" stroke="currentColor" fill="#c77dff14"/><circle cx="26" cy="14" r="6" stroke="url(#pciRgb)" stroke-width="3"/><circle cx="26" cy="30" r="6" stroke="url(#pciRgb)" stroke-width="3"/><path d="M38 9v26" stroke="url(#pciRgb)" stroke-width="3"/><path d="M54 8l2-4 2 4-4 2zM8 30l2-3 2 3-3 2z" stroke="#ffd27a" fill="#ffd27a"/></svg>`,
+  'net:cabo': sv(64,44, `<rect x="22" y="6" width="20" height="16" rx="2" fill="${AC}22"/><path d="M26 6v-2M31 6v-2M36 6v-2M27 22v6h10v-6M32 28v14"/>`),
+  'net:wifi': sv(64,44, `<path d="M10 18a31 31 0 0 1 44 0" stroke="${AC}"/><path d="M17 25a21 21 0 0 1 30 0"/><path d="M24 32a11 11 0 0 1 16 0" stroke="${AC}"/><circle cx="32" cy="38" r="2.6" fill="currentColor"/>`),
+  'plat:am4': sv(64,44, `<rect x="16" y="4" width="32" height="32" rx="4" fill="${AC}1a"/><path d="M22 40v2M28 40v2M34 40v2M40 40v2M12 12h2M12 20h2M12 28h2M50 12h2M50 20h2M50 28h2"/><text x="32" y="25" text-anchor="middle" font-size="11" font-weight="700" fill="currentColor" stroke="none" font-family="inherit">AM4</text>`),
+  'plat:am5': sv(64,44, `<rect x="16" y="4" width="32" height="32" rx="4" fill="${AC}33" stroke="${AC}"/><path d="M22 40v2M28 40v2M34 40v2M40 40v2M12 12h2M12 20h2M12 28h2M50 12h2M50 20h2M50 28h2"/><text x="32" y="25" text-anchor="middle" font-size="11" font-weight="700" fill="currentColor" stroke="none" font-family="inherit">AM5</text>`),
+  'dgpu': sv(64,44, `<rect x="4" y="10" width="52" height="22" rx="3" fill="${AC}1a"/><circle cx="20" cy="21" r="7"/><circle cx="40" cy="21" r="7"/><path d="M20 17v8M16 21h8M40 17v8M36 21h8" stroke="${AC}" stroke-width="1.6"/><path d="M10 32v5h20v-5M56 14h4"/>`),
+  'igpu': sv(64,44, `<rect x="18" y="6" width="28" height="28" rx="4" fill="${AC}1a"/><rect x="25" y="13" width="14" height="14" rx="2" fill="${AC}44" stroke="${AC}"/><path d="M24 38v3M32 38v3M40 38v3M14 14h-2M14 26h-2M52 14h-2M52 26h-2"/>`),
+};
+const ITIC = {
+  pc: sv(24,24, `<rect x="6" y="2" width="12" height="20" rx="2"/><circle cx="12" cy="8" r="2.4"/><path d="M9 17h6"/>`),
+  mon: sv(24,24, `<rect x="2" y="3" width="20" height="13" rx="2"/><path d="M12 16v4M8 21h8"/>`),
+  kb: sv(24,24, `<rect x="1.5" y="6" width="21" height="12" rx="2"/><path d="M5 10h1M9 10h1M13 10h1M17 10h1M7 14h10"/>`),
+  mouse: sv(24,24, `<rect x="6" y="2" width="12" height="20" rx="6"/><path d="M12 6v4"/>`),
+  head: sv(24,24, `<path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="2.5" y="14" width="5" height="7" rx="2"/><rect x="16.5" y="14" width="5" height="7" rx="2"/>`),
+};
+const orcIll = v => { const n = Math.max(1, Math.min(6, Math.round(Math.log2(v/2500)*1.6))); return sv(64,44, Array.from({length:6},(_,i)=>`<rect x="${6+i*9}" y="${38-(i+1)*5.5}" width="6" height="${(i+1)*5.5}" rx="1.5" ${i<n?`fill="${AC}" stroke="${AC}"`:'opacity=".25"'}/>`).join('')); };
+const brunoIll = () => `<img class="bri" src="${FOTO_BRUNO}" alt="">`;
+function illDe(k, v){
+  if(k==='orc') return orcIll(+v);
+  if(v==='auto') return brunoIll();
+  return ILL[k+':'+v] || '';
+}
 /* ---------- Perguntas (só botão) ---------- */
 const Q = [
  {k:'orc', t:'Quanto você quer investir?', h:'Marca o que entra na conta. O valor vale pra tudo que estiver marcado.', itens:1, o:[
@@ -325,13 +390,13 @@ function render(){
   if(q.alt && st.itens.mon) q = Object.assign({}, q, q.alt);
   if(q.k==='mon') q = Object.assign({}, q, st.itens.mon ? {t:'Qual monitor você quer comprar?', h:'Ele entra no orçamento. Escolhe o que quiser, ou deixa comigo.'} : {t:'Qual monitor você tem aí em casa?', h:'É pra essa tela que eu vou montar a máquina. A resolução decide quanta placa de vídeo você precisa.'});
   const cur = st[q.k];
-  const itens = q.itens ? `<div class="itl">O que entra no orçamento?</div><div class="its">${ITENS.map(i=>`<button class="it ${i[0]==='pc'||st.itens[i[0]]?'on':''} ${i[0]==='pc'?'lock':''}" data-i="${i[0]}"><i>${i[0]==='pc'||st.itens[i[0]]?'✓':'+'}</i>${i[1]}${i[2]?`<small>${i[2]}</small>`:''}</button>`).join('')}</div><div class="itl">Placa de vídeo</div><div class="its">${[['auto','Deixa o Brunão decidir','monto o melhor pro seu valor'],['dgpu','Com placa de vídeo','mais desempenho já, roda os pesados'],['igpu','Vídeo integrado','começa no AM5 e coloca a placa depois']].map(o=>`<button class="it gm ${(st.gmodo||'auto')===o[0]?'on':''}" data-g="${o[0]}"><i>${(st.gmodo||'auto')===o[0]?'✓':''}</i>${o[1]}<small>${o[2]}</small></button>`).join('')}</div>
+  const itens = q.itens ? `<div class="itl">O que entra no orçamento?</div><div class="its">${ITENS.map(i=>`<button class="it ${i[0]==='pc'||st.itens[i[0]]?'on':''} ${i[0]==='pc'?'lock':''}" data-i="${i[0]}"><i>${i[0]==='pc'||st.itens[i[0]]?'✓':'+'}</i><span class="iic">${ITIC[i[0]]}</span>${i[1]}${i[2]?`<small>${i[2]}</small>`:''}</button>`).join('')}</div><div class="itl">Placa de vídeo</div><div class="its">${[['auto','Deixa o Brunão decidir','monto o melhor pro seu valor'],['dgpu','Com placa de vídeo','mais desempenho já, roda os pesados'],['igpu','Vídeo integrado','começa no AM5 e coloca a placa depois']].map(o=>`<button class="it gm ${(st.gmodo||'auto')===o[0]?'on':''}" data-g="${o[0]}"><i>${(st.gmodo||'auto')===o[0]?'✓':''}</i><span class="iic g">${o[0]==='auto'?`<img class="bri s" src="${FOTO_BRUNO}" alt="">`:ILL[o[0]]}</span>${o[1]}<small>${o[2]}</small></button>`).join('')}</div>
      ${st.gmodo==='dgpu'?`<p class="gmx">Com placa de vídeo você joga os jogos pesados desde o primeiro dia. Em orçamento curto ela entra num AM4, que tem menos caminho de upgrade lá na frente.</p>`:st.gmodo==='igpu'?`<p class="gmx">Com vídeo integrado o PC já nasce no AM5, a plataforma nova, e você coloca a placa de vídeo depois sem trocar nada. Até lá, roda os competitivos leves (CS2, Valorant, LoL) no gráfico baixo. Jogo pesado, só depois da placa.</p>`:''}
      <div class="itl">Quanto, no total?</div>` : '';
   app.innerHTML = head(step===0) +
    `<div class="prog">${Q.map((_,i)=>`<i class="${i<=step?'on':''}"></i>`).join('')}</div>
     <div class="q"><h2>${q.t}</h2><p class="h">${q.h}</p>
-     ${itens}${q.k==='mon' ? monPanel() : `<div class="opts ${q.big?'big':''}">${q.o.map(o=>`<button class="opt ${cur===o[0]?'sel':''}" data-v="${o[0]}"><b>${o[1]}</b>${o[2]?`<span>${o[2]}</span>`:''}</button>`).join('')}</div>`}
+     ${itens}${q.k==='mon' ? monPanel() : `<div class="opts ${q.big?'big':''}">${q.o.map(o=>`<button class="opt ${cur===o[0]?'sel':''}" data-v="${o[0]}">${illDe(q.k,o[0])?`<div class="ill">${illDe(q.k,o[0])}</div>`:''}<b>${o[1]}</b>${o[2]?`<span>${o[2]}</span>`:''}</button>`).join('')}</div>`}
      ${q.k==='pag' && st.pag==='misto' ? misto() : ''}
      <div class="nav">${step?'<button class="lnk" id="pciBack">← voltar</button>':'<span></span>'}<span class="old">${step+1} de ${Q.length}</span></div></div>`;
   app.querySelectorAll('.opt').forEach(b => b.onclick = () => {
@@ -339,6 +404,7 @@ function render(){
     if(q.k==='pag' && v==='misto'){ render(); const r = document.getElementById('pciParc'); if(r) r.focus(); return; }
     step++; render(); {const y = app.getBoundingClientRect().top + scrollY - 80; if(scrollY > y) scrollTo({top:y, behavior:'smooth'});}
   });
+  bindTema();
   const bk = document.getElementById('pciBack'); if(bk) bk.onclick = () => { step--; render(); };
   if(step===0) mostraSalvos();
   app.querySelectorAll('.gm').forEach(b => b.onclick = () => { st.gmodo = b.dataset.g; render(); });
@@ -374,6 +440,8 @@ function misto(){
     <input type="range" id="pciParc" min="5" max="95" step="5" value="${st.parc}" aria-label="Porcentagem parcelada">
     ${mistoInfo()}<button class="opt go" id="pciGo"><b>Continuar →</b></button></div>`;
 }
+function bindTema(){ const t = document.getElementById('pciTema'); if(t) t.onclick = () => { const r = document.getElementById('pci'); r.classList.toggle('claro'); try { localStorage.setItem('pcideal_tema', r.classList.contains('claro')?'claro':'escuro'); } catch(_){} t.innerHTML = r.classList.contains('claro')?'🌙 Escuro':'☀️ Claro'; }; }
+try { if(localStorage.getItem('pcideal_tema')==='claro') document.getElementById('pci').classList.add('claro'); } catch(_){}
 function mostraSalvos(){
   const L = salvos(); if(!L.length) return;
   const bx = document.createElement('div'); bx.className = 'salvos';
@@ -384,7 +452,7 @@ function mostraSalvos(){
   const pr = app.querySelector('.prog'); if(pr) pr.parentNode.insertBefore(bx, pr);
 }
 function head(full){
-  return `<header><img class="logo" src="${LOGO}" alt="Grape Tec"><div class="brand"><b>Grape Tec · PC Ideal</b><span>preços dos meus posts dos últimos 30 dias</span></div></header>` +
+  return `<header><img class="logo" src="${LOGO}" alt="Grape Tec"><div class="brand"><b>Grape Tec · PC Ideal</b><span>preços dos meus posts dos últimos 30 dias</span></div><button class="tema" id="pciTema" title="Mudar tema">${document.getElementById('pci').classList.contains('claro')?'🌙 Escuro':'☀️ Claro'}</button></header>` +
    (full ? `<h1>Monte seu <em>PC Ideal</em></h1><p class="lead">Responde 7 perguntas, só clicando. Eu monto o PC completo com as 8 peças, do jeito que faço nas minhas consultorias, usando os preços reais que passaram no canal no último mês.</p>` : '');
 }
 
@@ -570,7 +638,7 @@ function monta(s){
       if((s.mon==='qhd' || s.mon==='uhd') && G.v<=8) continue;
       // regra do Bruno: plataforma PCIe 3.0 (Ryzen 5 5500, placas A520/B450) -> evitar placa de vídeo x8 (perde desempenho) e placa grande demais
       if(pcie3 && G.i>=175) continue;
-      const lanePen = (pcie3 && G.x8) ? .92 : 1;
+      const lanePen = (pcie3 && (G.x8 || G.inc)) ? .92 : 1;
       for(const ram of [16,32]){
         if(C.apu && ram===32 && s.jogo!=='work') continue;   // sem placa: o dinheiro que sobra é pra placa de vídeo, não pra 32GB
         const rr = pickRam(C.pl==='AM4'?4:5, ram); if(!rr) continue;
@@ -758,7 +826,7 @@ function result(){
   const ramNome = b.rr.qtd===2 ? `2x ${b.rr.it.n.replace('Memória ','')}` : b.rr.it.n.replace('Memória ','');
   const parts = [
     card('Processador', b.cpu, b.cI.p, b.cI, nCpu, W.cpu, '', '', [`${C.c} núcleos / ${C.c*2} threads`, b.pl, C.x3d?'3D V-Cache':'', C.apu?'vídeo integrado '+C.apu:''], meter('Força em jogos', C.g/150) + meter('Trabalho pesado', C.c*(C.pl==='AM5'?1.15:1)/14)),
-    b.apu ? cardSem('Placa de vídeo', 'Vídeo integrado ' + C.apu, nGpu, 'Começa jogando com o vídeo do processador e coloca a placa depois, sem trocar nada.', 'vem no processador') : card('Placa de vídeo', (b.gI.t || b.gpu).replace(/^Placa\s+(de\s+)?v[ií]deo\s*/i,'').replace(/^Placa gráfica\s*/i,''), b.gI.p, b.gI, nGpu, W.gpu, '', xGpu, [b.gpu, G.v+'GB de VRAM', 'pede fonte de '+G.w+'W', G.i>=200?'QHD com folga':G.i>=140?'Full HD no alto · QHD':'Full HD'], meter('Desempenho', G.i/270)),
+    b.apu ? cardSem('Placa de vídeo', 'Vídeo integrado ' + C.apu, nGpu, 'Começa jogando com o vídeo do processador e coloca a placa depois, sem trocar nada.', 'vem no processador') : card('Placa de vídeo', (b.gI.t || b.gpu).replace(/^Placa\s+(de\s+)?v[ií]deo\s*/i,'').replace(/^Placa gráfica\s*/i,''), b.gI.p, b.gI, nGpu, W.gpu, '', xGpu, [b.gpu, G.v+'GB '+(G.mem||''), G.ln ? G.pcie+' x'+G.ln : '', G.tdp ? G.tdp+'W · fonte '+G.w+'W' : 'fonte '+G.w+'W', G.i>=200?'QHD com folga':G.i>=140?'Full HD no alto · QHD':'Full HD'], meter('Desempenho', G.i/270)),
     card('Placa-mãe', b.mobo.it.n.replace('Placa-mãe ',''), b.mobo.preco, b.mobo.it, nMobo, W.mobo),
     card('Memória', ramNome, b.rr.preco, b.rr.it, nRam, W.ram, b.rr.qtd===2 ? `2 × ${R2(b.rr.it.p)} · ${esc(b.rr.it.loja)}` : '', '', [b.ram+'GB', ramT, b.rr.it.a.mhz+'MHz', 'dual channel (2 pentes)']),
     card('SSD', b.ss.it.n.replace('SSD ',''), b.ss.preco, b.ss.it, nSsd, W.ssd),
@@ -828,6 +896,7 @@ function result(){
    <button class="opt go novo" data-inicio="1"><b>↺ Voltar ao início e montar outro PC</b></button>
    <p class="foot">Atualizado com os posts até ${dia(DATA.gen)} · Compre pelos links: você me ajuda sem pagar nada a mais.</p>`;
   document.getElementById('pciRedo').onclick = refaz;
+  bindTema();
   app.querySelectorAll('[data-inicio]').forEach(b => b.onclick = () => { refaz(); scrollTo({top: app.getBoundingClientRect().top + scrollY - 80, behavior:'smooth'}); });
   salva({mapa:`${b.cpu} + ${GN}`, total:Math.round(b.geral), orc:s.orc});
   const pc = {cpu:b.cpu, gpu:b.apu?'vídeo integrado':b.gpu, placa_mae:b.mobo.it.n, memoria:b.ram+'GB '+ramT, ssd:b.ss.it.n, fonte:b.ps.it.n,

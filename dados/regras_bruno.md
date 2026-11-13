@@ -37,3 +37,6 @@ Regras que o Bruno passou e que o algoritmo segue. Anotar aqui cada regra nova (
 
 ## Wi-Fi
 - Wi-Fi é preferência, não obrigação: tenta placa-mãe com Wi-Fi do mesmo chipset (ex.: B550 com o 5700X, nunca rebaixa pra A520 por causa do Wi-Fi). Se não couber sem abrir mão de placa-mãe boa ou placa de vídeo, vai sem Wi-Fi e indica adaptador Wi-Fi USB (dongle). Explicar na pergunta e no resultado. (13/11/2026)
+
+## Banco de placas de vídeo
+- Tabela própria no código (GPU = {...}): linhas PCIe (x8/x16), memória, consumo, fonte e desempenho relativo 1080p (RX 7600 = 100). RX 9050 abaixo da RX 7600; specs da 9050 ainda não confirmadas. TechPowerUp bloqueia leitura automática, então a tabela é mantida à mão. (13/11/2026)

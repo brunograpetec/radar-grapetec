@@ -82,3 +82,6 @@ Regras que o Bruno passou e que o algoritmo segue. Anotar aqui cada regra nova (
 - Mapa/PDF reforça: entrar nos canais e que são os melhores preços do nosso banco de ofertas nesse período.
 - Refrigeração no "Eu sei montar": filtros Air cooler / Water cooler 240 / Water cooler 360 (400/420 quase não passa). Cooler box só aparece em Todos/Air.
 - Gabinete (e qualquer peça) abre só com os compatíveis com o que já foi escolhido (ex.: water 360 → só gabinete que cabe 360). Os incompatíveis ficam num "ver X que não são compatíveis".
+- Botão final do "Eu sei montar" = "Pedir pro Brunão avaliar" com a foto do Bruno.
+- Cada peça avaliada ganha explicação completa (o que é, pra que serve, plataforma, frequência, PCIe, certificação, folga da fonte, encaixe no gabinete) + "Veredito" ✔/⚠ + medidores.
+- Regras extras na avaliação: 32GB em PC ≥ R$7,5k ou placa forte; 32GB em PC < R$4,5k tira dinheiro da placa; SSD Gen4 em plataforma PCIe 3.0 = paga à toa; placa 8GB ok pra Full HD, QHD/4K pede 16GB; processador com vídeo básico sem placa não joga (pra isso, série G/8600G).

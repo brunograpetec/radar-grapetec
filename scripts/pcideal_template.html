@@ -177,6 +177,12 @@
 #pci .hero .nota{display:inline-flex;gap:8px;align-items:baseline;margin:6px 0 10px}#pci .hero .nota b{font-size:34px;font-family:var(--mono);color:var(--ac)}#pci .hero .nota span{color:var(--mut);font-size:13px}
 @media print{#pci .sei,#pci .tema,#pci .mmsec,#pci .mmtop,#pci .mmbar{display:none!important}}
 @media (max-width:560px){#pci .sei{font-size:11.5px;padding:5px 9px}#pci .mo{padding:10px 12px;gap:8px}#pci .mon{font-size:13.5px}#pci .mop{font-size:13.5px}#pci .mop small{font-size:10.5px}}
+#pci .btn.mmav{display:flex;align-items:center;gap:10px;padding:6px 16px 6px 6px;background:var(--ac);color:var(--onac);border-color:var(--ac);font-weight:700;text-align:left}
+#pci .btn.mmav img{width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,.7)}
+#pci .btn.mmav span{display:block}#pci .btn.mmav small{display:block;font-weight:400;font-size:11px;opacity:.85;color:inherit}
+#pci .mmah{display:flex;gap:12px;align-items:center;margin-bottom:10px}#pci .mmah img{width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid var(--ac)}#pci .mmah h3{margin:0}#pci .mmah span{font-size:12.5px;color:var(--mut)}
+#pci .vd{margin:10px 0 0;padding:8px 12px;border-radius:10px;font-size:14px}#pci .vd.ok{background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.25)}#pci .vd.no{background:rgba(255,159,107,.08);border:1px solid rgba(255,159,107,.3)}
+@media (max-width:560px){#pci .mmbar>div small{display:none}#pci .btn.mmav{padding:5px 12px 5px 5px;font-size:13px}#pci .btn.mmav img{width:34px;height:34px}#pci .btn.mmav small{display:none}#pci .mmbar b{white-space:nowrap;font-size:18px}}
 #pci .tema{all:unset;cursor:pointer;margin-left:auto;font-size:12.5px;border:1px solid var(--bd);border-radius:999px;padding:5px 11px;color:var(--mut);background:var(--s1)}
 #pci .tema:hover{border-color:var(--ac);color:var(--ink)}
 /* tema claro */
@@ -1132,7 +1138,14 @@ function mmAvalia(){
   }
   if(m.gpu==='iGPU') ok.push(C && C.apu ? `Vídeo integrado ${C.apu}: joga leve agora, e a placa entra depois.` : `Vídeo básico: o PC liga e funciona, mas pra jogar precisa da placa de vídeo.`);
   if(C && sel.mobo){ const entrada = /B650M-H|Gigabyte B650M$|HDV|A520/.test(sel.mobo.it.n); if((C.c>=8 || C.x3d) && entrada){ alerta.push(`Placa-mãe de entrada com um processador forte (${m.cpu}). Funciona, mas eu iria de uma placa com VRM melhor.`); nota -= 1; } else ok.push(`Placa-mãe à altura do processador.`); }
-  if(sel.ram){ ok.push(`Memória em dois pentes (dual channel).`); }
+  if(sel.ram){ ok.push(`Memória em dois pentes (dual channel).`);
+    const cap32 = m.f.ramcap==='32';
+    if(!cap32 && (tot >= 7500 || (g && g.i >= 170))){ alerta.push('Num PC desse nível eu iria de 32GB (2x16): jogo novo e multitarefa já passam dos 16GB.'); nota -= .5; }
+    if(cap32 && tot < 4500){ alerta.push('32GB num PC desse valor tira dinheiro do processador ou da placa de vídeo. Aqui eu ficaria nos 16GB (2x8) e subiria a placa.'); nota -= .5; } }
+  const pcie3 = m.cpu==='Ryzen 5 5500' || (sel.mobo && /A520|B450/.test(sel.mobo.it.a.Chipset||''));
+  if(sel.ssd && pcie3 && /Gen4/.test(sel.ssd.it.a.Interface||'')) alerta.push('Nessa plataforma (PCIe 3.0) o SSD Gen4 roda como 3.0. Um NVMe 3.0 supre e sai mais barato: a diferença no dia a dia não é gritante.');
+  if(g && g.v <= 8) ok.push(`A ${m.gpu} tem 8GB: perfeita pra Full HD. Se a ideia for QHD ou 4K, eu iria de uma placa de 16GB (RX 9060 XT 16GB, RTX 5070, RX 9070).`);
+  if(m.gpu==='iGPU' && C && !C.apu) alerta.push(`O ${m.cpu} tem vídeo básico: liga e usa o PC, mas não roda jogo. Pra começar sem placa de vídeo eu iria de um série G (8600G).`);
   if(sel.ssd && sel.ssd.it.a.Capacidade==='500GB'){ alerta.push('SSD de 500GB enche rápido com jogo. Se der, vai de 1TB.'); nota -= .5; }
   if(sel.psu && g){ const w = watts(sel.psu.it); if(w >= g.w + 100) ok.push(`Fonte de ${w}W com folga pra upgrade.`); if(sel.psu.it.a['Certificação']!=='Gold' && g.i>=170){ alerta.push('Pra uma placa desse nível eu iria de fonte Gold.'); nota -= .5; } }
   if(C && sel.co){ const air = sel.co.id==='box' || (sel.co.it && !/Water/.test(sel.co.it.n)); if(sel.co.it && radMm(sel.co.it)===240 && QUENTE.test(m.cpu)){ alerta.push(`Pro ${m.cpu} eu iria de radiador 360mm: o 240 segura, mas trabalha mais quente.`); nota -= .5; } else if(air && QUENTE.test(m.cpu)){ alerta.push(`O ${m.cpu} esquenta: com ele eu uso water cooler 360mm, não air cooler.`); nota -= 1.5; } else if(!air && !QUENTE.test(m.cpu) && C.c < 8 && !C.x3d){ alerta.push(`Se o water cooler não for pela estética, ele é exagero pro ${m.cpu}: um air cooler (ou o box) segura tranquilo, e essa diferença rende mais na placa de vídeo.`); nota -= .5; } else ok.push('Refrigeração adequada pro processador.'); }
@@ -1143,6 +1156,79 @@ function mmAvalia(){
     meu = monta({orc: tot, pag:'pix', jogo:'mix', mon:'fhd', plat:'auto', vis:'perf', net: sel.mobo && sel.mobo.it.a['Wi-Fi']==='Com Wi-Fi' ? 'wifi' : 'cabo', gmodo: m.gpu==='iGPU' ? 'igpu' : 'auto'}); window.__pciMeu = meu && {cpu:meu.cpu, gpu:meu.gpu, tot:meu.tot};
   }
   return {sel, tot, ok, alerta, nota: Math.max(0, Math.round(nota*2)/2), meu};
+}
+
+// texto peça por peça do modo manual: o que é, pra que serve e o veredito do Brunão
+function mmPeca(k, o, av){
+  const m = mmGet(), C = CPU[m.cpu] || {}, g = m.gpu && GPU[m.gpu], S = av.sel, it = o.it, a = it.a || {};
+  const v = (ok, t) => `<p class="vd ${ok?'ok':'no'}">${ok?'✔':'⚠'} <b>Veredito:</b> ${t}</p>`;
+  const pcie3 = m.cpu==='Ryzen 5 5500' || (S.mobo && /A520|B450/.test(S.mobo.it.a.Chipset||''));
+  const pdif = x => x > 0 ? `${Math.round(x*100)}% mais rápida` : x < 0 ? `${Math.round(-x*100)}% mais lenta` : 'no mesmo nível';
+  if(k==='cpu'){
+    const quente = QUENTE.test(m.cpu);
+    const d = C.d || '';
+    let t = `${d.charAt(0).toUpperCase()+d.slice(1)}. ` + (/núcleos/.test(d) ? '' : `${C.c} núcleos e ${C.c*2} threads. `) + (C.x3d && !/Cache/i.test(d) ? 'Tem 3D V-Cache, o cache extra que dá FPS em jogo. ' : '');
+    t += C.pl==='AM4' ? 'Plataforma AM4: a mais barata hoje, mas é fim de linha (upgrade de processador fica limitado ao que já existe). ' : 'Plataforma AM5: a AMD segue lançando processador nela, então dá pra trocar só o processador lá na frente. ';
+    t += C.apu ? `Tem vídeo integrado ${C.apu}, que já roda jogo leve. ` : C.igb ? 'Tem vídeo básico: liga a tela sem placa, mas não é pra jogo. ' : 'Não tem vídeo integrado: precisa de placa de vídeo pra dar imagem. ';
+    t += quente ? 'Esquenta: pede water cooler 360mm.' : 'Esquenta pouco: air cooler simples dá conta.';
+    const al = av.alerta.find(x => (x.includes(m.cpu) && !/cooler|Placa-mãe|vídeo básico/.test(x)) || (/gargalo|forte demais/.test(x) && g)), bom = !al;
+    return [t + v(bom, bom ? (g ? `casa bem com a ${m.gpu}.` : 'bom processador pro que você montou.') : al),
+      [`${C.c} núcleos / ${C.c*2} threads`, C.pl, C.x3d?'3D V-Cache':'', C.apu?'vídeo '+C.apu:C.igb?'vídeo básico':'sem vídeo', quente?'pede water 360':'air cooler ok'],
+      meter('Força em jogos', (C.g||0)/150) + meter('Trabalho pesado', (C.c||0)*(C.pl==='AM5'?1.15:1)/14)];
+  }
+  if(k==='mobo'){
+    const ch = a.Chipset||'', wifi = a['Wi-Fi']==='Com Wi-Fi';
+    const CH = {A520:'Chipset de entrada do AM4: PCIe 3.0 e VRM mais simples. Serve pra 6 núcleos sem overclock.', B450:'Chipset antigo do AM4: PCIe 3.0, mas costuma ter VRM melhor que a A520.', B550:'O chipset certo do AM4: PCIe 4.0 na placa de vídeo e no SSD, e VRM que segura até os 8 núcleos e os X3D.', B650:'Chipset de entrada do AM5: PCIe 4.0, DDR5 e suporte aos próximos processadores AM5.', B850:'Chipset mais novo do AM5: PCIe 5.0 no SSD (às vezes na placa de vídeo também) e mais conexões.'};
+    const entrada = /B650M-H|Gigabyte B650M$|HDV|A520/.test(it.n), forte = C.c>=8 || C.x3d;
+    let t = (CH[ch]||'') + ` Formato ${moboTam(it)}, memória ${a['Memória']||''}. ` + (wifi ? 'Já vem com Wi-Fi e Bluetooth.' : 'Sem Wi-Fi: no cabo é o ideal. Se precisar de Wi-Fi, um adaptador USB resolve barato.');
+    return [t + v(!(entrada && forte), entrada && forte ? `placa de entrada pra um ${m.cpu}. Eu iria de uma com VRM melhor.` : `combina com o ${m.cpu}.`), undefined, ''];
+  }
+  if(k==='ram'){
+    const cap = +(m.f.ramcap||16), mhz = a.mhz, ddr = a.ddr;
+    const ideal = ddr===4 ? (mhz>=3200 && mhz<=3600) : mhz>=6000;
+    let t = `${cap}GB em dois pentes de ${cap/2}GB: os dois trabalham juntos (dual channel), o que dá bem mais FPS que um pente só. `;
+    t += ddr===4 ? `DDR4 ${mhz}MHz: ${mhz>=3200?'3200 a 3600MHz é o ponto certo pro Ryzen AM4.':'abaixo de 3200 o Ryzen perde desempenho.'} ` : `DDR5 ${mhz}MHz: ${mhz>=6000?'6000MHz é o ponto ideal pro Ryzen AM5.':'funciona bem; 6000MHz é o ideal pro AM5 quando o preço é parecido.'} `;
+    t += cap>=32 ? '32GB sobra pra jogo + Discord + navegador + edição.' : '16GB roda todos os jogos hoje; pra jogo pesado com muita coisa aberta, 32GB começa a fazer diferença.';
+    if(/Gudga|Juhor|Kootion|Keepdata|Knup|Macrovip|Puskill|Winmemory|Husky/.test(it.n)) t += ' Marca de importação: costuma vir com garantia mais curta, mas é a que eu mais vejo boa custo-benefício no canal.';
+    return [t + v(ideal, ideal ? 'memória certa pra essa plataforma.' : 'funciona, mas eu buscaria a frequência ideal.'), [`${cap}GB (2x${cap/2})`, 'DDR'+ddr, mhz+'MHz', 'dual channel'], ''];
+  }
+  if(k==='ssd'){
+    const g4 = /Gen4/.test(a.Interface||''), cap = a.Capacidade;
+    let t = `NVMe ${g4?'PCIe 4.0':'PCIe 3.0'}: ${g4 ? (pcie3 ? 'nessa plataforma (PCIe 3.0) ele vai rodar como 3.0.' : 'mais rápido em cópia de arquivo grande.') : 'o 3.0 supre: no jogo e no dia a dia a diferença pro 4.0 não é gritante.'} `;
+    t += cap==='500GB' ? 'Com 500GB, o Windows e uns 4 ou 5 jogos grandes já enchem.' : cap==='1TB' ? 'Com 1TB cabe o Windows e uma boa biblioteca de jogos.' : 'Com 2TB sobra espaço pra jogo e projeto por muito tempo.';
+    return [t + v(cap!=='500GB' && !(g4 && pcie3), cap==='500GB' ? 'se der, sobe pra 1TB.' : g4 && pcie3 ? 'um 3.0 de 1TB faz o mesmo aqui, mais barato.' : 'SSD certo pro seu PC.'), undefined, ''];
+  }
+  if(k==='gpu' && g){
+    const rel = g.i/100 - 1, res = g.i>=200 ? 'QHD com folga e 4K em muitos jogos' : g.i>=165 ? 'QHD alto e Full HD sobrando' : g.i>=130 ? 'Full HD no alto, QHD no médio' : 'Full HD';
+    let t = `Comparando com a RX 7600 (a base do meu banco de desempenho), ela é <b>${pdif(rel)}</b> em Full HD. Indicada pra ${res}. ${g.v}GB de VRAM${g.v<=8?': pra Full HD tá ok; QHD e 4K pedem 16GB.':': aguenta textura alta e QHD/4K.'} `;
+    if(g.ln) t += `Liga em ${g.pcie} x${g.ln}${g.ln===8 && pcie3 ? ': numa plataforma PCIe 3.0 ela perde desempenho (eu iria de uma x16, como a RX 9060 XT).' : '.'} `;
+    t += `Pede fonte de ${g.w}W.`;
+    const al = av.alerta.find(x => x.includes(m.gpu)), bom = !al;
+    return [t + v(bom, bom ? 'boa escolha pro conjunto.' : al), [m.gpu, g.v+'GB '+(g.mem||''), g.ln?g.pcie+' x'+g.ln:'', 'fonte '+g.w+'W'],
+      meter('Full HD', g.i/270) + meter('QHD', (g.q||g.i*.85)/250)];
+  }
+  if(k==='psu'){
+    const w = watts(it), need = g ? g.w : 450, gold = a['Certificação']==='Gold', full = /Full/.test(a.Modular||'');
+    let t = `${w}W pra um PC que pede ${need}W: ${w-need>=100 ? 'folga boa pra upgrade de placa lá na frente.' : w>=need ? 'atende, mas sem muita folga pra upgrade.' : 'abaixo do recomendado.'} `;
+    t += gold ? 'Certificação Gold: desperdiça menos energia e esquenta menos, normalmente com componentes melhores. ' : 'Certificação Bronze: funciona bem em PC de entrada e intermediário; em placa forte eu prefiro Gold. ';
+    t += full ? 'Full modular: você só liga os cabos que usar, o que deixa o gabinete limpo.' : 'Não modular: os cabos vêm presos, então é só organizar atrás do gabinete.';
+    const ok = w >= need && (gold || !g || g.i < 170);
+    return [t + v(ok, ok ? 'fonte certa pro conjunto.' : 'eu iria de uma Gold com mais folga.'), undefined, ''];
+  }
+  if(k==='co'){
+    const wc = /Water/.test(it.n), r = radMm(it), q = QUENTE.test(m.cpu);
+    let t = wc ? `Water cooler com radiador de ${r}mm. ${r>=360 ? 'É o que eu uso nos processadores que esquentam (X3D, 7700X, 12 núcleos).' : 'O 240 segura bem os processadores médios.'}` : `Air cooler de torre: simples, silencioso e não tem bomba pra dar problema. Dá conta dos AM4 (menos X3D), dos 6 núcleos AM5 e do 9700X e 7700.`;
+    const ok = q ? (wc && r>=360) : true;
+    return [t + ' ' + v(ok, ok ? `segura o ${m.cpu} tranquilo.` : `pro ${m.cpu} eu iria de water cooler 360mm.`), undefined, ''];
+  }
+  if(k==='ca'){
+    const c = caseSpec(it.n) || {}, mob = S.mobo && S.mobo.it;
+    let t = `${c.tam||''}: cabe placa-mãe ${(c.mobo||[]).filter(x=>x!=='ITX').join('/')}, radiador de até ${c.rad}mm e placa de vídeo de até ${c.gpu}mm. `;
+    t += c.tier>=3 ? 'Gabinete de respeito: bom fluxo de ar e espaço pra montar com calma.' : c.tier===2 ? 'Gabinete intermediário, com bastante fan.' : 'Gabinete simples: cumpre o papel em PC de entrada.';
+    const ok = !(av.tot>=7000 && (c.tier||0)<3);
+    return [t + ' ' + v(ok, ok ? `tudo que você escolheu cabe${mob?' (placa-mãe '+moboTam(mob)+')':''}.` : 'num PC desse valor eu iria de um mid tower melhor.'), [c.tam, 'até '+c.rad+'mm de radiador', 'GPU até '+c.gpu+'mm'], ''];
+  }
+  return [o.sub, undefined, ''];
 }
 function mmCompara(av, m){
   const meu = av.meu; if(!meu) return '';
@@ -1196,18 +1282,19 @@ function montar(){
     });
   }
   const completo = m.pl && MM_SECS.slice(1).every(([k]) => m[k]);
-  h += `<div class="barra mmbar"><div><small>Seu PC até agora</small><b>${R(av.tot)}</b></div>${completo?`<button class="btn" id="pciMMok">Ver avaliação →</button>`:''}</div>`;
+  h += `<div class="barra mmbar"><div><small>Seu PC até agora</small><b>${R(av.tot)}</b></div>${completo?`<button class="btn mmav" id="pciMMok"><img src="${FOTO_BRUNO}" alt=""><span>Pedir pro Brunão avaliar<small>com as regras das minhas consultorias</small></span></button>`:''}</div>`;
   if(completo && m.ver){
     const S = av.sel;
     h += `<div class="hero" id="mmres"><div class="sub">Seu PC, montado por você</div><div class="tot">${R(av.tot)}</div><div class="mapa">${m.cpu} + ${m.gpu==='iGPU'?'vídeo integrado':m.gpu} + ${S.ram.nome.replace(/^2x /,'2x ')} + ${S.ssd.nome}</div>
       <div class="nota"><b>${String(av.nota).replace('.',',')}</b><span>nota do Brunão</span></div>
       <div class="sv"><button class="btn" id="pciPdf">📄 Salvar em PDF</button><button class="btn" id="pciLink">🔗 Copiar link do meu PC</button></div><div class="pdate">Montado em ${new Date().toLocaleDateString('pt-BR')} · grapetec.com.br</div></div>`;
     h += mapaHTML(true);
-    h += `<div class="raio"><h3>A avaliação do Brunão</h3>${av.alerta.length?`<ul class="ck no">${av.alerta.map(x=>`<li>${x}</li>`).join('')}</ul>`:''}${av.ok.length?`<ul class="ck" style="margin-top:8px">${av.ok.map(x=>`<li>${x}</li>`).join('')}</ul>`:''}
+    h += `<div class="raio"><div class="mmah"><img src="${FOTO_BRUNO}" alt="Brunão"><div><h3>A avaliação do Brunão</h3><span>Com base nas regras que eu uso nas minhas consultorias</span></div></div>${av.alerta.length?`<ul class="ck no">${av.alerta.map(x=>`<li>${x}</li>`).join('')}</ul>`:''}${av.ok.length?`<ul class="ck" style="margin-top:8px">${av.ok.map(x=>`<li>${x}</li>`).join('')}</ul>`:''}
       ${mmCompara(av, m)}
       <p class="foot" style="margin-top:10px">Esses são os melhores preços que passaram no meu canal no último mês, depois de uma leitura minuciosa de todas as ofertas. É esse o alvo: entra nos canais e vai pegando cada peça quando ela bater esse preço.</p></div>`;
-    h += `<div class="parts">${MM_SECS.slice(1).map(([k, nome]) => { const o = S[k]; if(!o || !o.it) return cardSem(nome, o ? o.nome : '-', o ? o.sub : '', k==='gpu' ? 'A placa entra depois, sem trocar nada.' : 'Já vem com o processador.', o && o.id==='box' ? 'já incluso' : 'vem no processador');
-      return card(nome, o.nome, o.preco, o.it, `até <b>${R(o.preco)}</b> tá bom. Faixa normal no mês: ${faixa(o.it.p25*(o.qtd||1), o.it.p75*(o.qtd||1))}.`, k==='cpu' ? (CPU[m.cpu].d||'') : k==='gpu' && GPU[m.gpu] ? `${GPU[m.gpu].v}GB de VRAM${GPU[m.gpu].ln ? ', '+GPU[m.gpu].pcie+' x'+GPU[m.gpu].ln : ''}.` : /mobo|ssd|ca/.test(k) ? '' : o.sub, o.qtd===2 ? `2 pentes × ${R2(o.it.p)}` : ''); }).join('')}</div>`;
+    h += `<div class="parts">${MM_SECS.slice(1).map(([k, nome]) => { const o = S[k]; if(!o || !o.it) return cardSem(nome, o ? o.nome : '-', o ? o.sub : '', k==='gpu' ? (CPU[m.cpu]&&CPU[m.cpu].apu ? `O ${CPU[m.cpu].apu} roda os competitivos leves (CS2, Valorant, LoL) no gráfico baixo. A placa de vídeo entra depois, sem trocar nada.` : 'Esse vídeo é só pra ligar a tela e usar o PC. Pra jogar, a placa de vídeo precisa vir logo.') : 'O cooler que vem na caixa segura esse processador sem overclock. Confere se a oferta é a versão box (com cooler).', o && o.id==='box' ? 'já incluso' : 'vem no processador');
+      const [why, specs, mtr] = mmPeca(k, o, av);
+      return card(nome, o.nome, o.preco, o.it, `até <b>${R(o.preco)}</b> tá bom. Faixa normal no mês: ${faixa(o.it.p25*(o.qtd||1), o.it.p75*(o.qtd||1))}.`, why, o.qtd===2 ? `2 pentes × ${R2(o.it.p)}` : '', '', specs, mtr); }).join('')}</div>`;
     h += `<a class="me" href="https://jobrufe.kpages.online/montageminteligente" target="_blank" rel="noopener" id="pciCta"><div class="foto"><img src="${FOTO_BRUNO}" alt="Brunão"></div><div><small>Quer que eu revise pessoalmente?</small><b>ME <u>AJUDA</u>, BRUNÃO</b><span>Essa é a avaliação automática. Na consultoria eu olho o seu caso e te entrego a configuração certinha <b>em até 24h</b>.</span><em>Quero a consultoria →</em></div></a>` + canaisHTML() + `<button class="opt go novo" id="pciMMnovo"><b>↺ Montar outro do zero</b></button>`;
   }
   app.innerHTML = h;

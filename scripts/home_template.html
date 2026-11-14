@@ -128,7 +128,7 @@
 @media (max-width:760px){
   #gth .top{position:static}#gth .nav{flex-wrap:wrap;overflow:visible;gap:6px}#gth .nav a{font-size:12.5px;padding:6px 10px}
   #gth .hero{grid-template-columns:1fr;padding-top:26px;gap:22px}
-  #gth .eu{width:220px;order:-1;justify-self:start}
+  #gth .eu{width:200px;justify-self:start}
   #gth .eu .tags{justify-content:flex-start;white-space:nowrap}#gth .eu .tags span:first-child{padding-left:0}
   #gth .flx,#gth .duo,#gth .pc{grid-template-columns:1fr}
   #gth .card.big{grid-column:span 2}
@@ -136,24 +136,68 @@
   #gth .brand span{display:none}
 }
 @media (max-width:420px){#gth .card.wide{grid-template-columns:auto 1fr}#gth .card.wide .go{grid-column:2;grid-row:3;margin-top:6px}#gth .hub{gap:8px}#gth .card{padding:14px;min-height:160px}#gth .card h3{font-size:15.5px}#gth .card p{font-size:12.5px}#gth .vid{grid-template-columns:1fr}}
+#gth .nav i svg{width:16px;height:16px;display:block}
+#gth .card .ic svg{width:24px;height:24px;color:var(--ac)}
+#gth .top{transition:box-shadow .2s}#gth .top.sc{box-shadow:0 10px 30px rgba(0,0,0,.35)}
+#gth .card{background:radial-gradient(420px circle at var(--mx,-300px) var(--my,-300px),color-mix(in srgb,var(--ac) 14%,transparent),transparent 60%),var(--s1)}
+#gth .card.big{background:radial-gradient(520px circle at var(--mx,-300px) var(--my,-300px),color-mix(in srgb,var(--ac) 18%,transparent),transparent 60%),linear-gradient(135deg,color-mix(in srgb,var(--ac2) 32%,var(--s1)),var(--s1) 70%)}
+#gth .tick{overflow:hidden;border-bottom:1px solid var(--bd);background:var(--s1);white-space:nowrap;mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+#gth .tr{display:inline-flex;animation:gthtk 70s linear infinite;padding:9px 0}
+#gth .tick:hover .tr{animation-play-state:paused}
+#gth .tr a{display:inline-flex;align-items:center;gap:8px;padding:0 22px;font-size:13.5px;border-right:1px solid var(--bd)}
+#gth .tr a:hover b{color:var(--ac)}
+#gth .tr b{font-weight:500}
+#gth .tr s{text-decoration:none;font-family:var(--mono);font-weight:800;font-size:12.5px;color:var(--ok)}
+#gth .tr em{font-style:normal;font-family:var(--mono);font-weight:700;color:var(--mut)}
+@keyframes gthtk{to{transform:translateX(-50%)}}
+#gth .ach{grid-auto-flow:dense}
+#gth .feat{grid-column:span 2;grid-row:span 2;display:flex;flex-direction:column;border-radius:20px;background:var(--s1);border:1px solid color-mix(in srgb,var(--ac) 45%,var(--bd));overflow:hidden}
+#gth .feat .fh{display:flex;gap:16px;padding:18px 18px 0;align-items:center}
+#gth .feat .fi{width:120px;height:120px;flex:none;border-radius:14px;background:#fff;overflow:hidden}#gth .feat .fi img{width:100%;height:100%;object-fit:contain}
+#gth .feat .fq{font-size:13px;color:var(--ok);font-weight:700}
+#gth .feat h3{margin:4px 0 8px;font-size:20px;line-height:1.25}
+#gth .feat .fp{font-family:var(--mono);font-weight:800;font-size:30px;line-height:1}
+#gth .feat .fp s{font-size:15px;color:var(--mut);font-weight:500;margin-left:8px}
+#gth .feat .cvw{padding:14px 0 6px}
+#gth .feat .cvw small{display:block;padding:0 18px;font-size:12px;color:var(--mut)}
+#gth .feat .cvw{display:flex;flex-direction:column;flex:1}#gth .feat .cvb{position:relative;flex:1;min-height:150px;margin-top:8px}#gth .feat svg.cv{position:absolute;inset:0;width:100%;height:100%}
+#gth .feat .cvd{position:absolute;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:var(--ok);border:3px solid var(--s1)}
+#gth .feat.anim svg.cv{animation:gthdraw 1.6s cubic-bezier(.6,.1,.2,1) both}
+#gth .feat.anim .cvd{animation:gthpop .45s 1.45s both}
+@keyframes gthdraw{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes gthpop{from{opacity:0;transform:scale(.2)}}
+#gth .feat .fl{display:flex;gap:8px;padding:6px 18px 18px;flex-wrap:wrap}
+#gth .feat .fl a{font-size:14px;font-weight:700;padding:10px 14px;border-radius:10px;border:1px solid var(--bd)}
+#gth .feat .fl a.p{background:var(--ac);border-color:var(--ac);color:var(--onac)}
+#gth .feat .fl a:not(.p):hover{border-color:var(--ac)}
+#gth a:focus-visible,#gth button:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){#gth .tr{animation:none}#gth .tick{overflow-x:auto}#gth .feat.anim svg.cv,#gth .feat.anim .cvd,#gth .kick .dot{animation:none}}
+@media (max-width:980px){#gth .feat{grid-column:1/-1;grid-row:auto}}
+@media (max-width:760px){
+  #gth .ach{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;margin:0 -20px;padding:0 20px 6px;scrollbar-width:none}
+  #gth .ach::-webkit-scrollbar{display:none}
+  #gth .ach>*{scroll-snap-align:start;flex:0 0 62%}#gth .ach>.feat{flex:0 0 88%}
+  #gth .feat .fi{width:84px;height:84px}#gth .feat h3{font-size:16px}#gth .feat .fp{font-size:24px}#gth .feat .cvb{min-height:120px}
+}
 </style></head><body style="margin:0">
 <div id="gth">
 <header class="top"><div class="wrap">
   <div class="tb"><a class="brand" href="https://grapetec.com.br/"><img src="/*LOGO*/" alt="Grape Tec"><span>GRAPE TEC</span></a>
     <button class="tema" id="gthTema">☀️ Claro</button></div>
   <nav class="nav" aria-label="Páginas da Grape Tec">
-    <a class="pri" href="https://grapetec.com.br/pc-ideal/" data-ev="nav_pcideal"><i>🖥️</i>Monte seu PC<sup>novo</sup></a>
-    <a href="https://grapetec.com.br/radar/" data-ev="nav_radar"><i>📡</i>Radar de preços<sup>ao vivo</sup></a>
-    <a href="https://grapetec.com.br/ofertas/" data-ev="nav_ofertas"><i>🔥</i>Ofertas</a>
-    <a href="https://jobrufe.kpages.online/montageminteligente" target="_blank" rel="noopener" data-ev="nav_consultoria"><i>🧑‍🔧</i>Consultoria</a>
-    <a href="https://grapetec.com.br/calcudora-de-consumo/" data-ev="nav_calculadora"><i>⚡</i>Calculadora de luz</a>
-    <a href="https://grapetec.com.br/promacho/" data-ev="nav_promacho"><i>🧔</i>ProMacho</a>
-    <a href="https://go.hotmart.com/K70125630T?dp=1" target="_blank" rel="noopener" data-ev="nav_curso"><i>🎓</i>Curso PSP</a>
-    <a href="https://grapetec.com.br/links/" data-ev="nav_links"><i>🔗</i>Links</a>
-    <a href="#videos" data-ev="nav_videos"><i>▶️</i>Vídeos</a>
-    <a href="#parcerias" data-ev="nav_parcerias"><i>🤝</i>Parcerias</a>
+    <a class="pri" href="https://grapetec.com.br/pc-ideal/" data-ev="nav_pcideal"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></i>Monte seu PC<sup>novo</sup></a>
+    <a href="https://grapetec.com.br/radar/" data-ev="nav_radar"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12 19 5"/><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg></i>Radar de preços<sup>ao vivo</sup></a>
+    <a href="https://grapetec.com.br/ofertas/" data-ev="nav_ofertas"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c1 3 4 4.5 4 8.5a4 4 0 0 1-8 0c0-1.6.7-2.7 1.6-3.6.2 1.4 1 2.2 2 2.6C11 8.8 11.2 5.6 12 3Z"/><path d="M8.2 16.5A4.5 4.5 0 0 0 12 21a5 5 0 0 0 5-5"/></svg></i>Ofertas</a>
+    <a href="https://jobrufe.kpages.online/montageminteligente" target="_blank" rel="noopener" data-ev="nav_consultoria"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5"/></svg></i>Consultoria</a>
+    <a href="https://grapetec.com.br/calcudora-de-consumo/" data-ev="nav_calculadora"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 5 13.5h6L10 22l8-11.5h-6L13 2Z"/></svg></i>Calculadora de luz</a>
+    <a href="https://grapetec.com.br/promacho/" data-ev="nav_promacho"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12V4h8l10 10-8 8L3 12Z"/><circle cx="7.5" cy="8" r="1.3" fill="currentColor"/></svg></i>ProMacho</a>
+    <a href="https://go.hotmart.com/K70125630T?dp=1" target="_blank" rel="noopener" data-ev="nav_curso"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m2 9 10-5 10 5-10 5L2 9Z"/><path d="M6 11v5c2.5 2 9.5 2 12 0v-5"/></svg></i>Curso PSP</a>
+    <a href="https://grapetec.com.br/links/" data-ev="nav_links"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1 1"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1-1"/></svg></i>Links</a>
+    <a href="#videos" data-ev="nav_videos"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m10 9 5 3-5 3V9Z" fill="currentColor"/></svg></i>Vídeos</a>
+    <a href="#parcerias" data-ev="nav_parcerias"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h3l3-3 3 1 2-2h5"/><path d="M4 12l5 5c.8.8 2 .8 2.8 0l5.2-5.2"/></svg></i>Parcerias</a>
   </nav>
 </div></header>
+<div class="tick" id="gthTick" hidden><div class="tr" id="gthTr"></div></div>
 
 <div class="wrap">
   <div class="hero">
@@ -162,8 +206,8 @@
       <h1>PCzão bom <em>não precisa</em> ser caro.</h1>
       <p class="lead">Há mais de 10 anos eu testo hardware de verdade. Aqui tá tudo num lugar só: o montador de PC com os preços do meu canal, o histórico de preço de cada peça e as ofertas do dia.</p>
       <div class="ctas">
-        <a class="btn p" href="https://grapetec.com.br/pc-ideal/" data-ev="hero_pcideal">🖥️ Montar meu PC agora</a>
-        <a class="btn" href="https://grapetec.com.br/ofertas/" data-ev="hero_ofertas">🔥 Ofertas de hoje</a>
+        <a class="btn p" href="https://grapetec.com.br/pc-ideal/" data-ev="hero_pcideal">Montar meu PC agora</a>
+        <a class="btn" href="https://grapetec.com.br/ofertas/" data-ev="hero_ofertas">Ofertas de hoje</a>
       </div>
       <div class="live" id="gthLive"></div>
     </div>
@@ -177,14 +221,14 @@
 <section><div class="wrap">
   <div class="sh"><div><h2>Tudo da Grape Tec</h2><p>Escolhe por onde começar.</p></div></div>
   <div class="hub">
-    <a class="card big" href="https://grapetec.com.br/pc-ideal/" data-ev="hub_pcideal"><span class="bd">novo</span><div class="ic">🖥️</div><h3>Monte seu PC Ideal</h3><p>Fala o orçamento e o que você joga: eu monto o PC peça por peça, com os preços reais do meu canal e o Raio-X explicando cada escolha. Se você já sabe montar, escolhe as peças e eu avalio.</p><span class="go">Montar meu PC →</span></a>
-    <a class="card big" href="https://grapetec.com.br/radar/" data-ev="hub_radar"><span class="bd v">ao vivo</span><div class="ic">📡</div><h3>Radar de preços</h3><p>O histórico de preço de cada peça no meu canal: se o preço de hoje tá bom, as maiores quedas do dia e o termômetro de cada categoria. Atualiza a cada 5 minutos.</p><span class="go">Abrir o Radar →</span></a>
-    <a class="card" href="https://grapetec.com.br/ofertas/" data-ev="hub_ofertas"><div class="ic">🔥</div><h3>Ofertas no WhatsApp e Telegram</h3><p>Promoção de hardware todo dia, com preço no Pix, cupom e link. Grátis.</p><span class="go">Entrar nos grupos →</span></a>
-    <a class="card" href="https://jobrufe.kpages.online/montageminteligente" target="_blank" rel="noopener" data-ev="hub_consultoria"><div class="ic">🧑‍🔧</div><h3>Consultoria com o Brunão</h3><p>Eu olho o seu caso e te entrego a configuração certinha em até 24h.</p><span class="go">Quero a consultoria →</span></a>
-    <a class="card" href="https://grapetec.com.br/calcudora-de-consumo/" data-ev="hub_calculadora"><div class="ic">⚡</div><h3>Calculadora de consumo</h3><p>Quanto o seu PC gamer gasta de luz por mês, com o consumo oficial das peças.</p><span class="go">Calcular →</span></a>
-    <a class="card" href="https://go.hotmart.com/K70125630T?dp=1" target="_blank" rel="noopener" data-ev="hub_curso"><div class="ic">🎓</div><h3>Curso Potencialize Seu PC</h3><p>Mais FPS no PC que você já tem: Windows, BIOS, drivers e jogo.</p><span class="go">Conhecer o curso →</span></a>
-    <a class="card wide" href="https://grapetec.com.br/promacho/" data-ev="hub_promacho"><div class="ic">🧔</div><h3>ProMacho</h3><p>Ofertas do universo masculino: barbear, perfume, tênis, games e mais.</p><span class="go">Ver o ProMacho →</span></a>
-    <a class="card wide" href="https://grapetec.com.br/links/" data-ev="hub_links"><div class="ic">🔗</div><h3>Todos os links</h3><p>YouTube, Instagram, grupos, cupons e tudo da Grape Tec num lugar só.</p><span class="go">Ver os links →</span></a>
+    <a class="card big" href="https://grapetec.com.br/pc-ideal/" data-ev="hub_pcideal"><span class="bd">novo</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></div><h3>Monte seu PC Ideal</h3><p>Fala o orçamento e o que você joga: eu monto o PC peça por peça, com os preços reais do meu canal e o Raio-X explicando cada escolha. Se você já sabe montar, escolhe as peças e eu avalio.</p><span class="go">Montar meu PC →</span></a>
+    <a class="card big" href="https://grapetec.com.br/radar/" data-ev="hub_radar"><span class="bd v">ao vivo</span><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 12 19 5"/><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg></div><h3>Radar de preços</h3><p>O histórico de preço de cada peça no meu canal: se o preço de hoje tá bom, as maiores quedas do dia e o termômetro de cada categoria. Atualiza a cada 5 minutos.</p><span class="go">Abrir o Radar →</span></a>
+    <a class="card" href="https://grapetec.com.br/ofertas/" data-ev="hub_ofertas"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c1 3 4 4.5 4 8.5a4 4 0 0 1-8 0c0-1.6.7-2.7 1.6-3.6.2 1.4 1 2.2 2 2.6C11 8.8 11.2 5.6 12 3Z"/><path d="M8.2 16.5A4.5 4.5 0 0 0 12 21a5 5 0 0 0 5-5"/></svg></div><h3>Ofertas no WhatsApp e Telegram</h3><p>Promoção de hardware todo dia, com preço no Pix, cupom e link. Grátis.</p><span class="go">Entrar nos grupos →</span></a>
+    <a class="card" href="https://jobrufe.kpages.online/montageminteligente" target="_blank" rel="noopener" data-ev="hub_consultoria"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5"/></svg></div><h3>Consultoria com o Brunão</h3><p>Eu olho o seu caso e te entrego a configuração certinha em até 24h.</p><span class="go">Quero a consultoria →</span></a>
+    <a class="card" href="https://grapetec.com.br/calcudora-de-consumo/" data-ev="hub_calculadora"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 5 13.5h6L10 22l8-11.5h-6L13 2Z"/></svg></div><h3>Calculadora de consumo</h3><p>Quanto o seu PC gamer gasta de luz por mês, com o consumo oficial das peças.</p><span class="go">Calcular →</span></a>
+    <a class="card" href="https://go.hotmart.com/K70125630T?dp=1" target="_blank" rel="noopener" data-ev="hub_curso"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m2 9 10-5 10 5-10 5L2 9Z"/><path d="M6 11v5c2.5 2 9.5 2 12 0v-5"/></svg></div><h3>Curso Potencialize Seu PC</h3><p>Mais FPS no PC que você já tem: Windows, BIOS, drivers e jogo.</p><span class="go">Conhecer o curso →</span></a>
+    <a class="card wide" href="https://grapetec.com.br/promacho/" data-ev="hub_promacho"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12V4h8l10 10-8 8L3 12Z"/><circle cx="7.5" cy="8" r="1.3" fill="currentColor"/></svg></div><h3>ProMacho</h3><p>Ofertas do universo masculino: barbear, perfume, tênis, games e mais.</p><span class="go">Ver o ProMacho →</span></a>
+    <a class="card wide" href="https://grapetec.com.br/links/" data-ev="hub_links"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1 1"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1-1"/></svg></div><h3>Todos os links</h3><p>YouTube, Instagram, grupos, cupons e tudo da Grape Tec num lugar só.</p><span class="go">Ver os links →</span></a>
   </div>
 </div></section>
 
@@ -275,19 +319,41 @@ tb.onclick = () => setT(!R.classList.contains('claro'));
 const V = [['sb9SMWzBc20','Utilidade pública','Short','Teu PC gamer consome muita energia, será?'],['WbMIrVoXRNw','Builds','14 min','O REI VOLTOU! O melhor PC gamer de R$ 4.000 pra 2026'],['cG6tlH0y1pc','AM4 em 2026','9 min','AM4 voltou em 2026? A decisão da AMD que chocou todo mundo'],['oWzegMfJKWg','Economia burra','1/50','ECONOMIA BURRA número 1 de 50 com seu PC gamer'],['u-0SfjGW0MU','Periféricos','20 min','Volante a R$ 1000 melhor que Logitech: Kalkan G500'],['-m8pb0JEkf8','Problema técnico','Short','PC reinicia nos jogos? Faça isso!']];
 document.getElementById('gthVid').innerHTML = V.map(v => `<a class="vd" href="https://www.youtube.com/watch?v=${v[0]}" target="_blank" rel="noopener" data-ev="yt_video"><div class="th"><img src="https://i.ytimg.com/vi/${v[0]}/hqdefault.jpg" alt="" loading="lazy"><span>${v[2]}</span></div><div class="tt"><small>${v[1]}</small><b>${esc(v[3])}</b></div></a>`).join('');
 // dados ao vivo (Radar)
+function feat(x){
+  const s = x.s.slice(), W = 600, H = 150, pd = 14;
+  const lx = s[s.length-1][0] + 1; s.push([lx, x.p]);
+  const a = s[0][0], ys = s.map(q => q[1]), lo = Math.min(...ys), hi = Math.max(...ys), sp = Math.max(1, hi - lo);
+  const X = v => pd + (v - a) / Math.max(1, lx - a) * (W - 2*pd), Y = v => pd + (hi - v) / sp * (H - 2*pd);
+  const pts = s.map(q => X(q[0]).toFixed(1) + ',' + Y(q[1]).toFixed(1)).join(' ');
+  const ex = X(lx), ey = Y(x.p), antes = Math.round(Math.max(...ys.slice(0,-1)));
+  return `<div class="feat"><div class="fh"><div class="fi"><img src="${esc(x.img)}" alt="" onerror="this.style.display='none'"></div><div><span class="fq">Maior queda de hoje: -${Math.round(x.drop)}%</span><h3>${esc(x.n)}</h3><div class="fp">${R2(x.p)}<s>${R0(x.med||antes)}</s></div></div></div>
+  <div class="cvw"><small>Preço dessa peça no meu canal, no último mês</small><div class="cvb"><svg class="cv" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="Gráfico do preço no último mês"><defs><linearGradient id="gthg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--ac)" stop-opacity=".28"/><stop offset="1" stop-color="var(--ac)" stop-opacity="0"/></linearGradient></defs>
+  <polygon points="${X(a).toFixed(1)},${H} ${pts} ${ex.toFixed(1)},${H}" fill="url(#gthg)"/><polyline class="cvl" points="${pts}" fill="none" stroke="var(--ac)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+</svg><i class="cvd" style="left:${(ex/W*100).toFixed(2)}%;top:${(ey/H*100).toFixed(2)}%"></i></div></div>
+  <div class="fl"><a class="p" href="${esc(x.url)}" target="_blank" rel="noopener sponsored" data-ev="feat_loja">Ver a oferta</a>${x.id?`<a href="https://grapetec.com.br/radar/#${esc(x.id)}" data-ev="feat_radar">Ver o histórico no Radar</a>`:''}</div></div>`;
+}
 function vivo(d){
   const lv = document.getElementById('gthLive'), ach = document.getElementById('gthAch');
   if(!d){ ach.innerHTML = '<div class="vazio">Os achados aparecem aqui assim que o Radar atualizar. <a href="https://grapetec.com.br/radar/" style="color:var(--ac);font-weight:600">Abrir o Radar →</a></div>'; return; }
   if(d.ofertas) document.getElementById('gthOf').textContent = (Math.floor(d.ofertas/1000)) + ' mil+';
   lv.innerHTML = `<span>📡 Radar atualizado às <b>${esc((d.upd||'').replace(/^.* às /,''))}</b></span>${d.nhoje?`<span>🔥 <b>${d.nhoje}</b> achados hoje</span>`:''}${d.pecas?`<span>🖥️ <b>${d.pecas}</b> peças no montador</span>`:''}`;
-  const A = (d.achados||[]).slice(0, innerWidth < 980 ? 4 : 8);
+  const A = (d.achados||[]).slice(0, 8);
   const hoje = d.dia && d.dia === new Date(Date.now()-3*3600e3).toISOString().slice(0,10);
   document.getElementById('gthAchSub').textContent = hoje ? 'As maiores quedas de preço que passaram no canal hoje.' : 'As maiores quedas de preço do último dia no canal.';
-  ach.innerHTML = A.length ? A.map(x => `<a class="ac" href="${esc(x.url)}" target="_blank" rel="noopener sponsored" data-ev="ach_produto"><div class="im"><img src="${esc(x.img)}" alt="" loading="lazy" onerror="this.style.display='none'"><span class="dr">-${Math.round(x.drop)}%</span></div><div class="bx"><span class="nm">${esc(x.n)}</span><span class="pr">${R2(x.p)}${x.med?`<s>${R0(x.med)}</s>`:''}</span><span class="lj">${esc(x.loja||'')}${x.h?' · '+esc(x.h):''}${x.cup?' · cupom '+esc(x.cup):''}</span></div></a>`).join('') : '<div class="vazio">Ainda não teve queda forte hoje. <a href="https://grapetec.com.br/radar/" style="color:var(--ac);font-weight:600">Ver o Radar →</a></div>';
+  const T = (d.achados||[]);
+  if(T.length){ const it = T.map(x => `<a href="${esc(x.url)}" target="_blank" rel="noopener sponsored" data-ev="tick"><s>-${Math.round(x.drop)}%</s><b>${esc(x.n)}</b><em>${R0(x.p)}</em></a>`).join(''); document.getElementById('gthTr').innerHTML = it + it; document.getElementById('gthTick').hidden = false; }
+  const F = A[0] && A[0].s && A[0].s.length > 1 ? A.shift() : null;
+  if(F && innerWidth >= 980) A.splice(4);
+  ach.innerHTML = (F ? feat(F) : '') + (A.length || F ? '' : '<div class="vazio">Ainda não teve queda forte hoje.</div>') + A.map(x => `<a class="ac" href="${esc(x.url)}" target="_blank" rel="noopener sponsored" data-ev="ach_produto"><div class="im"><img src="${esc(x.img)}" alt="" loading="lazy" onerror="this.style.display='none'"><span class="dr">-${Math.round(x.drop)}%</span></div><div class="bx"><span class="nm">${esc(x.n)}</span><span class="pr">${R2(x.p)}${x.med?`<s>${R0(x.med)}</s>`:''}</span><span class="lj">${esc(x.loja||'')}${x.h?' · '+esc(x.h):''}${x.cup?' · cupom '+esc(x.cup):''}</span></div></a>`).join('');
+  const fe = ach.querySelector('.feat');
+  if(fe && 'IntersectionObserver' in window){ const io = new IntersectionObserver(e => { if(e[0].isIntersecting){ fe.classList.add('anim'); io.disconnect(); } }, {threshold:.35}); io.observe(fe); }
 }
 vivo(D);
 // copiar e-mail
 document.getElementById('gthCopy').onclick = e => { try { navigator.clipboard.writeText('contato@grapetec.com.br'); } catch(_){} e.target.textContent = 'Copiado'; setTimeout(() => e.target.textContent = 'Copiar', 1800); };
+// topo com sombra ao rolar + luz que segue o mouse nos cards
+const tp = R.querySelector('.top'); addEventListener('scroll', () => tp.classList.toggle('sc', scrollY > 10), {passive:true});
+R.querySelectorAll('.card').forEach(c => c.addEventListener('pointermove', e => { const r = c.getBoundingClientRect(); c.style.setProperty('--mx', (e.clientX - r.left) + 'px'); c.style.setProperty('--my', (e.clientY - r.top) + 'px'); }));
 // pixel
 fire('Home_Visita');
 R.addEventListener('click', e => { const a = e.target.closest('[data-ev]'); if(a) fire('Home_' + a.dataset.ev); });

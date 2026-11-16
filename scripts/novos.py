@@ -85,10 +85,32 @@ def mesmo(a, b):
     return ca == cb or (min(len(ca), len(cb)) >= 6 and (ca.startswith(cb) or cb.startswith(ca)) and abs(len(ca) - len(cb)) <= 2)
 
 
+# G-Storm (parceiro): todos os produtos, escrito G-Storm, GStorm ou G Storm
+GSTORM = [(r'hx700', 'Coolers', 'Water cooler G-Storm HX700 360'), (r'hx500', 'Coolers', 'Water cooler G-Storm HX500 240'),
+          (r'gx400', 'Coolers', 'Air cooler G-Storm GX400'), (r'sentinel', 'Gabinetes', 'Gabinete G-Storm Sentinel'),
+          (r'frost.*(fan|12\s?cm|120)|(fan|12\s?cm|120).*frost|gs-frost-120', 'Coolers', 'Fan G-Storm Frost 120mm (kit 3 fans)'),
+          (r'fonte.*frost|frost.*fonte', 'Fontes', 'Fonte G-Storm Frost {w}W'), (r'fonte|airflow', 'Fontes', 'Fonte G-Storm Airflow {w}W')]
+
+
+def gstorm(t):
+    if not re.search(r'\bg[\s\-]?storm', t) or re.search(r'usad[oa]|seminov|open ?box|vitrine', t):
+        return None
+    for r, c, n in GSTORM:
+        if re.search(r, t):
+            if '{w}' in n:
+                w = re.search(r'(\d{3,4})\s?w\b', t)
+                if not w: return None
+                n = n.format(w=w.group(1))
+            return (c, n)
+    return None
+
+
 def nome(titulo):
     """(categoria, nome do produto) pra um título de post, ou None se não der pra ter certeza."""
     t0 = titulo.strip()
     t = re.sub(r'^[^\w]+', '', t0.lower())
+    gs = gstorm(t)
+    if gs: return gs
     if not t or FORA.search(t):
         return None
     # placa-mãe
@@ -180,8 +202,11 @@ def posts(desde):
             vis.add(m['id'])
             txt = flat(m.get('text', ''))
             i = txt.find('💰')
-            if i < 0:
-                continue
+            if i < 0:   # post sem o 💰 (ex.: postado à mão): o preço é o primeiro R$
+                i = txt.find('R$')
+                if i < 0:
+                    continue
+                i = txt.rfind('\n', 0, i) + 1 or i
             pm = re.search(r'R\$\s?([\d\.]+(?:,\d{1,2})?)', txt[i:])
             if not pm:
                 continue
@@ -230,13 +255,13 @@ def cadastra():
     novos = []
     conhecidos = [x for x in existentes if 'mais bar' not in x] + [x for x, v in C['itens'].items() if not v.get('igual')]
     for k, ds in sorted(dias.items(), key=lambda x: -n[x[0]]):
-        if k in C['itens'] or k in existentes:
+        if k in C['itens'] or (k in existentes and 'G-Storm' not in k):
             continue
         par = next((x for x in conhecidos if mesmo(k, x)), None)
         if par:   # mesmo modelo escrito de outro jeito: junta no que já existe
             C['itens'][k] = dict(cat=cats[k], desde=hoje.isoformat(), igual=par)
             continue
-        if len(ds) < 2:
+        if len(ds) < 2 and 'G-Storm' not in k:
             continue
         C['itens'][k] = dict(cat=cats[k], desde=hoje.isoformat(), posts=n[k], exemplo=ex[k])
         novos.append(k); conhecidos.append(k)

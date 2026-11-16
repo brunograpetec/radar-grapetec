@@ -1226,6 +1226,42 @@
    "cat": "Monitores",
    "desde": "2026-11-16",
    "igual": "Monitor LG 32G403B"
+  },
+  "Fonte G-Storm Airflow 650W": {
+   "cat": "Fontes",
+   "desde": "2026-11-16",
+   "posts": 18,
+   "exemplo": "GSTORM - FONTE ATX 650W AIRFLOW 80 PLUS BRONZE C/CABO DE FORÇA"
+  },
+  "Water cooler G-Storm HX700 360": {
+   "cat": "Coolers",
+   "desde": "2026-11-16",
+   "obs": "G-Storm (parceiro): todos os produtos"
+  },
+  "Water cooler G-Storm HX500 240": {
+   "cat": "Coolers",
+   "desde": "2026-11-16",
+   "obs": "G-Storm (parceiro): todos os produtos"
+  },
+  "Gabinete G-Storm Sentinel": {
+   "cat": "Gabinetes",
+   "desde": "2026-11-16",
+   "obs": "G-Storm (parceiro): todos os produtos"
+  },
+  "Fan G-Storm Frost 120mm (kit 3 fans)": {
+   "cat": "Coolers",
+   "desde": "2026-11-16",
+   "obs": "G-Storm (parceiro): todos os produtos"
+  },
+  "Fonte G-Storm Frost 650W": {
+   "cat": "Fontes",
+   "desde": "2026-11-16",
+   "obs": "G-Storm (parceiro): todos os produtos"
+  },
+  "Fonte G-Storm Airflow 550W": {
+   "cat": "Fontes",
+   "desde": "2026-11-16",
+   "obs": "G-Storm (parceiro): todos os produtos"
   }
  }
 }

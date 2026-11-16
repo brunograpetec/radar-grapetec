@@ -108,3 +108,8 @@ Regras que o Bruno passou e que o algoritmo segue. Anotar aqui cada regra nova (
 - Fica fora: usado, open box, kit, combo, anúncio com vários tamanhos, notebook/PC pronto, cupom, acessório; e os modelos antigos que já tínhamos tirado (RTX 3060, RX 6600 etc.).
 - Mesmo produto escrito de outro jeito (ex.: 25G523B-B e 25G523B) é juntado no que já existe, sem duplicar.
 - Primeiro cadastro: 195 produtos (monitores, placas-mãe Intel e AM5 B840, gabinetes, Intel Core, coolers, fontes, periféricos, SSD).
+
+## 16/11/2026 — G-Storm (parceiro)
+- Todos os produtos G-Storm entram no Radar, escritos G-Storm, GStorm ou G Storm, sempre com o nome certo do produto, mesmo com poucos dias de oferta (os outros produtos precisam de 6 dias).
+- Hoje: Water cooler HX700 360, Water cooler HX500 240, Air cooler GX400, Gabinete Sentinel, Fonte Airflow 650W, Fonte Airflow 550W, Fonte Frost 650W e o kit de 3 fans Frost 120mm.
+- Posts sem o 💰 (postados à mão, tipo "R$ 179,90") agora também contam pros produtos cadastrados.

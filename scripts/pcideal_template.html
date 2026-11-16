@@ -187,6 +187,13 @@
 #pci .fcx{font-size:11.5px;line-height:1.35;color:#ffb37a;background:rgba(255,159,107,.08);border:1px dashed rgba(255,159,107,.35);border-radius:8px;padding:5px 7px;margin:6px 0 2px}
 #pci .fcx b{color:inherit}#pci .mon small.fco{color:#ffb37a}
 #pci.claro .fcx,#pci.claro .mon small.fco{color:#b4530f}
+#pci .vps{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+#pci .mow{display:flex;gap:6px;align-items:stretch}#pci .mow .mo{flex:1;min-width:0}
+#pci .mo .moi{width:46px;height:46px;flex:none;border-radius:8px;background:#fff;object-fit:contain;margin:-4px 0}
+#pci .mo .mon{flex:1;min-width:0}
+#pci .mocv{flex:none;width:58px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border:1px solid var(--bd);border-radius:12px;background:var(--s2);color:var(--ac);font-size:11px;font-weight:700;text-decoration:none}
+#pci .mocv:hover{border-color:var(--ac);background:rgba(199,125,255,.12)}#pci .mocv svg{width:18px;height:18px}
+@media (max-width:560px){#pci .mo .moi{width:38px;height:38px;margin:0}#pci .mocv{width:44px;font-size:10px}#pci .mow .mo{flex-wrap:wrap;gap:4px 10px;padding:10px 12px}#pci .mow .mo .mon{flex:1 1 calc(100% - 52px)}#pci .mow .mo .mop{flex:1 1 100%;text-align:left;padding-left:48px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}#pci .mow .mo .mop small{display:inline;margin:0}}
 #pci .tema{all:unset;cursor:pointer;margin-left:auto;font-size:12.5px;border:1px solid var(--bd);border-radius:999px;padding:5px 11px;color:var(--mut);background:var(--s1)}
 #pci .tema:hover{border-color:var(--ac);color:var(--ink)}
 /* tema claro */
@@ -835,7 +842,7 @@ function pbox(it, preco, sub){
     <div class="pi"><div class="pp">${R2(preco)}</div><div class="ps">${sub||(esc(it.loja||'')+' · '+dia(it.d))}</div><div class="age ${idade(it)<=2?'new':''}">${idade(it)===0?'postado hoje':idade(it)===1?'postado ontem':'postado há '+idade(it)+' dias'}</div>${it.fc?`<div class="fcx">${fcTxt(it)}, mas foi pontual. Meta realista: <b>${R(it.p)}</b>${preco > it.p*1.5 ? " cada" : ""}</div>`:''}
     ${it.cup?`<button class="cupb" data-c="${esc(it.cup)}" data-u="${esc(it.url||'')}" title="Copia o cupom e abre a loja">🎟️ ${esc(it.cup)}</button>`:''}
     ${it.url?`<a class="btn buy" href="${esc(it.url)}" target="_blank" rel="noopener sponsored" data-ev="loja">${esc(it.loja||'Loja')} ↗</a>`:''}
-    <a class="vp" href="https://t.me/grape_tec/${it.post}" target="_blank" rel="noopener" data-ev="post">ver o post</a></div></div>`;
+    <div class="vps">${it.rid ? `<a class="vp" href="https://grapetec.com.br/radar/#${esc(it.rid)}" target="_blank" rel="noopener" data-ev="curva">📈 ver a curva</a>` : ''}<a class="vp" href="https://t.me/grape_tec/${it.post}" target="_blank" rel="noopener" data-ev="post">ver o post</a></div></div></div>`;
 }
 function termo(it){
   const lo = it.lo, hi = Math.max(it.p75*1.12, it.p*1.03, it.med*1.12, lo*1.2), w = v => Math.max(0, Math.min(100, (v-lo)/(hi-lo)*100));
@@ -1294,7 +1301,7 @@ function montar(){
         if(sec==='ca' && incomp.length && m.incomp!==sec){ const co = (P.cooler||[]).find(x=>x.n===m.co), mob = (P.mobo||[]).find(x=>x.n===m.mobo), g = GPU[m.gpu];
           h += `<p class="old" style="margin:-6px 0 8px">✔ Só gabinetes que cabem ${[mob&&'placa-mãe '+moboTam(mob), co&&radMm(co)&&'water cooler '+radMm(co)+'mm', g&&g.i>=175&&'a '+m.gpu].filter(Boolean).join(', ')}.</p>`; }
         const vis = m.mais===sec ? opts : opts.slice(0, 8);
-        h += `<div class="mml">${vis.map(o => { const bl = mmBloq(sec, o); return `<button class="mo ${m[sec]===o.id?'on':''} ${bl?'bl':''}" data-s="${sec}" data-id="${esc(o.id)}" ${bl?'disabled':''}><span class="mon">${esc(o.nome)}<small>${bl?'⚠ '+bl:o.sub}</small>${!bl && o.it && o.it.fc ? `<small class="fco">${fcTxt(o.it)} · realista: ${R(o.preco/(o.qtd||1))}${o.qtd===2?' cada':''}</small>` : ''}</span><span class="mop">${o.preco?R2(o.preco):'R$ 0'}${o.it?`<small>${esc(o.it.loja||'')} · ${idade(o.it)===0?'hoje':idade(o.it)===1?'ontem':'há '+idade(o.it)+' dias'}</small>`:''}</span></button>`; }).join('') || '<p class="old">Nada passou no canal com esse filtro no último mês.</p>'}</div>`;
+        h += `<div class="mml">${vis.map(o => { const bl = mmBloq(sec, o); return `<div class="mow"><button class="mo ${m[sec]===o.id?'on':''} ${bl?'bl':''}" data-s="${sec}" data-id="${esc(o.id)}" ${bl?'disabled':''}>${o.it && o.it.img ? `<img class="moi" src="${esc(o.it.img)}" alt="" loading="lazy" onerror="this.style.visibility='hidden'">` : `<span class="moi"></span>`}<span class="mon">${esc(o.nome)}<small>${bl?'⚠ '+bl:o.sub}</small>${!bl && o.it && o.it.fc ? `<small class="fco">${fcTxt(o.it)} · realista: ${R(o.preco/(o.qtd||1))}${o.qtd===2?' cada':''}</small>` : ''}</span><span class="mop">${o.preco?R2(o.preco):'R$ 0'}${o.it?`<small>${esc(o.it.loja||'')} · ${idade(o.it)===0?'hoje':idade(o.it)===1?'ontem':'há '+idade(o.it)+' dias'}</small>`:''}</span></button>${o.it && o.it.rid ? `<a class="mocv" href="https://grapetec.com.br/radar/#${esc(o.it.rid)}" target="_blank" rel="noopener" data-cv="radar" title="Ver a curva de preço no Radar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-6"/></svg><span>curva</span></a>` : o.it && o.it.post ? `<a class="mocv" href="https://t.me/grape_tec/${o.it.post}" target="_blank" rel="noopener" data-cv="post" title="Ver o post da oferta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4 3 11l7 2 2 7 9-16Z"/></svg><span>post</span></a>` : ''}</div>`; }).join('') || '<p class="old">Nada passou no canal com esse filtro no último mês.</p>'}</div>`;
         if(opts.length > 8 && m.mais!==sec) h += `<button class="lnk mmmais" data-s="${sec}">ver mais ${opts.length-8} opções ▾</button>`;
         if(incomp.length && m.incomp!==sec) h += `<button class="lnk mminc" data-s="${sec}" style="margin-left:14px">ver ${incomp.length} que não ${incomp.length>1?'são compatíveis':'é compatível'} ▾</button>`;
       } else if(!tem) h += `<p class="old">Escolhe a peça anterior primeiro.</p>`;
@@ -1329,6 +1336,7 @@ function montar(){
     ['psu','ca'].forEach(k => { if(m[k]){ const o = mmOpts(k).find(x=>x.id===m[k]); if(o && mmBloq(k,o)) m[k] = ''; } });
     render(); const nx = MM_SECS.find(([k]) => k!=='pl' && !m[k]); const el = nx && document.getElementById('mm_'+nx[0]); if(el) el.scrollIntoView({behavior:'smooth', block:'start'}); });
   app.querySelectorAll('.mmtroca').forEach(b => b.onclick = () => { m.open = b.dataset.s; render(); });
+  app.querySelectorAll('.mocv').forEach(a => a.addEventListener('click', () => { fire('PCIdeal_manual_' + a.dataset.cv); coleta('clique_curva', {modo:'manual'}); }));
   app.querySelectorAll('.mminc').forEach(b => b.onclick = () => { m.incomp = b.dataset.s; render(); });
   app.querySelectorAll('.mmmais').forEach(b => b.onclick = () => { m.mais = b.dataset.s; render(); });
   const okb = document.getElementById('pciMMok'); if(okb) okb.onclick = () => { m.ver = true; fire('PCIdeal_Manual'); coleta('manual', {total: Math.round(av.tot), nota: av.nota, plataforma: m.pl, cpu: m.cpu, placa_mae: m.mobo, memoria: m.ram, ssd: m.ssd, gpu: m.gpu, fonte: m.psu, cooler: m.co, gabinete: m.ca, alertas: av.alerta.map(x => x.replace(/<[^>]+>/g,'').slice(0,60)).join(' | ')});; render(); const r = document.getElementById('mmres'); if(r) r.scrollIntoView({behavior:'smooth'}); };

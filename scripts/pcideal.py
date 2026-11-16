@@ -106,6 +106,7 @@ for pid, (d, t) in TXT.items():
 
 site = json.load(open(SITE)) if os.path.exists(SITE) else {'P': []}
 ATTR = {p['n']: p.get('a') or {} for p in site['P']}
+RID = {p['n']: p['id'] for p in site['P']}   # id do produto no Radar (pra abrir a curva)
 
 out = collections.defaultdict(list)
 for (cat, nome), L in rows.items():
@@ -140,6 +141,7 @@ for (cat, nome), L in rows.items():
               p=round(best[1], 2), d=best[0], loja=best[2] or loja_de(u), post=int(best[3]), url=u, cup=cupom(t),
               t=best[4][:110], a=ATTR.get(nome, {}), img=FOTO.get(str(best[3]), ''))
     if fc: it['fc'] = fc
+    if nome in RID: it['rid'] = RID[nome]
     if cat == 'ram':
         m = re.search(r'DDR(\d) (?:(\d)x)?(\d+)GB (\d+)MHz', nome)
         it['a'] = dict(ddr=int(m.group(1)), mods=int(m.group(2) or 1), cap=int(m.group(3)), mhz=int(m.group(4)))

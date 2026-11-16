@@ -203,7 +203,8 @@ def posts(desde):
                 continue
             vis.add(m['id'])
             txt = flat(m.get('text', ''))
-            i = txt.find('💰')
+            mi = re.search(r'💰\s*R\$', txt)   # o 💰 do preço (alguns posts também começam com 💰)
+            i = mi.start() if mi else txt.find('💰', 2 if txt.lstrip().startswith('💰') else 0)
             if i < 0:   # post sem o 💰 (ex.: postado à mão): o preço é o primeiro R$
                 i = txt.find('R$')
                 if i < 0:

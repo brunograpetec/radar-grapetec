@@ -344,6 +344,25 @@
 #pci .cvf a{color:var(--ac);font-weight:600;text-decoration:none}
 #pci .cvload{padding:40px 0;text-align:center;color:var(--mut)}
 @media (max-width:520px){#pci .cvm{align-items:flex-end;padding:0}#pci .cvb{border-radius:20px 20px 0 0;max-height:88vh}#pci .cvt b{font-size:13.5px}}
+#pci .tut{margin-top:18px;display:grid;grid-template-columns:240px 1fr;gap:18px;align-items:center;background:linear-gradient(135deg,rgba(199,125,255,.10),rgba(123,44,191,.06));border:1px solid rgba(199,125,255,.35);border-radius:18px;padding:12px;max-width:720px}
+#pci .tutth{position:relative;display:block;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#000;border:0;padding:0;cursor:pointer;width:100%}
+#pci .tutth img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}
+#pci .tutth:hover img{transform:scale(1.04)}
+#pci .tutpl{position:absolute;inset:0;margin:auto;width:54px;height:54px;border-radius:50%;background:rgba(10,10,12,.72);border:2px solid #fff;display:grid;place-items:center;transition:background .15s}
+#pci .tutth:hover .tutpl{background:var(--ac2)}
+#pci .tutpl svg{width:20px;height:20px;margin-left:3px;fill:#fff}
+#pci .tutt b{display:block;font-size:17px;line-height:1.25;margin-bottom:4px}
+#pci .tutt p{color:var(--mut);font-size:14px;margin-bottom:10px}
+#pci .tutb{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:999px;padding:9px 16px;background:linear-gradient(135deg,var(--ac),var(--ac2));color:var(--onac);font:inherit;font-weight:700;font-size:14px;cursor:pointer}
+#pci .tutb svg{width:12px;height:12px;fill:currentColor}
+#pci .tut.on{grid-template-columns:1fr;padding:10px}
+#pci .tutv{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#000}
+#pci .tutv iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+#pci .tutx{justify-self:end;background:none;border:0;color:var(--mut);font:inherit;font-size:13px;cursor:pointer;padding:2px 4px}
+#pci .tutx:hover{color:var(--ink)}
+#pci .lnk.tutl{margin-left:14px}
+@media (max-width:560px){#pci .tut{grid-template-columns:120px 1fr;gap:12px;padding:10px}#pci .tutt b{font-size:15px}#pci .tutt p{display:none}#pci .tutb{padding:7px 12px;font-size:13px}#pci .tutpl{width:38px;height:38px}#pci .tutpl svg{width:14px;height:14px}#pci .lnk.tutl{margin-left:0;display:block;margin-top:6px}}
+@media print{#pci .tut{display:none!important}}
 </style>
 </head>
 <body style="margin:0;background:#0a0a0c">
@@ -421,6 +440,28 @@ function abreCurva(rid, img){
   }).catch(() => { w.querySelector('.cvb').innerHTML = `<button class="cvx" aria-label="Fechar">×</button><div class="cvload">Não deu pra carregar a curva agora.<br><a href="${url}" target="_blank" rel="noopener" style="color:var(--ac)">Abrir no Radar ↗</a></div>`; });
 }
 app.addEventListener('click', e => { const a = e.target.closest('[data-rcv]'); if(!a) return; e.preventDefault(); abreCurva(a.dataset.rcv, a.dataset.img || ''); });
+
+// ===== tutorial em vídeo (YouTube, começa em 1:46) =====
+const TUT_ID = 'OEciBAob3Vg', TUT_T = 106;
+const PLAY = '<svg viewBox="0 0 24 24"><path d="M6 4l15 8-15 8z"/></svg>';
+const tutIframe = () => `<iframe src="https://www.youtube-nocookie.com/embed/${TUT_ID}?start=${TUT_T}&autoplay=1&rel=0&playsinline=1" title="Tutorial do PC Ideal" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
+const tutCard = () => `<div class="tut" id="pciTut"><button class="tutth" data-tut="inline" aria-label="Assistir o tutorial"><img src="https://i.ytimg.com/vi/${TUT_ID}/hqdefault.jpg" alt="" loading="lazy"><span class="tutpl">${PLAY}</span></button>
+  <div class="tutt"><b>Primeira vez aqui? Eu te mostro como usar.</b><p>No vídeo eu monto um PC pela consultoria grátis e depois peça por peça no "Eu sei montar".</p><button class="tutb" data-tut="inline">${PLAY}Assistir o tutorial</button></div></div>`;
+function abreTut(modo){
+  fire('PCIdeal_tutorial'); coleta('tutorial', {modo: modo === 'modal' ? 'manual' : 'inicio'});
+  const card = document.getElementById('pciTut');
+  if(modo !== 'modal' && card){ card.classList.add('on'); card.innerHTML = `<div class="tutv">${tutIframe()}</div><button class="tutx" data-tut="fecha">fechar vídeo ×</button>`; return; }
+  const root = document.getElementById('pci'); let w = document.getElementById('pciCv'); if(w) w.remove();
+  w = document.createElement('div'); w.id = 'pciCv'; w.className = 'cvm'; w.setAttribute('role','dialog'); w.setAttribute('aria-modal','true');
+  w.innerHTML = `<div class="cvb" style="max-width:860px;padding:44px 12px 12px"><button class="cvx" aria-label="Fechar">×</button><div class="tutv">${tutIframe()}</div></div>`;
+  root.appendChild(w); requestAnimationFrame(() => w.classList.add('on'));
+  const fecha = () => { w.classList.remove('on'); setTimeout(() => w.remove(), 160); document.removeEventListener('keydown', k); };
+  const k = e => { if(e.key === 'Escape') fecha(); }; document.addEventListener('keydown', k);
+  w.addEventListener('click', e => { if(e.target === w || e.target.closest('.cvx')) fecha(); });
+}
+app.addEventListener('click', e => { const a = e.target.closest('[data-tut]'); if(!a) return; e.preventDefault();
+  if(a.dataset.tut === 'fecha'){ const c = document.getElementById('pciTut'); if(c) c.outerHTML = tutCard(); return; }
+  abreTut(a.dataset.tut); });
 /* coleta anônima pra planilha do Bruno (Google Sheets). Sem nome, e-mail ou telefone. Vazio = desligado. */
 const COLETA_URL = 'https://script.google.com/macros/s/AKfycbz5JpM6e1tRkFtHW-cQFy1KxG3_7SsAuBcct2lST9d3qIMh1J3KAQ4usLlK1qM2RFCFBw/exec';
 /* vídeo do Bruno explicando o "mapa" (link do YouTube). Vazio = mostra só o texto. */
@@ -624,7 +665,7 @@ function mostraSalvos(){
 }
 function head(full){
   return `<header><img class="logo" src="${LOGO}" alt="Grape Tec"><div class="brand"><b>Grape Tec · PC Ideal</b><span>preços dos meus posts dos últimos 30 dias</span></div><button class="sei" id="pciSei" title="Montar escolhendo peça por peça">🛠 Eu sei montar</button><button class="tema" id="pciTema" title="Mudar tema" aria-label="Mudar tema">${document.getElementById('pci').classList.contains('claro')?'🌙 Escuro':'☀️ Claro'}</button></header>` +
-   (full ? `<h1>Monte seu <em>PC Ideal</em></h1><p class="lead">Responde 7 perguntas, só clicando. Eu monto o PC completo com as 8 peças, do jeito que faço nas minhas consultorias, usando os preços reais que passaram no canal no último mês.</p>` : '');
+   (full ? `<h1>Monte seu <em>PC Ideal</em></h1><p class="lead">Responde 7 perguntas, só clicando. Eu monto o PC completo com as 8 peças, do jeito que faço nas minhas consultorias, usando os preços reais que passaram no canal no último mês.</p>${tutCard()}` : '');
 }
 
 /* ---------- Escolha das peças ---------- */
@@ -1365,7 +1406,7 @@ function montar(){
   };
   if(!f.ramcap) f.ramcap = '16';
   const av = mmAvalia();
-  let h = head(false) + `<div class="mmtop"><h2 class="mmh">🛠 Eu sei montar</h2><p class="lead" style="font-size:15px">Escolhe peça por peça. Eu só mostro o que é compatível, com o melhor preço que passou no canal no último mês, e no final avalio o seu PC.</p><button class="lnk" id="pciVoltaGuiado">← prefere que eu monte? Deixa o Brunão montar</button></div>`;
+  let h = head(false) + `<div class="mmtop"><h2 class="mmh">🛠 Eu sei montar</h2><p class="lead" style="font-size:15px">Escolhe peça por peça. Eu só mostro o que é compatível, com o melhor preço que passou no canal no último mês, e no final avalio o seu PC.</p><button class="lnk" id="pciVoltaGuiado">← prefere que eu monte? Deixa o Brunão montar</button><button class="lnk tutl" data-tut="modal">▶ Ver o tutorial em vídeo</button></div>`;
   h += `<div class="mmsec"><div class="mmt"><b>1. Plataforma</b></div><div class="its">${[['AM4','AM4 · DDR4','mais barato hoje'],['AM5','AM5 · DDR5','plataforma nova']].map(o=>`<button class="it mmpl ${m.pl===o[0]?'on':''}" data-v="${o[0]}"><i>${m.pl===o[0]?'✓':''}</i>${o[1]}<small>${o[2]}</small></button>`).join('')}</div></div>`;
   if(m.pl){
     MM_SECS.slice(1).forEach(([sec, nome], i) => {

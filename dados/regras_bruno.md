@@ -100,3 +100,11 @@ Regras que o Bruno passou e que o algoritmo segue. Anotar aqui cada regra nova (
 - Meta realista = o menor preço que já saiu em pelo menos 3 dias diferentes no mês (fora das datas duplas), nunca acima do começo da faixa normal (p25). Assim continua ajudando a montar barato, sem ser irreal.
 - O preço fora da curva aparece como aviso curto: "🔥 já saiu a R$ 2.140 em 11/11 (data dupla) · realista: R$ 2.440" (na escolha da peça e no card) e um parágrafo no Raio-X/avaliação.
 - Ex.: RTX 5060 saiu a R$ 2.140 no 11/11; meta virou R$ 2.440.
+
+## 16/11/2026 — cadastro automático de produtos novos
+- 1x por dia o radar procura no canal os produtos que ainda não estavam cadastrados e cadastra sozinho (dados/catalogo.json; o que entrou fica anotado em dados/catalogo_log.md).
+- Sempre produto individual, no padrão de nome do radar (placa de vídeo por chip; o resto por marca + modelo), e cada um na sua categoria: processador Intel em Processadores, monitor em Monitores, mouse/teclado/headset nos periféricos, fonte em Fontes etc.
+- Só entra produto que passou em pelo menos 2 dias diferentes no último mês; pra aparecer no site com histórico precisa de 3 dias (regra que já existia).
+- Fica fora: usado, open box, kit, combo, anúncio com vários tamanhos, notebook/PC pronto, cupom, acessório; e os modelos antigos que já tínhamos tirado (RTX 3060, RX 6600 etc.).
+- Mesmo produto escrito de outro jeito (ex.: 25G523B-B e 25G523B) é juntado no que já existe, sem duplicar.
+- Primeiro cadastro: 195 produtos (monitores, placas-mãe Intel e AM5 B840, gabinetes, Intel Core, coolers, fontes, periféricos, SSD).

@@ -1,0 +1,1231 @@
+{
+ "_leia": "Produtos cadastrados sozinhos pelo radar (scripts/novos.py). Pra tirar um produto, apague a linha dele.",
+ "ultimo": "2026-11-16",
+ "itens": {
+  "Placa-mãe MSI PRO B840M-B": {
+   "cat": "Placas-mãe",
+   "desde": "2026-11-16",
+   "posts": 33,
+   "exemplo": "Placa-mãe Msi Pro B840m-b Am5 Preto"
+  },
+  "Monitor AOC C27G4Z": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "posts": 32,
+   "exemplo": "Monitor Gamer Curvo AOC AGON G4Z 27\" 300Hz 0,3ms HDR10 Base Ajustável C27G4Z/P"
+  },
+  "Intel Core i5-14600KF": {
+   "cat": "Processadores",
+   "desde": "2026-11-16",
+   "posts": 29,
+   "exemplo": "Processador Intel Core I5 14600Kf 3 5Ghz 5 3 Ghz Max Turbo Cache 24 MB 14 Nucleos 20 Threads Lga 1700 Sem Video Integrad"
+  },
+  "Placa-mãe MSI PRO B760M-A WiFi": {
+   "cat": "Placas-mãe",
+   "desde": "2026-11-16",
+   "posts": 29,
+   "exemplo": "Placa Mae Msi Pro B760M A Wifi Intel Lga 1700 Micro Atx Ddr5 Wi Fi Prob760Mawifi"
+  },
+  "Intel Core i3-12100F": {
+   "cat": "Processadores",
+   "desde": "2026-11-16",
+   "posts": 29,
+   "exemplo": "Processador Intel Core I3 12100F 3 3Ghz 4 3Ghz Max Turbo Cache 12 MB 4 Nucleos 8 Threads Lga 1700 Sem Video Integrado Bx"
+  },
+  "Monitor AOC CQ32G4E": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "posts": 28,
+   "exemplo": "Monitor Gamer Curvo AOC AGON QUAD 32\" 180Hz 0,5ms HDR10 CQ32G4E"
+  },
+  "SSD WD WDS200T5G0A 2TB": {
+   "cat": "SSD",
+   "desde": "2026-11-16",
+   "posts": 27,
+   "exemplo": "SSD WD Green 2.5'' 2TB SATA III 545 MB/s WDS200T5G0A"
+  },
+  "Placa-mãe MSI PRO B760M-P": {
+   "cat": "Placas-mãe",
+   "desde": "2026-11-16",
+   "posts": 24,
+   "exemplo": "Placa Mãe MSI PRO B760M-P DDR4,Intel LGA 1700, mATX, DDR4"
+  },
+  "Placa-mãe MSI B840M WiFi": {
+   "cat": "Placas-mãe",
+   "desde": "2026-11-16",
+   "posts": 24,
+   "exemplo": "Placa Mãe MSI B840M GAMING WIFI6E AM5/2xDDR5/HDMI/DisplayPort/M.2/USB 3.2"
+  },
+  "Monitor Acer KG273": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "posts": 23,
+   "exemplo": "Monitor Gamer Acer Nitro KG273 G0bi 27\" Full HD IPS 120Hz 1ms HDMI/VGA Preto"
+  },
+  "Intel Core i5-14400F": {
+   "cat": "Processadores",
+   "desde": "2026-11-16",
+   "posts": 23,
+   "exemplo": "Processador Intel Core i5-14400F LGA 1700 BX8071514400F"
+  },
+  "Monitor LG 32G403B": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "posts": 23,
+   "exemplo": "Monitor LG UltraGear - Tela VA FHD 32”, 144Hz nativo, 1ms MBR , AMD FreeSync, HDR10, sRGB 99 , Preto - 32G403B"
+  },
+  "Monitor AOC B30": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "posts": 21,
+   "exemplo": "Monitor gamer Aoc Série B30 21.5'' Full Hd Gaming 120hz 1ms 22b30hm23 cor preto"
+  },
+  "Intel Core i5-14600K": {
+   "cat": "Processadores",
+   "desde": "2026-11-16",
+   "posts": 21,
+   "exemplo": "Processador Intel Core I5 14600K 3 5Ghz 5 3 Ghz Max Turbo Cache 24 MB 14 Nucleos 20 Threads Lga 1700 Com Video Integrado"
+  },
+  "Monitor LG 24MS500-B": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "posts": 20,
+   "exemplo": "Monitor LG Gamer 24\" 100Hz 5ms Full HD - 24MS500-B"
+  },
+  "Monitor AOC 25G4S": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "posts": 20,
+   "exemplo": "Monitor Gamer AOC AGON G4S 25\" 310Hz 0.3ms HDR400 IPS Base Ajustável 25G4S/P Preto"
+  },
+  "Monitor TCL 25G64": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "igual": "Monitor TCL 25G64 (FHD 25\" Mini LED)"
+  },
+  "Placa-mãe Gigabyte Aorus Elite B760M": {
+   "cat": "Placas-mãe",
+   "desde": "2026-11-16",
+   "posts": 19,
+   "exemplo": "Placa mãe LGA 1700 - Gigabyte B760M Aorus Elite DDR5 Micro ATX"
+  },
+  "Monitor Pichau PG-ATH27V3S-BL02": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "posts": 19,
+   "exemplo": "Monitor Gamer Pichau Athen V3S, 27 Pol, IPS, FHD, 1ms, 100Hz, HDMI/VGA, PG-ATH27V3S-BL02"
+  },
+  "Intel Core i5-12400F": {
+   "cat": "Processadores",
+   "desde": "2026-11-16",
+   "posts": 17,
+   "exemplo": "Processador Intel Core I5-12400F 2.5.0Ghz 18 MB DDR4/5 FCLGA1700 BX8071512400F"
+  },
+  "Monitor TCL 24G54": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "posts": 17,
+   "exemplo": "Monitor Gamer Tcl 24 Mini Led Full Hd G54 Hdr400 24g54 Branco 127/220v"
+  },
+  "Intel Core Ultra 5 225F": {
+   "cat": "Processadores",
+   "desde": "2026-11-16",
+   "posts": 17,
+   "exemplo": "Processador Intel Core Ultra 5 225F 3 3Ghz 4 9Ghz Turbo Cache 20 MB 10 Nucleos 10 Threads Lga 1851 Sem Video Integrado B"
+  },
+  "Monitor LG 29WQ500B": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "posts": 16,
+   "exemplo": "Monitor LG UltraWide - Tela IPS de 29\", 21 9, HDR10, sRGB 99 , 100Hz, Preto- 29WQ500B"
+  },
+  "Monitor Samsung LS24F320GALMZD": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "posts": 15,
+   "exemplo": "Monitor Samsung 24 Essential S3 FHD IPS 120HZ 5MS, 2 HDMI, Super Fino, 3 Side Boardless, LS24F320GALMZD"
+  },
+  "Fonte Gigabyte P650G": {
+   "cat": "Fontes",
+   "desde": "2026-11-16",
+   "posts": 15,
+   "exemplo": "Fonte Gigabyte P650G PG5, 650W, 80 PLUS Gold, PFC Ativo, Preto - 28200-P65G5-1CBRR"
+  },
+  "Monitor AOC CS25G": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "posts": 14,
+   "exemplo": "Monitor Gamer Aoc Agon Cs2 25'' 310hz Base Ajustável Cs25g Preto/dourado 127/220v"
+  },
+  "Monitor ASUS VG249QM5F": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "posts": 14,
+   "exemplo": "Monitor Gamer Asus Tuf 23 8 Full Hd 260Hz 0 3Ms Fast Ips Vrr G Sync Comp Freesync Premium Hdr10 Som Integrado Preto Vg24"
+  },
+  "Placa-mãe ASUS TUF Gaming B760M Plus": {
+   "cat": "Placas-mãe",
+   "desde": "2026-11-16",
+   "posts": 13,
+   "exemplo": "Placa Mãe Asus TUF Gaming B760M-PLUS II, Chipset B760, Intel LGA 1700, mATX, DDR5, 90MB1HD0-M0EAY0"
+  },
+  "Gabinete Mancer CV100": {
+   "cat": "Gabinetes",
+   "desde": "2026-11-16",
+   "posts": 13,
+   "exemplo": "Gabinete Gamer Mancer CV100 Purple Edition, Mid-Tower, Com 3 Fans, Branco, MCR-CV100-PEW"
+  },
+  "Monitor Philips 24M2N3200NF": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "posts": 13,
+   "exemplo": "Monitor Philips Gamer Evnia 24 LED 24M2N3200NF/57 / IPS / HDMI / DISPLAY PORT / VESA / 144HZ / 0.5 MS"
+  },
+  "Monitor HQ HQ27AJ75": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "posts": 12,
+   "exemplo": "Monitor HQ Pro 27”, IPS, 1MS, QHD 2560x1440, Ergonômico, Ajuste de Altura e Rotação, HDMI + DP Frameless HQ27AJ75"
+  },
+  "Headset Havit H2015D": {
+   "cat": "Headsets e fones",
+   "desde": "2026-11-16",
+   "posts": 12,
+   "exemplo": "Fone De Ouvido Gamer Headset Havit H2015D Pc/Xbox/Ps4/Ps5"
+  },
+  "Monitor LG 27G411B": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "igual": "Monitor LG UltraGear 27G411B (FHD 27\")"
+  },
+  "Monitor AOC 24B30HM2": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "posts": 11,
+   "exemplo": "Monitor AOC 23,8\" 100Hz 1ms Gaming HDMI 24B30HM2"
+  },
+  "Teclado Redragon K608-R": {
+   "cat": "Teclados",
+   "desde": "2026-11-16",
+   "posts": 11,
+   "exemplo": "TECLADO MECÂNICO Gamer REDRAGON VALHEIM ILUMINAÇÃO Rainbow Preto Switch Brown USB-A K608-R PT-BROWN"
+  },
+  "Gabinete Redragon CA-612BR": {
+   "cat": "Gabinetes",
+   "desde": "2026-11-16",
+   "posts": 11,
+   "exemplo": "Gabinete Gamer Redragon Eternal Mid Tower Aquário Preto e Vermelho Sem Fans CA-612BR"
+  },
+  "Monitor LG 25G523B": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "posts": 11,
+   "exemplo": "Monitor LG UltraGear -Tela IPS de 25”, 200Hz, 1ms GtG , NVIDIA G-SYNC e AMD FreeSync Premium, HDR10, sRGB 99 , Preto - 2"
+  },
+  "Monitor Dell SE2426HG": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "posts": 11,
+   "exemplo": "Monitor Dell 24\", Full Hd 1920 x 1080 , 240 Hz, Ips, Hdr10, Se2426hg 1000 1 de contraste, Brilho de 300 nits, 99 sRGB, A"
+  },
+  "SSD WD Green 480GB": {
+   "cat": "SSD",
+   "desde": "2026-11-16",
+   "posts": 10,
+   "exemplo": "Western Digital, SSD WD Green 480GB SATA lll 2,5\""
+  },
+  "Monitor Mancer MCR-HZN27-BL2": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "posts": 10,
+   "exemplo": "Monitor Gamer Mancer Horizon Z2, 27 Pol, VA, FHD, 100Hz, 1ms, HDMI/VGA, MCR-HZN27-BL2"
+  },
+  "Gabinete Rise Mode Galaxy Glass": {
+   "cat": "Gabinetes",
+   "desde": "2026-11-16",
+   "posts": 10,
+   "exemplo": "Gabinete Gamer Rise Mode Galaxy Glass Standard V2, Mid Tower, ATX, Lateral e Frontal em Vidro Temperado, Sem FANs, Preto"
+  },
+  "Monitor AOC 27G42HE": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "posts": 10,
+   "exemplo": "Monitor Gamer AOC AGON G42 27\" 200Hz 0,3ms IPS HDR10 NVIDIA G-Sync 27G42HE"
+  },
+  "Monitor Alienware AW2525HM": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "posts": 9,
+   "exemplo": "Monitor Gamer Alienware 25\", Full Hd 1920 x 1080 , 320 Hz, Aw2525hm"
+  },
+  "Teclado Aula F75": {
+   "cat": "Teclados",
+   "desde": "2026-11-16",
+   "posts": 9,
+   "exemplo": "Teclado Mecânico Aula F75 Sem fio Tri-Mode 2.4ghz/Bluetooth/Usb-C RGB 75"
+  },
+  "Monitor ASRock PG27FFS1A": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "posts": 9,
+   "exemplo": "Monitor Gamer ASRock PG27FFS1A 27\" IPS 240Hz 1ms"
+  },
+  "Water cooler Cooler Master Elite Liquid 360mm": {
+   "cat": "Coolers",
+   "desde": "2026-11-16",
+   "posts": 9,
+   "exemplo": "Water Cooler Cooler Master Elite Liquid 360mm RGB p/ CPU"
+  },
+  "Placa-mãe ASUS TUF Gaming B760M Plus WiFi": {
+   "cat": "Placas-mãe",
+   "desde": "2026-11-16",
+   "posts": 9,
+   "exemplo": "Placa Mae Asus Tuf Gaming B760M Plus Wifi Ii Intel Ddr5 Preto 90Mb1He0 M0Eay0"
+  },
+  "Intel Core i5-12600KF": {
+   "cat": "Processadores",
+   "desde": "2026-11-16",
+   "posts": 9,
+   "exemplo": "Processador Intel Core i5-12600KF, 3.7GHz 4.9Ghz Max Turbo , Cache 20 MB, 10 Núcleos, 16 Threads, LGA 1700, Sem Vídeo In"
+  },
+  "Air cooler Pichau PG-SGEWH-RGB-V02": {
+   "cat": "Coolers",
+   "desde": "2026-11-16",
+   "posts": 8,
+   "exemplo": "Cooler Para Processador Pichau Sage V2, RGB, 120mm, Branco, PG-SGEWH-RGB-V02"
+  },
+  "Fonte Rise Mode RM-PSU-01-WT-500": {
+   "cat": "Fontes",
+   "desde": "2026-11-16",
+   "posts": 8,
+   "exemplo": "Fonte Gamer Rise Mode Zeus, 500W, PFC Ativo, Preto - RM-PSU-01-WT-500"
+  },
+  "Monitor AOC 22B35HM23": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "posts": 8,
+   "exemplo": "Monitor Gamer Aoc 22'' 22b35hm23 120hz 1ms Hdmi Vga Full Hd Preto 127/220v"
+  },
+  "Fonte Duex DXFOPRO850WG3": {
+   "cat": "Fontes",
+   "desde": "2026-11-16",
+   "posts": 8,
+   "exemplo": "FONTE DE ALIMENTACAO DUEX PULSE PRO 850W DXFOPRO850WG3"
+  },
+  "Air cooler Redragon Tyr Fan": {
+   "cat": "Coolers",
+   "desde": "2026-11-16",
+   "posts": 8,
+   "exemplo": "Cooler para Processador a Ar Redragon Tyr, Fan de 120mm Preto, Iluminação Rainbow"
+  },
+  "Monitor Dell AW2525HM": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "posts": 8,
+   "exemplo": "Monitor Gamer Dell Alienware 25 Fhd 320Hz 0 5Ms Ips Displayport E Hdmi Freesync Ajuste De Altura Preto Aw2525Hm"
+  },
+  "Mouse Redragon M612-RGB": {
+   "cat": "Mouses",
+   "desde": "2026-11-16",
+   "posts": 7,
+   "exemplo": "Mouse Gamer Redragon Predator RGB M612-RGB, Preto"
+  },
+  "SSD Crucial BX500 1TB": {
+   "cat": "SSD",
+   "desde": "2026-11-16",
+   "posts": 7,
+   "exemplo": "MercadoLivre - Ssd 1tb Sata Iii 2,5 Pol. Crucial Bx500 Ct1000bx500ssd1 Sata 3 1TB 1 TB"
+  },
+  "Fonte Gamemax GS600": {
+   "cat": "Fontes",
+   "desde": "2026-11-16",
+   "posts": 7,
+   "exemplo": "Fonte De Alimentacao 600w Gs600 80 Plus White Gamemax"
+  },
+  "Fonte Redragon FRC-850": {
+   "cat": "Fontes",
+   "desde": "2026-11-16",
+   "posts": 7,
+   "exemplo": "Fonte Redragon Charge 850W, ATX 3.1, 80 Plus Bronze, PFC Ativo, Capacitores Japoneses, Preto, FRC-850"
+  },
+  "Monitor Acer MK221Q": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "posts": 7,
+   "exemplo": "Monitor 21.4 Acer 100hz Led Mk221q Bi"
+  },
+  "Placa-mãe MSI PRO H810M-B": {
+   "cat": "Placas-mãe",
+   "desde": "2026-11-16",
+   "posts": 7,
+   "exemplo": "MSI Placa-mãe PRO H810M-B, mATX - Suporta processadores Intel Core Ultra Série 2 , LGA 1851 - DDR5 Memory Boost 6400 MT/"
+  },
+  "Gabinete Aigo D275M": {
+   "cat": "Gabinetes",
+   "desde": "2026-11-16",
+   "posts": 7,
+   "exemplo": "Gabinete Gamer Aigo Darkflash Durin D275M,Rainbow, Mid-Tower,L.Vidro, Com 3 Fans,Branco, DURIN-WH-3F"
+  },
+  "Intel Core i7-14700KF": {
+   "cat": "Processadores",
+   "desde": "2026-11-16",
+   "posts": 7,
+   "exemplo": "Processador Intel Core i7-14700KF, 3.4GHz 5.6 GHz Max Turbo , Cache 33 MB, 20 Núcleos, 28 Threads, LGA 1700, Sem Vídeo I"
+  },
+  "Monitor LG 27G523": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "igual": "Monitor LG 27G523B"
+  },
+  "Placa-mãe Gigabyte H610M": {
+   "cat": "Placas-mãe",
+   "desde": "2026-11-16",
+   "posts": 7,
+   "exemplo": "Placa-Mãe Gigabyte H610M H V3 DDR4, Micro-ATX, Socket LGA 1700 Compatível com Intel Core 12ª/13ª/14ª Geração"
+  },
+  "Fonte Gamemax GX700": {
+   "cat": "Fontes",
+   "desde": "2026-11-16",
+   "posts": 6,
+   "exemplo": "Fonte Gamemax GX700, 700W, 80 Plus Gold, PFC Ativo, Preto"
+  },
+  "Air cooler Mach1 A40": {
+   "cat": "Coolers",
+   "desde": "2026-11-16",
+   "posts": 6,
+   "exemplo": "Air Cooler Mach1 Artic, Argb, Amd e Intel, 120mm, Preto - A40"
+  },
+  "Water cooler Cooler Master ELW-D36M-A21DA-RW 360mm": {
+   "cat": "Coolers",
+   "desde": "2026-11-16",
+   "posts": 6,
+   "exemplo": "Water Cooler 360mm Cooler Master Elite Liquid Branco ARGB ELW-D36M-A21DA-RW CPU Intel AMD"
+  },
+  "Placa-mãe Biostar Z890": {
+   "cat": "Placas-mãe",
+   "desde": "2026-11-16",
+   "posts": 6,
+   "exemplo": "Placa-Mãe Biostar Z890 Valkyrie DDR5 Intel LGA 1851"
+  },
+  "Air cooler Gamdias E1-410": {
+   "cat": "Coolers",
+   "desde": "2026-11-16",
+   "posts": 6,
+   "exemplo": "COOLER GAMDIAS BOREAS E1-410 LED AZUL"
+  },
+  "Intel Core Ultra 5 245KF": {
+   "cat": "Processadores",
+   "desde": "2026-11-16",
+   "posts": 6,
+   "exemplo": "Processador Intel Core Ultra 5 245Kf 4 2Ghz 5 2Ghz Turbo Cache 24 MB 14 Nucleos 14 Threads Lga 1851 Sem Video Integrado "
+  },
+  "Placa-mãe MSI PRO B840M-P WiFi": {
+   "cat": "Placas-mãe",
+   "desde": "2026-11-16",
+   "posts": 6,
+   "exemplo": "Placa-mãe MSI PRO B840M-P WIFI6E"
+  },
+  "Monitor ASUS 5VG279QM5F": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "posts": 6,
+   "exemplo": "Monitor Gamer Asus Tuf Gaming Series 5vg279qm5f,27 , Full Hd"
+  },
+  "Placa-mãe Gigabyte Gaming Plus B840M WiFi": {
+   "cat": "Placas-mãe",
+   "desde": "2026-11-16",
+   "posts": 6,
+   "exemplo": "GIGABYTE Placa-mãe B840M GAMING PLUS WIFI6E - CPUs AMD Ryzen 9000, 8+2+2 fases VRM, até 8200MHz DDR5 O.C , 2xPCIe 4.0 M."
+  },
+  "Teclado Aula F87": {
+   "cat": "Teclados",
+   "desde": "2026-11-16",
+   "posts": 5,
+   "exemplo": "Teclado Mecânico Aula F87 Sem Fio Wireless Bt Hotswap Abnt2 Preto Português Brasil"
+  },
+  "Placa-mãe ASUS Prime H610M-D": {
+   "cat": "Placas-mãe",
+   "desde": "2026-11-16",
+   "posts": 5,
+   "exemplo": "ASUS Placa-mãe Prime H610M-D Intel H610 Micro-ATX LGA 1700 , DDR5, PCIe 4.0, slot M.2, Realtek 1GB Ethernet, HDMITM/VGA,"
+  },
+  "Headset Redragon H530": {
+   "cat": "Headsets e fones",
+   "desde": "2026-11-16",
+   "posts": 5,
+   "exemplo": "Headset Gamer Redragon Hero Preto H530"
+  },
+  "Monitor Rise Mode RM-MOG-32F100FH-B": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "posts": 5,
+   "exemplo": "Monitor Rise Mode Essential, 32 Pol, Full HD, IPS, 100Hz, 99 sRGB, HDMI/VGA, FreeSync, RM-MOG-32F100FH-B"
+  },
+  "Gabinete Gamdias Argus E4": {
+   "cat": "Gabinetes",
+   "desde": "2026-11-16",
+   "posts": 5,
+   "exemplo": "Gabinete Mid Tower Gamdias Argus E4 Elite Vidro Temperado RGB Preto ARGUS E4 ELITE"
+  },
+  "Gabinete Gamdias Atlas E1": {
+   "cat": "Gabinetes",
+   "desde": "2026-11-16",
+   "posts": 5,
+   "exemplo": "Gabinete Gamer Gamdias Atlas E1 Preto com 3 Fans 120mm ARGB ATLAS E1"
+  },
+  "Mouse Attack Shark X11": {
+   "cat": "Mouses",
+   "desde": "2026-11-16",
+   "posts": 5,
+   "exemplo": "Mouse Gamer Attack Shark X11 Sem Fio RGB 22000 DPI Tri-Mode Ultra Leve"
+  },
+  "Air cooler Rise Mode Temp": {
+   "cat": "Coolers",
+   "desde": "2026-11-16",
+   "posts": 5,
+   "exemplo": "Air Cooler Gamer Rise Mode Temp 8 White, ARGB, AMD e Intel, 120mm, Branco - RM-ACT8-ARGB-W"
+  },
+  "Placa-mãe Gigabyte Gaming Plus B760M WiFi": {
+   "cat": "Placas-mãe",
+   "desde": "2026-11-16",
+   "posts": 5,
+   "exemplo": "Placa Mãe Gigabyte B760m Gaming Plus Wifi Ddr4 Lga 1700 Branco"
+  },
+  "Monitor Philips 271V8LAB3": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "posts": 5,
+   "exemplo": "Monitor Philips 27\" 120Hz 1ms Gaming Alto-falantes 271V8LAB3"
+  },
+  "Monitor AOC B35": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "posts": 5,
+   "exemplo": "Monitor Gamer 120Hz 1ms AOC B35 22B35HM23 21,5\" Full HD MPRT 1 VGA"
+  },
+  "Gabinete Aigo FT350": {
+   "cat": "Gabinetes",
+   "desde": "2026-11-16",
+   "posts": 5,
+   "exemplo": "Gabinete Gamer Aigo Darkflash FT350, Mid-Tower, Lateral de Vidro, Preto, FT350-BK"
+  },
+  "Gabinete Mancer CV550": {
+   "cat": "Gabinetes",
+   "desde": "2026-11-16",
+   "posts": 4,
+   "exemplo": "Gabinete Gamer Mancer CV550, Mid-Tower, Lateral de Vidro, Branco, MCR-CV550-WH"
+  },
+  "Teclado Redragon K606-OG": {
+   "cat": "Teclados",
+   "desde": "2026-11-16",
+   "posts": 4,
+   "exemplo": "Teclado Mecânico Gamer Redragon Lakshmi 60 ABNT2 Switch Marrom Laranja Cinza Preto K606-OG GY BK"
+  },
+  "Monitor SuperFrame SF-MN-ACE21FSIFC1B": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "posts": 4,
+   "exemplo": "Monitor Gamer SuperFrame Ace, 21.45 Pol, Full HD, IPS, 120Hz, 1ms, Flicker-Free, HDMI/VGA, SF-MN-ACE21FSIFC1B"
+  },
+  "Monitor BenQ EX2710S": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "posts": 4,
+   "exemplo": "Monitor Gamer BenQ MOBIUZ EX2710S com 27\" Painel IPS, 165Hz, FreeSync Premium, HDRi, Color Vibrance, Black eQualizer, Li"
+  },
+  "Air cooler PCYes Frost Pulse": {
+   "cat": "Coolers",
+   "desde": "2026-11-16",
+   "posts": 4,
+   "exemplo": "Cooler Para Processador Pcyes Frost Pulse Argb White Ghost - Tdp 180w - Pefpargbwg"
+  },
+  "Intel Core i3-13100F": {
+   "cat": "Processadores",
+   "desde": "2026-11-16",
+   "posts": 4,
+   "exemplo": "Intel Core i3-13100F 3.4GHz 4.5 Turbo Processador para desktop LGA 1700 de 4 núcleos Raptor Lake"
+  },
+  "Air cooler DeepCool AK620": {
+   "cat": "Coolers",
+   "desde": "2026-11-16",
+   "posts": 4,
+   "exemplo": "Cooler DeepCool AK620 Digital SE 120mm ARGB Preto"
+  },
+  "Gabinete Kalkan KLK00043": {
+   "cat": "Gabinetes",
+   "desde": "2026-11-16",
+   "posts": 4,
+   "exemplo": "Gabinete Kalkan Saga Preto Aquário Compacto Micro ATX USB 3.0 Sem Fans KLK00043"
+  },
+  "Fonte PCYes Shocker 600W": {
+   "cat": "Fontes",
+   "desde": "2026-11-16",
+   "posts": 4,
+   "exemplo": "Fonte Gamer Pcyes Shocker Full Modular 600w 80 Plus White - Branco"
+  },
+  "Intel Core i7-14700F": {
+   "cat": "Processadores",
+   "desde": "2026-11-16",
+   "posts": 4,
+   "exemplo": "Processador Intel Core I7 14700F 2 1Ghz 5 4.0Ghz Max Turbo Cache 33 MB 20 Nucleos 28 Threads Lga 1700 Sem Video Integrad"
+  },
+  "Water cooler Ninja Yuki 120mm": {
+   "cat": "Coolers",
+   "desde": "2026-11-16",
+   "posts": 4,
+   "exemplo": "Water Cooler Ninja Yuki 120mm ARGB Intel/AMD"
+  },
+  "Placa-mãe Gigabyte B760M": {
+   "cat": "Placas-mãe",
+   "desde": "2026-11-16",
+   "posts": 4,
+   "exemplo": "Placa Mãe Gigabyte B760M D3HP LGA 1700/4xDDR5/HDMI/DP/VGA/M.2/USB 3.2"
+  },
+  "Monitor AOC 22B30HM23": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "posts": 4,
+   "exemplo": "Monitor AOC 21\" 22B30HM23 FHD, 120Hz, 1MS, Preto"
+  },
+  "Headset Havit H2015PRO": {
+   "cat": "Headsets e fones",
+   "desde": "2026-11-16",
+   "posts": 4,
+   "exemplo": "Fone Gamer Havit H2015pro, Sem Fio, 5 Modos - Multiplataform Preto PRETO"
+  },
+  "Mouse Logitech G502 Hero": {
+   "cat": "Mouses",
+   "desde": "2026-11-16",
+   "posts": 4,
+   "exemplo": "Mouse Gamer Logitech G502 HERO com RGB LIGHTSYNC, Ajustes de Peso, 11 Botões Programáveis e Sensor HERO 25K"
+  },
+  "Fonte Duex DXFOPRO1000WG3W": {
+   "cat": "Fontes",
+   "desde": "2026-11-16",
+   "posts": 4,
+   "exemplo": "Fonte de Alimentação Duex Pulse White 1000W DXFOPRO1000WG3W"
+  },
+  "Air cooler Mach1 B40": {
+   "cat": "Coolers",
+   "desde": "2026-11-16",
+   "posts": 4,
+   "exemplo": "Air Cooler MACH1 STORM DIGITAL, AMD e Intel, 120mm, Branco - B40 DIG WH V2"
+  },
+  "Gabinete Gamdias Aura GC8": {
+   "cat": "Gabinetes",
+   "desde": "2026-11-16",
+   "posts": 4,
+   "exemplo": "Gabinete Gamer Gamdias Aura GC8 Vidro Temperado LED ARGB Compatível ATX Preto AURA GC8 ARGB"
+  },
+  "Gabinete Obsid Frame": {
+   "cat": "Gabinetes",
+   "desde": "2026-11-16",
+   "posts": 4,
+   "exemplo": "Gabinete Gamer Obsid Frame Preto Vidro Mid Tower S/ Fan Preto"
+  },
+  "SSD SanDisk SDSSDE30-1T00 1TB": {
+   "cat": "SSD",
+   "desde": "2026-11-16",
+   "posts": 4,
+   "exemplo": "SSD Externo Portátil 1TB Interface USB 3.2 SanDisk SDSSDE30-1T00 Velocidade de Leitura Até 800 MB/s Preto"
+  },
+  "Mouse Redragon M816-RGB": {
+   "cat": "Mouses",
+   "desde": "2026-11-16",
+   "posts": 4,
+   "exemplo": "Mouse Gamer Redragon Deicide RGB Preto PAW3313 1000DPI M816-RGB USB-C REMOVIVEL"
+  },
+  "Gabinete TGT Gladiator Rainbow": {
+   "cat": "Gabinetes",
+   "desde": "2026-11-16",
+   "posts": 4,
+   "exemplo": "Gabinete Gamer TGT Gladiator, Rainbow, Mid-Tower, Lateral de Vidro, Com 2 Fans, Preto, TGT-GLD-BK"
+  },
+  "Fonte Montech BETA2850W": {
+   "cat": "Fontes",
+   "desde": "2026-11-16",
+   "posts": 4,
+   "exemplo": "Fonte Montech Beta 2, 850W, Preto - BETA2850W"
+  },
+  "Gabinete Kalkan Saga Micro": {
+   "cat": "Gabinetes",
+   "desde": "2026-11-16",
+   "posts": 4,
+   "exemplo": "Gabinete Kalkan Saga, Micro ATX, Preto, RGB, USB 3.0, Sem Fans Compacto, Estilo Aquário, Painéis de Vidro Temperado, Des"
+  },
+  "Placa-mãe ColorFire B760M WiFi": {
+   "cat": "Placas-mãe",
+   "desde": "2026-11-16",
+   "posts": 4,
+   "exemplo": "Placa-Mãe ColorFire B760M- MEOW WIFI D5 Orange"
+  },
+  "Monitor Mancer MCR-HZ3BN24-BL2": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "posts": 4,
+   "exemplo": "Monitor Gamer Mancer Horizon Z3B, 23.8 Pol, VA, FHD, 1ms, 100Hz, HDMI/VGA, MCR-HZ3BN24-BL2"
+  },
+  "Monitor LG 24MS500": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "igual": "Monitor LG 24MS500-B"
+  },
+  "Headset Redragon H510-PRO": {
+   "cat": "Headsets e fones",
+   "desde": "2026-11-16",
+   "posts": 4,
+   "exemplo": "Headset Gamer Redragon H510-pro Zeus Rgb Wireless 7.1 53mm P Preto"
+  },
+  "Placa-mãe Husky Nexus H610": {
+   "cat": "Placas-mãe",
+   "desde": "2026-11-16",
+   "posts": 4,
+   "exemplo": "Placa-Mãe Husky Nexus H610, LGA 1700, 12ª/13ª Gen, M.2 NVMe/SATA, DDR4 3200MHz, Micro-ATX, HDMI/VGA - HPM610"
+  },
+  "Gabinete TGT TGT-JSRV2-BKGF02": {
+   "cat": "Gabinetes",
+   "desde": "2026-11-16",
+   "posts": 3,
+   "exemplo": "Gabinete Gamer TGT Jester V2 Rainbow Mini-Tower Lateral de Acrilico c/2 Fans, Preto TGT-JSRV2-BKGF02"
+  },
+  "Gabinete Kalkan KLK00041": {
+   "cat": "Gabinetes",
+   "desde": "2026-11-16",
+   "posts": 3,
+   "exemplo": "Gabinete Aquário Kalkan Skye ATX Vidro Temperado USB 3.0 Preto KLK00041"
+  },
+  "Placa-mãe ASUS Prime B760M-K": {
+   "cat": "Placas-mãe",
+   "desde": "2026-11-16",
+   "posts": 3,
+   "exemplo": "Placa-mãe Asus Prime B760m-k D4 Intel 1700 ie 4.0 Preto"
+  },
+  "Mouse Logitech G Pro": {
+   "cat": "Mouses",
+   "desde": "2026-11-16",
+   "posts": 3,
+   "exemplo": "Mouse Gamer Sem Fio Logitech G PRO X SUPERLIGHT 2 com Tecnologia LIGHTSPEED, Ultraleve, Switch LIGHTFORCE, Sensor HERO 2"
+  },
+  "Monitor Acer EK241Y": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "posts": 3,
+   "exemplo": "Monitor Acer Ek241y Gbi 23.8” FHD LED IPS 120Hz 1 ms"
+  },
+  "Fonte Duex Pulse Pro 1000W": {
+   "cat": "Fontes",
+   "desde": "2026-11-16",
+   "posts": 3,
+   "exemplo": "Fonte de Alimentação Duex Pulse Pro 1000W Cybenetics Gold"
+  },
+  "Mouse Redragon M711-PRO": {
+   "cat": "Mouses",
+   "desde": "2026-11-16",
+   "posts": 3,
+   "exemplo": "MOUSE GAMER REDRAGON COBRA PRO SEM FIO PRETO M711-PRO"
+  },
+  "Teclado Aula F99": {
+   "cat": "Teclados",
+   "desde": "2026-11-16",
+   "posts": 3,
+   "exemplo": "Teclado Mecânico Aula F99 Bluetooth 5.0/2.4ghz Hot Swap Cor De Teclado Preto Idioma Inglês Internacional"
+  },
+  "Placa-mãe ASUS Prime B760M-A": {
+   "cat": "Placas-mãe",
+   "desde": "2026-11-16",
+   "posts": 3,
+   "exemplo": "Placa Mãe Asus Prime B760M-A D4, Chipset B760, Intel LGA 1700, mATX, DDR4"
+  },
+  "Mouse Redragon M694-RGB": {
+   "cat": "Mouses",
+   "desde": "2026-11-16",
+   "posts": 3,
+   "exemplo": "Mouse Gamer Redragon Hana Tri-Mode Bluetooth 2.4GHz USB-C Sensor PAW3104 7200 DPI RGB Preto M694-RGB"
+  },
+  "Gabinete Pichau Osiris Pro": {
+   "cat": "Gabinetes",
+   "desde": "2026-11-16",
+   "posts": 3,
+   "exemplo": "Gabinete Gamer Pichau Osiris PRO, Mid-Tower, Lateral de Vidro, Preto, PG-OSIP-BK"
+  },
+  "Gabinete Mancer Hemlok": {
+   "cat": "Gabinetes",
+   "desde": "2026-11-16",
+   "posts": 3,
+   "exemplo": "Gabinete Gamer Mancer Hemlok, Mid-Tower, Lateral de Vidro, Preto, MCR-HEMLOK-BK"
+  },
+  "Gabinete Pichau Atom X": {
+   "cat": "Gabinetes",
+   "desde": "2026-11-16",
+   "posts": 3,
+   "exemplo": "Gabinete Gamer Aquário Pichau Atom X, Mini-Tower, Lateral de Vidro, Com 2 Fans, Preto, PG-ATOMX-BK"
+  },
+  "Gabinete Aigo AC-A275-B-HQ1": {
+   "cat": "Gabinetes",
+   "desde": "2026-11-16",
+   "posts": 3,
+   "exemplo": "Gabinete Gamer Aquário Aigo Apollo A275, Mini-Tower, Lateral de Vidro, Preto, AC-A275-B-HQ1"
+  },
+  "Headset Corsair HS80": {
+   "cat": "Headsets e fones",
+   "desde": "2026-11-16",
+   "posts": 3,
+   "exemplo": "Headset Gamer Corsair HS80, RGB, Drivers 50mm, Preto, CA-9011237-NA"
+  },
+  "Mouse Redragon M917GB-PRO": {
+   "cat": "Mouses",
+   "desde": "2026-11-16",
+   "posts": 3,
+   "exemplo": "Mouse Gamer Redragon St4r Pro PAW3395 26000 DPI Sem Fio Bluetooth USB-C Ambidestro Preto M917GB-PRO"
+  },
+  "Monitor Philips 221V8LBW3": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "posts": 3,
+   "exemplo": "Monitor Branco Philips 22\" 120Hz 1ms Gaming 221V8LBW3"
+  },
+  "Mouse Redragon M711": {
+   "cat": "Mouses",
+   "desde": "2026-11-16",
+   "posts": 3,
+   "exemplo": "Mouse Gamer Redragon Cobra Chroma Rgb 12400 Dpi 8 Botoes Preto M711"
+  },
+  "Air cooler Mach1 A60": {
+   "cat": "Coolers",
+   "desde": "2026-11-16",
+   "posts": 3,
+   "exemplo": "Air Cooler MACH1 WIND, ARGB, AMD e Intel, 120mm, Preto - A60 ARGB"
+  },
+  "Monitor Acer B247Y": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "posts": 3,
+   "exemplo": "Monitor Acer Vero B247Y GBMIPRZX 23.8H” LED IPS 120Hz 85 de PCR Adaptive-Sync Pivô 90º Selo Energy star"
+  },
+  "Gabinete Redragon CA-612B": {
+   "cat": "Gabinetes",
+   "desde": "2026-11-16",
+   "igual": "Gabinete Redragon CA-612BR"
+  },
+  "Teclado Gamdias Aura GK2": {
+   "cat": "Teclados",
+   "desde": "2026-11-16",
+   "posts": 3,
+   "exemplo": "Teclado Mecânico Gamer Gamdias Aura GK2 60 RGB Switch Azul Branco e Preto ABNT2 AURA GK2 WB"
+  },
+  "Monitor MSI 272QP": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "posts": 3,
+   "exemplo": "Monitor Gamer Msi Mag 265 Wqhd Qd Oled 240Hz 003Ms Hdmi E Displayport Preto Mag 272Qp Qd Oled X24"
+  },
+  "Gabinete Gamdias Atlas M1": {
+   "cat": "Gabinetes",
+   "desde": "2026-11-16",
+   "posts": 3,
+   "exemplo": "Gabinete Mid Tower Gamdias Atlas M1 ATX Vidro Temperado 3 Fans ARGB Branco Atlas M1 WH"
+  },
+  "Placa-mãe Maxsun Terminator B760M": {
+   "cat": "Placas-mãe",
+   "desde": "2026-11-16",
+   "posts": 3,
+   "exemplo": "Placa-Mãe Maxsun Terminator B760M B760 LGA 1700 mATX"
+  },
+  "Air cooler Mach1 A60-H-ARGB": {
+   "cat": "Coolers",
+   "desde": "2026-11-16",
+   "posts": 3,
+   "exemplo": "Air Cooler MACH1 TYPHOON ARGB, AMD e Intel, 120mm, Branco - A60-H-ARGB"
+  },
+  "Monitor AOC 27B30H3": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "posts": 3,
+   "exemplo": "Monitor 27 Aoc Gamer 27b30h3/57 Full Hd Ips 120hz, 1ms Preto Preto 127/220v"
+  },
+  "Placa-mãe Gigabyte DS3H B760": {
+   "cat": "Placas-mãe",
+   "desde": "2026-11-16",
+   "posts": 3,
+   "exemplo": "Placa Mãe Gigabyte B760 DS3H DDR4 LGA 1700/4xDDR4/HDMI/DP/M.2/USB 3.2"
+  },
+  "Headset Picun G2 2.4G": {
+   "cat": "Headsets e fones",
+   "desde": "2026-11-16",
+   "posts": 3,
+   "exemplo": "Headset Picun g2 2.4g sem fio gaming headset bluetooth fones de ouvido 5ms baixa latência 7.1 surround enc microfone par"
+  },
+  "Mouse Redragon M711A-RGB": {
+   "cat": "Mouses",
+   "desde": "2026-11-16",
+   "posts": 3,
+   "exemplo": "Mouse Gamer Redragon Cobra V2 Special Edition Cypher Branco e Preto M711A-RGB"
+  },
+  "Placa-mãe Gigabyte Eagle B840M WiFi": {
+   "cat": "Placas-mãe",
+   "desde": "2026-11-16",
+   "posts": 3,
+   "exemplo": "Placa Mãe Gigabyte B840M Eagle Wifi6 Preto Micro-ATX DDR5 Socket AM5 para Processadores Ryzen 9000 / 8000 / 7000 Slot M."
+  },
+  "Headset Havit Gamenote FUXI-H6": {
+   "cat": "Headsets e fones",
+   "desde": "2026-11-16",
+   "posts": 3,
+   "exemplo": "Fone De Ouvido Branco Havit Gamenote Fuxi-h6 - White Branco Branco"
+  },
+  "Mouse Redragon Storm Pro": {
+   "cat": "Mouses",
+   "desde": "2026-11-16",
+   "posts": 3,
+   "exemplo": "Mouse Gamer Sem Fio Redragon Storm Pro Preto"
+  },
+  "Intel Core Ultra 5 245K": {
+   "cat": "Processadores",
+   "desde": "2026-11-16",
+   "posts": 3,
+   "exemplo": "Processador Intel Core Ultra 5 245K 4 2Ghz 5 2Ghz Turbo Cache 24 MB 14 Nucleos 14 Threads Lga 1851 Com Video Integrado B"
+  },
+  "Intel Core i9-14900K": {
+   "cat": "Processadores",
+   "desde": "2026-11-16",
+   "posts": 3,
+   "exemplo": "Processador Intel Core I9 14900K 3 2Ghz 6Ghz Max Turbo Cache 36 MB 24 Nucleos 32 Threads Lga 1700 Com Video Integrado Bx"
+  },
+  "Teclado Akko Fun": {
+   "cat": "Teclados",
+   "desde": "2026-11-16",
+   "posts": 3,
+   "exemplo": "Teclado Mecânico Akko Fun 60 Pro Magnetic Keyboard, 8000Hz, RGB"
+  },
+  "Teclado Redragon K606R": {
+   "cat": "Teclados",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "Teclado Mecânico Redragon Lakshmi 60 ABNT2 Iluminação Rainbow Switch Marrom Preto K606R"
+  },
+  "Mouse Logitech G502 X": {
+   "cat": "Mouses",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "Mouse Gamer Logitech G502 X com Switch LIGHTFORCE, 13 Botões Programáveis, Sensor HERO 25K, Compatível com PC/ macOS/ Wi"
+  },
+  "Placa-mãe MSI PRO B760": {
+   "cat": "Placas-mãe",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "Placa Mãe Msi Pro B760 M - P, Lga 1700, Ddr5, Matx Preto"
+  },
+  "Gabinete Gamdias Talos E3": {
+   "cat": "Gabinetes",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "Gabinete Gamer Gamdias Talos E3 Mesh ATX Micro-ATX Mini-ITX 3 Fans 120mm ARGB Preto TALOS E3 MESH"
+  },
+  "Teclado Redragon K652GG-RGB-PRO": {
+   "cat": "Teclados",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "Teclado Mecânico Gamer Redragon Azure RGB Pro Preto Cinza Switch Marrom Sem Fio Bluetooth K652GG-RGB-PRO"
+  },
+  "Air cooler G-Storm GX400": {
+   "cat": "Coolers",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "Cooler Para Processador Gstorm Gx400 Preto Preto"
+  },
+  "Gabinete Ninja Kazan X3": {
+   "cat": "Gabinetes",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "Gabinete Gamer Ninja Kazan X3, Mini Tower,Temperado,M-ATX,USB-C,Sem Fonte, Com 3 Fans, GN-CS-KZMAW3F"
+  },
+  "Fonte Redragon GC-PS005-1 700W": {
+   "cat": "Fontes",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "Fonte 700w Redragon Rgps Full Modular Pfc Ativo Gc-ps005-1, Preto"
+  },
+  "Monitor SuperFrame SFVSFB-24240-FHD-PRO": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "Monitor Gamer SuperFrame Vision 23.8 Pol FHD IPS 240Hz HDR FreeSync/G-Sync SFVSFB-24240-FHD-PRO"
+  },
+  "Teclado Ninja Leap": {
+   "cat": "Teclados",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "Teclado Mecânico Gamer Ninja Leap 60 Switch Blue"
+  },
+  "Headset HyperX Cloud Stinger": {
+   "cat": "Headsets e fones",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "HEADSET GAMER HYPERX CLOUD STINGER 2 CORE PC PRETO"
+  },
+  "Monitor Mancer MCR-VLKUZ3-BL01": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "Monitor Gamer Mancer Valak UZ3, 31.5 Pol, VA, Curvo, FHD, 1ms, 165Hz, HDMI/DP, MCR-VLKUZ3-BL01"
+  },
+  "Headset Havit H2230D": {
+   "cat": "Headsets e fones",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "Fone de Ouvido Gamer Havit H2230D 7.1 P3 50mm para PC e Consoles Cor Branco"
+  },
+  "Mouse Redragon M816-LIT": {
+   "cat": "Mouses",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "Mouse Gamer Redragon Deicide Lite, RGB, Preto - M816-LIT"
+  },
+  "Gabinete Pichau Osiris": {
+   "cat": "Gabinetes",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "Gabinete Gamer Pichau Osiris, Mini-Tower, Lateral de Vidro, Preto, PG-OSI-BK"
+  },
+  "Teclado Husky HTG800PTMA": {
+   "cat": "Teclados",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "Teclado Sem Fio Mecanico Gamer Husky Nomadic Rgb Switch Gateron G Pro Brown Bluetooth Abnt2 Preto Htg800Ptma"
+  },
+  "Placa-mãe Gigabyte B840M": {
+   "cat": "Placas-mãe",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "Placa Mãe Gigabyte B840M D2H AM5/2xDDR5/HDMI/USB 3.2/M.2"
+  },
+  "Monitor Acer KG240Y": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "Monitor Gamer Acer Nitro 23.8\" KG240Y W3BIIP LED FHD 1 ms 240 Hz"
+  },
+  "Monitor Concórdia H238D": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "Monitor Gamer Concórdia 24\" H238D IPS Full HD 100Hz FreeSync sRGB 100 HDMI DisplayPort VESA LED"
+  },
+  "Monitor AOC 22B30HM2": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "igual": "Monitor AOC 22B30HM23"
+  },
+  "Teclado Redragon K552WGL-RGB": {
+   "cat": "Teclados",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "Teclado Mecânico Gamer Redragon Kumara RGB TKL Switch Marrom Branco e Cinza K552WGL-RGB PT-BROWN"
+  },
+  "Monitor AOC 27G4": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "Monitor Gamer AOC 27\" 180Hz 0,5ms IPS Ajuste de Altura 27G4/P"
+  },
+  "Monitor Duex DXMO238F100": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "Monitor Gamer Duex, 23.8 Pol, IPS, FHD, 1ms, HDR, 100Hz, FreeSync, HDMI/VGA, Preto, DXMO238F100"
+  },
+  "Mouse Redragon M916-LIT-1K": {
+   "cat": "Mouses",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "Mouse Gamer Redragon King Lite Ultraleve 49g Sensor PAW3313 10000 DPI 1000Hz Tri-Mode Preto M916-LIT-1K"
+  },
+  "SSD WD WDS480G3G0A 480GB": {
+   "cat": "SSD",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "SSD WD Green 480GB INTERNO WESTERN DIGITAL SATA3 WD GREEN WDS480G3G0A 480GB VERDE"
+  },
+  "Headset HyperX 727A8AA": {
+   "cat": "Headsets e fones",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "Headset Gamer HyperX Cloud III, Driver 53mm, USB, Multi Plataformas, Preto - 727A8AA"
+  },
+  "SSD PNY CS900 2TB": {
+   "cat": "SSD",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "SSD PNY CS900 2TB 2,5\" SATA III"
+  },
+  "Headset Havit FUXI-H5D P2": {
+   "cat": "Headsets e fones",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "Headset Gamer Havit Fuxi-H5D P2 3.5Mm Drivers De 50Mm Preto Multiplataforma"
+  },
+  "Mouse Attack Shark R1": {
+   "cat": "Mouses",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "Mouse Gamer Sem Fio Attack Shark R1 Ultraleve E Design Ergonomico Tri Mode 18 000 Dpi Sensor Optico Paw3311 6 Botoes Pre"
+  },
+  "Monitor Philips 24M2N3200FQ": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "Monitor Gamer Philips Evnia 23.8\" 200HZ 0,3MS 24M2N3200FQ"
+  },
+  "Monitor Redragon GMQ3222SUC": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "Monitor Gamer Redragon Ombra 32\" 165Hz QHD IPS 1ms MPRT DisplayPort HDMI 2.1 GMQ3222SUC"
+  },
+  "Gabinete Rise Mode RM-CA-ZE-02-ARGB": {
+   "cat": "Gabinetes",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "Gabinete Gamer Rise Mode Zeus Glass 02, Mid Tower, ARGB, Frontal e Lateral em Vidro, 2 Fans 200mm ARGB, Preto - RM-CA-ZE"
+  },
+  "Gabinete Pichau Atom": {
+   "cat": "Gabinetes",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "Gabinete Gamer Aquário Pichau Atom, Mini-Tower, Lateral de Vidro, Com 1 Fan, Preto, PG-ATOM-BK"
+  },
+  "Headset Havit H2015SE": {
+   "cat": "Headsets e fones",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "Headset Gamer Havit H2015SE, Drivers 53mm, Preto, H2015SE-BLK"
+  },
+  "Headset JBL Wave Buds": {
+   "cat": "Headsets e fones",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "Fone de Ouvido Intra-Auricular Sem Fio JBL Wave Buds 2, Branco Bluetooth, Resistente à Água e Poeira"
+  },
+  "Teclado Machenike K500-B94": {
+   "cat": "Teclados",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "Teclado Gamer Machenike K500-B94 quente swappable 94 teclas 90 layout rgb backlight k500b94"
+  },
+  "Teclado Ajazz AK820": {
+   "cat": "Teclados",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "Teclado Mecânico Ajazz Ak820, Switch Red, Hot Swappable, Após entrar no link no APP, vá na guia \" Do Brasil\", o produto"
+  },
+  "Gabinete PCYes Forcefield White": {
+   "cat": "Gabinetes",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "Gabinete Gamer PCYES Forcefield White Ghost Frontal e lateral em vidro"
+  },
+  "Monitor Mancer MCR-HZ27BN2-BL3": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "Monitor Gamer Mancer Horizon Z2B, 27 Pol, VA, FHD, 1ms, 100Hz, HDMI/VGA, MCR-HZ27BN2-BL3"
+  },
+  "Headset Picun G1 2.4GHZ": {
+   "cat": "Headsets e fones",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "Headset Picun g1 2.4ghz gaming sem fio fone de ouvido 3d surround som espacial áudio enc hd microfone fones para gamer l"
+  },
+  "Placa-mãe Gigabyte B760M WiFi": {
+   "cat": "Placas-mãe",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "Placa Mae Gigabyte B760M D3Hp Wifi6 Intel Micro Atx Ddr5 Wi Fi 6 Bluetooth Preto 9Mb76M3Pw 00 G10"
+  },
+  "Placa-mãe Gigabyte Aorus Elite B760M-A": {
+   "cat": "Placas-mãe",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "Placa Mae Gigabyte B760M Aorus Elite Gen5 Intel Lga 1700 Matx Ddr5 Rgb Pcie 5 0 B760M A Elite Gen5"
+  },
+  "Intel Core i5-12600K": {
+   "cat": "Processadores",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "Processador Intel Core I5 12600K 3 7Ghz 4 9Ghz Max Turbo Cache 20 MB 10 Nucleos 16 Threads Lga 1700 Com Video Integrado "
+  },
+  "Mouse Redragon Harry Potter": {
+   "cat": "Mouses",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "Mouse Gamer Redragon Harry Potter Grifinória, RGB, 12400 DPI, Sensor Pixart PMW3327, USB, Preto e Vermelho - HP-711G"
+  },
+  "Teclado Redragon K606": {
+   "cat": "Teclados",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "Teclado Mecanico Redragon Lakshmi Rainbow Brown K606 Abnt2 Cor Preto"
+  },
+  "Gabinete Aigo FT418": {
+   "cat": "Gabinetes",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "Gabinete Gamer Aigo Darkflash FT418, Mid-Tower, Lateral de Vidro, Preto, FT418-BK"
+  },
+  "Air cooler Cougar Forza": {
+   "cat": "Coolers",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "Cooler Para Processador Cougar Forza 50 Argb Intel/amd 120mm"
+  },
+  "Monitor LG 25G523B-B": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "igual": "Monitor LG 25G523B"
+  },
+  "Placa-mãe Biostar H610M": {
+   "cat": "Placas-mãe",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "Placa-Mãe Biostar H610MHD D5 H610 LGA 1700 mATX DDR5"
+  },
+  "Gabinete Mancer CV700B": {
+   "cat": "Gabinetes",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "Gabinete Gamer Mancer CV700B, Mini-Tower, Lateral de Vidro, Com 2 Fans, Preto, MCR-CV700B-BK-2F"
+  },
+  "Gabinete Lian Li A3 Micro": {
+   "cat": "Gabinetes",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "Gabinete Gamer Lian Li A3 Micro ATX Wood Edition Preto A3-MATX-WDG Black"
+  },
+  "Mouse Logitech G703 Lightspeed": {
+   "cat": "Mouses",
+   "desde": "2026-11-16",
+   "posts": 2,
+   "exemplo": "Mouse Gamer Sem Fio Logitech G703 LIGHTSPEED com RGB LIGHTSYNC, 6 Botões Programáveis, Sensor HERO 25K e Bateria Recarre"
+  },
+  "Monitor Gigabyte GS24F14": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "igual": "Monitor Gigabyte GS24F14 (FHD 24\")"
+  },
+  "Monitor ASUS VG34WQML5A": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "igual": "Monitor Asus VG34WQML5A (QHD 34\" UW)"
+  },
+  "Monitor Gigabyte GS24F14A": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "igual": "Monitor Gigabyte GS24F14 (FHD 24\")"
+  },
+  "Monitor LG 32G403B-B": {
+   "cat": "Monitores",
+   "desde": "2026-11-16",
+   "igual": "Monitor LG 32G403B"
+  }
+ }
+}

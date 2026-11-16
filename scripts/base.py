@@ -7,7 +7,7 @@ COMBO=re.compile(r'\+\s*(processador|placa|water|mem|ssd|cooler|fonte)|\bkit\b.*
 MULTI=re.compile(r'(\d{3})\s?gb\s+(\d{3}\s?gb|1\s?tb|2\s?tb)|1\s?tb\s+2\s?tb|2\s?tb\s+4\s?tb|\b(\d{1,2})\s?gb\s+(\d{1,2})\s?gb\b',re.I)
 SODIMM=re.compile(r'impact ddr|hyperx impact|notebook|so-?dimm',re.I)
 def cat(k):
-    for p,c in [('Ryzen','Processadores'),('RTX','Placas de vídeo'),('RX ','Placas de vídeo'),('Placa-mãe','Placas-mãe'),('Memória','Memória RAM'),('SSD','SSD'),('Fonte','Fontes'),('Gabinete','Gabinetes'),('Water','Coolers'),('Air','Coolers'),('Monitor','Monitores'),('Cadeira','Cadeiras'),('Mousepad','Setup e acessórios'),('Mouse','Mouses'),('Teclado','Teclados'),('Headset','Headsets e fones'),('Fone','Headsets e fones'),('Controle','Controles'),('Notebook','Notebooks'),('PlayStation','Consoles'),('Nintendo','Consoles'),('Smart TV','TVs'),('Celular','Celulares, tablets e relógios'),('Tablet','Celulares, tablets e relógios'),('Smartwatch','Celulares, tablets e relógios'),('Microfone','Setup e acessórios'),('Mousepad','Setup e acessórios')]:
+    for p,c in [('Ryzen','Processadores'),('Intel','Processadores'),('GTX','Placas de vídeo'),('Arc ','Placas de vídeo'),('RTX','Placas de vídeo'),('RX ','Placas de vídeo'),('Placa-mãe','Placas-mãe'),('Memória','Memória RAM'),('SSD','SSD'),('Fonte','Fontes'),('Gabinete','Gabinetes'),('Water','Coolers'),('Air','Coolers'),('Monitor','Monitores'),('Cadeira','Cadeiras'),('Mousepad','Setup e acessórios'),('Mouse','Mouses'),('Teclado','Teclados'),('Headset','Headsets e fones'),('Fone','Headsets e fones'),('Controle','Controles'),('Notebook','Notebooks'),('PlayStation','Consoles'),('Nintendo','Consoles'),('Smart TV','TVs'),('Celular','Celulares, tablets e relógios'),('Tablet','Celulares, tablets e relógios'),('Smartwatch','Celulares, tablets e relógios'),('Microfone','Setup e acessórios'),('Mousepad','Setup e acessórios')]:
         if k.startswith(p): return c
 import sys as _s0;_s0.path.insert(0,os.path.dirname(os.path.abspath(__file__)))
 import atributos as AT
@@ -29,7 +29,9 @@ for r in R:
 import sys as _s;_s.path.insert(0,os.path.dirname(os.path.abspath(__file__)))
 import atributos as AT
 _mods=set()
-_nomes=[re.sub(r'[^a-z0-9]','',k.lower()) for k in {r['k'] for r in rows} if 'mais bar' not in k]
+_cat=set(json.load(open('../dados/catalogo.json'))['itens']) if os.path.exists('../dados/catalogo.json') else set()
+# os produtos do catálogo automático não entram nessa checagem de duplicado (senão escondem modelos da lista)
+_nomes=[re.sub(r'[^a-z0-9]','',k.lower()) for k in {r['k'] for r in rows} if 'mais bar' not in k and k not in _cat]
 def _dup(m):
     cod=re.sub(r'[^a-z0-9]','',m.split(' ',2)[-1].split(' ')[0].lower()) if ' ' in m else ''
     _bm={re.sub(r'[^a-z0-9]','',v.lower()) for v in AT.MARCA.values()}|{'cooler','water','placa','mae','monitor','fonte','memoria','ssd','gaming','plus','pro'}

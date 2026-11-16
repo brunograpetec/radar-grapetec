@@ -17,7 +17,13 @@ P
 node --max-old-space-size=3000 ../scripts/classify.js $D0 $DFIM ../dados/posts/*.json
 python3 ../scripts/clean_extra.py
 mkdir -p base; export OUT=base POSTS=../dados/posts
+# produtos cadastrados automaticamente (dados/catalogo.json) entram junto com os da lista
+python3 ../scripts/novos.py aplica || true
 python3 ../scripts/base.py
+# 1x por dia: procura produtos novos no canal e cadastra no catálogo
+if python3 -c "import json,datetime as d,sys;c=json.load(open('../dados/catalogo.json')) if __import__('os').path.exists('../dados/catalogo.json') else {};sys.exit(0 if c.get('ultimo')!=(d.datetime.now(d.timezone.utc)-d.timedelta(hours=3)).date().isoformat() else 1)"; then
+  python3 ../scripts/novos.py cadastra && python3 ../scripts/novos.py aplica && python3 ../scripts/base.py || true
+fi
 python3 ../scripts/comentarios.py ../site_data.json ../dados/comentarios.json || true
 python3 ../scripts/fotos.py ../site_data.json ../dados/fotos.json || true
 export FOTOS=../dados/fotos.json

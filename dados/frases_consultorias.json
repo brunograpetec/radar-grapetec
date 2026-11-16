@@ -1,1 +1,183 @@
-{"_leia":"Frases aprendidas das consultorias do Bruno (mesmas chaves de scripts/frases.json). Atualizado pela tarefa agendada de seg/qua/sex."}
+{
+  "_leia": "Frases aprendidas das consultorias do Bruno (mesmas chaves de scripts/frases.json). Atualizado pela tarefa agendada de seg/qua/sex.",
+  "abre_aaa": [
+    "Fala! Você quer jogo bonito e fluido, então coloquei o dinheiro onde realmente importa: <b>processador e placa de vídeo</b>.",
+    "Fala! Pra <b>longevidade e jogo de campanha</b>, quem decide o desempenho é a placa de vídeo, então foi nela que eu concentrei o dinheiro.",
+    "Fala! Pra <b>campanha e lançamento</b> com gráfico alto e acima de 60 FPS, montei uma máquina forte pra vários anos sem mexer.",
+    "Fala! A ideia não é montar o PC mais caro possível: é <b>qualidade, desempenho e longevidade</b> pra jogo pesado em alta resolução."
+  ],
+  "dupla": [
+    "Minha indicação pra esse orçamento é o conjunto <b>{cpu} + {gpu}</b>, mirando {res} com qualidade e FPS.",
+    "Com <b>{cpu} + {gpu}</b> a proposta é {res}: equilibra qualidade gráfica e FPS sem gastar à toa.",
+    "O mapa gira em torno de <b>{cpu} + {gpu}</b> pra {res}. É esse conjunto que eu tentaria preservar.",
+    "O coração da máquina fica em <b>{cpu} + {gpu}</b>, mirando direto o {res}, e o resto foi pensado pra acompanhar sem sobrar.",
+    "Força no processador e na placa, economia onde não precisa exagerar: <b>{cpu} + {gpu}</b> são os protagonistas em {res}.",
+    "O mais importante aqui foi não sacrificar a dupla <b>{cpu} + {gpu}</b>. Pra {res}, ela segura o projeto inteiro.",
+    "O coração ficou em <b>{cpu} + {gpu}</b>: processador forte de base e placa que leva o {res} pra outro patamar.",
+    "O investimento ficou concentrado em <b>{cpu} + {gpu}</b>: processador com folga e placa que dá conta do {res} com qualidade alta.",
+    "O grande salto fica no conjunto <b>{cpu} + {gpu}</b>. Em {res} sobra máquina, e ainda tá pronto pra subir de resolução.",
+    "Com <b>{cpu} + {gpu}</b> a máquina sai do básico e fica preparada de verdade pra {res}.",
+    "Pensando em {res}, coloquei o dinheiro onde aparece no jogo: <b>{cpu} + {gpu}</b>.",
+    "<b>{cpu} + {gpu}</b> forma uma base muito forte pra {res} nos próximos anos.",
+    "Em {res}, o conjunto <b>{cpu} + {gpu}</b> fica equilibrado: nenhum segura o outro.",
+    "Mantive <b>{cpu} + {gpu}</b> como o centro da máquina: é o que mais pesa em {res}.",
+    "<b>{cpu} + {gpu}</b> é uma combinação muito forte pra {res}, sem o processador virar gargalo.",
+    "<b>{cpu} + {gpu}</b> em {res}: forte pro competitivo e ainda com margem pros jogos mais pesados.",
+    "Preferi puxar o dinheiro pra placa: <b>{cpu} + {gpu}</b> é um conjunto muito forte pra {res}."
+  ],
+  "why_gpu": [
+    "Essa placa atende o orçamento de hoje, mas não é a definitiva: o PC foi montado pra receber uma <b>mais forte</b> depois.",
+    "O alvo é o <b>chip</b>, não a marca: achou outro modelo da mesma placa mais barato, pode ir.",
+    "Entre pegar 32GB agora ou uma placa mais forte, eu fico com a <b>placa</b>: memória dá pra subir depois.",
+    "Faz muito mais sentido colocar o dinheiro numa placa forte do que gastar em peças que mudam pouco a <b>experiência no jogo</b>.",
+    "Pra AAA com gráfico alto e pensando em sair do Full HD, faz muito mais sentido concentrar o orçamento na <b>placa de vídeo</b>.",
+    "Placa dedicada é o que transforma a máquina em <b>PC gamer de verdade</b> e evita começar já pensando em comprar placa depois.",
+    "Se o preço da placa tá subindo semana após semana, ela é a <b>primeira peça que eu compraria</b>. O resto encaixa conforme aparecer oferta.",
+    "Se o orçamento permitir, vale ir direto na placa mais forte: <b>dura muito mais</b> antes de pedir upgrade."
+  ],
+  "why_mobo": [
+    "Evitei placa-mãe básica demais só pra baixar o total: a base fica pronta pra um processador melhor depois.",
+    "Em vez de gastar demais na placa-mãe, fui numa {pl} que atende e deixa mais dinheiro pro processador e pra placa de vídeo.",
+    "Dá pra ter uma {pl} boa sem colocar uma fortuna na placa-mãe, e essa economia ajudou a encaixar o resto.",
+    "É a base do {pl}: a ideia é evoluir dentro da plataforma no futuro, sem trocar placa-mãe e memória junto.",
+    "Fecha o {pl} sem gastar uma parcela desnecessária, e o que economizou foi pra placa de vídeo.",
+    "Base do {pl} pra não precisar trocar placa-mãe e memória quando quiser subir o processador."
+  ],
+  "why_psu": [
+    "Fonte com boa margem de potência já pensando numa <b>troca de placa de vídeo</b> lá na frente.",
+    "Essa fonte não foi pensada pra placa de hoje, e sim pra <b>próxima</b>: sobe de placa sem trocar fonte.",
+    "Essa potência já atende bem esse PC: não tem por que pagar por uma fonte muito maior aqui.",
+    "Não precisa de fonte exagerada só pra inflar o orçamento: potência certa, PFC ativo e linha conhecida.",
+    "Fonte com folga pra trabalhar tranquila junto de uma placa forte.",
+    "Com placa de vídeo forte não faz sentido economizar na alimentação: potência com folga e boa certificação.",
+    "Placa forte merece fonte de qualidade e com folga, já pensando nos próximos upgrades.",
+    "Fonte moderna, eficiente e <b>pronta pra upgrade</b> de placa de vídeo no futuro.",
+    "Sobra de potência pra placa atual e pras <b>próximas placas de vídeo</b>: fonte que não precisa trocar no upgrade."
+  ],
+  "why_ca_aq": [
+    "Estética legal sem tirar dinheiro do conjunto processador e placa de vídeo.",
+    "Espaço pra acomodar tudo e visual gamer à altura da máquina.",
+    "Bastante espaço interno e bom airflow, combinando com uma máquina grande e potente.",
+    "Espaço e visual gamer <b>sem comer uma fatia grande</b> do orçamento."
+  ],
+  "abre_fps": [
+    "Fala! Seu objetivo é aproveitar o monitor de taxa alta, então <b>primeiro o PC entrega mais FPS</b>, depois a gente pensa em tela.",
+    "Fala! A missão aqui foi <b>desempenho puro</b>: FPS alto e uma plataforma pra usar por bastante tempo sem pensar em trocar peça logo.",
+    "Fala! O alvo aqui é <b>FPS alto com estabilidade</b> no competitivo, e o resto dos jogos só precisa rodar liso.",
+    "Fala! Seu foco é <b>FPS máximo no competitivo</b>, então não coloquei dinheiro em peça que não vira frame na prática.",
+    "Fala! Seu foco é competitivo com <b>estabilidade e baixa latência</b>, numa máquina que dure anos sem upgrade importante."
+  ],
+  "why_cpu_x3d": [
+    "Se a prioridade número 1 é FPS, faz sentido ter um <b>X3D</b> como base da máquina.",
+    "Salto enorme de FPS no competitivo: deixa a placa de vídeo trabalhar <b>perto do potencial dela</b>."
+  ],
+  "why_ram32": [
+    "Pra quem pensa em upgrade só daqui a muitos anos, faz mais sentido já sair com 32GB do que economizar justo na memória.",
+    "Com 2x16GB você monta agora e fica bastante tempo sem se preocupar com <b>memória</b>, ainda mais com multitarefa.",
+    "Já começa com <b>32GB em dual channel</b>, então a memória não vira preocupação tão cedo.",
+    "32GB em dual channel deixam a máquina tranquila pra jogo, multitarefa e uso pesado.",
+    "32GB em dual channel colocam a máquina num patamar excelente pra jogo, estudo e multitarefa.",
+    "32GB em dual channel dão a <b>capacidade ideal</b> pra jogo, programação e edição ao mesmo tempo."
+  ],
+  "why_ca_simples": [
+    "Gabinete apertado esquenta tudo. Um maior melhora a ventilação e a organização dos cabos.",
+    "Gabinete espaçoso que comporta tranquilamente o resto da configuração.",
+    "Compacto, com visual gamer, e sem comer uma parte grande do orçamento.",
+    "Fecha a estrutura com custo baixo: o dinheiro fica no que importa pra evolução do PC.",
+    "Fluxo de ar bom, espaço interno e já <b>preparado pra placas maiores</b>."
+  ],
+  "am5": [
+    "Começar no <b>AM5</b> é não precisar trocar placa-mãe, processador e memória tudo de uma vez daqui a pouco.",
+    "Preferi uma base <b>AM5</b> bem montada: a placa de vídeo é a primeira candidata a upgrade, o resto já fica pronto.",
+    "Pra montar algo que dure vários anos, fui de <b>AM5</b>: base atual e caminho de upgrade aberto.",
+    "Mantive o <b>AM5</b> porque ele deixa você pensar em upgrade futuro sem começar o PC do zero.",
+    "Como você não quer upgrade tão cedo, fui de <b>AM5 com DDR5</b>: base moderna pra não começar o PC já pensando em trocar tudo.",
+    "Pensando em <b>longevidade</b>, fico no AM5: dá pra trocar só o processador lá na frente sem trocar placa-mãe e memória.",
+    "AM4 não é ruim, longe disso. Mas se dá pra investir um pouco mais agora, o <b>AM5</b> entrega a longevidade que você pediu.",
+    "Em vez de gastar tudo numa plataforma antiga só pra encaixar placa de vídeo agora, eu prefiro uma <b>base AM5</b> pra crescer depois.",
+    "O <b>AM5</b> não compra FPS na mesma proporção do preço: compra plataforma, processador mais forte e longevidade.",
+    "Se o orçamento comportar, prefiro <b>AM5</b>: investe mais agora, mas não fica preso de novo numa plataforma antiga.",
+    "Chega um ponto em que colocar mais dinheiro no AM4 faz cada vez menos sentido: aqui vale <b>migrar de vez pro AM5</b>.",
+    "No <b>AM5</b>, se um dia o trabalho pedir mais processador, você troca só ele e mantém o resto da máquina.",
+    "Pra extrair tudo de uma placa forte no competitivo, o caminho é <b>migrar pra um kit AM5 parrudo</b>.",
+    "Em vez de plataforma antiga só pra encaixar placa agora, começa <b>direto no AM5</b>, com anos de suporte pela frente."
+  ],
+  "why_mon_fhd": [
+    "Se você está satisfeito com Full HD, não tem por que gastar mais só pra subir resolução."
+  ],
+  "am4": [
+    "Sem plano de upgrade no curto prazo, o <b>AM4</b> barateia a plataforma e libera dinheiro pra uma placa de vídeo mais forte.",
+    "Preferi desempenho agora em vez de sacrificar processador ou placa só pra ter AM5 na ficha técnica.",
+    "Eu olharia pro AM5, mas com os preços de hoje não fecha <b>32GB e uma placa desse nível</b> sem sacrificar demais. Por isso, AM4.",
+    "Fui de <b>AM4</b> de propósito: AM5 pediria muito dinheiro em placa-mãe e DDR5, e eu prefiro esse dinheiro na placa de vídeo.",
+    "Tem diferença entre <b>poder fazer upgrade</b> e precisar fazer. Se você não pretende trocar tão cedo, AM4 forte resolve.",
+    "Em vez de investir pesado em AM5, fui de <b>AM4</b> pra não sacrificar a placa de vídeo.",
+    "Gastar bem mais na plataforma e perder placa de vídeo não faz sentido: <b>AM4</b> aqui é a jogada coerente.",
+    "<b>AM4</b> é a escolha mais racional no custo-benefício: o grande salto de FPS vem da placa de vídeo, não da plataforma.",
+    "No <b>AM4</b> sobra dinheiro pra placa de vídeo, que é a peça que mais pesa tanto no jogo quanto no trabalho.",
+    "O <b>AM4</b> ainda tem custo-benefício excelente: deixa encaixar uma placa de vídeo bem mais forte no mesmo dinheiro."
+  ],
+  "why_per": [
+    "Periférico já resolvido? Então nenhum centavo vai pra isso agora."
+  ],
+  "abre_mix": [
+    "Fala! Você quer <b>desempenho e custo-benefício</b>, sem gastar com estética ou recurso que não traz ganho real.",
+    "Fala! Pra jogar bem, estudar e <b>envelhecer bem</b>, coloquei o máximo do orçamento no processador e na placa de vídeo.",
+    "Fala! A ideia foi <b>desempenho agora</b> e uma plataforma boa pra durar bastante, sem deixar a máquina desequilibrada.",
+    "Fala! Você joga <b>de tudo um pouco</b> e quer gráfico alto sem ter que mexer no PC tão cedo. Foi nessa linha que eu montei.",
+    "Fala! A prioridade aqui é <b>custo-benefício</b>, mas sem abrir mão de qualidade e de um PC que faça sentido por alguns anos.",
+    "Fala! Seu PC é pra <b>tudo um pouco e com longevidade</b>: comprando aos poucos, sem ficar trocando peça toda hora."
+  ],
+  "why_co_wc": [
+    "Pelo preço que saiu, deu pra colocar 360mm sem pesar no orçamento.",
+    "360mm pra refrigerar o processador com folga e ainda completar a estética da máquina.",
+    "Margem térmica alta pra carga pesada e uso prolongado.",
+    "360mm dá margem térmica excelente e deixa o interior do gabinete mais limpo.",
+    "Mantém o processador sempre fresco, <b>mesmo em carga pesada</b>, sem gastar muito.",
+    "Processador sempre em <b>temperatura baixa</b> e um visual bem mais bonito por dentro."
+  ],
+  "why_mon_qhd": [
+    "Não compre monitor só porque tem <b>4K</b> na caixa: olha resolução, taxa, painel, tamanho e preço juntos.",
+    "Com placa forte, o próximo passo natural é um monitor <b>QHD</b> pra aproveitar melhor a GPU.",
+    "Quando você partir pro <b>QHD</b>, vai aproveitar muito melhor todo esse poder gráfico.",
+    "Pra QHD, 27\" é um tamanho excelente: boa densidade de pixels e não precisa subir pra 32\" pra ter uma ótima experiência."
+  ],
+  "why_cpu_8": [
+    "8 núcleos fazem sentido pra quem também edita, modela e deixa vários programas abertos.",
+    "Não precisa ir atrás de X3D a qualquer custo: <b>8 núcleos e 16 threads</b> seguram a placa no jogo e ainda sobram pra multitarefa e estudo.",
+    "Os <b>8 núcleos</b> conversam muito bem com uso misto entre jogo, multitarefa e programa de trabalho.",
+    "Em jogo competitivo o processador pesa muito, e <b>8 núcleos</b> deixam a máquina forte sem comer o orçamento.",
+    "8 núcleos e 16 threads dão fôlego pra jogo, multitarefa e uso geral, sem gastar à toa na plataforma.",
+    "Muito desempenho de processador pra acompanhar a placa de vídeo por bastante tempo.",
+    "8 núcleos e 16 threads casam bem com essa placa, sem tirar dinheiro dela.",
+    "Equilíbrio entre desempenho, consumo e longevidade: FPS alto hoje e <b>sobra pros próximos anos</b>.",
+    "8 núcleos e 16 threads dão <b>fôlego pra multitarefa</b> e produtividade, sem deixar de jogar bem.",
+    "Não precisa do processador mais caro: o importante é <b>todo mundo trabalhando em equilíbrio</b>, sem segurar a placa de vídeo.",
+    "8 núcleos e 16 threads: desempenho de sobra pra jogo e multitarefa, e ainda <b>deixa espaço pra upgrade</b>."
+  ],
+  "why_ssd": [
+    "SSD rápido ajuda em carregamento, instalação de jogo e principalmente <b>projeto grande</b>.",
+    "Começa com o suficiente pro Windows e alguns jogos. Quando precisar, <b>é só somar outro SSD</b>."
+  ],
+  "dica_misto": [
+    "Orçamento no cartão? Deixa uma <b>margem</b>: preço parcelado costuma sair mais caro que o da oferta à vista.",
+    "Mesma placa em duas ofertas? O desempenho é igual: escolhe pela <b>condição de pagamento</b> que fizer mais sentido na hora.",
+    "Se a placa de vídeo vai no cartão, separa ela da conta e fecha o resto do PC no <b>orçamento à vista</b>."
+  ],
+  "why_ram16": [
+    "Começar com 16GB e deixar a memória como upgrade futuro libera dinheiro pra placa de vídeo.",
+    "São dois módulos, então a máquina já sai em <b>dual channel</b>. Aqui priorizei processador e placa de vídeo.",
+    "Começa com <b>16GB em dual channel</b>. Se um dia pedir mais, memória é um dos upgrades mais simples de fazer.",
+    "Dá pra começar com 16GB e subir pra 32GB depois: <b>melhor guardar o dinheiro</b> do que sacrificar a placa de vídeo agora.",
+    "16GB em dual channel atendem a primeira etapa, e ainda tem espaço pra evoluir a memória depois.",
+    "2x8GB em dual channel pra começar. Se um dia limitar, memória é das peças mais fáceis de evoluir.",
+    "Um pente só é limitação: 2x8GB em <b>dual channel</b> já corrige isso.",
+    "16GB em dual channel seguram o orçamento sem tirar da placa de vídeo. O <b>próximo upgrade</b> é subir pra 32GB."
+  ],
+  "vis_equil": [
+    "A estética entrou na conta, mas sem tirar o foco principal da máquina, que é <b>desempenho</b>."
+  ],
+  "why_cpu_6": [
+    "Pro seu foco não faz sentido pagar muito mais num 8 núcleos: o dinheiro economizado foi direto pra <b>placa de vídeo</b>."
+  ]
+}

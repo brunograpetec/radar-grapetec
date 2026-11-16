@@ -12,3 +12,6 @@ Todo dia o radar procura no canal produtos que ainda não estavam cadastrados (2
 - **Processadores** (14): Intel Core i5-14600KF, Intel Core i3-12100F, Intel Core i5-14400F, Intel Core i5-14600K, Intel Core i5-12400F, Intel Core Ultra 5 225F, Intel Core i5-12600KF, Intel Core i7-14700KF, Intel Core Ultra 5 245KF, Intel Core i3-13100F, Intel Core i7-14700F, Intel Core Ultra 5 245K, Intel Core i9-14900K, Intel Core i5-12600K
 - **SSD** (6): SSD WD WDS200T5G0A 2TB, SSD WD Green 480GB, SSD Crucial BX500 1TB, SSD SanDisk SDSSDE30-1T00 1TB, SSD WD WDS480G3G0A 480GB, SSD PNY CS900 2TB
 - **Teclados** (15): Teclado Redragon K608-R, Teclado Aula F75, Teclado Aula F87, Teclado Redragon K606-OG, Teclado Aula F99, Teclado Gamdias Aura GK2, Teclado Akko Fun, Teclado Redragon K606R, Teclado Redragon K652GG-RGB-PRO, Teclado Ninja Leap, Teclado Husky HTG800PTMA, Teclado Redragon K552WGL-RGB, Teclado Machenike K500-B94, Teclado Ajazz AK820, Teclado Redragon K606
+
+## 16/11/2026: 1 produtos novos
+- **Fontes** (1): Fonte G-Storm Airflow 650W

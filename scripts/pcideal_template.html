@@ -324,6 +324,26 @@
 #pci .cta a.main span{color:#3b1a55}
 #pci .foot{color:var(--dim);font-size:12px;margin-top:20px}
 #pci .alt{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 0}
+#pci .cvm{position:fixed;inset:0;z-index:99999;background:rgba(5,4,8,.72);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;transition:opacity .15s}
+#pci .cvm.on{opacity:1}
+#pci .cvb{position:relative;width:100%;max-width:620px;max-height:calc(100vh - 32px);overflow:auto;background:var(--s1);border:1px solid var(--bd);border-radius:20px;padding:18px 18px 16px;box-shadow:0 30px 80px rgba(0,0,0,.6);transform:translateY(8px);transition:transform .15s}
+#pci .cvm.on .cvb{transform:none}
+#pci .cvh{display:flex;gap:12px;align-items:center;padding-right:36px;margin-bottom:12px}
+#pci .cvh img{width:52px;height:52px;border-radius:10px;background:#fff;object-fit:contain;flex:none}
+#pci .cvh b{display:block;font-size:16px;line-height:1.25}#pci .cvh small{color:var(--mut);font-size:12.5px}
+#pci .cvx{position:absolute;top:12px;right:12px;width:32px;height:32px;border-radius:10px;border:1px solid var(--bd);background:var(--s2);color:var(--ink);font-size:18px;line-height:1;cursor:pointer}
+#pci .cvx:hover{border-color:var(--ac)}
+#pci .cvt{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+#pci .cvt div{background:var(--s2);border-radius:12px;padding:8px 10px;min-width:0}
+#pci .cvt small{display:block;font-size:11px;color:var(--mut)}#pci .cvt b{font-family:var(--mono);font-size:15px;white-space:nowrap}#pci .cvt span{display:block;font-size:11px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#pci .cvg{position:relative}#pci .cvg svg{display:block;width:100%;height:auto;touch-action:pan-y}
+#pci .cvtip{position:absolute;top:0;pointer-events:none;background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:4px 8px;font-size:12px;white-space:nowrap;transform:translateX(-50%);display:none}
+#pci .cvtip b{font-family:var(--mono)}
+#pci .cvv{margin-top:10px;font-size:13.5px;color:#d9d3e3}
+#pci .cvf{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:12px;font-size:12.5px;color:var(--mut);flex-wrap:wrap}
+#pci .cvf a{color:var(--ac);font-weight:600;text-decoration:none}
+#pci .cvload{padding:40px 0;text-align:center;color:var(--mut)}
+@media (max-width:520px){#pci .cvm{align-items:flex-end;padding:0}#pci .cvb{border-radius:20px 20px 0 0;max-height:88vh}#pci .cvt b{font-size:13.5px}}
 </style>
 </head>
 <body style="margin:0;background:#0a0a0c">
@@ -340,6 +360,67 @@ const r50 = v => Math.round(v/50)*50;
 const faixa = (a,b) => { a=r50(a); b=r50(b); if(b<=a) b=a+50; return R(a)+'–'+b.toLocaleString('pt-BR'); };
 const esc = s => String(s||'').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const fire = (e,p) => { try { window.fbq && fbq('trackCustom', e, p||{}); } catch(_){} };
+
+// ===== janelinha da curva (dados do Radar, carregados só quando alguém clica) =====
+let RDR = null;
+const rdrLoad = () => RDR || (RDR = (() => { const q='?v='+Math.floor(Date.now()/6e4), g = u => fetch(u+q,{cache:'no-store'}).then(r=>{ if(!r.ok) throw 0; return r.json(); }).catch(()=>null);
+  return Promise.all([g('https://cdn.jsdelivr.net/gh/brunograpetec/radar-grapetec@main/site_data.json'), g('https://raw.githubusercontent.com/brunograpetec/radar-grapetec/main/site_data.json')])
+    .then(a => { const b = a.filter(j => j && j.P).sort((x,y)=>(y.ts||0)-(x.ts||0))[0]; if(!b){ RDR = null; throw 0; } return b; }); })());
+function abreCurva(rid, img){
+  const url = 'https://grapetec.com.br/radar/#' + rid;
+  const root = document.getElementById('pci');
+  let w = document.getElementById('pciCv'); if(w) w.remove();
+  w = document.createElement('div'); w.id = 'pciCv'; w.className = 'cvm'; w.setAttribute('role','dialog'); w.setAttribute('aria-modal','true');
+  w.innerHTML = `<div class="cvb"><button class="cvx" aria-label="Fechar">×</button><div class="cvload">Carregando a curva…</div></div>`;
+  root.appendChild(w); requestAnimationFrame(() => w.classList.add('on'));
+  const fecha = () => { w.classList.remove('on'); setTimeout(() => w.remove(), 160); document.removeEventListener('keydown', esc1); };
+  const esc1 = e => { if(e.key === 'Escape') fecha(); };
+  document.addEventListener('keydown', esc1);
+  w.addEventListener('click', e => { if(e.target === w || e.target.closest('.cvx')) fecha(); });
+  w.querySelector('.cvx').focus();
+  rdrLoad().then(D => {
+    const p = D.P.find(x => x.id === rid); if(!p) throw 0;
+    const ST = D.stores || {}, D0 = new Date(D.d0 + 'T12:00:00-03:00');
+    const dt = i => { const d = new Date(D0.getTime() + i*864e5); return String(d.getDate()).padStart(2,'0') + '/' + String(d.getMonth()+1).padStart(2,'0'); };
+    const iso = s => s ? s.slice(8,10) + '/' + s.slice(5,7) : '';
+    const pts = (p.s || []).filter(x => x[1] > 0);
+    const W = 600, H = 230, ml = 8, mr = 8, mt = 26, mb = 26;
+    const n = D.days || (pts.length ? pts[pts.length-1][0] + 1 : 1);
+    const vals = pts.map(x => x[1]).concat(p.alvo ? [p.alvo] : []);
+    let lo = Math.min(...vals), hi = Math.max(...vals); const pad = (hi - lo) * .12 || hi * .05; lo -= pad; hi += pad;
+    const s0 = Math.max(0, (pts[0] ? pts[0][0] : 0) - 1), X = i => ml + (W - ml - mr) * (n - 1 > s0 ? (i - s0) / (n - 1 - s0) : .5), Y = v => mt + (H - mt - mb) * (1 - (v - lo) / (hi - lo));
+    const path = pts.map((x, k) => (k ? 'L' : 'M') + X(x[0]).toFixed(1) + ' ' + Y(x[1]).toFixed(1)).join(' ');
+    const mi = pts.reduce((a, x) => x[1] < a[1] ? x : a, pts[0] || [0, 0]);
+    let g = '';
+    [[0,'01/10'],[D.mB ? Math.round((new Date(D.mB+'T12:00:00-03:00') - D0)/864e5) : 31, '01/11']].forEach(([i, l]) => { if(i < n && i >= s0) g += `<line x1="${X(i)}" x2="${X(i)}" y1="${mt-6}" y2="${H-mb}" stroke="var(--bd)" stroke-width="1"/><text x="${X(i)+4}" y="${H-8}" fill="var(--dim)" font-size="11">${l}</text>`; });
+    g += `<text x="${W-mr}" y="${H-8}" text-anchor="end" fill="var(--dim)" font-size="11">hoje</text>`;
+    if(p.alvo) g += `<line x1="${ml}" x2="${W-mr}" y1="${Y(p.alvo)}" y2="${Y(p.alvo)}" stroke="var(--act)" stroke-width="1.5" stroke-dasharray="2 5"/><text x="${ml+4}" y="${Y(p.alvo)-6}" fill="var(--act)" font-size="12" style="paint-order:stroke" stroke="var(--s1)" stroke-width="4">meu alvo ${R(p.alvo)}</text>`;
+    g += `<path d="${path} L${X(pts[pts.length-1][0])} ${H-mb} L${X(pts[0][0])} ${H-mb} Z" fill="url(#cvgr)" opacity=".5"/><path d="${path}" fill="none" stroke="var(--ac)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>`;
+    g += pts.map(x => `<circle cx="${X(x[0]).toFixed(1)}" cy="${Y(x[1]).toFixed(1)}" r="2.6" fill="var(--ac)" stroke="var(--s1)" stroke-width="1.5"/>`).join('');
+    const mx = X(mi[0]), my = Y(mi[1]), anc = mx < 80 ? 'start' : mx > W - 80 ? 'end' : 'middle';
+    g += `<circle cx="${mx}" cy="${my}" r="5" fill="var(--ok)" stroke="var(--s1)" stroke-width="2"/><text x="${mx}" y="${my+18}" text-anchor="${anc}" fill="var(--okt)" font-size="12" font-weight="700" style="paint-order:stroke" stroke="var(--s1)" stroke-width="4">${R(mi[1])}</text>`;
+    const last = pts[pts.length-1];
+    const ver = !p.alvo ? '' : p.u && p.u <= p.alvo ? `O último preço (${R(p.u)}) está abaixo do meu alvo. Se aparecer nesse valor, pode pegar.` : `Preço bom aqui é abaixo de ${R(p.alvo)}. Já passou por ${R(p.lo)} no período.`;
+    w.querySelector('.cvb').innerHTML = `<button class="cvx" aria-label="Fechar">×</button>
+      <div class="cvh">${img ? `<img src="${esc(img)}" alt="" onerror="this.remove()">` : ''}<div><b>${esc(p.n)}</b><small>Menor preço de cada dia no canal · out → nov</small></div></div>
+      <div class="cvt"><div><small>Último preço</small><b>${R(p.u)}</b><span>${iso(p.ud)} · ${esc(p.ul||'')}</span></div>
+        <div><small>Menor preço</small><b style="color:var(--okt)">${R(p.lo)}</b><span>${iso(p.lod)} · ${esc(p.los||'')}</span></div>
+        <div><small>Meu preço-alvo</small><b style="color:var(--act)">${p.alvo ? R(p.alvo) : '—'}</b><span>${p.dias} dias com oferta</span></div></div>
+      <div class="cvg"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Curva de preço de ${esc(p.n)}"><defs><linearGradient id="cvgr" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#c77dff" stop-opacity=".45"/><stop offset="1" stop-color="#c77dff" stop-opacity="0"/></linearGradient></defs>${g}<line class="cvcx" x1="0" x2="0" y1="${mt-6}" y2="${H-mb}" stroke="var(--mut)" stroke-width="1" opacity="0"/><circle class="cvcd" r="5" fill="var(--ink)" stroke="var(--s1)" stroke-width="2" opacity="0"/><rect x="0" y="0" width="${W}" height="${H}" fill="transparent"/></svg><div class="cvtip"></div></div>
+      ${ver ? `<p class="cvv">${ver}</p>` : ''}
+      <div class="cvf"><span>Atualizado ${esc(D.upd || '')}</span><a href="${url}" target="_blank" rel="noopener">Abrir no Radar completo ↗</a></div>`;
+    const svg = w.querySelector('svg'), tip = w.querySelector('.cvtip'), cx = w.querySelector('.cvcx'), cd = w.querySelector('.cvcd');
+    const mv = e => { const r = svg.getBoundingClientRect(), ex = ((e.touches ? e.touches[0].clientX : e.clientX) - r.left) / r.width * W;
+      let b = pts[0]; pts.forEach(x => { if(Math.abs(X(x[0]) - ex) < Math.abs(X(b[0]) - ex)) b = x; });
+      const px = X(b[0]), py = Y(b[1]); cx.setAttribute('x1', px); cx.setAttribute('x2', px); cx.setAttribute('opacity', '.5'); cd.setAttribute('cx', px); cd.setAttribute('cy', py); cd.setAttribute('opacity', '1');
+      tip.innerHTML = `${dt(b[0])} · <b>${R(b[1])}</b> · ${esc(ST[b[2]] || '')}`; tip.style.display = 'block';
+      tip.style.left = Math.min(Math.max(px / W * r.width, 70), r.width - 70) + 'px'; };
+    const out = () => { tip.style.display = 'none'; cx.setAttribute('opacity', '0'); cd.setAttribute('opacity', '0'); };
+    svg.addEventListener('mousemove', mv); svg.addEventListener('touchstart', mv, {passive:true}); svg.addEventListener('touchmove', mv, {passive:true}); svg.addEventListener('mouseleave', out);
+    w.querySelector('.cvx').focus();
+  }).catch(() => { w.querySelector('.cvb').innerHTML = `<button class="cvx" aria-label="Fechar">×</button><div class="cvload">Não deu pra carregar a curva agora.<br><a href="${url}" target="_blank" rel="noopener" style="color:var(--ac)">Abrir no Radar ↗</a></div>`; });
+}
+app.addEventListener('click', e => { const a = e.target.closest('[data-rcv]'); if(!a) return; e.preventDefault(); abreCurva(a.dataset.rcv, a.dataset.img || ''); });
 /* coleta anônima pra planilha do Bruno (Google Sheets). Sem nome, e-mail ou telefone. Vazio = desligado. */
 const COLETA_URL = 'https://script.google.com/macros/s/AKfycbz5JpM6e1tRkFtHW-cQFy1KxG3_7SsAuBcct2lST9d3qIMh1J3KAQ4usLlK1qM2RFCFBw/exec';
 /* vídeo do Bruno explicando o "mapa" (link do YouTube). Vazio = mostra só o texto. */
@@ -621,6 +702,7 @@ const CASE_SPEC = [
   [/Kalkan Asgard/,            {tam:'Mid Tower', mobo:['ATX','mATX','ITX'], rad:240, ar:160, gpu:330, tier:3}],
   [/CV450 \(9 fans\)/,         {tam:'Mini Tower', mobo:['mATX','ITX'], rad:240, ar:155, gpu:300, tier:2}],
   [/Mancer CV450/,             {tam:'Mini Tower', mobo:['mATX','ITX'], rad:240, ar:155, gpu:300, tier:1}],
+  [/G-Storm Raider/,           {tam:'Mini Tower', mobo:['mATX','ITX'], rad:240, ar:155, gpu:300, tier:1}],
   [/G-Storm Sentinel/,         {tam:'Mid Tower', mobo:['ATX','mATX','ITX'], rad:240, ar:155, gpu:300, tier:1}],
   [/Acegeek/,                  {tam:'Mid Tower', mobo:['ATX','mATX','ITX'], rad:240, ar:155, gpu:300, tier:1}],
 ];
@@ -842,7 +924,7 @@ function pbox(it, preco, sub){
     <div class="pi"><div class="pp">${R2(preco)}</div><div class="ps">${sub||(esc(it.loja||'')+' · '+dia(it.d))}</div><div class="age ${idade(it)<=2?'new':''}">${idade(it)===0?'postado hoje':idade(it)===1?'postado ontem':'postado há '+idade(it)+' dias'}</div>${it.fc?`<div class="fcx">${fcTxt(it)}, mas foi pontual. Meta realista: <b>${R(it.p)}</b>${preco > it.p*1.5 ? " cada" : ""}</div>`:''}
     ${it.cup?`<button class="cupb" data-c="${esc(it.cup)}" data-u="${esc(it.url||'')}" title="Copia o cupom e abre a loja">🎟️ ${esc(it.cup)}</button>`:''}
     ${it.url?`<a class="btn buy" href="${esc(it.url)}" target="_blank" rel="noopener sponsored" data-ev="loja">${esc(it.loja||'Loja')} ↗</a>`:''}
-    <div class="vps">${it.rid ? `<a class="vp" href="https://grapetec.com.br/radar/#${esc(it.rid)}" target="_blank" rel="noopener" data-ev="curva">📈 ver a curva</a>` : ''}<a class="vp" href="https://t.me/grape_tec/${it.post}" target="_blank" rel="noopener" data-ev="post">ver o post</a></div></div></div>`;
+    <div class="vps">${it.rid ? `<a class="vp" href="https://grapetec.com.br/radar/#${esc(it.rid)}" target="_blank" rel="noopener" data-ev="curva" data-rcv="${esc(it.rid)}" data-img="${esc(it.img||'')}">📈 ver a curva</a>` : ''}<a class="vp" href="https://t.me/grape_tec/${it.post}" target="_blank" rel="noopener" data-ev="post">ver o post</a></div></div></div>`;
 }
 function termo(it){
   const lo = it.lo, hi = Math.max(it.p75*1.12, it.p*1.03, it.med*1.12, lo*1.2), w = v => Math.max(0, Math.min(100, (v-lo)/(hi-lo)*100));
@@ -1301,7 +1383,7 @@ function montar(){
         if(sec==='ca' && incomp.length && m.incomp!==sec){ const co = (P.cooler||[]).find(x=>x.n===m.co), mob = (P.mobo||[]).find(x=>x.n===m.mobo), g = GPU[m.gpu];
           h += `<p class="old" style="margin:-6px 0 8px">✔ Só gabinetes que cabem ${[mob&&'placa-mãe '+moboTam(mob), co&&radMm(co)&&'water cooler '+radMm(co)+'mm', g&&g.i>=175&&'a '+m.gpu].filter(Boolean).join(', ')}.</p>`; }
         const vis = m.mais===sec ? opts : opts.slice(0, 8);
-        h += `<div class="mml">${vis.map(o => { const bl = mmBloq(sec, o); return `<div class="mow"><button class="mo ${m[sec]===o.id?'on':''} ${bl?'bl':''}" data-s="${sec}" data-id="${esc(o.id)}" ${bl?'disabled':''}>${o.it && o.it.img ? `<img class="moi" src="${esc(o.it.img)}" alt="" loading="lazy" onerror="this.style.visibility='hidden'">` : `<span class="moi"></span>`}<span class="mon">${esc(o.nome)}<small>${bl?'⚠ '+bl:o.sub}</small>${!bl && o.it && o.it.fc ? `<small class="fco">${fcTxt(o.it)} · realista: ${R(o.preco/(o.qtd||1))}${o.qtd===2?' cada':''}</small>` : ''}</span><span class="mop">${o.preco?R2(o.preco):'R$ 0'}${o.it?`<small>${esc(o.it.loja||'')} · ${idade(o.it)===0?'hoje':idade(o.it)===1?'ontem':'há '+idade(o.it)+' dias'}</small>`:''}</span></button>${o.it && o.it.rid ? `<a class="mocv" href="https://grapetec.com.br/radar/#${esc(o.it.rid)}" target="_blank" rel="noopener" data-cv="radar" title="Ver a curva de preço no Radar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-6"/></svg><span>curva</span></a>` : o.it && o.it.post ? `<a class="mocv" href="https://t.me/grape_tec/${o.it.post}" target="_blank" rel="noopener" data-cv="post" title="Ver o post da oferta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4 3 11l7 2 2 7 9-16Z"/></svg><span>post</span></a>` : ''}</div>`; }).join('') || '<p class="old">Nada passou no canal com esse filtro no último mês.</p>'}</div>`;
+        h += `<div class="mml">${vis.map(o => { const bl = mmBloq(sec, o); return `<div class="mow"><button class="mo ${m[sec]===o.id?'on':''} ${bl?'bl':''}" data-s="${sec}" data-id="${esc(o.id)}" ${bl?'disabled':''}>${o.it && o.it.img ? `<img class="moi" src="${esc(o.it.img)}" alt="" loading="lazy" onerror="this.style.visibility='hidden'">` : `<span class="moi"></span>`}<span class="mon">${esc(o.nome)}<small>${bl?'⚠ '+bl:o.sub}</small>${!bl && o.it && o.it.fc ? `<small class="fco">${fcTxt(o.it)} · realista: ${R(o.preco/(o.qtd||1))}${o.qtd===2?' cada':''}</small>` : ''}</span><span class="mop">${o.preco?R2(o.preco):'R$ 0'}${o.it?`<small>${esc(o.it.loja||'')} · ${idade(o.it)===0?'hoje':idade(o.it)===1?'ontem':'há '+idade(o.it)+' dias'}</small>`:''}</span></button>${o.it && o.it.rid ? `<a class="mocv" href="https://grapetec.com.br/radar/#${esc(o.it.rid)}" target="_blank" rel="noopener" data-rcv="${esc(o.it.rid)}" data-img="${esc(o.it.img||'')}" title="Ver a curva de preço"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-6"/></svg><span>curva</span></a>` : ''}</div>`; }).join('') || '<p class="old">Nada passou no canal com esse filtro no último mês.</p>'}</div>`;
         if(opts.length > 8 && m.mais!==sec) h += `<button class="lnk mmmais" data-s="${sec}">ver mais ${opts.length-8} opções ▾</button>`;
         if(incomp.length && m.incomp!==sec) h += `<button class="lnk mminc" data-s="${sec}" style="margin-left:14px">ver ${incomp.length} que não ${incomp.length>1?'são compatíveis':'é compatível'} ▾</button>`;
       } else if(!tem) h += `<p class="old">Escolhe a peça anterior primeiro.</p>`;
@@ -1336,7 +1418,7 @@ function montar(){
     ['psu','ca'].forEach(k => { if(m[k]){ const o = mmOpts(k).find(x=>x.id===m[k]); if(o && mmBloq(k,o)) m[k] = ''; } });
     render(); const nx = MM_SECS.find(([k]) => k!=='pl' && !m[k]); const el = nx && document.getElementById('mm_'+nx[0]); if(el) el.scrollIntoView({behavior:'smooth', block:'start'}); });
   app.querySelectorAll('.mmtroca').forEach(b => b.onclick = () => { m.open = b.dataset.s; render(); });
-  app.querySelectorAll('.mocv').forEach(a => a.addEventListener('click', () => { fire('PCIdeal_manual_' + a.dataset.cv); coleta('clique_curva', {modo:'manual'}); }));
+  app.querySelectorAll('.mocv').forEach(a => a.addEventListener('click', () => { fire('PCIdeal_manual_curva'); coleta('clique_curva', {modo:'manual'}); }));
   app.querySelectorAll('.mminc').forEach(b => b.onclick = () => { m.incomp = b.dataset.s; render(); });
   app.querySelectorAll('.mmmais').forEach(b => b.onclick = () => { m.mais = b.dataset.s; render(); });
   const okb = document.getElementById('pciMMok'); if(okb) okb.onclick = () => { m.ver = true; fire('PCIdeal_Manual'); coleta('manual', {total: Math.round(av.tot), nota: av.nota, plataforma: m.pl, cpu: m.cpu, placa_mae: m.mobo, memoria: m.ram, ssd: m.ssd, gpu: m.gpu, fonte: m.psu, cooler: m.co, gabinete: m.ca, alertas: av.alerta.map(x => x.replace(/<[^>]+>/g,'').slice(0,60)).join(' | ')});; render(); const r = document.getElementById('mmres'); if(r) r.scrollIntoView({behavior:'smooth'}); };

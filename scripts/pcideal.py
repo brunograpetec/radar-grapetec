@@ -110,7 +110,7 @@ RID = {p['n']: p['id'] for p in site['P']}   # id do produto no Radar (pra abrir
 
 out = collections.defaultdict(list)
 for (cat, nome), L in rows.items():
-    if len(L) < 2 and cat != 'ram':
+    if len(L) < 2 and cat != 'ram' and 'G-Storm' not in nome:   # G-Storm (parceiro) entra com 1 post só
         continue
     ps = sorted(x[1] for x in L)
     med = S.median(ps)

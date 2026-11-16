@@ -87,13 +87,15 @@ def mesmo(a, b):
 
 # G-Storm (parceiro): todos os produtos, escrito G-Storm, GStorm ou G Storm
 GSTORM = [(r'hx700', 'Coolers', 'Water cooler G-Storm HX700 360'), (r'hx500', 'Coolers', 'Water cooler G-Storm HX500 240'),
-          (r'gx400', 'Coolers', 'Air cooler G-Storm GX400'), (r'sentinel', 'Gabinetes', 'Gabinete G-Storm Sentinel'),
+          (r'gx-?400', 'Coolers', 'Air cooler G-Storm GX400'),
+          (r'raider.*(3 fans|3 fan|rainbow)|(3 fans|3 fan).*raider', 'Gabinetes', 'Gabinete G-Storm Raider (3 fans)'), (r'raider', 'Gabinetes', 'Gabinete G-Storm Raider'),
+          (r'vanguard.*(3 fans|3 fan|rainbow)|(3 fans|3 fan).*vanguard', 'Gabinetes', 'Gabinete G-Storm Vanguard (3 fans)'), (r'vanguard', 'Gabinetes', 'Gabinete G-Storm Vanguard'), (r'sentinel', 'Gabinetes', 'Gabinete G-Storm Sentinel'),
           (r'frost.*(fan|12\s?cm|120)|(fan|12\s?cm|120).*frost|gs-frost-120', 'Coolers', 'Fan G-Storm Frost 120mm (kit 3 fans)'),
           (r'fonte.*frost|frost.*fonte', 'Fontes', 'Fonte G-Storm Frost {w}W'), (r'fonte|airflow', 'Fontes', 'Fonte G-Storm Airflow {w}W')]
 
 
 def gstorm(t):
-    if not re.search(r'\bg[\s\-]?storm', t) or re.search(r'usad[oa]|seminov|open ?box|vitrine', t):
+    if not re.search(r'\bg[\s\-]?storm|\bgts gx', t) or re.search(r'usad[oa]|seminov|open ?box|vitrine', t):
         return None
     for r, c, n in GSTORM:
         if re.search(r, t):

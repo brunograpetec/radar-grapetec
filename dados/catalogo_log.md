@@ -15,3 +15,11 @@ Todo dia o radar procura no canal produtos que ainda não estavam cadastrados (2
 
 ## 16/11/2026: 1 produtos novos
 - **Fontes** (1): Fonte G-Storm Airflow 650W
+
+## 17/11/2026: 8 produtos novos
+- **Gabinetes** (1): Gabinete Metalfish T60
+- **Headsets e fones** (1): Headset JBL Bluetooth Wave
+- **Monitores** (3): Monitor HQ HQW32C180, Monitor Concórdia CZ270F, Monitor Acer ED343CUR
+- **Mouses** (1): Mouse Logitech Lift Vertical
+- **Processadores** (1): Intel Core Ultra 5 250KF
+- **Teclados** (1): Teclado Ajazz NK68

@@ -1,6 +1,6 @@
 {
  "_leia": "Produtos cadastrados sozinhos pelo radar (scripts/novos.py). Pra tirar um produto, apague a linha dele.",
- "ultimo": "2026-11-16",
+ "ultimo": "2026-11-17",
  "itens": {
   "Placa-mãe MSI PRO B840M-B": {
    "cat": "Placas-mãe",
@@ -1282,6 +1282,54 @@
    "cat": "Gabinetes",
    "desde": "2026-11-16",
    "obs": "G-Storm (parceiro): entra assim que for postado"
+  },
+  "Intel Core Ultra 5 250KF": {
+   "cat": "Processadores",
+   "desde": "2026-11-17",
+   "posts": 3,
+   "exemplo": "Processador Intel Core Ultra 5 250Kf 4 2Ghz 5 3Ghz Turbo Cache 30 MB 18 Nucleos 18 Threads Lga 1851 Sem Video Integrado "
+  },
+  "Monitor HQ HQW32C180": {
+   "cat": "Monitores",
+   "desde": "2026-11-17",
+   "posts": 3,
+   "exemplo": "Monitor Gamer HQ 32\" Ultra Branco Curvo 1ms, 180Hz, Quad HD QHD - 2560x1440, AMD FreeSync, HDMI, DP, HQW32C180"
+  },
+  "Monitor Concórdia CZ270F": {
+   "cat": "Monitores",
+   "desde": "2026-11-17",
+   "posts": 2,
+   "exemplo": "Monitor Gamer Curvo 27'' CZ270F Concórdia 100HZ LED FULL HD HDMI VGA SRGB 99"
+  },
+  "Headset JBL Bluetooth Wave": {
+   "cat": "Headsets e fones",
+   "desde": "2026-11-17",
+   "posts": 2,
+   "exemplo": "Fone de Ouvido Sem Fio, JBL, Bluetooth, Wave Buds 2, Intra Auricular, Sem Fio, Resistente À Água e Poeira - Preto"
+  },
+  "Teclado Ajazz NK68": {
+   "cat": "Teclados",
+   "desde": "2026-11-17",
+   "posts": 2,
+   "exemplo": "Teclado Mecânico Gamer AJAZZ NK68, RGB, Switch Red, Keycaps PBT, Hotswap, Branco - AJAZZ-NK68-W1-OEM-WH-R"
+  },
+  "Monitor Acer ED343CUR": {
+   "cat": "Monitores",
+   "desde": "2026-11-17",
+   "posts": 2,
+   "exemplo": "Monitor Acer Nitro ED343CUR J0BMIIPPX 34C, 34” Tela Curva, QuadHD 120Hz 1ms LED VA Tecnologia Acer Vision Care, AMD Free"
+  },
+  "Mouse Logitech Lift Vertical": {
+   "cat": "Mouses",
+   "desde": "2026-11-17",
+   "posts": 2,
+   "exemplo": "Mouse Sem Fio Logitech Lift Vertical com Design Ergonômico para Redução de Tensão Muscular, Cliques Silenciosos, Conexão"
+  },
+  "Gabinete Metalfish T60": {
+   "cat": "Gabinetes",
+   "desde": "2026-11-17",
+   "posts": 2,
+   "exemplo": "Gabinete 9L Metalfish T60 ITX SFX"
   }
  }
 }

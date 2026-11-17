@@ -4,7 +4,7 @@ R=list(csv.DictReader(open('posts_raw2.csv',encoding='utf-8')))+list(csv.DictRea
 RENAME={'Monitor AOC 25G64 (FHD 25")':'Monitor TCL 25G64 (FHD 25" Mini LED)'}
 DROP={'Ryzen 3 2200G','Ryzen 5 2600X','RTX 3070','RTX 3050','RTX 3060','RTX 3060 Ti','RTX 2060 Super','RTX 4050','RX 5500 XT','RX 5600 XT','RX 5600','RX 5700','RX 6600','Ryzen 7 5700G'}
 COMBO=re.compile(r'\+\s*(processador|placa|water|mem|ssd|cooler|fonte)|\bkit\b.*\+',re.I)
-MULTI=re.compile(r'(\d{3})\s?gb\s+(\d{3}\s?gb|1\s?tb|2\s?tb)|1\s?tb\s+2\s?tb|2\s?tb\s+4\s?tb|\b(\d{1,2})\s?gb\s+(\d{1,2})\s?gb\b',re.I)
+MULTI=re.compile(r'(\d{3})\s?gb\s+(\d{3}\s?gb|1\s?tb|2\s?tb)|1\s?tb\s+2\s?tb|2\s?tb\s+4\s?tb|\b(\d{1,2})\s?gb\s*(?:/|e|,)?\s*(\d{1,2})\s?gb\b',re.I)
 SODIMM=re.compile(r'impact ddr|hyperx impact|notebook|so-?dimm',re.I)
 def cat(k):
     for p,c in [('Ryzen','Processadores'),('Fan ','Coolers'),('Intel','Processadores'),('GTX','Placas de vídeo'),('Arc ','Placas de vídeo'),('RTX','Placas de vídeo'),('RX ','Placas de vídeo'),('Placa-mãe','Placas-mãe'),('Memória','Memória RAM'),('SSD','SSD'),('Fonte','Fontes'),('Gabinete','Gabinetes'),('Water','Coolers'),('Air','Coolers'),('Monitor','Monitores'),('Cadeira','Cadeiras'),('Mousepad','Setup e acessórios'),('Mouse','Mouses'),('Teclado','Teclados'),('Headset','Headsets e fones'),('Fone','Headsets e fones'),('Controle','Controles'),('Notebook','Notebooks'),('PlayStation','Consoles'),('Nintendo','Consoles'),('Smart TV','TVs'),('Celular','Celulares, tablets e relógios'),('Tablet','Celulares, tablets e relógios'),('Smartwatch','Celulares, tablets e relógios'),('Microfone','Setup e acessórios'),('Mousepad','Setup e acessórios')]:

@@ -19,7 +19,10 @@ MARCA = {'asus': 'ASUS', 'gigabyte': 'Gigabyte', 'aorus': 'Gigabyte', 'msi': 'MS
          'thunderx3': 'ThunderX3', 'dt3': 'DT3', 'draxen': 'Draxen', 'xt racer': 'XT Racer', 'fox racer': 'Fox Racer',
          'dr. office': 'Dr. Office', 'luvinco': 'Luvinco', 'mtek': 'Mtek', 'sharkoon': 'Sharkoon', 'segotep': 'Segotep', 'valecom': 'Valecom',
          'philco': 'Philco', 'hisense': 'Hisense', 'semp': 'Semp', 'toshiba': 'Toshiba', 'aiwa': 'Aiwa', 'sony': 'Sony', 'mibao': 'Mibao',
-         'ktrok': 'Ktrok', 'superpc': 'SuperPC'}
+         'ktrok': 'Ktrok', 'superpc': 'SuperPC',
+         'spectrum': 'Spectrum', 'up gamer': 'Up Gamer', 'kllisre': 'Kllisre', 'gmog': 'GMOG',
+         'gbt': 'GBT', 'macrovip': 'Macrovip', 'synex': 'Synex', 'next-bit': 'Next-Bit', 'puskill': 'Puskill', 'cusu': 'CUSU', 'memtech': 'Memtech',
+         'juhor': 'Juhor', 'kingfast': 'Kingfast', 'ceamere': 'CeaMere', 'keepdata': 'KeepData', 'gudga': 'Gudga'}
 _MK = sorted(MARCA, key=len, reverse=True)
 
 
@@ -49,7 +52,7 @@ _SER_MB = [('rog strix', 'ROG Strix'), ('strix', 'ROG Strix'), ('tuf', 'TUF Gami
            ('gaming plus', 'Gaming Plus'), ('steel legend', 'Steel Legend'), ('phantom', 'Phantom Gaming'), ('pg lightning', 'PG Lightning'),
            ('lightning', 'PG Lightning'), ('hdv', 'HDV'), ('eagle', 'Eagle'), ('ultra durable', 'Ultra Durable'), ('nexus', 'Nexus'),
            ('challenger', 'Challenger'), ('terminator', 'Terminator'), ('force', 'Force'), ('ayw', 'AYW'), ('pro', 'PRO')]
-_SER_RAM = [('fury beast', 'Fury Beast'), ('fury renegade', 'Fury Renegade'), ('vengeance', 'Vengeance'), ('dominator', 'Dominator'),
+_SER_RAM = [('fury beast', 'Fury Beast'), ('beast fury', 'Fury Beast'), ('blitz s', 'Blitz S'), ('blitz', 'Blitz'), ('anubis', 'Anubis'), ('killblade', 'Killblade'), ('fury renegade', 'Fury Renegade'), ('vengeance', 'Vengeance'), ('dominator', 'Dominator'),
             ('lancer', 'Lancer'), ('spectrix', 'Spectrix'), ('gammix', 'Gammix'), ('delta', 'Delta'), ('vulcan', 'Vulcan'),
             ('ripjaws', 'Ripjaws'), ('trident', 'Trident Z'), ('flare', 'Flare X5'), ('pro', 'Pro'), ('viper', 'Viper'),
             ('elite', 'Elite'), ('ballistix', 'Ballistix'), ('value', 'Value'), ('ares', 'Ares'), ('hiker', 'Hiker')]

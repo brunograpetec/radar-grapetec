@@ -1,5 +1,5 @@
 var EX=/notebook|laptop|pc gamer|computador|(?<!processador de )(?<!processador para )(?<!processador )desktop|mini ?pc|kit upgrade|kit gamer|kit processador|kit placa|combo|smartwatch|rel[oó]gio|monitor de sa[uú]de|card[ií]ac|console|port[aá]til|externo|case para|gaveta|sodimm|so-dimm|hyperx impact|ally|steam deck|usado|seminovo|vitrine|^\s*(cabo|adaptador|suporte|mouse|teclado|headset|fone|cadeira|kit fan|fan |ventoinha)/i;
-var __keys=function(t){const T=t.toLowerCase();const K=[];if(EX.test(T))return K;
+var __keys=function(t){const T=t.toLowerCase();const K=[];if(EX.test(/mem[oó]ria|\bram\b/.test(T)&&/ddr[45]/.test(T)?T.replace(/desktop|\bpara pc\b/g,' '):T))return K;
  const isMB=/placa[\s-]*m[ãa]e|motherboard|mainboard/.test(T);const isCPU=/processador|\bcpu\b/.test(T)||/^\s*(amd )?ryzen/.test(T);
  const isGPU=!isMB&&(/placa (de )?v[ií]deo|placa gr[aá]fica|\bgpu\b|\brtx\s?\d{4}\b/.test(T)||(/geforce|radeon/.test(T)&&!isCPU));
  if(isMB){const m=T.match(/\b(a520|b450|b550|a620|b650e?|b850|x870e?)/);if(m)K.push('Placa-mãe '+m[1].toUpperCase().replace(/E$/,'')+' (mais barata)');return K}

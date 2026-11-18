@@ -23,3 +23,10 @@ Todo dia o radar procura no canal produtos que ainda não estavam cadastrados (2
 - **Mouses** (1): Mouse Logitech Lift Vertical
 - **Processadores** (1): Intel Core Ultra 5 250KF
 - **Teclados** (1): Teclado Ajazz NK68
+
+## 18/11/2026: 7 produtos novos
+- **Coolers** (1): Air cooler DeepCool AG400
+- **Gabinetes** (3): Gabinete Spectrum Flux, Gabinete Spectrum SM-CS-FLX90FAWSF, Gabinete Ninja Akyra X2
+- **Headsets e fones** (1): Headset Kalkan KLK00025
+- **Mouses** (1): Mouse Logitech Mx Master
+- **Teclados** (1): Teclado Rise Mode Kyron

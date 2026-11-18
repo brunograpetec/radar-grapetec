@@ -1,6 +1,6 @@
 {
  "_leia": "Produtos cadastrados sozinhos pelo radar (scripts/novos.py). Pra tirar um produto, apague a linha dele.",
- "ultimo": "2026-11-17",
+ "ultimo": "2026-11-18",
  "itens": {
   "Placa-mãe MSI PRO B840M-B": {
    "cat": "Placas-mãe",
@@ -1330,6 +1330,53 @@
    "desde": "2026-11-17",
    "posts": 2,
    "exemplo": "Gabinete 9L Metalfish T60 ITX SFX"
+  },
+  "Gabinete Spectrum Flux": {
+   "cat": "Gabinetes",
+   "desde": "2026-11-18",
+   "posts": 6,
+   "exemplo": "Gabinete Gamer Spectrum FLUX 900 Mid Tower ATX"
+  },
+  "Teclado Rise Mode Kyron": {
+   "cat": "Teclados",
+   "desde": "2026-11-18",
+   "posts": 3,
+   "exemplo": "Teclado Mecânico Rise Mode Kyron RGB Switch Core"
+  },
+  "Gabinete Spectrum SM-CS-FLX90FAWSF": {
+   "cat": "Gabinetes",
+   "desde": "2026-11-18",
+   "posts": 2,
+   "exemplo": "Gabinete Gamer Spectrum FLUX 900, Mid Tower, Vidro Temperado, ATX, Sem Fans, Sem Fonte, Branco, SM-CS-FLX90FAWSF"
+  },
+  "Gabinete Ninja Akyra X2": {
+   "cat": "Gabinetes",
+   "desde": "2026-11-18",
+   "posts": 2,
+   "exemplo": "Gabinete Gamer Ninja Akyra X2 Mid Tower Vidro M-ATX"
+  },
+  "Air cooler DeepCool AG400": {
+   "cat": "Coolers",
+   "desde": "2026-11-18",
+   "posts": 2,
+   "exemplo": "Air Cooler AG400 ARGB - DeepCool"
+  },
+  "Mouse Logitech Mx Master": {
+   "cat": "Mouses",
+   "desde": "2026-11-18",
+   "posts": 2,
+   "exemplo": "Mouse Logitech Mx Master 3S Bluetooth Edition Conexao Por Bluetooth Rolagem Ultra Rapida 8K Dpi Clique Silencioso Grafit"
+  },
+  "Headset Kalkan KLK00025": {
+   "cat": "Headsets e fones",
+   "desde": "2026-11-18",
+   "posts": 2,
+   "exemplo": "Headset Gamer Kalkan Ragnar Preto KLK00025"
+  },
+  "Headset Havit FUXI-H5D 3.5MM": {
+   "cat": "Headsets e fones",
+   "desde": "2026-11-18",
+   "igual": "Headset Havit FUXI-H5D P2"
   }
  }
 }

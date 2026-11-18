@@ -4,7 +4,9 @@
     "Fala! Você quer jogo bonito e fluido, então coloquei o dinheiro onde realmente importa: <b>processador e placa de vídeo</b>.",
     "Fala! Pra <b>longevidade e jogo de campanha</b>, quem decide o desempenho é a placa de vídeo, então foi nela que eu concentrei o dinheiro.",
     "Fala! Pra <b>campanha e lançamento</b> com gráfico alto e acima de 60 FPS, montei uma máquina forte pra vários anos sem mexer.",
-    "Fala! A ideia não é montar o PC mais caro possível: é <b>qualidade, desempenho e longevidade</b> pra jogo pesado em alta resolução."
+    "Fala! A ideia não é montar o PC mais caro possível: é <b>qualidade, desempenho e longevidade</b> pra jogo pesado em alta resolução.",
+    "Fala! Seu PC é pra jogo de história com gráfico alto, mas quando bater vontade de competitivo ele entrega <b>FPS de sobra</b> também.",
+    "Fala! Seu PC é pra <b>jogo AAA e ponto</b>: nada de RGB ou peça de enfeite, cada real foi pra desempenho e qualidade gráfica nos lançamentos."
   ],
   "dupla": [
     "Minha indicação pra esse orçamento é o conjunto <b>{cpu} + {gpu}</b>, mirando {res} com qualidade e FPS.",
@@ -23,7 +25,10 @@
     "Mantive <b>{cpu} + {gpu}</b> como o centro da máquina: é o que mais pesa em {res}.",
     "<b>{cpu} + {gpu}</b> é uma combinação muito forte pra {res}, sem o processador virar gargalo.",
     "<b>{cpu} + {gpu}</b> em {res}: forte pro competitivo e ainda com margem pros jogos mais pesados.",
-    "Preferi puxar o dinheiro pra placa: <b>{cpu} + {gpu}</b> é um conjunto muito forte pra {res}."
+    "Preferi puxar o dinheiro pra placa: <b>{cpu} + {gpu}</b> é um conjunto muito forte pra {res}.",
+    "<b>{cpu} + {gpu}</b>: processador que segura o frame mínimo e placa que dá o salto de verdade em {res}.",
+    "<b>{cpu} + {gpu}</b> é a combinação que eu montaria pra mim pra jogar em {res} sem me preocupar com hardware por muitos anos.",
+    "Com <b>{cpu} + {gpu}</b> a ideia é simples: ligar, colocar tudo no alto em {res} e só jogar."
   ],
   "why_gpu": [
     "Essa placa atende o orçamento de hoje, mas não é a definitiva: o PC foi montado pra receber uma <b>mais forte</b> depois.",
@@ -33,7 +38,10 @@
     "Pra AAA com gráfico alto e pensando em sair do Full HD, faz muito mais sentido concentrar o orçamento na <b>placa de vídeo</b>.",
     "Placa dedicada é o que transforma a máquina em <b>PC gamer de verdade</b> e evita começar já pensando em comprar placa depois.",
     "Se o preço da placa tá subindo semana após semana, ela é a <b>primeira peça que eu compraria</b>. O resto encaixa conforme aparecer oferta.",
-    "Se o orçamento permitir, vale ir direto na placa mais forte: <b>dura muito mais</b> antes de pedir upgrade."
+    "Se o orçamento permitir, vale ir direto na placa mais forte: <b>dura muito mais</b> antes de pedir upgrade.",
+    "Dava pra descer um degrau de placa e economizar, mas pra quem quer FPS agora e longevidade, <b>não vale sacrificar a GPU</b>.",
+    "Hoje o gargalo é a placa de vídeo: é ela que vai <b>mudar sua experiência</b> de verdade, então o upgrade começa por ela.",
+    "Pra live, placa NVIDIA tem o <b>encoder NVENC</b>: ele processa a transmissão e deixa o processador livre pro resto."
   ],
   "why_mobo": [
     "Evitei placa-mãe básica demais só pra baixar o total: a base fica pronta pra um processador melhor depois.",
@@ -41,7 +49,10 @@
     "Dá pra ter uma {pl} boa sem colocar uma fortuna na placa-mãe, e essa economia ajudou a encaixar o resto.",
     "É a base do {pl}: a ideia é evoluir dentro da plataforma no futuro, sem trocar placa-mãe e memória junto.",
     "Fecha o {pl} sem gastar uma parcela desnecessária, e o que economizou foi pra placa de vídeo.",
-    "Base do {pl} pra não precisar trocar placa-mãe e memória quando quiser subir o processador."
+    "Base do {pl} pra não precisar trocar placa-mãe e memória quando quiser subir o processador.",
+    "Preferi uma {pl} com chipset mais novo: já chega <b>pronta pras próximas gerações</b> de processador.",
+    "Já vem com <b>Wi-Fi e Bluetooth</b> integrados: nada de adaptador e controle sem fio funcionando direto.",
+    "Placa com <b>VRM mais robusto</b>: processador de muitos núcleos trabalhando pesado por horas pede uma base que aguente."
   ],
   "why_psu": [
     "Fonte com boa margem de potência já pensando numa <b>troca de placa de vídeo</b> lá na frente.",
@@ -52,13 +63,17 @@
     "Com placa de vídeo forte não faz sentido economizar na alimentação: potência com folga e boa certificação.",
     "Placa forte merece fonte de qualidade e com folga, já pensando nos próximos upgrades.",
     "Fonte moderna, eficiente e <b>pronta pra upgrade</b> de placa de vídeo no futuro.",
-    "Sobra de potência pra placa atual e pras <b>próximas placas de vídeo</b>: fonte que não precisa trocar no upgrade."
+    "Sobra de potência pra placa atual e pras <b>próximas placas de vídeo</b>: fonte que não precisa trocar no upgrade.",
+    "Sua fonte atual dá conta? Então a troca pode esperar: <b>fonte Gold</b> é melhoria, não urgência. Troca quando aparecer promoção.",
+    "Placa nova pede fonte à altura: trocar a fonte junto deixa o PC <b>estável e seguro</b> com a placa nova.",
+    "Se a sua fonte atual é de linha boa e tem potência, dá pra <b>reaproveitar</b> e jogar esse dinheiro na placa de vídeo."
   ],
   "why_ca_aq": [
     "Estética legal sem tirar dinheiro do conjunto processador e placa de vídeo.",
     "Espaço pra acomodar tudo e visual gamer à altura da máquina.",
     "Bastante espaço interno e bom airflow, combinando com uma máquina grande e potente.",
-    "Espaço e visual gamer <b>sem comer uma fatia grande</b> do orçamento."
+    "Espaço e visual gamer <b>sem comer uma fatia grande</b> do orçamento.",
+    "Estrutura espaçosa e boa pra upgrade, mas vem <b>sem fans</b>: vale colocar ventoinhas depois pra temperatura ficar em dia."
   ],
   "abre_fps": [
     "Fala! Seu objetivo é aproveitar o monitor de taxa alta, então <b>primeiro o PC entrega mais FPS</b>, depois a gente pensa em tela.",
@@ -69,7 +84,8 @@
   ],
   "why_cpu_x3d": [
     "Se a prioridade número 1 é FPS, faz sentido ter um <b>X3D</b> como base da máquina.",
-    "Salto enorme de FPS no competitivo: deixa a placa de vídeo trabalhar <b>perto do potencial dela</b>."
+    "Salto enorme de FPS no competitivo: deixa a placa de vídeo trabalhar <b>perto do potencial dela</b>.",
+    "O 3D V-Cache brilha justamente onde o processador pesa: <b>competitivo e MMO</b> com muita gente na tela."
   ],
   "why_ram32": [
     "Pra quem pensa em upgrade só daqui a muitos anos, faz mais sentido já sair com 32GB do que economizar justo na memória.",
@@ -77,14 +93,17 @@
     "Já começa com <b>32GB em dual channel</b>, então a memória não vira preocupação tão cedo.",
     "32GB em dual channel deixam a máquina tranquila pra jogo, multitarefa e uso pesado.",
     "32GB em dual channel colocam a máquina num patamar excelente pra jogo, estudo e multitarefa.",
-    "32GB em dual channel dão a <b>capacidade ideal</b> pra jogo, programação e edição ao mesmo tempo."
+    "32GB em dual channel dão a <b>capacidade ideal</b> pra jogo, programação e edição ao mesmo tempo.",
+    "6000MHz é o <b>ponto ideal</b> da DDR5 no AM5: 32GB nessa frequência e a memória sai da lista de preocupações.",
+    "Pra quem trabalha com <b>containers, banco de dados</b> e várias aplicações abertas ao mesmo tempo, 32GB fazem muita diferença."
   ],
   "why_ca_simples": [
     "Gabinete apertado esquenta tudo. Um maior melhora a ventilação e a organização dos cabos.",
     "Gabinete espaçoso que comporta tranquilamente o resto da configuração.",
     "Compacto, com visual gamer, e sem comer uma parte grande do orçamento.",
     "Fecha a estrutura com custo baixo: o dinheiro fica no que importa pra evolução do PC.",
-    "Fluxo de ar bom, espaço interno e já <b>preparado pra placas maiores</b>."
+    "Fluxo de ar bom, espaço interno e já <b>preparado pra placas maiores</b>.",
+    "Além de caber toda a configuração, as <b>medidas</b> batem com o espaço que você tem na mesa."
   ],
   "am5": [
     "Começar no <b>AM5</b> é não precisar trocar placa-mãe, processador e memória tudo de uma vez daqui a pouco.",
@@ -100,10 +119,12 @@
     "Chega um ponto em que colocar mais dinheiro no AM4 faz cada vez menos sentido: aqui vale <b>migrar de vez pro AM5</b>.",
     "No <b>AM5</b>, se um dia o trabalho pedir mais processador, você troca só ele e mantém o resto da máquina.",
     "Pra extrair tudo de uma placa forte no competitivo, o caminho é <b>migrar pra um kit AM5 parrudo</b>.",
-    "Em vez de plataforma antiga só pra encaixar placa agora, começa <b>direto no AM5</b>, com anos de suporte pela frente."
+    "Em vez de plataforma antiga só pra encaixar placa agora, começa <b>direto no AM5</b>, com anos de suporte pela frente.",
+    "Upgrade em etapas? Começa pela <b>base AM5</b>: processador, placa-mãe e memória agora, placa de vídeo quando o dinheiro chegar."
   ],
   "why_mon_fhd": [
-    "Se você está satisfeito com Full HD, não tem por que gastar mais só pra subir resolução."
+    "Se você está satisfeito com Full HD, não tem por que gastar mais só pra subir resolução.",
+    "No competitivo, Full HD com <b>240Hz ou mais</b> é onde você realmente sente o desempenho da máquina."
   ],
   "am4": [
     "Sem plano de upgrade no curto prazo, o <b>AM4</b> barateia a plataforma e libera dinheiro pra uma placa de vídeo mais forte.",
@@ -115,10 +136,14 @@
     "Gastar bem mais na plataforma e perder placa de vídeo não faz sentido: <b>AM4</b> aqui é a jogada coerente.",
     "<b>AM4</b> é a escolha mais racional no custo-benefício: o grande salto de FPS vem da placa de vídeo, não da plataforma.",
     "No <b>AM4</b> sobra dinheiro pra placa de vídeo, que é a peça que mais pesa tanto no jogo quanto no trabalho.",
-    "O <b>AM4</b> ainda tem custo-benefício excelente: deixa encaixar uma placa de vídeo bem mais forte no mesmo dinheiro."
+    "O <b>AM4</b> ainda tem custo-benefício excelente: deixa encaixar uma placa de vídeo bem mais forte no mesmo dinheiro.",
+    "Já tem 32GB de DDR4? Isso é dinheiro no bolso: ficar no <b>AM4</b> aproveita essa memória e libera orçamento pra placa de vídeo.",
+    "Com monitor Full HD, o AM4 entrega praticamente a mesma experiência de hoje gastando bem menos, e a diferença pode virar um <b>monitor QHD</b> lá na frente.",
+    "Você já tem uma base boa: trocar processador e placa-mãe agora seria gastar onde <b>não aparece desempenho</b>. O upgrade inteligente é na placa de vídeo."
   ],
   "why_per": [
-    "Periférico já resolvido? Então nenhum centavo vai pra isso agora."
+    "Periférico já resolvido? Então nenhum centavo vai pra isso agora.",
+    "Se precisar cortar, começa pelo <b>headset ou teclado</b>: periférico simples hoje troca depois, a parte principal do PC não se sacrifica."
   ],
   "abre_mix": [
     "Fala! Você quer <b>desempenho e custo-benefício</b>, sem gastar com estética ou recurso que não traz ganho real.",
@@ -126,7 +151,10 @@
     "Fala! A ideia foi <b>desempenho agora</b> e uma plataforma boa pra durar bastante, sem deixar a máquina desequilibrada.",
     "Fala! Você joga <b>de tudo um pouco</b> e quer gráfico alto sem ter que mexer no PC tão cedo. Foi nessa linha que eu montei.",
     "Fala! A prioridade aqui é <b>custo-benefício</b>, mas sem abrir mão de qualidade e de um PC que faça sentido por alguns anos.",
-    "Fala! Seu PC é pra <b>tudo um pouco e com longevidade</b>: comprando aos poucos, sem ficar trocando peça toda hora."
+    "Fala! Seu PC é pra <b>tudo um pouco e com longevidade</b>: comprando aos poucos, sem ficar trocando peça toda hora.",
+    "Fala! Você quer FPS alto no competitivo e AAA bonito no mesmo PC, sem upgrade tão cedo. Então coloquei quase tudo agora numa <b>base forte</b>.",
+    "Fala! Seu perfil é chegar em casa, ligar o PC e jogar. Montei uma máquina pra você <b>não precisar se preocupar com hardware</b> por muitos anos.",
+    "Fala! Seu perfil mistura <b>trabalho pesado e jogo AAA</b>, então a máquina precisava de muito processamento sem perder força na placa de vídeo."
   ],
   "why_co_wc": [
     "Pelo preço que saiu, deu pra colocar 360mm sem pesar no orçamento.",
@@ -134,13 +162,19 @@
     "Margem térmica alta pra carga pesada e uso prolongado.",
     "360mm dá margem térmica excelente e deixa o interior do gabinete mais limpo.",
     "Mantém o processador sempre fresco, <b>mesmo em carga pesada</b>, sem gastar muito.",
-    "Processador sempre em <b>temperatura baixa</b> e um visual bem mais bonito por dentro."
+    "Processador sempre em <b>temperatura baixa</b> e um visual bem mais bonito por dentro.",
+    "Ambiente quente? 360mm dá a <b>folga térmica</b> que o processador precisa no verão.",
+    "240mm já segura bem esse processador com <b>baixo ruído</b>, ideal pra quem quer PC silencioso no dia a dia.",
+    "Processador de muitos núcleos esquenta de verdade em carga pesada: aqui o 360mm <b>tem motivo de estar</b>."
   ],
   "why_mon_qhd": [
     "Não compre monitor só porque tem <b>4K</b> na caixa: olha resolução, taxa, painel, tamanho e preço juntos.",
     "Com placa forte, o próximo passo natural é um monitor <b>QHD</b> pra aproveitar melhor a GPU.",
     "Quando você partir pro <b>QHD</b>, vai aproveitar muito melhor todo esse poder gráfico.",
-    "Pra QHD, 27\" é um tamanho excelente: boa densidade de pixels e não precisa subir pra 32\" pra ter uma ótima experiência."
+    "Pra QHD, 27\" é um tamanho excelente: boa densidade de pixels e não precisa subir pra 32\" pra ter uma ótima experiência.",
+    "Ultrawide QHD com placa forte é <b>imersão no jogo e área de trabalho enorme</b> no dia a dia.",
+    "Se o orçamento permitir, vai de <b>QHD com taxa alta</b>: é o monitor que deixa você ver tudo que essa máquina entrega.",
+    "Ainda não tem monitor? Já pensa a máquina pra <b>QHD</b>: com essa placa, ficar no Full HD é desperdiçar potência."
   ],
   "why_cpu_8": [
     "8 núcleos fazem sentido pra quem também edita, modela e deixa vários programas abertos.",
@@ -153,11 +187,15 @@
     "Equilíbrio entre desempenho, consumo e longevidade: FPS alto hoje e <b>sobra pros próximos anos</b>.",
     "8 núcleos e 16 threads dão <b>fôlego pra multitarefa</b> e produtividade, sem deixar de jogar bem.",
     "Não precisa do processador mais caro: o importante é <b>todo mundo trabalhando em equilíbrio</b>, sem segurar a placa de vídeo.",
-    "8 núcleos e 16 threads: desempenho de sobra pra jogo e multitarefa, e ainda <b>deixa espaço pra upgrade</b>."
+    "8 núcleos e 16 threads: desempenho de sobra pra jogo e multitarefa, e ainda <b>deixa espaço pra upgrade</b>.",
+    "Pra trabalho sem jogo, um 8 núcleos com <b>vídeo integrado</b> resolve: dispensa placa de vídeo e o dinheiro vai pra memória e SSD.",
+    "8 núcleos seguram jogo, multitarefa e <b>gravação de gameplay</b> sem engasgo, e casam bem com a placa de vídeo."
   ],
   "why_ssd": [
     "SSD rápido ajuda em carregamento, instalação de jogo e principalmente <b>projeto grande</b>.",
-    "Começa com o suficiente pro Windows e alguns jogos. Quando precisar, <b>é só somar outro SSD</b>."
+    "Começa com o suficiente pro Windows e alguns jogos. Quando precisar, <b>é só somar outro SSD</b>.",
+    "Fica de olho em promoção de <b>SSD PCIe 4.0</b>: às vezes sai mais rápido e mais barato que o 3.0 da lista. Se aparecer, troca só esse item.",
+    "Já tem SSD NVMe de 1TB? Então <b>reaproveita</b>: armazenamento não dá FPS, e o dinheiro vai pro que dá."
   ],
   "dica_misto": [
     "Orçamento no cartão? Deixa uma <b>margem</b>: preço parcelado costuma sair mais caro que o da oferta à vista.",
@@ -172,12 +210,25 @@
     "16GB em dual channel atendem a primeira etapa, e ainda tem espaço pra evoluir a memória depois.",
     "2x8GB em dual channel pra começar. Se um dia limitar, memória é das peças mais fáceis de evoluir.",
     "Um pente só é limitação: 2x8GB em <b>dual channel</b> já corrige isso.",
-    "16GB em dual channel seguram o orçamento sem tirar da placa de vídeo. O <b>próximo upgrade</b> é subir pra 32GB."
+    "16GB em dual channel seguram o orçamento sem tirar da placa de vídeo. O <b>próximo upgrade</b> é subir pra 32GB.",
+    "No AM4, memória de <b>3600MHz</b> em dual channel dá um ganho real pro Ryzen sem custar muito mais.",
+    "Memória com perfil <b>EXPO</b>: é só ativar e ela roda na velocidade certa no AM5, sem dor de cabeça.",
+    "16GB de DDR5 em dual channel já seguram tranquilo a proposta de jogo e mantêm a <b>plataforma moderna</b>."
   ],
   "vis_equil": [
-    "A estética entrou na conta, mas sem tirar o foco principal da máquina, que é <b>desempenho</b>."
+    "A estética entrou na conta, mas sem tirar o foco principal da máquina, que é <b>desempenho</b>.",
+    "Gosta de setup bonito? Beleza, mas primeiro garante a <b>placa de vídeo</b>: fan e iluminação dá pra completar depois sem trocar nada."
   ],
   "why_cpu_6": [
-    "Pro seu foco não faz sentido pagar muito mais num 8 núcleos: o dinheiro economizado foi direto pra <b>placa de vídeo</b>."
+    "Pro seu foco não faz sentido pagar muito mais num 8 núcleos: o dinheiro economizado foi direto pra <b>placa de vídeo</b>.",
+    "Ele ainda segura bem essa placa. Se lá na frente quiser extrair mais em taxa alta, aí sim faz sentido <b>subir pra um X3D</b> sem trocar a plataforma."
+  ],
+  "why_co_air": [
+    "Air cooler bom mantém tudo fresco em <b>jornada longa</b>, com pouco barulho e sem manutenção.",
+    "Pra quem quer PC <b>silencioso e confiável</b> por anos, um air cooler bom é menos coisa pra dar problema.",
+    "Esse processador esquenta mais que um de entrada, então coloquei um <b>air cooler bom</b>: segura tranquilo, silencioso e sem gastar muito."
+  ],
+  "vis_perf": [
+    "Como RGB não importa pra você, o foco foi todo em <b>qualidade de componente</b> e desempenho real."
   ]
 }

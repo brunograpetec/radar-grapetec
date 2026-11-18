@@ -42,3 +42,43 @@ Observações tiradas das consultorias que contradizem ou não estão em regras_
 
 ### Observação sobre os dados
 - O doc "234 - João Pedro Aguiar Dantas Oliveira" tem o texto da consultoria 233 (outro cliente). Foi marcado como lido, mas não entrou na contagem pra não contar duas vezes.
+
+## 18/11/2026 (consultorias 168 a 207, 248 e 249)
+
+### Plataforma AM4 x AM5
+- AM4 com placa forte (RX 9070 / 9070 XT) mesmo em ~8 a 10 mil, principalmente com monitor Full HD, sem plano de upgrade ou foco em jogo de história. A diferença vai pra GPU ou fica pra um monitor QHD depois. (186, 190, 192, 195, 198)
+- Cliente que já tem 32GB DDR4: fica no AM4 (5800X3D + B550) pra não reduzir a placa de vídeo pagando placa-mãe AM5 + DDR5. Em ~9 mil, mostra AM4 e AM5 lado a lado e o cliente escolhe. Nunca reduz a GPU pra caber AM5. (248, 249)
+- AM5 aparece com mais firmeza a partir de ~11-12 mil, já com chipset B850 e 32GB DDR5 6000. Disse que 750-850W Gold já bastam ali, mesmo usando uma 1000W. (184, 188, 204, 206)
+- AAA em QHD no AM5: prefere Ryzen 7 7700 ao 9700X e ao 7800X3D. X3D só quando há competitivo junto (9800X3D em ~12-13 mil). (184, 188, 193)
+- Produtividade pesada (Docker, edição): Ryzen 9 5900XT no AM4, com B550 de VRM mais robusto e WC 360, em vez de migrar pra AM5. (177, 182)
+- Compra em etapas: base AM5 (CPU + placa-mãe + 32GB) primeiro, depois GPU + fonte, SSD por último. (203)
+- Estação de trabalho sem jogo (~7,5 mil): Ryzen 7 7700 com vídeo integrado, sem placa de vídeo, 32GB DDR5. (200)
+
+### Upgrades
+- Base AM4 boa (5600/5600X/5700X + B450/B550): mantém CPU e placa-mãe e troca só GPU (+ fonte, às vezes monitor). B450M com RX 9060 XT não tem perda perceptível. Sugere 5700X3D como próximo passo. (180, 185, 189, 205)
+- Upgrade de trabalho com GPU boa já instalada: não mexe na placa de vídeo e põe tudo em plataforma, RAM e cooler. (178)
+
+### Fonte
+- Fonte de linha boa que o cliente já tem (600-650W) é reaproveitada mesmo com RTX 5070 ou RX 9060 XT. A Gold nova fica opcional e o SSD 1TB vem antes dela. Isso contradiz a regra de 850W pra upgrade. (185, 201, 202)
+- AM4 de ~6-6,5 mil com 5060 / 9060 XT / 7600: 650W Gold ou 750W Bronze, não 850W. (169, 191, 194)
+- RX 9070 XT com 750W Gold, inclusive em build de ~10 mil. (179)
+
+### Memória, SSD e cooler
+- Mais casos de 16GB DDR5 (2x8) em AM5 de ~11-12,4 mil, inclusive com 9800X3D + RX 9070 XT, por causa do preço da DDR5. 32GB DDR5 6400 entrou só acima de ~15 mil (4K). (172, 176, 168)
+- SSD de 500-512GB em PCs de ~6-6,5 mil, principalmente quando o orçamento inclui periféricos ou é pra live. (169, 170, 187, 196)
+- Quando o SSD 1TB nacional está caro, manda acompanhar promoção de SSD PCIe 4.0 importado. (205, 207)
+- Air cooler topo em vez de water cooler em AM5 de ~10 mil, quando o cliente quer PC silencioso e sem RGB. Usa WC 240 pelo baixo ruído. (194, 199)
+
+### Placa de vídeo e uso
+- NVIDIA também pra live, gravação e edição leve (encoder NVENC), não só pra IA e Blender: RTX 5060 em ~6-6,5 mil. Também quando o cliente prefere NVIDIA. (170, 191, 196)
+- AAA em AM4 de ~6,5 mil: RX 9060 XT 16GB pela VRAM. (171)
+
+### Orçamento e compra
+- Com teto de ~14 mil no cartão, montou ~10,3 mil à vista (margem de ~25%, bem acima dos ~10% de costume). (199)
+- Cliente que quer receber montado e testado: indicou a configuração pelo montador de uma loja grande em vez de peças avulsas. (187)
+- Placa-mãe sem Wi-Fi + adaptador USB depois, pra caber no orçamento. (170)
+- Periféricos no orçamento: se precisar cortar, corta primeiro headset/teclado, nunca o PC. (196)
+
+### Observação sobre os dados
+- O doc "197" tem o mesmo texto da consultoria 198 (outro cliente no título). Foi marcado como lido, mas não entrou na contagem.
+- Na 190, a placa-mãe da lista (ASUS TUF B550M-Plus) não bate com a da tabela financeira (MSI B550M PRO-VDH WiFi).

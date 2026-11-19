@@ -1,6 +1,6 @@
 {
  "_leia": "Produtos cadastrados sozinhos pelo radar (scripts/novos.py). Pra tirar um produto, apague a linha dele.",
- "ultimo": "2026-11-18",
+ "ultimo": "2026-11-19",
  "itens": {
   "Placa-mãe MSI PRO B840M-B": {
    "cat": "Placas-mãe",
@@ -1377,6 +1377,36 @@
    "cat": "Headsets e fones",
    "desde": "2026-11-18",
    "igual": "Headset Havit FUXI-H5D P2"
+  },
+  "Fonte Rise Mode Zeus 500W": {
+   "cat": "Fontes",
+   "desde": "2026-11-19",
+   "posts": 3,
+   "exemplo": "Fonte Gamer Rise Mode Zeus 500w Pfc Ativo Preto"
+  },
+  "Placa-mãe Gigabyte H810M-K": {
+   "cat": "Placas-mãe",
+   "desde": "2026-11-19",
+   "posts": 3,
+   "exemplo": "GIGABYTE Placa mãe H810M K GEN5 Micro-ATX MB6996"
+  },
+  "Fonte Rise Mode Zeus 1000W": {
+   "cat": "Fontes",
+   "desde": "2026-11-19",
+   "posts": 2,
+   "exemplo": "Fonte Gamer Rise Mode Zeus 1000W Platinum Full Modular Pfc Ativo Branco Rm Psu 02 Pa 1000 W"
+  },
+  "Gabinete Husky HGN210PT": {
+   "cat": "Gabinetes",
+   "desde": "2026-11-19",
+   "posts": 2,
+   "exemplo": "Gabinete Gamer Husky Dome 210, Mini Tower, M-ATX, Lateral e Frontal em Vidro, Sem FANs, Preto - HGN210PT"
+  },
+  "Mouse HyperX HX-MC004B": {
+   "cat": "Mouses",
+   "desde": "2026-11-19",
+   "posts": 2,
+   "exemplo": "Mouse Gamer HyperX Pulsefire Core RGB 6200 DPIs - HX-MC004B"
   }
  }
 }

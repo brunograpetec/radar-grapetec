@@ -30,3 +30,9 @@ Todo dia o radar procura no canal produtos que ainda não estavam cadastrados (2
 - **Headsets e fones** (1): Headset Kalkan KLK00025
 - **Mouses** (1): Mouse Logitech Mx Master
 - **Teclados** (1): Teclado Rise Mode Kyron
+
+## 19/11/2026: 5 produtos novos
+- **Fontes** (2): Fonte Rise Mode Zeus 500W, Fonte Rise Mode Zeus 1000W
+- **Gabinetes** (1): Gabinete Husky HGN210PT
+- **Mouses** (1): Mouse HyperX HX-MC004B
+- **Placas-mãe** (1): Placa-mãe Gigabyte H810M-K

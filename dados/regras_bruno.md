@@ -116,3 +116,7 @@ Regras que o Bruno passou e que o algoritmo segue. Anotar aqui cada regra nova (
 
 ## Gabinete Kalkan Asgard (16/11)
 - Cabe water cooler 360mm (Bruno confirmou). Estava cadastrado como 240.
+
+## Anúncio com várias capacidades no título (19/11)
+- Ex.: AliExpress "SSD Kootion X15Lite 1TB 512GB" a R$395 era o de 512GB, não o de 1TB.
+- Regra: quando o título traz mais de uma capacidade (SSD ou memória), o robô compara o preço com a mediana de cada capacidade (posts de capacidade única) e fica com a que bate (entre 55% e 130% da mediana, e claramente mais perto que a outra). Se não der pra saber, o post fica fora do Radar.

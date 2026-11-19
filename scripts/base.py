@@ -12,8 +12,58 @@ def cat(k):
 import sys as _s0;_s0.path.insert(0,os.path.dirname(os.path.abspath(__file__)))
 import atributos as AT
 import novos as _NV
+# ---- anúncio com várias capacidades no título (ex.: "1TB 512GB" do AliExpress) ----
+# o preço decide qual capacidade é: compara com a mediana dos posts de capacidade única
+import math as _m
+def _caps(k,t):
+    tl=t.lower()
+    if k.startswith('SSD'):
+        c={('500GB' if g in ('500','512') else g+'GB') for g in re.findall(r'(?<![\dx])(\d{3})\s?gb',tl) if g in ('120','128','240','250','256','480','500','512','960')}
+        c|={g+'TB' for g in re.findall(r'(?<![\d.,])([124])\s?tb\b',tl)}
+        return c
+    if k.startswith('Memória'):
+        tl=re.sub(r'\d\s?x\s?\d{1,2}\s?gb','',tl)
+        return {g+'GB' for g in re.findall(r'(?<![\dx])(8|16|32|64)\s?gb\b',tl)}
+    return set()
+def _swap(k,c):
+    if k.startswith('SSD'): return re.sub(r'\b(\d{3}GB|\dTB)\b',c,k,count=1)
+    return re.sub(r'\b(8|16|32|64)GB\b',c,k,count=1)
+_ref=collections.defaultdict(list)
+for r in R:
+    if r['data']>=os.environ.get('D0','2026-10-01') and len(_caps(r['produto'],r['titulo']))==1: _ref[r['produto']].append(float(r['preco']))
+_ref={k:S.median(v) for k,v in _ref.items() if len(v)>=3}
+_byid=collections.defaultdict(list)
+for r in R: _byid[r['post_id']].append(r)
+_capdec={}
+def _decide(pid):
+    # para cada capacidade do título: preço / mediana (do modelo exato; se não tiver, do grupo da capacidade)
+    if pid in _capdec: return _capdec[pid]
+    L=[r for r in _byid[pid] if len(_caps(r['produto'],r['titulo']))>=2]
+    best=None
+    if L:
+        cs=_caps(L[0]['produto'],L[0]['titulo']);p=float(L[0]['preco']);rat={}
+        for c in cs:
+            for r in sorted(L,key=lambda x:'mais bar' in x['produto']):
+                k2=_swap(r['produto'],c)
+                if k2 in _ref: rat[c]=p/_ref[k2];break
+        if len(rat)==len(cs):      # só decide se conhece o preço de todas as capacidades
+            sc=sorted((abs(_m.log(v)),c) for c,v in rat.items())
+            if 0.55<=rat[sc[0][1]]<=1.3 and sc[1][0]-sc[0][0]>=0.15: best=sc[0][1]
+    _capdec[pid]=best;return best
 rows=[];dropped=collections.Counter()
 for r in R:
+    _cs=_caps(r['produto'],r['titulo'])
+    if len(_cs)>=2:
+        _c=_decide(r['post_id'])
+        if not _c: dropped['multi']+=1; continue
+        r=dict(r,produto=_swap(r['produto'],_c))
+        _t=r['titulo']
+        for _o in _cs-{_c}:
+            _pat={'500GB':r'(500|512)\s?gb'}.get(_o, _o[:-2]+r'\s?'+_o[-2:])
+            _t=re.sub(r'(?i)(?<![\d.,x])'+_pat+r'\b',' ',_t)
+        if _c=='500GB': _t=re.sub(r'(?i)(?<![\d.,x])512\s?gb\b','500GB',_t)
+        r['titulo']=_t
+
     k=RENAME.get(r['produto'],r['produto'])
     if k in DROP: continue
     t=r['titulo']
@@ -21,7 +71,7 @@ for r in R:
         if k.startswith('Monitor QHD 27'): k='Monitor OLED QHD 27" (mais barato)'
         else: continue
     if COMBO.search(t): dropped['combo']+=1; continue
-    if (k.startswith('SSD') or k.startswith('Memória')) and MULTI.search(t): dropped['multi']+=1; continue
+    if (k.startswith('SSD') or k.startswith('Memória')) and MULTI.search(t) and len(_caps(k,t))<2: dropped['multi']+=1; continue
     if k.startswith('Memória') and SODIMM.search(t): dropped['sodimm']+=1; continue
     if r['data']<os.environ.get('D0','2026-10-01'): continue
     k=AT.refina(k,t)

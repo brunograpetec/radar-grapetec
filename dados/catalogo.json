@@ -1,6 +1,6 @@
 {
  "_leia": "Produtos cadastrados sozinhos pelo radar (scripts/novos.py). Pra tirar um produto, apague a linha dele.",
- "ultimo": "2026-11-19",
+ "ultimo": "2026-11-20",
  "itens": {
   "Placa-mãe MSI PRO B840M-B": {
    "cat": "Placas-mãe",
@@ -1407,6 +1407,48 @@
    "desde": "2026-11-19",
    "posts": 2,
    "exemplo": "Mouse Gamer HyperX Pulsefire Core RGB 6200 DPIs - HX-MC004B"
+  },
+  "Monitor AOC 24B35HM2": {
+   "cat": "Monitores",
+   "desde": "2026-11-20",
+   "posts": 4,
+   "exemplo": "Monitor Gamer Aoc 24\", Full Hd, 100hz, 1ms, Adaptive-Sync, Hdr, Preto - 24b35hm2"
+  },
+  "Headset SuperFrame Velka 7.1": {
+   "cat": "Headsets e fones",
+   "desde": "2026-11-20",
+   "posts": 4,
+   "exemplo": "Headset Gamer SuperFrame Velka 7.1 Surround RGB"
+  },
+  "Teclado Attack Shark X66": {
+   "cat": "Teclados",
+   "desde": "2026-11-20",
+   "posts": 3,
+   "exemplo": "Teclado Mecanico Gamer Attack Shark X66 65 Compacto Rgb Star Black Preto As X66 Star Bk"
+  },
+  "Placa-mãe ASUS TUF Gaming B760M-E": {
+   "cat": "Placas-mãe",
+   "desde": "2026-11-20",
+   "posts": 2,
+   "exemplo": "Placa Mãe Asus Tuf Gaming B760m-e D4 B760 Lga 1700 Matx Ddr4"
+  },
+  "Placa-mãe MSI PRO H610M": {
+   "cat": "Placas-mãe",
+   "desde": "2026-11-20",
+   "posts": 2,
+   "exemplo": "Placa Mae Msi H610M G Pro Intel Matx Ddr4 Pro H610M G Ddr4"
+  },
+  "Placa-mãe ASUS Prime H610M-F": {
+   "cat": "Placas-mãe",
+   "desde": "2026-11-20",
+   "posts": 2,
+   "exemplo": "Placa Mãe Asus Prime Para Intel LGA 1700 H610M-F D4 R2.0 2xDDR4 mATX - 90MB1H70-M0EAY0"
+  },
+  "Fonte Rise Mode RM-PSU-01-PA-1000": {
+   "cat": "Fontes",
+   "desde": "2026-11-20",
+   "posts": 2,
+   "exemplo": "Fonte Gamer Rise Mode Zeus, 1000W, 80 Plus Platinum, Modular, PFC Ativo, Preto - RM-PSU-01-PA-1000"
   }
  }
 }

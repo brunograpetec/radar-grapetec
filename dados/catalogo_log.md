@@ -36,3 +36,10 @@ Todo dia o radar procura no canal produtos que ainda não estavam cadastrados (2
 - **Gabinetes** (1): Gabinete Husky HGN210PT
 - **Mouses** (1): Mouse HyperX HX-MC004B
 - **Placas-mãe** (1): Placa-mãe Gigabyte H810M-K
+
+## 20/11/2026: 7 produtos novos
+- **Fontes** (1): Fonte Rise Mode RM-PSU-01-PA-1000
+- **Headsets e fones** (1): Headset SuperFrame Velka 7.1
+- **Monitores** (1): Monitor AOC 24B35HM2
+- **Placas-mãe** (3): Placa-mãe ASUS TUF Gaming B760M-E, Placa-mãe MSI PRO H610M, Placa-mãe ASUS Prime H610M-F
+- **Teclados** (1): Teclado Attack Shark X66

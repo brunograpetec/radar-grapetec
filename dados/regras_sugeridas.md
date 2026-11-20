@@ -82,3 +82,55 @@ Observações tiradas das consultorias que contradizem ou não estão em regras_
 ### Observação sobre os dados
 - O doc "197" tem o mesmo texto da consultoria 198 (outro cliente no título). Foi marcado como lido, mas não entrou na contagem.
 - Na 190, a placa-mãe da lista (ASUS TUF B550M-Plus) não bate com a da tabela financeira (MSI B550M PRO-VDH WiFi).
+
+## 20/11/2026 (consultorias 128 a 167)
+
+### Plataforma AM4 x AM5 x Intel
+- Ryzen 7 5700X + B550 é a base padrão entre ~6,2 e 8,9 mil (7 de 10 docs entre 158 e 167), com RX 9060 XT 16GB, RTX 5060 ou até RX 9070 XT. (158, 161-164, 166)
+- Mostrou AM4 (5700X) x AM5 (9800X3D) com a mesma RX 9060 XT e recomendou o AM4: com a mesma GPU, o FPS não acompanha os ~3,5 mil a mais. (166)
+- 5700X + RX 9070 XT + 16GB DDR4 em ~8,9 mil pra competitivo acima de 200 FPS, sem X3D e sem AM5. (158)
+- Pra AAA, preferiu 5700X ao 7600X e RX 9060 XT 16GB à RTX 5060 8GB, pela VRAM. (161)
+- Competitivo em AM5 de ~7-8,6 mil: Ryzen 5 7600 sem X3D + RX 9060 XT 16GB, com a economia indo pra GPU e RAM. (133, 134)
+- Cliente com 32GB DDR4 e 12 mil foi pro AM5 mesmo assim (7800X3D + RX 9070 XT + 32GB DDR5) por ser competitivo em QHD 360Hz, vendendo a DDR4. Contraponto à regra de ficar no AM4 quando já tem 32GB DDR4. (154)
+- Intel aparece como opção: i5-14600KF + B760 DDR4 com RX 9070 XT em ~10,6 mil; i7-14700KF + B760M DDR4 quando o cliente pede Intel + NVIDIA e já tem DDR4; em upgrade, rota Intel D4 lado a lado com AM5. O algoritmo não considera Intel. (141, 144, 150)
+- Ryzen 7 7700X aparece como CPU principal em AM5 de 10 a 14 mil, sempre com WC 360, mas não existe em pcideal_data.json. (128, 131, 135, 140)
+- PC sem placa de vídeo com orçamento curto (~3-3,8 mil): APU Ryzen 7 5700G + B550 + 2x8GB e fonte já pensando na GPU futura; se comprar a GPU agora, troca pro 5700X. Complementa a regra da 200. (139, 149)
+
+### Upgrades
+- APU AM4 (5600G) com GPU antiga boa: prefere vender a GPU e pegar uma de nova geração (RTX 5070) mantendo a APU por enquanto, aceitando gargalo no single player. (136)
+- Quem já tem X3D AM4 + 32GB DDR4: fica no AM4 com B550 nova + RX 9070 XT + fonte 850W Gold. (160)
+- Quem já tem plataforma topo (9800X3D + B850 + 32GB DDR5): troca só GPU, fonte, SSD, gabinete e WC. Quem tem GPU topo (RTX 4090): troca só a plataforma. (142, 143)
+
+### Fonte
+- Reaproveita fonte boa de 650W com RTX 5070 e até fonte de 500W com 5700X + RTX 5060. (136, 137, 151)
+- Fonte Bronze de entrada (650-750W) em AM4 de ~6,5-8 mil com RTX 5060 e RX 9060 XT. (146, 156, 163, 164)
+- 850W Gold com RX 9070 XT + 9800X3D (inclusive em upgrade só de GPU); 700W Gold com RX 9060 XT em AM5. (133, 143, 144, 145)
+
+### Memória e SSD
+- 16GB DDR5 (2x8) com 9800X3D (~8,3 mil), com Ryzen 7 7700 + RTX 5070 (~9 mil) e até em dev pesado com Docker/VMs e teto de 15 mil (saiu ~9 mil). Contradiz 32GB como prioridade pra VMs. (129, 137, 155)
+- 32GB DDR5 6000-6400 em AM5 de ~12-14,7 mil com edição/trabalho ou longevidade, mesmo com DDR5 cara; também 32GB DDR5 em AM5 de ~8,6 mil competitivo. (130, 133, 140, 145, 165)
+- 16GB DDR4 mesmo num PC Intel de ~10,6 mil com RX 9070 XT. (144)
+- SSD 500GB como único SSD novo num PC de ~10,4 mil com RTX 5070 Ti; mantém SSD de 240GB do cliente só pro Windows. (135, 137)
+
+### Refrigeração e estética
+- Silêncio + uso de 10-12h/dia em AM5 de ~14,5 mil: WC 360 + fans extras, dizendo que é mais silencioso que air cooler topo. Contradiz 194/199. (165)
+- WC 360 barato com 5700X e 5800X3D por custo-benefício e estética. (160, 161)
+- i5-14600KF tratado como processador quente: WC 240mm+ (360 na 144). (141, 144)
+- Evita GPU na vertical com riser (instabilidade) e tela secundária interna; prefere WC com tela LCD e fans reversas. (132)
+- Redragon Wideload Pro é o gabinete padrão (6 de 10 docs entre 148 e 157, de ~6 a ~13 mil); quando vem sem fans, adiciona 6. (148-157)
+
+### Placa de vídeo e uso
+- Live não exige NVIDIA: com ~7 mil indicou RX 9060 XT 16GB usando o encoder da AMD. Relativiza a regra de NVENC pra live. (162, 166)
+- IA local: VRAM máxima (RTX 5060 Ti 16GB) e 64GB de RAM; placa-mãe premium é dinheiro mal gasto. IA/edição como uso futuro puxa pra NVIDIA (RTX 5070). (128, 153)
+- Com RX 9060 XT 16GB, recomenda monitor QHD 165-180Hz até pra competitivo; Full HD desperdiça a placa. (161, 167)
+- Quando o cliente pede uma GPU cara específica (RTX 5070 Ti), mostra a RX 9070 XT ao lado como opção ~1,8 mil mais barata. (131)
+
+### Orçamento e periféricos
+- Passou ~10% do teto: mostra a recomendada como opção 1 e uma versão ajustada ao teto como opção 2, sugerindo vender peças antigas. (154)
+- Monitor tratado à parte do orçamento da torre em alguns casos; com periféricos no orçamento, teclado baratinho e trocar monitor 27" por 24" antes de mexer no PC. (140, 163)
+- Com previsão de alta de GPU, usa a sobra pra antecipar a compra da placa. (139)
+
+### Observação sobre os dados
+- 138 é um doc vazio; 153 é análise de PC já comprado (só a troca sugerida entrou); 148 e 132 só tinham complementos sobre base que o cliente já tinha.
+- Na 133 o nome do cliente no corpo é diferente do título (possível doc trocado); foi contada normalmente.
+- Muitas peças indicadas não têm modelo no site (Kalkan 650/750W, CM MWE Gold 850 V3, TUF B850M-Plus, B850 Eagle, Thermaltake LA360, Dahua C910, Kootion X16 Plus, Mancer CV500L) e ficaram fora da contagem.

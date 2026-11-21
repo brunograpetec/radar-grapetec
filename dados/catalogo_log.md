@@ -43,3 +43,7 @@ Todo dia o radar procura no canal produtos que ainda não estavam cadastrados (2
 - **Monitores** (1): Monitor AOC 24B35HM2
 - **Placas-mãe** (3): Placa-mãe ASUS TUF Gaming B760M-E, Placa-mãe MSI PRO H610M, Placa-mãe ASUS Prime H610M-F
 - **Teclados** (1): Teclado Attack Shark X66
+
+## 21/11/2026: 2 produtos novos
+- **Fontes** (1): Fonte Montech BETA2650W
+- **Placas-mãe** (1): Placa-mãe Maxsun Terminator B760M WiFi

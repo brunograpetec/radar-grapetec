@@ -1,6 +1,6 @@
 {
  "_leia": "Produtos cadastrados sozinhos pelo radar (scripts/novos.py). Pra tirar um produto, apague a linha dele.",
- "ultimo": "2026-11-20",
+ "ultimo": "2026-11-21",
  "itens": {
   "Placa-mãe MSI PRO B840M-B": {
    "cat": "Placas-mãe",
@@ -1449,6 +1449,18 @@
    "desde": "2026-11-20",
    "posts": 2,
    "exemplo": "Fonte Gamer Rise Mode Zeus, 1000W, 80 Plus Platinum, Modular, PFC Ativo, Preto - RM-PSU-01-PA-1000"
+  },
+  "Placa-mãe Maxsun Terminator B760M WiFi": {
+   "cat": "Placas-mãe",
+   "desde": "2026-11-21",
+   "posts": 2,
+   "exemplo": "Placa-Mãe Maxsun Terminator B760M D5 WiFi LGA 1700"
+  },
+  "Fonte Montech BETA2650W": {
+   "cat": "Fontes",
+   "desde": "2026-11-21",
+   "posts": 2,
+   "exemplo": "Fonte Montech Beta 2 650W 80 Plus Preto Beta2650W"
   }
  }
 }

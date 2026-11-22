@@ -1,6 +1,6 @@
 {
  "_leia": "Produtos cadastrados sozinhos pelo radar (scripts/novos.py). Pra tirar um produto, apague a linha dele.",
- "ultimo": "2026-11-21",
+ "ultimo": "2026-11-22",
  "itens": {
   "Placa-mãe MSI PRO B840M-B": {
    "cat": "Placas-mãe",
@@ -1461,6 +1461,23 @@
    "desde": "2026-11-21",
    "posts": 2,
    "exemplo": "Fonte Montech Beta 2 650W 80 Plus Preto Beta2650W"
+  },
+  "Monitor AOC 27B35H": {
+   "cat": "Monitores",
+   "desde": "2026-11-22",
+   "posts": 6,
+   "exemplo": "Monitor AOC 27\" 120Hz 1ms Gaming IPS Adaptive-Sync 27B35H"
+  },
+  "Headset Havit TW969": {
+   "cat": "Headsets e fones",
+   "desde": "2026-11-22",
+   "posts": 2,
+   "exemplo": "Fone De Ouvido Bluetooth Havit Tw969 Tws Com Microfone Preto"
+  },
+  "Headset Havit Gamenote FUXI-H5D": {
+   "cat": "Headsets e fones",
+   "desde": "2026-11-22",
+   "igual": "Headset Havit FUXI-H5D P2"
   }
  }
 }

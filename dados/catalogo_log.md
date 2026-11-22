@@ -47,3 +47,7 @@ Todo dia o radar procura no canal produtos que ainda não estavam cadastrados (2
 ## 21/11/2026: 2 produtos novos
 - **Fontes** (1): Fonte Montech BETA2650W
 - **Placas-mãe** (1): Placa-mãe Maxsun Terminator B760M WiFi
+
+## 22/11/2026: 2 produtos novos
+- **Headsets e fones** (1): Headset Havit TW969
+- **Monitores** (1): Monitor AOC 27B35H

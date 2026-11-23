@@ -134,3 +134,30 @@ Observações tiradas das consultorias que contradizem ou não estão em regras_
 - 138 é um doc vazio; 153 é análise de PC já comprado (só a troca sugerida entrou); 148 e 132 só tinham complementos sobre base que o cliente já tinha.
 - Na 133 o nome do cliente no corpo é diferente do título (possível doc trocado); foi contada normalmente.
 - Muitas peças indicadas não têm modelo no site (Kalkan 650/750W, CM MWE Gold 850 V3, TUF B850M-Plus, B850 Eagle, Thermaltake LA360, Dahua C910, Kootion X16 Plus, Mancer CV500L) e ficaram fora da contagem.
+
+## 23/11/2026 (consultorias 90 a 127 + doc sem número "Fabio Sobrinho de Freitas")
+
+### Processador e plataforma
+- AM5 domina já a partir de ~R$ 4-6 mil: Ryzen 5 7600 + B650 aparece em ~R$ 5-7 mil (95, 97, 106, 109, 116), e até em ~R$ 4-5 mil sem placa de vídeo dedicada, com Ryzen 5 8600G pra uso leve (94). AM4 (5700X + B550) ficou restrito a ~R$ 4-5,7 mil ou quando reaproveita DDR4 do cliente (96, 105, 110, 114, 115).
+- Foco FPS com R$ 8-10 mil muitas vezes vai de Ryzen 5 7600/7600X (sem X3D) e põe o dinheiro na RTX 5070 (117, 119, 125, 126); mostra o 7600X como "opção 2" mais barata do 7800X3D com o resto igual (121). Contradiz X3D pra FPS.
+- ~R$ 14 mil pra QHD/4K: Ryzen 7 7700 (sem X3D) + RTX 5070 Ti (doc sem número).
+- Quando o cliente já tem GPU forte (RX 7900 XT, RX 9060 XT), monta só a base AM5 e não gasta o orçamento todo (102, 111).
+- Com sobra de orçamento sem GPU, prioriza 7800X3D + WC 360 e deixa a placa de vídeo pra depois (122) ou bota GPU de entrada (RTX 5060) com o X3D (123).
+- PC de escritório/PDV (~R$ 2 mil): APU AM4 5600GT + A520, 16GB num pente só, fonte 400W. (113)
+
+### Memória
+- 32GB DDR5 6000 virou padrão a partir de ~R$ 6-7 mil (97, 98, 106, 109, 120, 125, 126), inclusive em ~R$ 4-5 mil sem GPU (94) e em upgrade de ~R$ 3,2 mil (91). Ainda há 16GB DDR5 (2x8) em ~R$ 7 mil (112, 116).
+
+### Fonte e refrigeração
+- Fonte 750W Gold (ATX 3.1) quase sempre, mesmo com GPU de consumo baixo e orçamento de ~R$ 4 mil (110, 114, 116); 850W Gold com RTX 5060 (112) e RTX 5070 (125, 126). Exceções: 500W Bronze com 7600 + RTX 5060 (97), 600W White com 5700X + RTX 5060 (96).
+- 9800X3D com air cooler de 120mm (AK400) em ~R$ 10 mil (103), mas WC 360 com o 7800X3D/9800X3D em outros (100, 107, 108, 121, 122, 123).
+
+### Placa de vídeo e uso
+- Edição de vídeo com orçamento curto: prefere NVIDIA (RTX 5060) por CUDA (96); produção musical sem GPU dedicada usa 8600G (94).
+- Entre GPU melhor e periféricos/mesa/cadeira, recomenda cortar os acessórios e subir pra RTX 5070 (119).
+- Build Intel (i5-14600K + B760 + RX 9070 XT) só a pedido do cliente ou quando ele já tem o processador (99, 124).
+
+### Observação sobre os dados
+- 92 e o rascunho "108 (INCOMPLETO)" estão vazios; contados como lidos, sem peças. O doc sem número "Fabio Sobrinho de Freitas" (~R$ 14 mil) é diferente da 115 (mesmo nome, ~R$ 4 mil) e foi contado à parte.
+- O conector do Drive devolveu o texto truncado no fim de vários docs; peças e frases vieram das partes lidas.
+- Muitas peças sem modelo no site: Kalkan Delta 360, Gamemax GX-750, XPG Lancer DDR5 2x16GB CL30, Corsair RM750x Shift, CM MWE Gold 850 V3, TUF B850M-Plus, B650M Aorus Elite, Adata Legend 710, Patriot P300, Husky DDR5, Mancer CV500L.

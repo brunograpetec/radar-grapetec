@@ -51,3 +51,7 @@ Todo dia o radar procura no canal produtos que ainda não estavam cadastrados (2
 ## 22/11/2026: 2 produtos novos
 - **Headsets e fones** (1): Headset Havit TW969
 - **Monitores** (1): Monitor AOC 27B35H
+
+## 24/11/2026: 2 produtos novos
+- **Headsets e fones** (1): Headset Razer RZ04
+- **Teclados** (1): Teclado Razer RZ03

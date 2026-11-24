@@ -1,6 +1,6 @@
 {
  "_leia": "Produtos cadastrados sozinhos pelo radar (scripts/novos.py). Pra tirar um produto, apague a linha dele.",
- "ultimo": "2026-11-23",
+ "ultimo": "2026-11-24",
  "itens": {
   "Placa-mãe MSI PRO B840M-B": {
    "cat": "Placas-mãe",
@@ -1478,6 +1478,18 @@
    "cat": "Headsets e fones",
    "desde": "2026-11-22",
    "igual": "Headset Havit FUXI-H5D P2"
+  },
+  "Teclado Razer RZ03": {
+   "cat": "Teclados",
+   "desde": "2026-11-24",
+   "posts": 2,
+   "exemplo": "Teclado Mecanico Gamer Razer Blackwidow V3 Tenkeyless Chroma Razer Rgb Switch Yellow Us Preto Rz03 03491800 R3M1"
+  },
+  "Headset Razer RZ04": {
+   "cat": "Headsets e fones",
+   "desde": "2026-11-24",
+   "posts": 2,
+   "exemplo": "Headset Gamer Razer Blackshark V3 X Hyperspeed Sem Fio Drivers 50Mm Preto Rz04"
   }
  }
 }

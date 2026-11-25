@@ -55,3 +55,8 @@ Todo dia o radar procura no canal produtos que ainda não estavam cadastrados (2
 ## 24/11/2026: 2 produtos novos
 - **Headsets e fones** (1): Headset Razer RZ04
 - **Teclados** (1): Teclado Razer RZ03
+
+## 25/11/2026: 4 produtos novos
+- **Monitores** (1): Monitor BenQ EW270Q
+- **Mouses** (1): Mouse Redragon M607
+- **Processadores** (2): Intel Core i7-14700K, Intel Core i3-14100

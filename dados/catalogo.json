@@ -1,6 +1,6 @@
 {
  "_leia": "Produtos cadastrados sozinhos pelo radar (scripts/novos.py). Pra tirar um produto, apague a linha dele.",
- "ultimo": "2026-11-24",
+ "ultimo": "2026-11-25",
  "itens": {
   "Placa-mãe MSI PRO B840M-B": {
    "cat": "Placas-mãe",
@@ -1490,6 +1490,30 @@
    "desde": "2026-11-24",
    "posts": 2,
    "exemplo": "Headset Gamer Razer Blackshark V3 X Hyperspeed Sem Fio Drivers 50Mm Preto Rz04"
+  },
+  "Intel Core i7-14700K": {
+   "cat": "Processadores",
+   "desde": "2026-11-25",
+   "posts": 3,
+   "exemplo": "Processador Intel Core I7 14700K 3 4Ghz 5 6 Ghz Max Turbo Cache 33 MB 20 Nucleos 28 Threads Lga 1700 Com Video Integrado"
+  },
+  "Monitor BenQ EW270Q": {
+   "cat": "Monitores",
+   "desde": "2026-11-25",
+   "posts": 2,
+   "exemplo": "Monitor Gamer BenQ EW270Q com resolução 2K, cobertura de cor 90 P3, taxa de atualização de 200Hz e alto-falantes integra"
+  },
+  "Intel Core i3-14100": {
+   "cat": "Processadores",
+   "desde": "2026-11-25",
+   "posts": 2,
+   "exemplo": "Processador Intel Core I3 14100 3 5Ghz 4 7.0Ghz Max Turbo Cache 12 MB 4 Nucleos 8 Threads Lga 1700 Com Video Integrado B"
+  },
+  "Mouse Redragon M607": {
+   "cat": "Mouses",
+   "desde": "2026-11-25",
+   "posts": 2,
+   "exemplo": "Mouse Gamer Redragon Griffin Preto 7200 DPI M607"
   }
  }
 }

@@ -60,3 +60,11 @@ Todo dia o radar procura no canal produtos que ainda não estavam cadastrados (2
 - **Monitores** (1): Monitor BenQ EW270Q
 - **Mouses** (1): Mouse Redragon M607
 - **Processadores** (2): Intel Core i7-14700K, Intel Core i3-14100
+
+## 26/11/2026: 7 produtos novos
+- **Coolers** (1): Air cooler Rise Mode Storm
+- **Gabinetes** (1): Gabinete Pichau Pouter 4B
+- **Headsets e fones** (2): Headset Corsair Void Elite, Headset Corsair Void Wireless
+- **Mouses** (1): Mouse Redragon M816-STD
+- **Placas-mãe** (1): Placa-mãe ASUS AYW B760M WiFi
+- **Processadores** (1): Intel Core i5-12400

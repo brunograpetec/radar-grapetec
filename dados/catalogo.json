@@ -1,6 +1,6 @@
 {
  "_leia": "Produtos cadastrados sozinhos pelo radar (scripts/novos.py). Pra tirar um produto, apague a linha dele.",
- "ultimo": "2026-11-25",
+ "ultimo": "2026-11-26",
  "itens": {
   "Placa-mãe MSI PRO B840M-B": {
    "cat": "Placas-mãe",
@@ -1514,6 +1514,48 @@
    "desde": "2026-11-25",
    "posts": 2,
    "exemplo": "Mouse Gamer Redragon Griffin Preto 7200 DPI M607"
+  },
+  "Placa-mãe ASUS AYW B760M WiFi": {
+   "cat": "Placas-mãe",
+   "desde": "2026-11-26",
+   "posts": 4,
+   "exemplo": "Placa Mae Asus B760M Ayw Wifi D4 Ii Intel Lga 1700 Matx Ddr4 Wi Fi 6 Preto 90Mb1Mg0 M0Eay0"
+  },
+  "Intel Core i5-12400": {
+   "cat": "Processadores",
+   "desde": "2026-11-26",
+   "posts": 3,
+   "exemplo": "Processador Intel Core I5 12400 2 5Ghz 4 4Ghz Max Turbo Cache 18 MB 6 Nucleos 12 Threads Lga 1700 Com Video Integrado Bx"
+  },
+  "Mouse Redragon M816-STD": {
+   "cat": "Mouses",
+   "desde": "2026-11-26",
+   "posts": 2,
+   "exemplo": "Mouse Gamer Redragon Deicide Standard Preto RGB 24000 DPI M816-STD"
+  },
+  "Air cooler Rise Mode Storm": {
+   "cat": "Coolers",
+   "desde": "2026-11-26",
+   "posts": 2,
+   "exemplo": "Air Cooler Gamer Rise Mode Storm 8 Rm-acst-w 120mm Branco"
+  },
+  "Gabinete Pichau Pouter 4B": {
+   "cat": "Gabinetes",
+   "desde": "2026-11-26",
+   "posts": 2,
+   "exemplo": "Gabinete Gamer Pichau Pouter 4B, Mid-Tower, Lateral de Vidro, Branco, PG-PO4B-WH"
+  },
+  "Headset Corsair Void Elite": {
+   "cat": "Headsets e fones",
+   "desde": "2026-11-26",
+   "posts": 2,
+   "exemplo": "Headset Gamer Corsair Void Elite Wireless Rgb 7 1 Surround Drivers 50Mm Branco Ca 9011202 Na"
+  },
+  "Headset Corsair Void Wireless": {
+   "cat": "Headsets e fones",
+   "desde": "2026-11-26",
+   "posts": 2,
+   "exemplo": "Headset Gamer Sem Fio Corsair Void Wireless V2 Rgb Bluetooth Dolby Atmos Carbon Ca 9011379 Ww"
   }
  }
 }

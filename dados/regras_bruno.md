@@ -131,3 +131,10 @@ Regras que o Bruno passou e que o algoritmo segue. Anotar aqui cada regra nova (
 ## Placa de vídeo topo e octa-core (27/11)
 - Momento difícil de placa de vídeo: Bruno NÃO recomenda RTX 5080 nem RTX 5070 Ti (nem 5090). Topo pra jogo = RX 9070 / RX 9070 XT. O montador não escolhe mais essas placas; no "Eu sei montar" a avaliação avisa.
 - "Se o cara tem dinheiro, eu trabalho octa-core": a partir de R$ 9 mil o montador só usa processador de 8 núcleos ou mais (casual no AM5 continua sem 3D V-Cache, ex. 9700X/7700).
+
+## Combos das consultorias: o dinheiro vai pra placa de vídeo grande (27/11)
+- Casual / jogos pesados: AM4 = Ryzen 7 5700X (5800X3D se o orçamento der); AM5 = Ryzen 7 7700 ou 9700X (octa comum). Sempre com placa de vídeo grande.
+- FPS / battle royale ("cuspir FPS"): 7800X3D ou 9800X3D (5800X3D no AM4) + placa grande.
+- Ryzen 7 5800XT: tá caro, não vale. Nunca. (5600XT, 5500X3D, 7600X, 9600X, 7600X3D também saíram do montador; 5500/5600/7500F/7600 só em orçamento curto.)
+- 5700X segura placa grande no casual (sem alerta de gargalo).
+- Sem orçamento pra placa grande: bota a placa grande e pede pra aumentar o orçamento.

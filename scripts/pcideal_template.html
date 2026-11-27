@@ -840,17 +840,20 @@ function score(cpu, gpu, s, ram, ssd){
   if(s.mon==='qhd') mult *= 1.3; if(s.mon==='uhd') mult *= 1.75; if(s.mon==='fhd60' || s.hz60) mult *= 1.4;
   const cg = (s.jogo==='mix' && c.pl==='AM5' && c.x3d) ? Math.min(c.g, 115) : c.g;   // casual não aproveita o 3D V-Cache
   let sc = Math.min(gi, cg*mult) + .12*Math.max(gi, cg*mult);
+  if(gpu!=='iGPU' && s.jogo!=='work') sc += GPU_PESO*(s.mon==='qhd'||s.mon==='uhd' ? (g.q||g.i*.8) : g.i);   // regra do Bruno: o dinheiro vai pra placa de vídeo grande
   if(c.c>=8) sc += 3;                       // 8 núcleos envelhecem melhor
   if(s.jogo==='fps' && c.x3d) sc += 6;      // cache 3D no competitivo
   if(s.jogo==='mix' && c.pl==='AM5'){ if(c.x3d) sc -= 8; if(cpu==='Ryzen 7 9700X') sc += 4; else if(cpu==='Ryzen 7 7700') sc += 2; }   // casual no AM5: octa-core sem 3D V-Cache
   if(s.jogo==='work') sc = .55*sc + .45*(c.c*10*(c.pl==='AM5'?1.15:1));
   if(ram===32) sc += s.jogo==='work' ? 10 : (s.mon==='uhd' ? 4.5 : 2.5);   // 4K: o ideal é 2x16GB (sem tirar da placa de vídeo)
   if(ssd==='1t'||ssd==='1t4') sc += 8; if(ssd==='2t') sc += 9.5; if(ssd==='1t4') sc += .5;
-  if(s.plat==='auto' && c.pl==='AM5') sc *= 1.02;  // empate técnico → AM5 leva pela vida útil
+  if(s.plat==='auto' && c.pl==='AM5') sc += 2;    // empate técnico → AM5 leva pela vida útil (mas não tira placa de vídeo)
   // equilíbrio: processador não pode segurar demais a placa
   if(gpu!=='iGPU'){
-    const thr = Math.min(108, .3*g.i*(s.mon==='qhd' ? .8 : s.mon==='uhd' ? .6 : 1) + 40);   // 5800X3D / octa AM5 seguram qualquer placa (regra do Bruno)
-    if(c.g < thr) sc -= (thr - c.g)*3;
+    const thr = Math.min(108, .3*g.i*(s.mon==='qhd' ? .8 : s.mon==='uhd' ? .6 : 1) + 40);
+    const thrC = (s.jogo==='mix' || s.jogo==='aaa') ? Math.min(thr, 85) : thr;   // casual: 5700X + placa grande é o combo do Bruno
+   // 5800X3D / octa AM5 seguram qualquer placa (regra do Bruno)
+    if(c.g < thrC) sc -= (thrC - c.g)*3;
   }
   return sc;
 }
@@ -861,6 +864,16 @@ function itipo(s){ const t = s.itipo || 'auto'; return t!=='auto' ? t : 'apu'; }
 // regra do Bruno (27/11): momento difícil de placa de vídeo. RTX 5070 Ti / 5080 / 5090 ele não recomenda: o topo é a RX 9070 / 9070 XT
 const GPU_NAO = /5070 Ti|5080|5090/;
 const OCTA_ORC = 9000;
+const GPU_PESO = .45;
+// regra do Bruno (27/11): os combos das consultorias. O dinheiro vai pra placa de vídeo grande.
+// Casual / jogos pesados: AM4 5700X (ou 5800X3D se der); AM5 7700 ou 9700X (octa comum). 5500/5600/7500F/7600 só em orçamento curto.
+// FPS (competitivo, battle royale): aí entram 7800X3D / 9800X3D (e 5800X3D no AM4).
+// 5800XT tá caro e não vale: nunca.
+const CPU_JOGO = {
+  mix: /^Ryzen (5 5500|5 5600|7 5700X|7 5800X3D|5 7500F|5 7600|7 7700|7 9700X)$/,
+  aaa: /^Ryzen (5 5500|5 5600|7 5700X|7 5800X3D|5 7500F|5 7600|7 7700|7 9700X)$/,
+  fps: /^Ryzen (5 5500|5 5600|7 5700X|7 5800X3D|5 7500F|5 7600|7 7700|7 9700X|7 7800X3D|7 9800X3D)$/
+};
 function futGpu(s){
   const gf = +s.gfut || 0; if(!gf) return null;
   let best = null;
@@ -880,7 +893,9 @@ function monta(s){
     const C = CPU[cpu], cI = (P.cpu||[]).find(x=>x.n===cpu);
     if(!cI || !plats.includes(C.pl)) continue;
     if(s.jogo!=='work' && C.c>=12) continue;
-    if(s.orc>=OCTA_ORC && s.gmodo!=='igpu' && C.c<8) continue;   // regra do Bruno: se o cara tem dinheiro, octa-core
+    if(s.orc>=OCTA_ORC && s.gmodo!=='igpu' && C.c<8) continue;
+    if(cpu==='Ryzen 7 5800XT') continue;
+    if(s.gmodo!=='igpu' && CPU_JOGO[s.jogo] && !CPU_JOGO[s.jogo].test(cpu)) continue;   // regra do Bruno: se o cara tem dinheiro, octa-core
     if(s.gmodo==='dgpu' && C.apu) continue;
     const itp = itipo(s);
     if(s.gmodo==='igpu'){ if(C.pl!=='AM5') continue; if(itp==='apu' && !C.apu) continue; if(itp==='cpu' && !C.igb) continue; }

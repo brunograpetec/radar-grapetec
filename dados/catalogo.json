@@ -1,6 +1,6 @@
 {
  "_leia": "Produtos cadastrados sozinhos pelo radar (scripts/novos.py). Pra tirar um produto, apague a linha dele.",
- "ultimo": "2026-11-26",
+ "ultimo": "2026-11-27",
  "itens": {
   "Placa-mãe MSI PRO B840M-B": {
    "cat": "Placas-mãe",
@@ -1556,6 +1556,54 @@
    "desde": "2026-11-26",
    "posts": 2,
    "exemplo": "Headset Gamer Sem Fio Corsair Void Wireless V2 Rgb Bluetooth Dolby Atmos Carbon Ca 9011379 Ww"
+  },
+  "Teclado Machenike KG87": {
+   "cat": "Teclados",
+   "desde": "2026-11-27",
+   "posts": 5,
+   "exemplo": "Teclado Gamer Mecânico Machenike Kg87 Rgb Switch Silver"
+  },
+  "Monitor Gigabyte GS25F14": {
+   "cat": "Monitores",
+   "desde": "2026-11-27",
+   "posts": 3,
+   "exemplo": "Monitor Gigabyte GS25F14"
+  },
+  "Gabinete Gamemax Defender Mb": {
+   "cat": "Gabinetes",
+   "desde": "2026-11-27",
+   "posts": 2,
+   "exemplo": "Gabinete Gamemax Defender MB WH Mid Tower MATX"
+  },
+  "Placa-mãe MSI Gaming Plus B760M WiFi": {
+   "cat": "Placas-mãe",
+   "desde": "2026-11-27",
+   "posts": 2,
+   "exemplo": "Placa Mae Msi B760M Gaming Plus Intel Lga 1700 M Atx Ddr5 Wi Fi Preto B760M Gaming Plus Wifi"
+  },
+  "Placa-mãe ASRock HDV H610M": {
+   "cat": "Placas-mãe",
+   "desde": "2026-11-27",
+   "posts": 2,
+   "exemplo": "Placa Mãe ASRock H610M-HDV/M.2+ D5, Chipset H610, Intel LGA 1700, mATX, DDR5"
+  },
+  "Gabinete MSI M120R": {
+   "cat": "Gabinetes",
+   "desde": "2026-11-27",
+   "posts": 2,
+   "exemplo": "Gabinete Gamer MSI PRO PANO M120R Vidro Temperado"
+  },
+  "Teclado Attack Shark X85PRO": {
+   "cat": "Teclados",
+   "desde": "2026-11-27",
+   "posts": 2,
+   "exemplo": "Teclado Mecânico Sem Fio Attack Shark X85pro 75 Tela Tft Preto Estrelado Português Brasil"
+  },
+  "Headset Corsair HS55": {
+   "cat": "Headsets e fones",
+   "desde": "2026-11-27",
+   "posts": 2,
+   "exemplo": "Headset Gamer Corsair HS55, Wireless, Drivers 50mm, Carbon, CA-9011280-NA"
   }
  }
 }

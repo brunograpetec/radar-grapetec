@@ -68,3 +68,10 @@ Todo dia o radar procura no canal produtos que ainda não estavam cadastrados (2
 - **Mouses** (1): Mouse Redragon M816-STD
 - **Placas-mãe** (1): Placa-mãe ASUS AYW B760M WiFi
 - **Processadores** (1): Intel Core i5-12400
+
+## 27/11/2026: 8 produtos novos
+- **Gabinetes** (2): Gabinete Gamemax Defender Mb, Gabinete MSI M120R
+- **Headsets e fones** (1): Headset Corsair HS55
+- **Monitores** (1): Monitor Gigabyte GS25F14
+- **Placas-mãe** (2): Placa-mãe MSI Gaming Plus B760M WiFi, Placa-mãe ASRock HDV H610M
+- **Teclados** (2): Teclado Machenike KG87, Teclado Attack Shark X85PRO

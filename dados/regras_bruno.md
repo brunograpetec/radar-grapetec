@@ -124,3 +124,6 @@ Regras que o Bruno passou e que o algoritmo segue. Anotar aqui cada regra nova (
 ## PC Ideal: preço do dia (26/11)
 - O preço de cada peça é o menor preço dos 2 dias mais recentes em que ela saiu no canal (antes era o menor dos últimos 10 dias, que deixava preço velho).
 - Peça que não sai há dias continua com o último preço e o aviso "há N dias".
+
+## Placa de vídeo x8 em PCIe 3.0 (27/11)
+- RX 7600 (e outras x8) em B450/A520/Ryzen 5 5500: perde só 1-2% na média (TechPowerUp, RX 6600 XT x8), mais se estourar a VRAM. Vira dica (💡), não alerta ✕; penalidade no montador caiu de 8% pra 2%.

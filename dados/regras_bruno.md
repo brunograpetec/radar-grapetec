@@ -127,3 +127,7 @@ Regras que o Bruno passou e que o algoritmo segue. Anotar aqui cada regra nova (
 
 ## Placa de vídeo x8 em PCIe 3.0 (27/11)
 - RX 7600 (e outras x8) em B450/A520/Ryzen 5 5500: perde só 1-2% na média (TechPowerUp, RX 6600 XT x8), mais se estourar a VRAM. Vira dica (💡), não alerta ✕; penalidade no montador caiu de 8% pra 2%.
+
+## Placa de vídeo topo e octa-core (27/11)
+- Momento difícil de placa de vídeo: Bruno NÃO recomenda RTX 5080 nem RTX 5070 Ti (nem 5090). Topo pra jogo = RX 9070 / RX 9070 XT. O montador não escolhe mais essas placas; no "Eu sei montar" a avaliação avisa.
+- "Se o cara tem dinheiro, eu trabalho octa-core": a partir de R$ 9 mil o montador só usa processador de 8 núcleos ou mais (casual no AM5 continua sem 3D V-Cache, ex. 9700X/7700).

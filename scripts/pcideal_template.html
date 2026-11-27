@@ -858,10 +858,13 @@ function score(cpu, gpu, s, ram, ssd){
 // regra do Bruno: se ele deixou eu decidir, vai de série G (ele quer pelo menos jogar um pouco desde o primeiro dia)
 function itipo(s){ const t = s.itipo || 'auto'; return t!=='auto' ? t : 'apu'; }
 // placa de vídeo pro upgrade (fora do orçamento): a mais forte que cabe no valor que ele separou
+// regra do Bruno (27/11): momento difícil de placa de vídeo. RTX 5070 Ti / 5080 / 5090 ele não recomenda: o topo é a RX 9070 / 9070 XT
+const GPU_NAO = /5070 Ti|5080|5090/;
+const OCTA_ORC = 9000;
 function futGpu(s){
   const gf = +s.gfut || 0; if(!gf) return null;
   let best = null;
-  for(const n in GPU){ const g = GPU[n], it = (P.gpu||[]).find(x=>x.n===n); if(!it || it.p > gf) continue;
+  for(const n in GPU){ const g = GPU[n], it = (P.gpu||[]).find(x=>x.n===n); if(!it || it.p > gf || GPU_NAO.test(n)) continue;
     if((s.mon==='qhd'||s.mon==='uhd') && g.v<=8) continue;
     const v = s.mon==='qhd' ? (g.q||g.i*.8) : g.i;
     if(!best || v > best.v || (v===best.v && it.p < best.it.p)) best = {n, g, it, v}; }
@@ -877,6 +880,7 @@ function monta(s){
     const C = CPU[cpu], cI = (P.cpu||[]).find(x=>x.n===cpu);
     if(!cI || !plats.includes(C.pl)) continue;
     if(s.jogo!=='work' && C.c>=12) continue;
+    if(s.orc>=OCTA_ORC && s.gmodo!=='igpu' && C.c<8) continue;   // regra do Bruno: se o cara tem dinheiro, octa-core
     if(s.gmodo==='dgpu' && C.apu) continue;
     const itp = itipo(s);
     if(s.gmodo==='igpu'){ if(C.pl!=='AM5') continue; if(itp==='apu' && !C.apu) continue; if(itp==='cpu' && !C.igb) continue; }
@@ -889,6 +893,7 @@ function monta(s){
     const pcie3 = /^Ryzen 5 5500$/.test(cpu) || /A520|B450/.test(mobo.it.a.Chipset||'');
     for(const gpu of ((C.apu || s.gmodo==='igpu') ? ['iGPU'] : Object.keys(GPU))){
       const gI = gpu==='iGPU' ? {p:0, n:'iGPU'} : (P.gpu||[]).find(x=>x.n===gpu); if(!gI) continue;
+      if(GPU_NAO.test(gpu)) continue;
       const G = gpu==='iGPU' ? {i:C.ig, v:0, w:500} : GPU[gpu];
       // regra do Bruno: QHD/4K pede placa com MAIS de 8GB (9060 XT 16GB, 9070 GRE, 5070, 9070, 9070 XT pra cima)
       if(gpu!=='iGPU' && (s.mon==='qhd' || s.mon==='uhd') && G.v<=8) continue;
@@ -1284,6 +1289,7 @@ function mmAvalia(){
     else ok.push(`Processador e placa de vídeo equilibrados, sem gargalo.`);
     if(am4oct && g.i >= 165 && !topo) dica.push(`O ${m.cpu} roda bem a ${m.gpu}. Mas se o foco for jogo de FPS (competitivo, muito FPS), ele começa a segurar: o <b>Ryzen 7 5800X3D</b> cospe bem mais FPS com essa placa.`);
     const pcie3 = m.cpu==='Ryzen 5 5500' || (sel.mobo && /A520|B450/.test(sel.mobo.it.a.Chipset||''));
+    if(GPU_NAO.test(m.gpu)){ alerta.push(`Hoje eu não recomendo a <b>${m.gpu}</b>: o preço de placa de vídeo tá fora da curva e ela não compensa. Pra jogar, a <b>RX 9070 XT</b> (ou a RX 9070) entrega muito por bem menos, e o que sobra vai pra um processador octa-core.`); nota -= .5; }
     if(pcie3 && g.x8){ dica.push(`A <b>${m.gpu}</b> usa 8 linhas (x8). Numa plataforma PCIe 3.0 a perda é pequena, <b>1 a 2% na média</b>, e só pesa mais se o jogo passar dos ${g.v||8}GB de memória da placa. Se der, uma placa-mãe B550 (PCIe 4.0) aproveita ela inteira.`); }
   }
   if(m.gpu==='iGPU') ok.push(C && C.apu ? `Vídeo integrado ${C.apu}: joga leve agora, e a placa entra depois.` : `Vídeo básico: o PC liga e funciona, mas pra jogar precisa da placa de vídeo.`);

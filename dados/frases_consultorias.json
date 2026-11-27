@@ -11,7 +11,14 @@
     "Fala! Saindo do console pro PC? Montei pensando em <b>rodar com mods</b> e com uma qualidade que o console nunca vai entregar.",
     "Fala! A ideia aqui é uma máquina que <b>substitua de vez o console</b>, com experiência claramente superior e pronta pros próximos lançamentos.",
     "Fala! A estratégia foi economizar no processador sem perder nada em alta resolução, pra <b>investir pesado na placa de vídeo</b>, que é o que manda no visual.",
-    "Fala! Montei um setup pra te colocar de vez na <b>nova geração</b>: rodando tudo no talo e com base sólida pra upgrade."
+    "Fala! Montei um setup pra te colocar de vez na <b>nova geração</b>: rodando tudo no talo e com base sólida pra upgrade.",
+    "Entendi o que você busca: uma máquina pra segurar jogo atual em alta resolução com desempenho puro e <b>sem dor de cabeça</b> por muitos anos.",
+    "Preparei uma base bem sólida na AM5, com foco no desempenho que você pediu — pensando em longevidade, <b>sem gargalo</b> e com espaço pra upgrade futuro sem dor de cabeça.",
+    "Mantive a qualidade que você quer: AM5 com DDR5, placa de vídeo forte pra aguentar tranquilo os jogos e uma base sólida de processador pra <b>não precisar mexer tão cedo</b>.",
+    "Ficou um PCzão muito forte, condizente com teu orçamento e com o que você quer: <b>jogos de nova geração em Quad HD</b> com FPS estável e sem dor de cabeça.",
+    "Orçamento gigante, mas não é porque a gente tem o dinheiro que vai gastar tudo. Ficou uma <b>máquina forte demais</b> sem extrapolar.",
+    "Achei maneiro a consciência de não precisar jogar tudo no preset máximo. O PC vai ter condições de rodar em Quad HD de forma estável e fluida.",
+    "Com monitor Quad HD e pensando em 4K, o foco é <b>placa de vídeo grande</b>. O foco do PC gamer é sempre a GPU, mas no seu caso principalmente."
   ],
   "dupla": [
     "Minha indicação pra esse orçamento é o conjunto <b>{cpu} + {gpu}</b>, mirando {res} com qualidade e FPS.",
@@ -38,7 +45,11 @@
     "<b>{cpu} + {gpu}</b> rodam em {res} com sobra pra mod, textura no ultra e o que mais vier.",
     "O grande destaque é a combinação do <b>{cpu} com a {gpu}</b>: desempenho de sobra pra {res} em qualquer jogo atual.",
     "{cpu} + {gpu}: <b>ultra em {res} por muitos anos</b>, sem precisar pensar em upgrade tão cedo.",
-    "{cpu} + {gpu} seguram {res} com folga e ainda dão conta de <b>edição e softwares 3D</b>."
+    "{cpu} + {gpu} seguram {res} com folga e ainda dão conta de <b>edição e softwares 3D</b>.",
+    "{cpu} + {gpu} é um conjunto muito bem dimensionado pra jogar competitivo em {res}, com margem pra uma futura evolução da placa de vídeo.",
+    "{cpu} + {gpu} é desempenho competitivo máximo em {res}, com FPS alto e estável.",
+    "Se for montar agora, eu iria de {cpu} + {gpu}: é o setup mais parrudo e equilibrado pra games em {res} e uso pesado.",
+    "Com esse orçamento dá pra equilibrar placa de vídeo grande e processador forte: {cpu} + {gpu} pra jogar em {res} com preset alto por muitos anos."
   ],
   "why_gpu": [
     "Essa placa atende o orçamento de hoje, mas não é a definitiva: o PC foi montado pra receber uma <b>mais forte</b> depois.",
@@ -54,7 +65,19 @@
     "Pra live, placa NVIDIA tem o <b>encoder NVENC</b>: ele processa a transmissão e deixa o processador livre pro resto.",
     "Periféricos dá pra trocar com o tempo. <b>A placa de vídeo define a experiência por anos.</b>",
     "A versão de <b>16GB</b> anda muito acima das de 8GB: dá pra jogar pesado sem pensar em upgrade por anos.",
-    "Placa NVIDIA traz <b>CUDA e DLSS</b>, o que ajuda muito em software de edição e projeto 3D."
+    "Placa NVIDIA traz <b>CUDA e DLSS</b>, o que ajuda muito em software de edição e projeto 3D.",
+    "O grande investimento em desempenho deve ser feito na GPU. Trocar placa-mãe e fonte não traz FPS, só prepara a máquina pra ela.",
+    "16GB de VRAM e aceleração CUDA: pronta pra jogos pesados em Full HD Ultra, dá conta de QHD e ainda ajuda no render 3D.",
+    "Placa muito forte, 16GB de VRAM e nova geração: desempenho de sobra em Quad HD e até 4K dependendo do jogo, com <b>ótimo custo</b> pelo que entrega.",
+    "Aqui é o coração gamer do setup: memória rápida, DLSS e Frame Generation. Com 16GB tá mais do que preparada pros lançamentos futuros.",
+    "Recomendo vender a placa antiga: as saídas de vídeo dela não vão te dar a qualidade que os monitores atuais precisam.",
+    "O ideal seria uma placa de 16GB pra ter folga no Quad HD com tudo no máximo, mas aí extrapola o orçamento atual.",
+    "Do lado AMD a opção costuma vir com preço melhor e, em longevidade, até mais rápida que a concorrente da NVIDIA na mesma faixa.",
+    "Dá pra segurar o orçamento com uma placa intermediária de 16GB, mas aí é meio-termo: roda bem muita coisa, mas nos pesados não puxa tudo no máximo.",
+    "No seu caso, quanto mais placa de vídeo, melhor o PC vai envelhecer. Não vai precisar se preocupar tão cedo com preset de jogo.",
+    "Comecei numa placa menor, mas vi margem e subi. Toda placa encolhe em performance com o tempo, então é melhor <b>sair com uma das melhores</b>.",
+    "Primeiro troca o kit e joga com a placa atual. Se sentir necessidade, aí evolui a GPU, mas só vale se for pelo menos <b>uns 35-40% de performance</b> a mais.",
+    "Com três monitores a resolução sobe bastante, então recomendo <b>placa forte pra Quad HD</b>. Placa maior dá muito mais longevidade."
   ],
   "why_mobo": [
     "Evitei placa-mãe básica demais só pra baixar o total: a base fica pronta pra um processador melhor depois.",
@@ -67,7 +90,20 @@
     "Já vem com <b>Wi-Fi e Bluetooth</b> integrados: nada de adaptador e controle sem fio funcionando direto.",
     "Placa com <b>VRM mais robusto</b>: processador de muitos núcleos trabalhando pesado por horas pede uma base que aguente.",
     "Placa-mãe topo de linha não dá mais desempenho pro processador: uma {pl} sólida segura igual, e a diferença vira <b>placa de vídeo</b>.",
-    "Placa {pl} com <b>Wi-Fi integrado</b>: facilita a vida e dispensa adaptador."
+    "Placa {pl} com <b>Wi-Fi integrado</b>: facilita a vida e dispensa adaptador.",
+    "Uma boa base {pl}, pensando em custo-benefício e longevidade, e já com Wi-Fi e Bluetooth.",
+    "Placa de boa construção, com melhor estrutura de alimentação e suporte a PCIe 4.0, preparando a máquina pra uma GPU mais forte.",
+    "Plataforma {pl} com PCIe 5.0, Wi-Fi integrado e VRM adequado pro processador escolhido.",
+    "Placa simples, mas completa: já DDR5, suporte aos processadores atuais e futuros da {pl}, e segura bem qualquer upgrade depois.",
+    "Linha TUF é sinônimo de durabilidade: VRM sólido, Wi-Fi integrado e suporte total a DDR5. Placa que te deixa tranquilo por anos.",
+    "Placa que entrega o essencial sem firula e sem faltar nada importante. VRM bom pra subir pra um Ryzen 7 ou X3D no futuro no {pl}.",
+    "Placa TUF com Wi-Fi, de qualidade e confiável.",
+    "Como não precisa de Wi-Fi (vai no cabo), dá pra usar modelo custo-benefício, porque o Wi-Fi encarece. Placa que segura bem o kit.",
+    "Placa sólida, já com PCIe 5.0, DDR5 e Wi-Fi. E como você falou em upgrade futuro, ela <b>já suporta os novos Ryzen</b> que vão sair no {pl}.",
+    "Placa robusta, PCIe 4.0, com suporte bacana e até opção com Wi-Fi se pintar oferta.",
+    "Placa excelente, sólida e segura. Pena não ter Wi-Fi, mas pelo preço que apareceu valeu muito a pena.",
+    "Não seria necessário uma placa topo nesse setup, mas como coube no orçamento entrou: PCIe 5.0, quatro M.2, VRM parrudo e USB de sobra. <b>Monstro de longevidade</b>.",
+    "Ainda vem com Wi-Fi: mesmo usando rede cabeada, se um dia precisar já tá ali. O preço tá muito bom, por isso escolhi esse modelo."
   ],
   "why_psu": [
     "Fonte com boa margem de potência já pensando numa <b>troca de placa de vídeo</b> lá na frente.",
@@ -83,7 +119,21 @@
     "Placa nova pede fonte à altura: trocar a fonte junto deixa o PC <b>estável e seguro</b> com a placa nova.",
     "Se a sua fonte atual é de linha boa e tem potência, dá pra <b>reaproveitar</b> e jogar esse dinheiro na placa de vídeo.",
     "Fonte <b>ATX 3.1</b> com conector 12V-2x6, já pronta pras placas de vídeo novas.",
-    "Fonte Gold mesmo sem placa de vídeo dedicada: <b>já fica pronta pro upgrade</b> lá na frente."
+    "Fonte Gold mesmo sem placa de vídeo dedicada: <b>já fica pronta pro upgrade</b> lá na frente.",
+    "Fonte já dimensionada pensando no <b>futuro upgrade de placa de vídeo</b>, evitando outro investimento nesse componente depois.",
+    "Fonte de qualidade, totalmente modular e bem dimensionada pra receber uma <b>placa de vídeo mais potente</b> futuramente.",
+    "Fonte Gold modular: estável e com <b>margem pra upgrades</b>.",
+    "Fonte eficiente, silenciosa e segura, com potência ideal pra esse setup.",
+    "Fonte é a peça que ninguém vê, mas se errar aqui o PC todo sofre. Gold, PFC ativo e potência real com <b>margem de segurança</b>.",
+    "Fonte Gold com PFC ativo, estável e eficiente: segura tranquilo essa placa e até upgrades futuros mais parrudos.",
+    "Fonte Gold, modular, já no padrão PCIe 5.0, preparada pra futuras placas de vídeo.",
+    "Fonte é um ponto que <b>eu nunca economizo</b>, ainda mais com placa de vídeo forte. Gold, PFC ativo, segura tranquilo esse conjunto.",
+    "Deixei uma fonte Gold porque, com placa de vídeo grande e forte, não dá pra abrir mão disso. <b>Longevidade sem precisar trocar</b> daqui a pouco.",
+    "A fonte já tá preparada pra upgrade de placa de vídeo, com potência e eficiência de sobra. Se for pra uma placa mais forte, <b>não vai precisar trocar de fonte</b>.",
+    "Puxei a fonte um pouco pra cima: modelo com <b>PCIe 5.0</b> pra ligar a placa de vídeo direto, sem adaptador e sem gambiarra, já pensando em upgrade.",
+    "Placa de vídeo é sempre a peça que a gente mais mexe pra frente, então a fonte já fica preparada pra segurar uma placa forte por muitos anos.",
+    "Uma boa Gold costuma sair mais barata, mas essa é <b>PCIe 5.0</b>: a placa de vídeo liga direto na fonte, sem adaptador. Os modelos novos estão vindo assim.",
+    "Já deixei uma fonte Gold com folga pra quando entrar a placa de vídeo dedicada você <b>não precisar trocar nada</b>."
   ],
   "why_ca_aq": [
     "Estética legal sem tirar dinheiro do conjunto processador e placa de vídeo.",
@@ -93,7 +143,13 @@
     "Estrutura espaçosa e boa pra upgrade, mas vem <b>sem fans</b>: vale colocar ventoinhas depois pra temperatura ficar em dia.",
     "Vidro panorâmico é o <b>pulo do gato</b> da estética: mostra o hardware inteiro sem custar caro.",
     "Gabinete aquário, mas ainda <b>sóbrio e bem ventilado</b>.",
-    "Vidro panorâmico estilo aquário: <b>visual premium sem pesar no bolso</b>."
+    "Vidro panorâmico estilo aquário: <b>visual premium sem pesar no bolso</b>.",
+    "Gabinete preto estilo aquário, com bom espaço interno e excelente custo-benefício.",
+    "Gabinete de design moderno, vidro panorâmico e airflow eficiente.",
+    "Gabinete lindo, espaçoso, com airflow excelente e que abriga tranquilo o radiador de 360mm.",
+    "Gabinetão estilo aquário, lateral panorâmica, cabe water cooler 360mm de boa com bastante espaço pra airflow. Visual top.",
+    "Talvez você não conheça a marca, mas esse gabinete é praticamente uma cópia fiel de um dos modelos mais elogiados que já testei, com a mesma qualidade e preço mais acessível.",
+    "Chegou pra mim e é maravilhoso: pau a pau com o gabinete aquário mais elogiado da categoria, praticamente uma cópia, só que mais barato."
   ],
   "abre_fps": [
     "Fala! Seu objetivo é aproveitar o monitor de taxa alta, então <b>primeiro o PC entrega mais FPS</b>, depois a gente pensa em tela.",
@@ -104,7 +160,10 @@
     "Fala! Live e competitivo ao mesmo tempo pedem <b>processador com folga</b>: OBS, Discord e jogo abertos sem derrubar o FPS.",
     "Fala! Seu perfil é de <b>maluco por FPS</b>: desempenho máximo em taxa alta, com tudo frio e estável por muitos anos.",
     "Fala! Setup com foco total em <b>desempenho competitivo</b>, pra tirar o máximo do seu monitor de alta taxa.",
-    "Fala! Esse PC roda liso o competitivo e ainda <b>sobra potência pros jogos pesados</b> em qualidade alta."
+    "Fala! Esse PC roda liso o competitivo e ainda <b>sobra potência pros jogos pesados</b> em qualidade alta.",
+    "O foco vai ser jogar em Full HD com <b>FPS elevado</b>, baixa latência e uma configuração preparada pra aproveitar monitor de alta taxa de atualização.",
+    "Você tá consciente da resolução e quer mais performance. Em jogos que forçam muito o processador, o X3D faz toda a diferença no FPS.",
+    "Recomendo o upgrade pensando em jogos competitivos, que demandam FPS. O que deve estar te limitando hoje é o processador."
   ],
   "why_cpu_x3d": [
     "Se a prioridade número 1 é FPS, faz sentido ter um <b>X3D</b> como base da máquina.",
@@ -113,7 +172,13 @@
     "Pra quem quer passar <b>muitos anos</b> sem trocar processador, o X3D é a escolha: é o que melhor segura os jogos que ainda vão sair.",
     "Com monitor de taxa altíssima, é o X3D que <b>segura o frame</b> pra você enxergar todos os Hz que pagou.",
     "Com placa forte, o X3D garante que <b>nada segure a GPU</b>, nem em resolução alta.",
-    "O <b>3D V-Cache</b> faz dele o melhor processador pra jogos hoje, ideal pra quem quer longevidade."
+    "O <b>3D V-Cache</b> faz dele o melhor processador pra jogos hoje, ideal pra quem quer longevidade.",
+    "Excelente processador pra jogos competitivos: a tecnologia <b>3D V-Cache</b> entrega alto desempenho em FPS.",
+    "Hoje é um dos melhores processadores do mundo pra jogos. O cache 3D entrega performance absurda e longevidade: anos sem pensar em trocar.",
+    "Coloquei um dos melhores processadores pra jogos hoje, que testo muito no canal. Vai te dar longevidade e desempenho absurdo.",
+    "Mirando num X3D com bom preço, sobra investimento pra colocar numa <b>placa de vídeo bem grande</b>.",
+    "A diferença do X3D mais novo pro anterior foi <b>irrelevante</b>, muito pequenininha. Ou seja: eu iria no que estiver mais barato.",
+    "Esse X3D entrega praticamente o mesmo desempenho do mais novo por um valor <b>bem menor</b>."
   ],
   "why_ram32": [
     "Pra quem pensa em upgrade só daqui a muitos anos, faz mais sentido já sair com 32GB do que economizar justo na memória.",
@@ -125,7 +190,14 @@
     "6000MHz é o <b>ponto ideal</b> da DDR5 no AM5: 32GB nessa frequência e a memória sai da lista de preocupações.",
     "Pra quem trabalha com <b>containers, banco de dados</b> e várias aplicações abertas ao mesmo tempo, 32GB fazem muita diferença.",
     "Memória em <b>6000MHz é o ponto ideal</b> da AM5, principalmente com X3D.",
-    "32GB são ideais pra planilha pesada, <b>vários programas abertos</b> e estabilidade."
+    "32GB são ideais pra planilha pesada, <b>vários programas abertos</b> e estabilidade.",
+    "Um dos pontos mais importantes da configuração: 32GB dão folga pra trabalhar com várias aplicações, abas do navegador e jogos abertos ao mesmo tempo.",
+    "32GB DDR5 é ótimo pra multitarefa e jogos pesados, sem aperto.",
+    "32GB DDR5 com latência ajustada pra tirar o máximo do processador, com visual clean e iluminação suave.",
+    "Fui direto no que importa: <b>frequência alta e dual channel</b>, que é o que faz diferença no AM5. É só ativar o EXPO na BIOS e pronto.",
+    "32GB (2x16) pra dar longevidade, rodar live e os jogos com sobra.",
+    "Coloquei 32GB porque, no DDR5, o 2x16 tá saindo quase no preço do 2x8. Além de <b>mais longevidade</b>, a velocidade é bem maior.",
+    "Pra navegador e muitas abas o que faz diferença é <b>quantidade</b>, não frequência absurda."
   ],
   "why_ca_simples": [
     "Gabinete apertado esquenta tudo. Um maior melhora a ventilação e a organização dos cabos.",
@@ -134,7 +206,14 @@
     "Fecha a estrutura com custo baixo: o dinheiro fica no que importa pra evolução do PC.",
     "Fluxo de ar bom, espaço interno e já <b>preparado pra placas maiores</b>.",
     "Além de caber toda a configuração, as <b>medidas</b> batem com o espaço que você tem na mesa.",
-    "Gabinete bem ventilado deixa as fans trabalharem em <b>rotação baixa</b>: menos calor e menos barulho."
+    "Gabinete bem ventilado deixa as fans trabalharem em <b>rotação baixa</b>: menos calor e menos barulho.",
+    "Gabinete com bom espaço interno e possibilidade de instalar um water cooler de 360mm futuramente.",
+    "Gabinete que já vem com três fans, design limpo e fluxo de ar muito bom: o conjunto fica bonito e bem ventilado.",
+    "Mid tower compacto com vidro lateral, gestão de cabos excelente, visual clean e sóbrio e espaço de sobra pro water cooler 360.",
+    "Gabinete simples, mas muito funcional: espaço, boa ventilação e suporte pra water cooler. Não rouba a cena, mas entrega o que precisa.",
+    "Gabinete custo-benefício grandinho, bom, que já cabe o water cooler no topo.",
+    "Chequei o tamanho: cabe a placa de vídeo e até um water cooler 360mm no topo se quiser colocar no futuro.",
+    "Gabinete dentro do custo-benefício, mas sem ser simples demais, já preparado pra receber o water cooler de 360mm."
   ],
   "am5": [
     "Começar no <b>AM5</b> é não precisar trocar placa-mãe, processador e memória tudo de uma vez daqui a pouco.",
@@ -154,12 +233,29 @@
     "Upgrade em etapas? Começa pela <b>base AM5</b>: processador, placa-mãe e memória agora, placa de vídeo quando o dinheiro chegar.",
     "Plataforma <b>AM5</b> pronta pra próximas gerações de Ryzen: lá na frente dá pra trocar só o processador.",
     "Montei uma <b>base sólida em AM5</b> pra você evoluir depois sem precisar trocar tudo.",
-    "Com AM5 você tem upgrade garantido: dá pra colocar uma placa de vídeo melhor ou <b>trocar só o processador</b> depois."
+    "Com AM5 você tem upgrade garantido: dá pra colocar uma placa de vídeo melhor ou <b>trocar só o processador</b> depois.",
+    "No cenário atual de preços, prefiro montar uma boa plataforma AM5 com 32GB e um processador de 8 núcleos do que <b>comprometer tudo</b> por uma placa de vídeo de entrada.",
+    "A plataforma AM5 garante longevidade pra futuros upgrades <b>sem precisar trocar a placa-mãe</b>.",
+    "Plataforma AM5 pronta pras futuras gerações Ryzen, com espaço pra upgrade <b>sem precisar trocar tudo</b>.",
+    "Base AM5 moderna, com suporte a upgrade até Ryzen 9 sem trocar placa-mãe.",
+    "Base AM5 sólida pra durar vários anos <b>sem mexer em placa-mãe ou memória</b>, o que já é meio caminho andado.",
+    "A base toda em AM5 + DDR5 fica pronta pra durar muitos anos e lidar com <b>renderização e multitarefa pesada</b>.",
+    "Plataforma AM5 moderna, já com vídeo integrado forte pra segurar bem enquanto você não coloca uma GPU dedicada.",
+    "AM5 com DDR5 te dá longevidade: espaço pra upgrades futuros sem dor de cabeça.",
+    "Mesmo pensando em vender lá na frente, a gente sempre acaba perdendo. Se dá pra investir já no AM5, vale a pena: <b>processador bem mais forte</b> e mais longevidade.",
+    "Entrando já no AM5 com DDR5: plataforma moderna, com ótima vida útil e preparada pra upgrades sem precisar trocar tudo de novo.",
+    "Tudo na linha AM5 com DDR5, garantindo longevidade, desempenho absurdo e estética equilibrada.",
+    "Base sólida em AM5 e DDR5 te garante anos de tranquilidade sem precisar trocar de plataforma.",
+    "Dava pra ir de AM4 e sair mais barato, mas o processador sem vídeo integrado te obriga a ter placa de vídeo desde o início. Por isso fui de <b>AM5</b>.",
+    "Placa de entrada/intermediária, mas aceita até um <b>X3D topo de linha no futuro</b>, frouxo. Hoje não cabe no orçamento, mas a plataforma já tá pronta.",
+    "Saindo do AM4 pro <b>AM5</b> você ganha arquitetura mais nova, suporte a DDR5 e empilhamento de cache, com muito mais poder de processamento e sem gargalo.",
+    "O X3D do AM4 tá totalmente fora de preço. O caminho mais interessante é vender memória, placa-mãe e processador e partir pra uma plataforma nova."
   ],
   "why_mon_fhd": [
     "Se você está satisfeito com Full HD, não tem por que gastar mais só pra subir resolução.",
     "No competitivo, Full HD com <b>240Hz ou mais</b> é onde você realmente sente o desempenho da máquina.",
-    "Se o orçamento apertou, descer o monitor de 27\" pra <b>24\"</b> é o corte mais fácil sem mexer no PC."
+    "Se o orçamento apertou, descer o monitor de 27\" pra <b>24\"</b> é o corte mais fácil sem mexer no PC.",
+    "Pra competitivo, mantém o foco em Full HD, 24 a 25 polegadas, alta taxa de atualização e baixa latência. O Full HD favorece <b>mais quadros</b>."
   ],
   "am4": [
     "Sem plano de upgrade no curto prazo, o <b>AM4</b> barateia a plataforma e libera dinheiro pra uma placa de vídeo mais forte.",
@@ -177,12 +273,21 @@
     "Você já tem uma base boa: trocar processador e placa-mãe agora seria gastar onde <b>não aparece desempenho</b>. O upgrade inteligente é na placa de vídeo.",
     "Mesma placa de vídeo nas duas plataformas? Aí o AM5 custa bem mais e o <b>FPS quase não muda</b>: o AM4 já entrega tudo com sobra.",
     "AM4 ainda é <b>ótimo custo-benefício</b> pra quem quer desempenho sem gastar com DDR5.",
-    "Plataforma AM4 <b>extremamente estável</b>, perfeita pra máquina que fica ligada o dia inteiro."
+    "Plataforma AM4 <b>extremamente estável</b>, perfeita pra máquina que fica ligada o dia inteiro.",
+    "Com um processador X3D e 32GB na plataforma AM4, não vejo necessidade de migrar pra AM5 agora. O processador ainda tem <b>bastante potencial</b>.",
+    "AM4 com upgrade real: processador de 8 núcleos que segura bem a placa de vídeo sem pesar no orçamento.",
+    "No AM5 não caberia uma placa de vídeo nova nesse orçamento. Por isso fui no AM4, que ainda é uma geração <b>muito boa</b>: PC completo, forte e equilibrado.",
+    "A DDR4 ainda tá bem barata, o que ajuda a segurar o orçamento. Diferente da DDR5, que encarece muito a nova geração.",
+    "Você já tem as memórias e outras peças que casam com o AM4, e levando em conta o orçamento, <b>fez total sentido seguir esse caminho</b>.",
+    "O AM5 não encaixava por conta da placa de vídeo, e quando a gente fala em PC Gamer <b>a prioridade sempre é a placa de vídeo</b>. Fez certíssimo.",
+    "Com essa placa você fecha o ciclo do AM4: não tem muito mais evolução, então fica com ela e daqui a um ou dois anos migra se sentir necessidade."
   ],
   "why_per": [
     "Periférico já resolvido? Então nenhum centavo vai pra isso agora.",
     "Se precisar cortar, começa pelo <b>headset ou teclado</b>: periférico simples hoje troca depois, a parte principal do PC não se sacrifica.",
-    "É mais inteligente <b>investir numa placa de vídeo melhor agora</b> e ajustar periféricos depois do que ficar limitado por anos."
+    "É mais inteligente <b>investir numa placa de vídeo melhor agora</b> e ajustar periféricos depois do que ficar limitado por anos.",
+    "Periférico é muito pessoal: tem gente que prefere teclado maior, menor, com fio, sem fio, mecânico, low profile. <b>É questão de estilo e preferência</b>, a gente alinha junto.",
+    "Mouse e teclado você resolve depois fácil. Com pouco investimento já pega um bom kit, nada absurdo, mas que vai te atender bem."
   ],
   "abre_mix": [
     "Fala! Você quer <b>desempenho e custo-benefício</b>, sem gastar com estética ou recurso que não traz ganho real.",
@@ -197,7 +302,13 @@
     "Fala! Seu uso mistura <b>edição e jogo</b>, então reforcei processador e memória sem deixar a placa de vídeo de lado.",
     "Fala! Jogo pesado e live no mesmo PC pedem <b>fôlego de sobra</b>: processador com núcleos sobrando e placa forte pra transmitir sem engasgo.",
     "Fala! Montagem feita pra te atender <b>no trabalho e nos jogos pesados</b>, sem abrir mão de nenhum dos dois.",
-    "Fala! Configuração ajustada pra <b>processamento e memória fortes</b>, mantendo uma boa placa de vídeo pros momentos de lazer."
+    "Fala! Configuração ajustada pra <b>processamento e memória fortes</b>, mantendo uma boa placa de vídeo pros momentos de lazer.",
+    "Organizei um setup com o melhor equilíbrio entre custo-benefício e performance, fechando o conjunto com a placa de vídeo que você já tem.",
+    "Montei um setup equilibrado, moderno e bonito: potência pros jogos com fluidez e desempenho pros projetos <b>sem gargalo nenhum</b>.",
+    "Montei uma máquina profissional e equilibrada pro seu uso com 3D e jogos, garantindo desempenho bruto, estabilidade e espaço pra crescer.",
+    "Parabéns pela iniciativa de buscar consultoria antes de sair comprando peça aleatória. É esse cuidado que faz você montar um PC <b>equilibrado</b>, sem gastar à toa.",
+    "Montei o resto do setup em volta da sua placa de vídeo pra extrair o máximo dela <b>sem gargalo</b> e sem desperdiçar grana onde não precisa.",
+    "Teu perfil é bem completo, trabalho, estudo e jogo pesado, então o foco foi equilibrar <b>força bruta, eficiência e investimento inteligente</b>."
   ],
   "why_co_wc": [
     "Pelo preço que saiu, deu pra colocar 360mm sem pesar no orçamento.",
@@ -211,7 +322,19 @@
     "Processador de muitos núcleos esquenta de verdade em carga pesada: aqui o 360mm <b>tem motivo de estar</b>.",
     "Pra quem passa o dia inteiro no PC, 360mm mantém o processador frio com as <b>fans girando devagar</b>, e isso é silêncio.",
     "Water cooler 360mm pra <b>segurar processador mais quente</b> com folga.",
-    "O <b>water cooler é opcional</b>: entra se você quiser temperatura mais baixa e visual mais caprichado."
+    "O <b>water cooler é opcional</b>: entra se você quiser temperatura mais baixa e visual mais caprichado.",
+    "Com as melhorias térmicas da geração nova, dá pra usar um water cooler mais econômico e manter uma refrigeração adequada.",
+    "Water cooler 360mm segura temperaturas baixas mesmo em uso prolongado.",
+    "Water cooler 360mm: excelente refrigeração com <b>visual imponente</b> e compatibilidade total com o soquete.",
+    "É o tipo de cooler que você instala e esquece: <b>zero barulho, zero dor de cabeça</b>, e mantém o processador sempre frio.",
+    "Water cooler 360mm com ótima performance térmica e acabamento premium: deixa o X3D geladinho e o setup silencioso.",
+    "Botei um water cooler intermediário/avançado porque esses processadores são quentes. Não precisa ser topo de linha, mas tem estética e eficiência juntos.",
+    "Water cooler custo-benefício, nada absurdo, mas que segura bem um processador de 8 núcleos.",
+    "Esse X3D esquenta, e um bom water cooler é fundamental. Esse tem ótimo desempenho, sistema anti-vazamento e ainda é ARGB.",
+    "Water cooler 360mm estético, premium e muito forte. Vale cada centavo pra quem quer nível, cor e padrão.",
+    "Testei esse water cooler com processador de exigência térmica parecida e ele segurou muito bem até em estresse. No seu nível de orçamento, pede um WC nessa faixa.",
+    "Testei esse water cooler com um X3D e segurou tranquilo, por isso que coloquei.",
+    "Coloquei esse water cooler num Ryzen 5 e ele ficou na casa dos 70 graus em estresse máximo. Muito bom, ainda vem com display, e o preço tá maneiríssimo."
   ],
   "why_mon_qhd": [
     "Não compre monitor só porque tem <b>4K</b> na caixa: olha resolução, taxa, painel, tamanho e preço juntos.",
@@ -223,7 +346,10 @@
     "Ainda não tem monitor? Já pensa a máquina pra <b>QHD</b>: com essa placa, ficar no Full HD é desperdiçar potência.",
     "QHD não é só pra AAA: com placa boa dá pra jogar competitivo em <b>1440p com taxa alta</b> e ainda ganhar nitidez.",
     "Monitor QHD de alta taxa, <b>perfeito pra aproveitar a placa de vídeo</b>.",
-    "Pra fechar o combo visual: Quad HD, <b>painel IPS e taxa alta</b>."
+    "Pra fechar o combo visual: Quad HD, <b>painel IPS e taxa alta</b>.",
+    "Eu avaliaria o Quad HD em vez do 4K: já dá um ótimo salto de imagem sobre o Full HD, exige menos da placa de vídeo e favorece a <b>longevidade do PC</b>.",
+    "Deixei duas opções de monitor, ultrawide 34\" e 27\" QHD, pra você visualizar a diferença de valor e decidir o que encaixa melhor no setup.",
+    "Se fosse eu, pegaria monitor Quad HD com esse PC. Em Full HD ia sobrar, mas no Quad HD você ganha nitidez, e isso ajuda até em design e edição."
   ],
   "why_cpu_8": [
     "8 núcleos fazem sentido pra quem também edita, modela e deixa vários programas abertos.",
@@ -241,21 +367,37 @@
     "8 núcleos seguram jogo, multitarefa e <b>gravação de gameplay</b> sem engasgo, e casam bem com a placa de vídeo.",
     "Entre um 6 núcleos de plataforma nova e um <b>8 núcleos AM4</b>, em jogo o desempenho fica parecido, e a economia vai pra placa.",
     "Os <b>8 núcleos</b> dão folga em multitarefa e renderização, perfeito pra quem também edita vídeo.",
-    "8 núcleos e 16 threads pra jogos atuais e futuros, numa plataforma com <b>vários anos de upgrade</b>."
+    "8 núcleos e 16 threads pra jogos atuais e futuros, numa plataforma com <b>vários anos de upgrade</b>.",
+    "8 núcleos e 16 threads com vídeo integrado forte: ótimo pra produtividade e multitarefa, e ainda dá pra jogar <b>sem placa de vídeo dedicada</b> no começo.",
+    "Se der pra ir no processador de <b>oito núcleos</b>, é melhor. Ele vem sem cooler e não é legal usar o box nele, então já encaixei um water custo-benefício.",
+    "Processador de 8 núcleos, forte, que entrega muito desempenho pro dia a dia, projetos e jogo nas horas vagas.",
+    "Não precisa de Ryzen 9 pra PC gamer, mas quando ele tá com preço colado no Ryzen 7, vale demais: <b>mais núcleos, mais fôlego e longevidade</b>.",
+    "Não vai trazer um ganho absurdo de FPS na hora, mas é um processador mais parrudo, que envelhece melhor e segura upgrades futuros sem dor de cabeça.",
+    "Daria até pra usar um Ryzen 5 e economizar, já que é PC gamer e teria ótima longevidade, mas com o Ryzen 7 você garante processador forte por mais tempo."
   ],
   "why_ssd": [
     "SSD rápido ajuda em carregamento, instalação de jogo e principalmente <b>projeto grande</b>.",
     "Começa com o suficiente pro Windows e alguns jogos. Quando precisar, <b>é só somar outro SSD</b>.",
     "Fica de olho em promoção de <b>SSD PCIe 4.0</b>: às vezes sai mais rápido e mais barato que o 3.0 da lista. Se aparecer, troca só esse item.",
     "Já tem SSD NVMe de 1TB? Então <b>reaproveita</b>: armazenamento não dá FPS, e o dinheiro vai pro que dá.",
-    "Já tem SSD SATA? Ele vira <b>unidade secundária</b>: o NVMe novo fica com o sistema e os jogos principais."
+    "Já tem SSD SATA? Ele vira <b>unidade secundária</b>: o NVMe novo fica com o sistema e os jogos principais.",
+    "Excelente custo-benefício. Pra jogos, não vejo necessidade de investir em SSD PCIe 4.0 ou 5.0.",
+    "SSD NVMe Gen4: carregamento muito rápido pra jogos e programas.",
+    "SSD NVMe 1TB pra ter velocidade e espaço de sobra pra jogos e sistema: rápido, confiável e entrega o que promete.",
+    "SSD PCIe 4.0 alinhado ao padrão da plataforma: inicialização instantânea e jogo carregando em segundos, sem pagar caro demais.",
+    "SSD de ótimo custo-benefício: velocidade excelente pra sistema, jogos e programas. Pra quem quer 1TB gastando pouco, é das melhores escolhas.",
+    "1TB no padrão que sempre uso, Gen 4 rápido. Se precisar depois, <b>é só espetar outro</b> de 1TB ou 2TB e já era.",
+    "SSD rápido, 2TB. Não faz sentido extrapolar aqui: com a placa-mãe já tendo dissipador, na prática <b>dá no mesmo que um supertop caríssimo</b>.",
+    "SSD de 1TB NVMe 3.0 com boa velocidade, garantindo desempenho sem pesar no orçamento.",
+    "Como sobrou uma margem no orçamento, subi o SSD pra 2TB. Não faz diferença no desempenho, mas agrega bastante em armazenamento."
   ],
   "dica_misto": [
     "Orçamento no cartão? Deixa uma <b>margem</b>: preço parcelado costuma sair mais caro que o da oferta à vista.",
     "Mesma placa em duas ofertas? O desempenho é igual: escolhe pela <b>condição de pagamento</b> que fizer mais sentido na hora.",
     "Se a placa de vídeo vai no cartão, separa ela da conta e fecha o resto do PC no <b>orçamento à vista</b>.",
     "Parcelar só a placa de vídeo é uma boa saída pra <b>aliviar o custo</b> sem abrir mão de desempenho.",
-    "Fonte e cooler que você já tem seguram bem o conjunto: dá pra <b>reaproveitar e investir onde importa</b>."
+    "Fonte e cooler que você já tem seguram bem o conjunto: dá pra <b>reaproveitar e investir onde importa</b>.",
+    "Compra peça por peça buscando as melhores lojas e enxugando frete. Parcela o que dá sem juros, mas a placa de vídeo costuma sair mais barata à vista."
   ],
   "why_ram16": [
     "Começar com 16GB e deixar a memória como upgrade futuro libera dinheiro pra placa de vídeo.",
@@ -268,35 +410,83 @@
     "16GB em dual channel seguram o orçamento sem tirar da placa de vídeo. O <b>próximo upgrade</b> é subir pra 32GB.",
     "No AM4, memória de <b>3600MHz</b> em dual channel dá um ganho real pro Ryzen sem custar muito mais.",
     "Memória com perfil <b>EXPO</b>: é só ativar e ela roda na velocidade certa no AM5, sem dor de cabeça.",
-    "16GB de DDR5 em dual channel já seguram tranquilo a proposta de jogo e mantêm a <b>plataforma moderna</b>."
+    "16GB de DDR5 em dual channel já seguram tranquilo a proposta de jogo e mantêm a <b>plataforma moderna</b>.",
+    "Coloquei 2x8GB pra não extrapolar o orçamento. Muita gente vai de 32GB porque a diferença é pequena, mas pra custo-benefício <b>16GB já tá de excelente tamanho</b>.",
+    "Como você não joga competitivo que exige altíssimo FPS, 16GB já te dá bons resultados. Se quiser 2x16 é válido, mas não é totalmente necessário."
   ],
   "vis_equil": [
     "A estética entrou na conta, mas sem tirar o foco principal da máquina, que é <b>desempenho</b>.",
     "Gosta de setup bonito? Beleza, mas primeiro garante a <b>placa de vídeo</b>: fan e iluminação dá pra completar depois sem trocar nada.",
     "Bonito sem virar <b>escola de samba</b>: aquário sóbrio, iluminação discreta, e o dinheiro continua no desempenho.",
     "Um PC forte, moderno e equilibrado, <b>sem exageros e sem gargalo escondido</b>.",
-    "Aqui você investe no que faz diferença na rotina, <b>sem transformar o PC em algo exageradamente gamer</b>."
+    "Aqui você investe no que faz diferença na rotina, <b>sem transformar o PC em algo exageradamente gamer</b>.",
+    "Uma máquina voltada pra sua principal necessidade, trabalhar com fluidez, e uma excelente base pra evoluir nos jogos futuramente.",
+    "Essa base vai te atender por muitos anos, com espaço pra upgrades futuros sem precisar trocar tudo.",
+    "Esse PC vai te atender com folga por muitos anos, tanto pro trampo quanto pros games.",
+    "Fonte Gold, 32GB DDR5, SSD NVMe e gabinete com airflow decente: tudo redondinho, sem gargalo, um PC muito bem balanceado.",
+    "Essa é a base ideal pro seu objetivo, sem exageros e sem gargalos.",
+    "Alinhei tudo pensando em longevidade e desempenho real, não só número bonito no papel ou recomendação genérica da internet.",
+    "A base do setup ficou bem alinhada e com espaço pra upgrade futuro sem dor de cabeça.",
+    "No geral ficou uma máquina <b>bem equilibrada</b>, moderna, que vai te entregar muitos anos de tranquilidade sem precisar trocar nada.",
+    "Separei primeiro o kit principal (processador + placa-mãe + memória), que é a base forte da máquina, e depois o resto, pra você ver onde vai cada valor.",
+    "Configuração equilibrada, com caminho de upgrade e respeitando teu orçamento <b>sem abrir mão de desempenho real</b>.",
+    "O conjunto ficou extremamente equilibrado: base AM5 dá longevidade, o processador segura multitarefa e jogo, e a GPU <b>sobra em Full HD</b> e atende com folga em Quad HD.",
+    "Um PC intermediário forte, com base sólida: segura 30, 40 abas sem travar e ainda roda o joguinho casual liso.",
+    "PC muito forte pro dia a dia e pros projetos, que roda qualquer jogo em Full HD tranquilo e <b>vai envelhecer bem</b>.",
+    "A máquina ficou extremamente equilibrada, parruda e pronta pra segurar muito tempo sem precisar trocar peça tão cedo, com margem pra upgrades futuros.",
+    "Coloquei tudo no mais barato possível dentro da linha boa. Dá pra achar peça mais barata, mas aí você ficaria com <b>desequilíbrio na máquina</b>."
   ],
   "why_cpu_6": [
     "Pro seu foco não faz sentido pagar muito mais num 8 núcleos: o dinheiro economizado foi direto pra <b>placa de vídeo</b>.",
     "Ele ainda segura bem essa placa. Se lá na frente quiser extrair mais em taxa alta, aí sim faz sentido <b>subir pra um X3D</b> sem trocar a plataforma.",
     "Fui num processador mais em conta em vez do X3D: a diferença rende muito mais <b>numa placa de vídeo mais forte</b>.",
-    "Processador com <b>vídeo integrado forte</b>: roda jogos leves e médios em Full HD e deixa a placa de vídeo pra depois."
+    "Processador com <b>vídeo integrado forte</b>: roda jogos leves e médios em Full HD e deixa a placa de vídeo pra depois.",
+    "Processador com vídeo integrado, então <b>dispensa GPU provisória</b> e ainda segura bem o conjunto pra jogos e trabalho.",
+    "Mais bruto no processamento, ideal pra quem vai usar placa de vídeo dedicada logo: a escolha <b>mais equilibrada</b> pra performance.",
+    "E ainda tem vídeo integrado, então se um dia precisar testar algo sem a placa de vídeo, tá tranquilo.",
+    "Esse Ryzen 5 <b>cospe FPS pra caramba</b> e tem preço ótimo. Eu nem mexeria no processador."
   ],
   "why_co_air": [
     "Air cooler bom mantém tudo fresco em <b>jornada longa</b>, com pouco barulho e sem manutenção.",
     "Pra quem quer PC <b>silencioso e confiável</b> por anos, um air cooler bom é menos coisa pra dar problema.",
     "Esse processador esquenta mais que um de entrada, então coloquei um <b>air cooler bom</b>: segura tranquilo, silencioso e sem gastar muito.",
-    "Um <b>air cooler</b> bom de 120mm já segura um X3D com temperaturas excelentes, sem precisar de water cooler."
+    "Um <b>air cooler</b> bom de 120mm já segura um X3D com temperaturas excelentes, sem precisar de water cooler.",
+    "Vamos usar inicialmente o cooler original do processador pra economizar. Não vejo necessidade de water cooler nesse primeiro momento."
   ],
   "vis_perf": [
     "Como RGB não importa pra você, o foco foi todo em <b>qualidade de componente</b> e desempenho real.",
-    "A ideia não é gastar por gastar: é investir nas peças certas pra uma máquina forte agora e <b>sem upgrade toda hora</b>."
+    "A ideia não é gastar por gastar: é investir nas peças certas pra uma máquina forte agora e <b>sem upgrade toda hora</b>.",
+    "Não precisamos gastar trocando componentes que atendem bem. Uma máquina bem dimensionada, abaixo do orçamento e focada exatamente no que você procura.",
+    "Essa configuração entrega o melhor dos dois mundos: potência profissional e performance gamer de sobra.",
+    "O objetivo é processamento pesado, muitos núcleos, estabilidade e longevidade. Nada de gastar à toa em coisa que <b>não traz retorno real</b> no seu uso.",
+    "Essa é a base com foco em desempenho real e longevidade sem dor de cabeça; agora é só ajustar o que quiser melhorar ou economizar.",
+    "Conjunto de respeito, equilibrado entre performance extrema e refrigeração premium: <b>potência, silêncio e longevidade</b>.",
+    "Plataforma de última geração, processador topo pra games, 32GB DDR5 e fonte pronta pra upgrade: <b>uma baita máquina</b> sem precisar gastar tudo.",
+    "PC high-end, com peças de primeira, sem estourar o teto: pensado pra Quad HD, jogos novos, longevidade no AM5 e ainda bonito pra caramba.",
+    "Um PC gamer bem montado vai muito bem pro trabalho, pra canal no YouTube e qualquer outra tarefa. Jogo é sempre a missão mais difícil, e a máquina já tá preparada pra isso."
   ],
   "vis_est": [
     "Você quer PC de vitrine: gabinete caprichado e <b>water cooler 360mm</b>, e mesmo assim nenhum real saiu do processador.",
     "Placa de vídeo na vertical com cabo riser eu evito: costuma dar <b>instabilidade</b> e perda de desempenho. Um bom aquário já valoriza a placa.",
     "PC todo black, <b>sem frescura de luz</b>, com ótimo fluxo de ar.",
     "Setup <b>full white</b>, bonito e equilibrado, sem abrir mão de desempenho."
+  ],
+  "opp": [
+    "Se precisar reduzir o investimento inicial, dá pra trocar por {item} e economizar uns {valor}, mas pelo seu perfil eu faria um esforço pra manter a escolha original.",
+    "Fica de olho em {item}: se aparecer com uma diferença interessante, tipo {valor} a menos, é outra boa opção.",
+    "Colocando lado a lado, a economia na refrigeração praticamente anula a diferença: por só {valor} a mais você leva {item}, que é superior.",
+    "Se quiser segurar um tempo sem placa de vídeo, {item} tem vídeo integrado forte e sai só uns {valor} mais em conta.",
+    "Dá pra comprar peça por peça: começa sem placa de vídeo e depois a gente vê se vale colocar {item} ou otimizar o orçamento.",
+    "Se for pagar à vista, dá pra trocar por {item} e economizar uns {valor} sem perder desempenho real.",
+    "Já tem SSD? Deixei o total com e sem, pra você ver a diferença certinha de {valor}.",
+    "Você falou no X3D mais novo, mas os dois são basicamente o mesmo chip pra jogo. Indo no anterior você economiza uns {valor}, <b>e isso já paga o {item}</b>.",
+    "Vale pegar parcelado sem juros: monta o setup dentro do orçamento e ainda abre espaço pra investir mais sem pesar de uma vez.",
+    "Algumas peças estão sem juros no mesmo preço: dá pra parcelar e sobrar orçamento pra investir em outra coisa, tipo melhorar o {item}.",
+    "Dá pra montar agora usando o vídeo integrado do processador e rodar jogos leves e trabalho. Quando entrar a placa dedicada, aí vira um <b>PC gamer de verdade</b>.",
+    "Dá pra começar sem placa de vídeo e fazer o upgrade depois: a máquina já tá <b>preparada pra receber uma placa robusta</b>.",
+    "Preço muda todo dia, principalmente em eventos de loja. Monto a configuração como <b>base</b>: amanhã pode aparecer um modelo parecido, melhor e mais barato.",
+    "Diminuindo um pouco a placa de vídeo dá pra liberar espaço e já encaixar um monitor de alta taxa no pacote, sem perder FPS no Full HD.",
+    "Sobrou um espacinho. A única evolução que eu pensaria é na placa de vídeo: com {valor} a mais dá pra mirar numa {item}, e em Quad HD quanto maior a placa, <b>maior a longevidade</b>.",
+    "Faça o upgrade em etapas: primeiro processador, placa-mãe e memória; depois, se precisar, a placa de vídeo. Os dois juntos dão um grande salto em FPS e longevidade."
   ]
 }

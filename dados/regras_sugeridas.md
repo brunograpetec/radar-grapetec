@@ -161,3 +161,30 @@ Observações tiradas das consultorias que contradizem ou não estão em regras_
 - 92 e o rascunho "108 (INCOMPLETO)" estão vazios; contados como lidos, sem peças. O doc sem número "Fabio Sobrinho de Freitas" (~R$ 14 mil) é diferente da 115 (mesmo nome, ~R$ 4 mil) e foi contado à parte.
 - O conector do Drive devolveu o texto truncado no fim de vários docs; peças e frases vieram das partes lidas.
 - Muitas peças sem modelo no site: Kalkan Delta 360, Gamemax GX-750, XPG Lancer DDR5 2x16GB CL30, Corsair RM750x Shift, CM MWE Gold 850 V3, TUF B850M-Plus, B650M Aorus Elite, Adata Legend 710, Patriot P300, Husky DDR5, Mancer CV500L.
+
+
+## 27/11/2026 (consultorias 250 a 252, 53 a 89 e 34-2)
+
+### Processador e plataforma
+- AM5 domina a partir de ~R$ 4,5 mil, inclusive quando a GPU fica pra depois: monta com processador com vídeo integrado (8600G, 8700G, 7600X) e explica que AM4 com 5700X não liga sem placa de vídeo (62, 80, 85, 252). Com foco em trabalho/IA (~R$ 6,5 mil), prefere 8700G + 32GB a uma GPU de entrada (252).
+- AM4 (5700X + B550) só quando reaproveita DDR4/fonte do cliente ou quando a GPU nova não caberia no AM5: ~R$ 4 mil com RX 7600 (68-Lucas), ~R$ 5,2-5,7 mil (79), GPU forte já comprada (64, 65). Cliente com 5800X3D no AM4 não migra (251).
+- Passa um pouco do orçamento pra entrar no AM5 em vez de AM4 com ~R$ 6,5 mil (72).
+- X3D: entre 7800X3D e 9800X3D pega o que estiver mais barato (57, 58, 70); em 4K/60 não usa X3D e põe tudo na GPU (87). FPS competitivo com ~R$ 8 mil vai de 7600X + RTX 5060 Ti 16GB (56) — de novo sem X3D.
+- Ryzen 7 7700/7700X (sem X3D) aparece bastante em ~R$ 6-12 mil (59, 60, 63, 69, 71, 78, 83, 84, 87). Em CPU de 8 núcleos sem cooler, evita o box e põe WC 360 barato (69).
+- Uso profissional pesado (3D/Houdini, processamento): Ryzen 9 7950X, até 64GB de RAM, com GPU modesta ou sem GPU (86, 88). Sobe pra Ryzen 9/X670E só quando a diferença de preço é pequena (61).
+
+### Memória
+- 32GB DDR5 é padrão em praticamente tudo, inclusive ~R$ 4-5 mil sem GPU (80, 85). DDR5 6400 aparece muito, às vezes mais barata que 6000 (53, 56-60). 16GB só em AM4 com DDR4 (64, 68-Lucas, 79) e um AM5 apertado (62).
+
+### Fonte e refrigeração
+- Fonte 700W Gold mesmo com RTX 5070 / 5070 Ti (68-Dennis, 77); 800-850W Gold (PCIe 5.0/ATX 3.0) a partir de ~R$ 8 mil ou com GPU forte (58, 61, 63, 83, 87). 500W White só em PC sem GPU (80).
+- Water cooler 360mm vira padrão a partir de ~R$ 4,6 mil, mesmo com Ryzen 5 7600X (56, 62); 240mm só em gabinete Mini ITX (63); 420mm em Ryzen 9 profissional (88).
+
+### Placa de vídeo e uso
+- Com sobra de orçamento, sobe primeiro a GPU (5060 Ti → 5070, 5070 Ti → 5080) e depois o SSD (56, 58). RTX 5090 considerada exagero pra jogos (58).
+- Pra Full HD competitivo, prefere RX 9060 XT 16GB + monitor 240Hz em vez de RTX 5070 sem monitor (57).
+- Render 3D (V-Ray/CUDA) → NVIDIA (89). Monitor: sugere Quad HD em vez de 4K pela longevidade (251, 65).
+
+### Observação sobre os dados
+- 55 veio vazio do Drive (contado como lido, sem peças). 76 é orçamento em euros só com lista de peças. 71 não tem preços. Vários docs vieram truncados no fim pelo conector.
+- Peças frequentes sem modelo no site: Kalkan Asgard (gabinete), Ryzen 7 8700G, Ryzen 9 7950X/7900, B850M, X670E, B650I ITX, DDR5 6400 2x16, WC 420mm e 240mm, RX 7800 XT, RTX 5080.

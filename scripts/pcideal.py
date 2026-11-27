@@ -118,10 +118,11 @@ for (cat, nome), L in rows.items():
     L = [x for x in L if x[1] >= 0.55 * med]
     ps = sorted(x[1] for x in L)
     q = lambda f: ps[min(len(ps) - 1, int(len(ps) * f))]
-    rec = [x for x in L if x[0] >= D10] or L
+    # preço de HOJE: o menor preço dos 2 dias mais recentes em que a peça saiu no canal (regra do Bruno, 26/11)
+    ult = max(x[0][:10] for x in L)
+    ont = (dt.date.fromisoformat(ult) - dt.timedelta(days=1)).isoformat()
+    rec = [x for x in L if x[0][:10] >= ont]     # dia mais recente + o dia anterior
     best = min(rec, key=lambda x: (x[1], x[0]))
-    # entre posts com o mesmo preço mínimo, pega o mais novo
-    best = max([x for x in rec if x[1] <= best[1] * 1.01], key=lambda x: x[0])
     # regra do Bruno: preço fora da curva (data dupla tipo 11/11, ou que saiu só 1-2 dias) não vira meta.
     # A meta vira o menor preço que já saiu em pelo menos 3 dias diferentes (fora das datas duplas).
     fc = None

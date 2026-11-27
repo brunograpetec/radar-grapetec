@@ -120,3 +120,7 @@ Regras que o Bruno passou e que o algoritmo segue. Anotar aqui cada regra nova (
 ## Anúncio com várias capacidades no título (19/11)
 - Ex.: AliExpress "SSD Kootion X15Lite 1TB 512GB" a R$395 era o de 512GB, não o de 1TB.
 - Regra: quando o título traz mais de uma capacidade (SSD ou memória), o robô compara o preço com a mediana de cada capacidade (posts de capacidade única) e fica com a que bate (entre 55% e 130% da mediana, e claramente mais perto que a outra). Se não der pra saber, o post fica fora do Radar.
+
+## PC Ideal: preço do dia (26/11)
+- O preço de cada peça é o menor preço dos 2 dias mais recentes em que ela saiu no canal (antes era o menor dos últimos 10 dias, que deixava preço velho).
+- Peça que não sai há dias continua com o último preço e o aviso "há N dias".

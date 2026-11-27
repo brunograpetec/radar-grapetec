@@ -278,6 +278,17 @@ MESES.forEach(function(m,j){if(j===0)return;var xb=m.a-.5,pv=MESES[j-1];if(r[0]<
 #gt1111 .topr{display:flex;gap:10px;align-items:center}
 #gt1111.lt .card,#gt1111.lt .tc,#gt1111.lt .ac,#gt1111.lt .ck,#gt1111.lt .count{box-shadow:0 1px 2px rgba(20,18,23,.04),0 8px 24px rgba(60,9,108,.06)}
 #gt1111.lt .clock b{text-shadow:none;color:var(--ac2)}
+/* contador de evento laranja */
+#gt1111 .count.ev{background:radial-gradient(420px 220px at 100% 0%,rgba(255,122,0,.16),transparent 70%),linear-gradient(180deg,var(--s2),var(--s1))}
+#gt1111 .count.ev::before{background:linear-gradient(135deg,#ff7a00,rgba(255,45,149,.55) 35%,transparent 60%,#ffd400)}
+#gt1111 .count.ev h3{color:#ffb35c}
+#gt1111 .count.ev .clock div{border-color:rgba(255,122,0,.35)}
+#gt1111 .count.ev .clock b{color:#fff;text-shadow:0 0 18px rgba(255,122,0,.75)}
+#gt1111 .count.ev .clock span{color:#ffb35c}
+#gt1111 .count.ev p b{color:#ffd27a}
+#gt1111.lt .count.ev .clock b{color:#c2410c;text-shadow:none}
+#gt1111.lt .count.ev h3,#gt1111.lt .count.ev .clock span{color:#c2410c}
+#gt1111.lt .count.ev p b{color:#9a3412}
 #gt1111.lt .bgfx .scan{opacity:.5}
 </style>
 <div class="bgfx"><div class="grid"></div><div class="orb o1"></div><div class="orb o2"></div><div class="scan"></div></div>
@@ -288,7 +299,7 @@ MESES.forEach(function(m,j){if(j===0)return;var xb=m.a-.5,pv=MESES[j-1];if(r[0]<
  </div>
  <div class="hero">
   <div>
-   <span class="kicker">◉ RADAR DE PREÇOS · BLACK FRIDAY 2026</span>
+   <span class="kicker" id="gtKick">◉ RADAR DE PREÇOS · 12.12 · 2026</span>
    <h1>Antes de comprar,<br><span class="g">olha o radar.</span></h1>
    <p class="lead">Eu analiso cada oferta que passa no canal, todo dia, com o histórico dos últimos 3 meses. Aqui você vê como cada peça se comportou e o meu palpite: comprar agora, esperar a Black ou só abaixo de um preço.</p>
    <div class="stats">
@@ -302,10 +313,10 @@ MESES.forEach(function(m,j){if(j===0)return;var xb=m.a-.5,pv=MESES[j-1];if(r[0]<
     <a class="cta tg" href="https://t.me/grape_tec" target="_blank" rel="noopener" data-ev="Telegram_hero">__TG__<span><small>OFERTA SAI PRIMEIRO AQUI</small>Canal do Telegram</span></a>
    </div>
   </div>
-  <div class="count">
-   <h3 id="gtCdT">A BLACK FRIDAY COMEÇA EM</h3>
+  <div class="count ev">
+   <h3 id="gtCdT">O 12.12 COMEÇA EM</h3>
    <div class="clock mono"><div><b id="gtH">--</b><span>DIAS</span></div><div><b id="gtM">--</b><span>HORAS</span></div><div><b id="gtS">--</b><span>MIN</span></div><div><b id="gtCs">--</b><span>SEG</span></div></div>
-   <p id="gtCdP">Sexta, <b>27/11</b>. Os cupons mais fortes caem <b>à meia-noite</b> e acabam em minutos. Quem está no grupo recebe <b>na hora</b>.</p>
+   <p id="gtCdP">Sábado, <b>12/12</b>. Os cupons mais fortes caem <b>à meia-noite</b> e acabam em minutos. Quem está no grupo recebe <b>na hora</b>.</p>
   </div>
  </div>
 </div>
@@ -398,9 +409,10 @@ function watch(el){if(io)io.observe(el);else{if(el.dataset.count)el.textContent=
 (function(){var c=$$('[data-count]');if(c.length>=4){c[0].dataset.count=D.total_posts;c[1].dataset.count=D.ofertas;c[2].dataset.count=D.P.length;c[3].dataset.count=D.days}if(D.upd&&$('#gtUpd'))$('#gtUpd').textContent=D.upd;if(D.ate&&$('#gtAte'))$('#gtAte').textContent=D.ate})();
 $$('[data-count]').forEach(watch);
 /* ---------- countdown ---------- */
-var EVT=[['2026-11-27T00:00:00-03:00','2026-11-28T00:00:00-03:00','A BLACK FRIDAY COMEÇA EM','É BLACK FRIDAY · CORRE PRO GRUPO','Sexta, <b>27/11</b>. Os cupons mais fortes caem <b>à meia-noite</b> e acabam em minutos. Quem está no grupo recebe <b>na hora</b>.'],['2026-11-30T00:00:00-03:00','2026-12-01T00:00:00-03:00','A CYBER MONDAY COMEÇA EM','É CYBER MONDAY · CORRE PRO GRUPO','Segunda, <b>30/11</b>. Última chance com preço de Black.']];
+// próximos eventos (o contador pega o primeiro que ainda não acabou): [início, fim, título antes, título durante, texto, nome no topo]
+var EVT=[['2026-12-12T00:00:00-03:00','2026-12-13T00:00:00-03:00','O 12.12 COMEÇA EM','É 12.12 · CORRE PRO GRUPO','Sábado, <b>12/12</b>. Os cupons mais fortes caem <b>à meia-noite</b> e acabam em minutos. Quem está no grupo recebe <b>na hora</b>.','12.12']];
 var EV=null,lastSec=-1;EVT.some(function(e){if(Date.now()<new Date(e[1]).getTime()){EV=e;return true}});
-if(EV){$('#gtCdP').innerHTML=EV[4]}else{var cdb=$('.count');if(cdb)cdb.style.display='none'}
+if(EV){$('#gtCdP').innerHTML=EV[4];var kk=$('#gtKick');if(kk&&EV[5])kk.textContent='◉ RADAR DE PREÇOS · '+EV[5]+' · '+EV[0].slice(0,4)}else{var cdb=$('.count');if(cdb)cdb.style.display='none'}
 function tick(){if(!EV)return;var T=new Date(EV[0]).getTime(),r=T-Date.now();
  if(r<=0){$('#gtCdT').textContent=EV[3];['#gtH','#gtM','#gtS','#gtCs'].forEach(function(s){$(s).textContent='00'});return}
  $('#gtCdT').textContent=EV[2];

@@ -1,6 +1,6 @@
 {
  "_leia": "Produtos cadastrados sozinhos pelo radar (scripts/novos.py). Pra tirar um produto, apague a linha dele.",
- "ultimo": "2026-11-27",
+ "ultimo": "2026-11-28",
  "itens": {
   "Placa-mãe MSI PRO B840M-B": {
    "cat": "Placas-mãe",
@@ -1604,6 +1604,72 @@
    "desde": "2026-11-27",
    "posts": 2,
    "exemplo": "Headset Gamer Corsair HS55, Wireless, Drivers 50mm, Carbon, CA-9011280-NA"
+  },
+  "Headset Havit Fuxi H3": {
+   "cat": "Headsets e fones",
+   "desde": "2026-11-28",
+   "posts": 4,
+   "exemplo": "Headset Havit Fuxi H3 Bluetooth 5.2 Gamer Sem Fio Áudio Imersivo, Microfone e Baixa Latência"
+  },
+  "Fonte Montech BETA2750W": {
+   "cat": "Fontes",
+   "desde": "2026-11-28",
+   "posts": 3,
+   "exemplo": "Fonte Montech Beta 2 750W Preto Beta2750W"
+  },
+  "Water cooler Husky Freezy 120mm": {
+   "cat": "Coolers",
+   "desde": "2026-11-28",
+   "posts": 2,
+   "exemplo": "Water Cooler Husky Freezy ARGB 120MM AMD Intel Branco"
+  },
+  "Mouse Redragon HP-711R": {
+   "cat": "Mouses",
+   "desde": "2026-11-28",
+   "posts": 2,
+   "exemplo": "Mouse Gamer Redragon Harry Potter Corvinal, RGB, 12400 DPI, Sensor Pixart PMW3327, USB, Preto e Azul - HP-711R"
+  },
+  "Gabinete Acegeek R339": {
+   "cat": "Gabinetes",
+   "desde": "2026-11-28",
+   "posts": 2,
+   "exemplo": "GABINETE GAMER ACEGEEK DIAMOND R339 RAINBOW MID-TOWER LATERAL DE VIDRO 4 FANS AG-DIAMOND-R339-WH-I4F"
+  },
+  "Headset Attack Shark L80": {
+   "cat": "Headsets e fones",
+   "desde": "2026-11-28",
+   "posts": 2,
+   "exemplo": "Headset Gamer Sem Fio Attack Shark L80 Pro Bluetooth Som Surround 7 1 Preto L80Pro"
+  },
+  "Monitor Philips 27M2N3200L": {
+   "cat": "Monitores",
+   "desde": "2026-11-28",
+   "posts": 2,
+   "exemplo": "Monitor Gamer Philips EVNIA 27\", 180Hz, 0,5ms, IPS, Hdmi, Vesa - 27M2N3200L"
+  },
+  "Headset Logitech G321 Lightspeed": {
+   "cat": "Headsets e fones",
+   "desde": "2026-11-28",
+   "posts": 2,
+   "exemplo": "Headset Gamer Sem Fio Logitech G321, LIGHTSPEED, Bluetooth, Confortável, microfone 16 kHz, bateria de mais de 20 horas d"
+  },
+  "Gabinete Gamemax Lucent Pro": {
+   "cat": "Gabinetes",
+   "desde": "2026-11-28",
+   "posts": 2,
+   "exemplo": "Gabinete Gamer GameMax LUCENT PRO Mid Tower para ATX em Preto"
+  },
+  "Fonte Rise Mode Selo Teclab 500W": {
+   "cat": "Fontes",
+   "desde": "2026-11-28",
+   "posts": 2,
+   "exemplo": "Fonte Gamer Zeus 500w Rise Mode Selo Teclab Preto"
+  },
+  "Intel Core i7-14700": {
+   "cat": "Processadores",
+   "desde": "2026-11-28",
+   "posts": 2,
+   "exemplo": "Processador Intel Core I7 14700 2 1Ghz 5 4.0Ghz Max Turbo Cache 33 MB 20 Nucleos 28 Threads Lga 1700 Com Video Integrado"
   }
  }
 }

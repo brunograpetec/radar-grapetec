@@ -75,3 +75,12 @@ Todo dia o radar procura no canal produtos que ainda não estavam cadastrados (2
 - **Monitores** (1): Monitor Gigabyte GS25F14
 - **Placas-mãe** (2): Placa-mãe MSI Gaming Plus B760M WiFi, Placa-mãe ASRock HDV H610M
 - **Teclados** (2): Teclado Machenike KG87, Teclado Attack Shark X85PRO
+
+## 28/11/2026: 11 produtos novos
+- **Coolers** (1): Water cooler Husky Freezy 120mm
+- **Fontes** (2): Fonte Montech BETA2750W, Fonte Rise Mode Selo Teclab 500W
+- **Gabinetes** (2): Gabinete Acegeek R339, Gabinete Gamemax Lucent Pro
+- **Headsets e fones** (3): Headset Havit Fuxi H3, Headset Attack Shark L80, Headset Logitech G321 Lightspeed
+- **Monitores** (1): Monitor Philips 27M2N3200L
+- **Mouses** (1): Mouse Redragon HP-711R
+- **Processadores** (1): Intel Core i7-14700
